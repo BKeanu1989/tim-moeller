@@ -1,0 +1,24 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+// defaultLocale is "en"
+const aboutURL = getRelativeLocaleUrl("en", "about");
+const scientificProjectsUrl = getRelativeLocaleUrl("en", "scientifProjects");
+const publicationsURL = getRelativeLocaleUrl("en", "publications");
+const shopURL = getRelativeLocaleUrl("en", "shop");
+---
+
+<nav>
+  <ul class="flex flex-row">
+    <li><a href="/">Home</a></li>
+    <li><a href={scientificProjectsUrl}>Scientific Projects</a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+    <li><a href=""></a></li>
+  </ul>
+</nav>
+
+<style>
+  nav ul {
+  }
+</style>
