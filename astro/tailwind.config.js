@@ -4,6 +4,16 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
-}
-
+  plugins: [
+    function ({ addComponents, _ }) {
+      addComponents({
+        ".nav-active": {
+          fontWeight: "bold",
+        },
+        ".active": {
+          fontWeight: "bold",
+        },
+      });
+    },
+  ],
+};

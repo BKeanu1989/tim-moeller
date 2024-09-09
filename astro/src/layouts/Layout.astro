@@ -2,19 +2,23 @@
 interface Props {
   title: string;
 }
+import NavBar from "../components/NavBar.astro";
+import { getLangFromUrl } from "../i18n/utils";
 
 const { title } = Astro.props;
-import NavBar from "../components/NavBar.astro";
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <!-- <meta http-equiv="refresh" content="0;url=/en/" /> -->
+
     <title>{title}</title>
     <!-- TODO: this is sadly not working rn -->
     <!-- <link href="/styles/output.css" rel="stylesheet" /> -->

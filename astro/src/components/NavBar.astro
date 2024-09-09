@@ -1,24 +1,55 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import LanguagePicker from "./LanguagePicker.astro";
 
 // defaultLocale is "en"
 const aboutURL = getRelativeLocaleUrl("en", "about");
 const scientificProjectsUrl = getRelativeLocaleUrl("en", "scientifProjects");
 const publicationsURL = getRelativeLocaleUrl("en", "publications");
 const shopURL = getRelativeLocaleUrl("en", "shop");
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const pathname = new URL(Astro.request.url).pathname;
+// const currentPath = pathname.slice(4); // remove the first "/"
+const splittedPathName = pathname.split("/"); // remove the first "/"
+const currentPath = splittedPathName[splittedPathName.length - 1];
 ---
 
-<nav>
-  <ul class="flex flex-row">
-    <li><a href="/">Home</a></li>
-    <li><a href={scientificProjectsUrl}>Scientific Projects</a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
+<nav class="flex bg-slate-950 h-[50px] relative justify-center">
+  <ul class="flex flex-row text-slate-50 gap-5 h-full items-center">
+    <li>
+      <a class={currentPath === "" ? "active" : ""} href={`/${lang}/`}
+        >{t("nav.home")}</a
+      >
+    </li>
+    <li>
+      <a
+        class={currentPath === "scientificProjects" ? "nav-active" : ""}
+        href={`/${lang}/scientificProjects`}>{t("nav.scientificProjects")}</a
+      >
+    </li>
+    <li>
+      <a
+        class={currentPath === "publications" ? "nav-active" : ""}
+        href={`/${lang}/publications`}>{t("nav.publications")}</a
+      >
+    </li>
+    <li>
+      <a
+        class={currentPath === "contact" ? "nav-active" : ""}
+        href={`/${lang}/contact`}>{t("nav.contact")}</a
+      >
+    </li>
+    <li>
+      <a
+        class={currentPath === "shop" ? "nav-active" : ""}
+        href={`/${lang}/shop`}>{t("nav.shop")}</a
+      >
+    </li>
   </ul>
-</nav>
 
-<style>
-  nav ul {
-  }
-</style>
+  <LanguagePicker />
+</nav>

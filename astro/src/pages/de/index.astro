@@ -1,0 +1,28 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+---
+
+<Layout title="Welcome to Astro.">
+  <main>
+    <div
+      class="relative -z-10 hero-bg w-full flex bg-gradient-to-br dark:from-slate-900 dark:to-slate-400"
+    >
+      <img
+        class="h-full w-full absolute top-0 left-0"
+        src="/brain-scan-with-books.png"
+        alt="img of tim j moeller"
+      />
+    </div>
+    <div class="h-dvh">
+      HELLO
+      <button class="btn-blue">Test</button>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .hero-bg {
+    height: calc(100dvh - 50px);
+  }
+</style>

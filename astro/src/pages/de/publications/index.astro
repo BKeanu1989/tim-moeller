@@ -1,0 +1,14 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+
+import { getCollection } from "astro:content";
+
+const allPublications = await getCollection("publications");
+console.log("🚀 ~ allPublications:", allPublications);
+---
+
+<Layout title="Veröffentlichungen">
+  <main>
+    <h1>Veröffentlichungen</h1>
+  </main>
+</Layout>
