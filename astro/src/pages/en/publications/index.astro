@@ -5,10 +5,26 @@ import { getCollection } from "astro:content";
 
 const allPublications = await getCollection("publications");
 console.log("🚀 ~ allPublications:", allPublications);
+
+const foo = ["test", 23];
 ---
 
 <Layout title="Publications">
   <main>
     <h1>Publications</h1>
+    {JSON.stringify(allPublications)}
+    <div class="border-2">
+      {
+        allPublications.map((x) => {
+          return (
+            <div class="single-publication">
+              <span>{x.slug}</span>
+              <a href={"/" + x.slug}>{x.data.title}</a>
+            </div>
+          );
+        })
+      }
+    </div>
+    <p>foo is: {foo}</p>;
   </main>
 </Layout>

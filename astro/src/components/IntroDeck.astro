@@ -1,0 +1,100 @@
+---
+
+---
+
+<div class="intro relative snap-mandatory snap-y z-10 w-dvw max-w-full">
+  <div
+    class="intro-name min-w-full min-h-full relative text-9xl snap-start text-gray-50 w-fit font-body-col h-dvh place-content-center"
+  >
+    <div
+      class="navbar-offset place-self-center absolute w-3/4 top-1/4 left-1/2 -translate-x-1/2"
+    >
+      <span class="opacity-0 intro-name--first">Hi</span>
+      <span class="opacity-0">my name is </span>
+      <span class="opacity-0">Tim J. Möller</span>
+    </div>
+    <button
+      class="btn absolute w-7 h-7 scroll-to-button bg-gray-500 rounded-full text-gray-50 place-self-end navbar-offset bottom-[12.5%] left-1/2 -translate-x-1/2"
+      data-scrollTraget="intro-career">yes</button
+    >
+  </div>
+
+  <div
+    class="intro-career min-w-full min-h-full relative snap-start text-8xl text-gray-50 w-2/3 font-body h-dvh"
+    id="intro-career"
+  >
+    <ul class="flex flex-col navbar-offset">
+      <li class="opacity-0">University lecturer in Berlin, Germany</li>
+      <li class="opacity-0">Candidate in computational psychiatry</li>
+      <li class="opacity-0">Psychologist</li>
+      <li class="opacity-0">Neuroscientist</li>
+      <li class="opacity-0">Practitioner for Psychotherapy</li>
+    </ul>
+  </div>
+
+  <!-- <img
+  class="h-full w-full absolute top-0 left-0"
+  src="/brain-scan-with-books.png"
+  alt="img of tim j moeller"
+/> -->
+</div>
+
+<style>
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  /* .intro::-webkit-scrollbar {
+    display: none;
+  } */
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .intro {
+    /* -ms-overflow-style: none;*/ /* IE and Edge */
+    /* scrollbar-width: none;*/ /* Firefox */
+
+    scroll-behavior: smooth;
+  }
+
+  .intro-name--first:after {
+    content: ",";
+  }
+</style>
+
+<script>
+  import { animate, timeline, stagger, inView } from "motion";
+
+  const secquence = [
+    [
+      ".intro-name span",
+      { opacity: 1 },
+      { easing: "ease-out", duration: 1, delay: stagger(1, { start: 0.8 }) },
+    ],
+  ];
+  timeline(secquence, {});
+  inView(".intro-career ul", (element) => {
+    let listElements = element.target.querySelectorAll("li");
+    animate(
+      listElements!,
+      { opacity: 1 },
+      { duration: 2, easing: "ease-out", delay: stagger(2, { start: 0.8 }) }
+    );
+  });
+  const buttons = document.querySelectorAll("button.scroll-to-button");
+  console.log("🚀 ~ buttons:", buttons);
+
+  Array.from(buttons).forEach((x) => {
+    // console.log("🚀 ~ buttons.forEach ~ x:", x);
+    x.addEventListener("click", (e) => {
+      //   alert("clicked button to scroll to target");
+      //   console.warn(e);
+    });
+  });
+
+  //   const buttonsv2 = document.querySelectorAll("button.scroll-to-button");
+
+  //   // Handle clicks on each button.
+  //   buttonsv2.forEach((button) => {
+  //     button.addEventListener("click", (e) => {
+  //       alert("Button was clicked!");
+  //       //   console.warn(e);
+  //     });
+  //   });
+</script>

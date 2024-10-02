@@ -10,7 +10,7 @@ const lang = getLangFromUrl(Astro.url);
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
@@ -22,14 +22,41 @@ const lang = getLangFromUrl(Astro.url);
     <title>{title}</title>
     <!-- TODO: this is sadly not working rn -->
     <!-- <link href="/styles/output.css" rel="stylesheet" /> -->
-    <link href="/output.css" rel="stylesheet" />
+    <!-- this is but, do we need it? -->
+    <!-- <link href="/output.css" rel="stylesheet" /> -->
   </head>
-  <body>
+  <body
+    class="min-h-dvh bg-gradient-to-br dark:from-neutral dark:to-neutral-50"
+  >
     <NavBar />
     <slot />
   </body>
 </html>
 <style is:global>
+  :root {
+    --neutral-cool-grey-1: 210 25 7;
+    --neutral-cool-grey-2: 210 12 15;
+    --navbar-height: 50px;
+    --navbar-offset: calc(-1 * var(--navbar-height));
+  }
+  @font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/OpenSans-VariableFont_wdth,wght.ttf) format("truetype");
+  }
+
+  body {
+    /* max-width: 100dvw;
+    min-height: 100dvh; */
+    height: 100%;
+    /* overflow: hidden; */
+  }
+
+  .navbar-offset {
+    margin-top: var(--navbar-offset, -50px);
+  }
   /* :root {
     --accent: 136, 58, 234;
     --accent-light: 224, 204, 250;

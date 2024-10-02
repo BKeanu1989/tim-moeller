@@ -2,10 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --neutral-cool-grey-1: 210, 25, 7;
+    --navbar-height: 50px;
+
+    --navbar-offset: var(var(--navbar-height));
+}
 
 @layer base {
+    @font-face {
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(/fonts/OpenSans-VariableFont_wdth,wght.ttf) format("truetype");
+      }
+
+    :root {
+        --neutral-cool-grey-1-test: 210, 25, 7;
+    }
     .nav-active {
         @apply font-bold;
+    }
+
+    .nav-offset {
+        margin-top: -50px;
     }
 }
 

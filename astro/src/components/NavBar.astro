@@ -18,9 +18,9 @@ const splittedPathName = pathname.split("/"); // remove the first "/"
 const currentPath = splittedPathName[splittedPathName.length - 1];
 ---
 
-<nav class="flex bg-slate-950 h-[50px] relative justify-center">
+<nav class="flex bg-body h-[50px] justify-center sticky top-0">
   <ul class="flex flex-row text-slate-50 gap-5 h-full items-center">
-    <li>
+    <li class="">
       <a class={currentPath === "" ? "active" : ""} href={`/${lang}/`}
         >{t("nav.home")}</a
       >
