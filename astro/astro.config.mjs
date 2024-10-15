@@ -8,6 +8,9 @@ export default defineConfig({
   i18n: {
     defaultLocale: "en",
     locales: ["de", "en"],
+    fallback: {
+      de: "en",
+    },
   },
 
   integrations: [tailwind(), mdx()],

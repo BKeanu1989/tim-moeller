@@ -1,43 +1,114 @@
 ---
-
+import CareerCard from "./CareerCard.astro";
+import FlippingCard from "./FlippingCard.astro";
+// import BottomArrow from '../'
 ---
 
 <div class="intro relative snap-mandatory snap-y z-10 w-dvw max-w-full">
   <div
-    class="intro-name min-w-full min-h-full relative text-9xl snap-start text-gray-50 w-fit font-body-col h-dvh place-content-center"
+    class="intro-name h-c-dvh flex min-w-full min-h-full relative text-4xl lg:text-9xl snap-start text-gray-50 w-fit font-body-col place-content-center"
   >
     <div
       class="navbar-offset place-self-center absolute w-3/4 top-1/4 left-1/2 -translate-x-1/2"
     >
-      <span class="opacity-0 intro-name--first">Hi</span>
-      <span class="opacity-0">my name is </span>
-      <span class="opacity-0">Tim J. Möller</span>
+      <span class="opacity-0 intro-name--first text-5xl lg:text-7xl">Hi</span>
+      <span class="opacity-0 text-3xl lg:text-5xl">my name is </span>
+      <span class="opacity-0 text-7xl md:text-8xl lg:text-9xl"
+        >Tim J. Möller</span
+      >
     </div>
-    <button
-      class="btn absolute w-7 h-7 scroll-to-button bg-gray-500 rounded-full text-gray-50 place-self-end navbar-offset bottom-[12.5%] left-1/2 -translate-x-1/2"
-      data-scrollTraget="intro-career">yes</button
+    <!-- <button
+    class="btn absolute w-7 h-7 scroll-to-button bg-gray-500 rounded-full text-gray-50 place-self-end navbar-offset bottom-[12.5%] left-1/2 -translate-x-1/2"
+    data-scrollTraget="intro-career">yes</button
+    > -->
+    <div
+      class="proceed border rounded-full w-12 h-12 place-self-end items-center animate-bounce"
     >
+      <svg
+        viewBox="0 0 1024 1024"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="#000000"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            fill="#000000"
+            d="M544 805.888V168a32 32 0 1 0-64 0v637.888L246.656 557.952a30.72 30.72 0 0 0-45.312 0 35.52 35.52 0 0 0 0 48.064l288 306.048a30.72 30.72 0 0 0 45.312 0l288-306.048a35.52 35.52 0 0 0 0-48 30.72 30.72 0 0 0-45.312 0L544 805.824z"
+          >
+          </path>
+        </g>
+      </svg>
+    </div>
   </div>
 
   <div
-    class="intro-career min-w-full min-h-full relative snap-start text-8xl text-gray-50 w-2/3 font-body h-dvh"
+    class="intro-career min-w-full min-h-full relative snap-start text-8xl text-gray-50 w-2/3 font-body h-c-dvh flex flex-col sm:flex-row flex-wrap"
     id="intro-career"
   >
-    <ul class="flex flex-col navbar-offset">
-      <li class="opacity-0">University lecturer in Berlin, Germany</li>
-      <li class="opacity-0">Candidate in computational psychiatry</li>
-      <li class="opacity-0">Psychologist</li>
-      <li class="opacity-0">Neuroscientist</li>
-      <li class="opacity-0">Practitioner for Psychotherapy</li>
-    </ul>
+    <FlippingCard
+      frontImage="/brain-scan-with-books.jpeg"
+      frontText="PhD candidate in computational psychiatry"
+      backText="I am a Psychologist and finished writing my dissertation in computational psychiatry at the Humboldt University of Berlin. I specialize in schizophrenia and disorders of the self in psychiatry."
+    />
+    <FlippingCard
+      frontImage="/brain-scan-with-books.jpeg"
+      frontText="PhD candidate in computational psychiatry"
+      backText="I am a Psychologist and finished writing my dissertation in computational psychiatry at the Humboldt University of Berlin. I specialize in schizophrenia and disorders of the self in psychiatry."
+    />
+    <FlippingCard
+      frontImage="/brain-scan-with-books.jpeg"
+      frontText="PhD candidate in computational psychiatry"
+      backText="I am a Psychologist and finished writing my dissertation in computational psychiatry at the Humboldt University of Berlin. I specialize in schizophrenia and disorders of the self in psychiatry."
+    />
+    <!-- <ul class="flex flex-col navbar-offset">
+      <li class="opacity-0">
+        <CareerCard
+          title="Psycholgist"
+          src="/brain-scan-with-books.jpeg"
+          alt="example for now">Psycholgist</CareerCard
+        >
+      </li>
+      <li class="opacity-0">
+        <CareerCard
+          title="University lecturer in Berlin, Germany"
+          src="/brain-scan-with-books.jpeg"
+          alt="example for now">Psycholgist</CareerCard
+        >
+      </li>
+      <li class="opacity-0">
+        <CareerCard
+          title="PhD Candidate in computional psyiatry"
+          src="/brain-scan-with-books.jpeg"
+          alt="example for now">Candidate in computional psyiatry</CareerCard
+        >
+      </li>
+      <li class="opacity-0">
+        <CareerCard
+          title="Neuroscientist"
+          src="/brain-scan-with-books.jpeg"
+          alt="example for now">Neuroscientist</CareerCard
+        >
+      </li>
+      <li class="opacity-0">
+        <CareerCard
+          title="Practitioner for Psychotherapy"
+          src="/brain-scan-with-books.jpeg"
+          alt="example for now">Practitioner for Psychotherapy</CareerCard
+        >
+      </li>
+    </ul> -->
   </div>
-
-  <!-- <img
+</div>
+<div class="h-dvh flex"></div>
+<!-- <img
   class="h-full w-full absolute top-0 left-0"
   src="/brain-scan-with-books.png"
   alt="img of tim j moeller"
 /> -->
-</div>
 
 <style>
   /* Hide scrollbar for Chrome, Safari and Opera */
@@ -51,6 +122,11 @@
     /* scrollbar-width: none;*/ /* Firefox */
 
     scroll-behavior: smooth;
+  }
+
+  .intro-name,
+  .h-c-dvh {
+    height: calc(100dvh - var(--navbar-height, 50px));
   }
 
   .intro-name--first:after {

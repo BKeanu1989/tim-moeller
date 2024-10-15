@@ -4,6 +4,7 @@ interface Props {
 }
 import NavBar from "../components/NavBar.astro";
 import { getLangFromUrl } from "../i18n/utils";
+import { ViewTransitions } from "astro:transitions";
 
 const { title } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
@@ -24,6 +25,7 @@ const lang = getLangFromUrl(Astro.url);
     <!-- <link href="/styles/output.css" rel="stylesheet" /> -->
     <!-- this is but, do we need it? -->
     <!-- <link href="/output.css" rel="stylesheet" /> -->
+    <ViewTransitions />
   </head>
   <body
     class="min-h-dvh bg-gradient-to-br dark:from-neutral dark:to-neutral-50"

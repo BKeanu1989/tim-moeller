@@ -1,0 +1,51 @@
+---
+// import { Props } from ;
+interface Props {
+  frontImage: string;
+  frontText: string;
+  backImage?: string;
+  backText: string;
+}
+
+const { frontImage, frontText, backImage, backText } = Astro.props;
+---
+
+<article class="flipping-card min-h-24 min-w-24 max-h-80 border relative block">
+  <slot name="front ">
+    <div class="front-container relative h-full w-full">
+      <slot name="front-image" />
+      <div class="front absolute top-0 left-0 h-full text-xl">{frontText}</div>
+    </div>
+  </slot>
+  <slot name="back ">
+    <div class="back-contai">
+      <img
+        src={backImage ? backImage : ""}
+        class="absolute top-0 left-0 w-full h-full -z-10"
+        alt="front page example"
+      />
+      <div class="back absolute top-0 left-0 h-full rotate-x-180 text-sm">
+        {backText}
+      </div>
+    </div>
+  </slot>
+</article>
+
+<style>
+  .flipping-card {
+    perspective: 1000px;
+  }
+
+  /* .front-container img,
+  .back-container img {
+    z-index: -1;
+  } */
+
+  .front-container {
+    background-color: green;
+  }
+
+  .back-container {
+    background-color: yellow;
+  }
+</style>

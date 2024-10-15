@@ -2,5 +2,7 @@
 
 - fix routing
     - should default to english via /en?
+    - navbar routing
 
+    
     
