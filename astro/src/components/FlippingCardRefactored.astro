@@ -7,6 +7,7 @@ interface Props {
   backImage?: string;
   backImageAlt?: string;
   backText: string;
+  title: string;
 }
 
 const {
@@ -16,22 +17,29 @@ const {
   backImage,
   backImageAlt,
   backText,
+  title,
 } = Astro.props;
 ---
 
 <article
-  class="flipping-card shadow-md rounded-sm group/card min-h-24 min-w-48 max-h-80 w-[400px] relative block"
+  class="f-card-refactored shadow-md group/card min-h-48 min-w-48 max-h-80 w-[400px] relative block"
 >
   <slot name="front">
     <div
-      class="front-container motion-reduce:transition-none transition-all ease-in-out duration-500 delay-100 group/front group-hover/card:rotate-y-180 relative h-full w-full"
+      class="front-container flex flex-col motion-reduce:transition-none transition-all ease-in-out duration-500 delay-100 group/front group-hover/card:rotate-y-180 relative h-full w-full"
     >
       <img
         src={frontImage ? frontImage : ""}
         class="absolute top-0 left-0 w-full h-full -z-10 object-cover"
         alt={frontImageAlt}
       />
-      <div class="front absolute top-0 left-0 h-full text-xl">{frontText}</div>
+      <h2 class="text-center text-2xl">{title}</h2>
+      <div
+        class="front-text absolute bottom-0 left-0 h-fit text-xl bg-neutral-50/90"
+      >
+        {frontText}
+      </div>
+      <span class="text-xs absolute bottom-4 right-4">-></span>
     </div>
   </slot>
   <slot name="back">
@@ -47,18 +55,15 @@ const {
           />
         )
       }
-      <div
-        class="back flex items-center justify-center top-0 left-0 h-full text-sm"
-      >
-        <!-- {backText} -->
-        <Fragment set:html={backText} />
+      <div class="back absolute top-0 left-0 h-full text-sm">
+        {backText}
       </div>
     </div>
   </slot>
 </article>
 
 <style>
-  .flipping-card {
+  .f-card-refactored {
     perspective: 1000px;
   }
   .front-container {
@@ -69,11 +74,11 @@ const {
     z-index: -10;
   }
 
-  .flipping-card:hover .back-container {
+  .f-card-refactored:hover .back-container {
     transform: rotateY(0deg);
     z-index: 10;
   }
-  .flipping-card:hover .front-container {
+  .f-card-refactored:hover .front-container {
     transform: rotateY(-180deg);
     z-index: -10;
   }
