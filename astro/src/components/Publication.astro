@@ -1,0 +1,65 @@
+---
+import type { ContentEntryMap } from "astro:content";
+import type { ValidContentEntrySlug } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
+
+// type Author = {
+//   name: string;
+//   imageUrl: string;
+// };
+
+// interface Props {
+//   imageSrc: string;
+//   imageAlt: string;
+//   text: string;
+//   authors: Author[];
+//   date: Date;
+//   title: string;
+// }
+
+// const { imageSrc, imageAlt, title, text, authors, date } = Astro.props;
+type foo = string;
+
+// type C =
+
+interface Props {
+  // collection: CollectionEntry,
+  id: keyof ContentEntryMap;
+  slug: ValidContentEntrySlug<keyof ContentEntryMap>;
+  authors: ValidContentEntrySlug<keyof ContentEntryMap>[];
+}
+
+const { id } = Astro.props;
+const foo = await getEntry("publications", id);
+const t = await getEntry("authors", "");
+const image = foo?.data.image || "";
+const title = foo?.data.title || "";
+const text = foo?.body;
+---
+
+<article class="publication relative bg-slate-300 rounded-md min-h-96 min-w-96">
+  <div class="flex flex-row">
+    <img
+      class="publication-img"
+      src={image}
+      alt={""}
+      data-alt={"auto: image for " + title}
+    />
+    <div class="flex flex-">
+      <h1 class="inline text-2xl publication-title">{title}</h1>
+      <div class="publication-authors">
+        <ul>
+          <!-- {
+            authors.map((author) => (
+              <li>
+                <img src={author.imageUrl} alt={"author " + author.name} />
+              </li>
+            ))
+          } -->
+        </ul>
+      </div>
+    </div>
+  </div>
+  <Fragment class:list={"publication-te text-center"} set:html={text} />
+</article>

@@ -2,6 +2,7 @@
 import Layout from "../../../layouts/Layout.astro";
 
 import { getCollection } from "astro:content";
+import Publication from "@components/Publication.astro";
 
 const allPublications = await getCollection("publications");
 console.log("🚀 ~ allPublications:", allPublications);
@@ -10,16 +11,20 @@ const foo = ["test", 23];
 ---
 
 <Layout title="Publications">
-  <main>
+  <main class="text-white">
     <h1>Publications</h1>
     {JSON.stringify(allPublications)}
-    <div class="border-2">
+    <div class="border-2 flex gap-2 flex-wrap">
       {
         allPublications.map((x) => {
           return (
-            <div class="single-publication">
-              <span>{x.slug}</span>
-              <a href={"/" + x.slug}>{x.data.title}</a>
+            <div class="single-publication border rounded px-5 py-2">
+              <span>{x}</span>
+              <Publication
+                id="authors"
+                slug="en/fourth"
+                authors={["de/real-time-ecg-analysis"]}
+              />
             </div>
           );
         })
