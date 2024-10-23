@@ -11,12 +11,13 @@ const authorCollection = defineCollection({
 
 const publicationCollection = defineCollection({
     type: 'content',
-    schema: z.object({
+    schema: ({ image }) => z.object({
         title: z.string(),
         subTitle: z.string().optional(),
         year: z.number().optional(),
-        text: z.string().optional(),
-        image: z.string(),
+        // text: z.string().optional(),
+        image: image(),
+        // image: z.string(),
         authors: z.array(z.string())
     })
 })
