@@ -1,12 +1,16 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import IntroDeck from "../../components/IntroDeck.astro";
+import ContactForm from "@components/ContactForm.astro";
+import Footer from "@components/Footer.astro";
 ---
 
 <Layout title="Welcome to Astro.">
   <main class="overflow-hidden">
     <IntroDeck />
+    <ContactForm />
     <!--client load is not for astro components -->
     <!-- <IntroDeck client:load /> -->
+    <Footer />
   </main>
 </Layout>
