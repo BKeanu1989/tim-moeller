@@ -1,0 +1,33 @@
+---
+// type Language = "en" | "de";
+
+// interface Props {
+//   language: Language;
+// }
+
+import { getLangFromUrl, useTranslations } from "src/i18n/utils";
+import { ui } from "../i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<form action="" class="flex flex-col">
+  <div class="form-group">
+    <label for="name">{t("contact.name")}</label>
+    <input type="text" placeholder="Jane Doe" name="name" />
+  </div>
+  <div class="form-group">
+    <label for="email">{t("contact.email")}</label>
+    <input type="email" placeholder="your@email.com" name="email" />
+  </div>
+  <div class="form-group">
+    <label for="subject">{t("contact.subject")}</label>
+    <input type="text" placeholder="subject" name="subject" />
+  </div>
+  <div class="form-group">
+    <label for="subject">{t("contact.message")}</label>
+    <input type="text" placeholder="subject" name="subject" />
+  </div>
+  <button type="submit">{t("contact.send")}</button>
+</form>
