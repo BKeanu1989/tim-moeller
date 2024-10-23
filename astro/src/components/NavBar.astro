@@ -25,16 +25,17 @@ const currentPath = splittedPathName[splittedPathName.length - 1];
         >{t("nav.home")}</a
       >
     </li>
-    <li>
+    <!-- <li>
       <a
         class={currentPath === "scientificProjects" ? "nav-active" : ""}
-        href={`/${lang}/scientificProjects`}>{t("nav.scientificProjects")}</a
+        href={`/${lang}/scientificProjects`}>{t("nav.pr")}</a
       >
-    </li>
+    </li> -->
     <li>
       <a
         class={currentPath === "publications" ? "nav-active" : ""}
-        href={`/${lang}/publications`}>{t("nav.publications")}</a
+        href={`/${lang}/publications`}
+        >{t("nav.projects")} & {t("nav.publications")}</a
       >
     </li>
     <li>

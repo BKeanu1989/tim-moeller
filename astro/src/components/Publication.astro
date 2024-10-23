@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { ContentEntryMap } from "astro:content";
 import type { ValidContentEntrySlug } from "astro:content";
 import type { CollectionEntry } from "astro:content";
@@ -22,31 +23,40 @@ import { getEntry } from "astro:content";
 type foo = string;
 
 // type C =
+type Publication = {
+  auhors: string[];
+  image: string;
+  title: string;
+  year: number;
+};
 
 interface Props {
   // collection: CollectionEntry,
-  id: keyof ContentEntryMap;
-  slug: ValidContentEntrySlug<keyof ContentEntryMap>;
-  authors: ValidContentEntrySlug<keyof ContentEntryMap>[];
+  // id: keyof ContentEntryMap;
+  // slug: ValidContentEntrySlug<keyof ContentEntryMap>;
+  authors?: string[]; // array of file names of authors
+  // data: Publication;
+  input: CollectionEntry<"publications">;
 }
 
-const { id } = Astro.props;
-const foo = await getEntry("publications", id);
-const t = await getEntry("authors", "");
-const image = foo?.data.image || "";
-const title = foo?.data.title || "";
-const text = foo?.body;
+// const image = foo?.data.image || "";
+// const title = foo?.data.title || "";
+// const text = foo?.body;
+const { input } = Astro.props;
+// input.data
+const text = input.body;
+const { year, image, title } = input.data;
+
+// import someImage from image + "";
 ---
 
-<article class="publication relative bg-slate-300 rounded-md min-h-96 min-w-96">
-  <div class="flex flex-row">
-    <img
-      class="publication-img"
-      src={image}
-      alt={""}
-      data-alt={"auto: image for " + title}
-    />
-    <div class="flex flex-">
+<article class="publication relative bg-slate-300 rounded-md min-h-96">
+  <div class="flex flex-row relative">
+    <span class="publication--year top-2 right-2 absolute">
+      {year}
+    </span>
+    <Image src={image} alt="st" class={"w-1/2"} />
+    <div class="flex flex-col">
       <h1 class="inline text-2xl publication-title">{title}</h1>
       <div class="publication-authors">
         <ul>
@@ -61,5 +71,7 @@ const text = foo?.body;
       </div>
     </div>
   </div>
-  <Fragment class:list={"publication-te text-center"} set:html={text} />
+  <div class="flex">
+    <Fragment class:list={"publication-te text-center"} set:html={text} />
+  </div>
 </article>
