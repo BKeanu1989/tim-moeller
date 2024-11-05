@@ -12,22 +12,57 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<form action="" class="flex flex-col">
-  <div class="form-group">
-    <label for="name">{t("contact.name")}</label>
-    <input type="text" placeholder="Jane Doe" name="name" />
+<form
+  action=""
+  class="flex flex-col justify-center border rounded-sm lg:w-1/2 bg-c-neutral-500 mx-auto c-mx-auto p-5"
+>
+  <div class="form-group mt-4 flex flex-col gap-1">
+    <label class="w-1/4" for="name">{t("contact.name")}</label>
+    <input
+      class="h-8 rounded-sm p-1"
+      type="text"
+      id="name"
+      placeholder="Jane Doe"
+      name="name"
+    />
   </div>
-  <div class="form-group">
+  <div class="form-group mt-4 flex flex-col gap-1">
     <label for="email">{t("contact.email")}</label>
-    <input type="email" placeholder="your@email.com" name="email" />
+    <input
+      class="h-8 rounded-sm p-1"
+      type="email"
+      id="email"
+      placeholder="your@email.com"
+      name="email"
+    />
   </div>
-  <div class="form-group">
+  <div class="form-group mt-4 flex flex-col gap-1">
     <label for="subject">{t("contact.subject")}</label>
-    <input type="text" placeholder="subject" name="subject" />
+    <input
+      class="h-8 rounded-sm p-1"
+      type="text"
+      id="text"
+      placeholder="subject"
+      name="subject"
+    />
   </div>
-  <div class="form-group">
+  <div class="form-group mt-4 flex flex-col gap-1">
     <label for="subject">{t("contact.message")}</label>
-    <input type="text" placeholder="subject" name="subject" />
+    <!-- <input type="text" id="message" placeholder="your message" name="message" /> -->
+    <textarea
+      id="message"
+      name="message"
+      class="text-black h-16 rounded-sm p-1"
+      placeholder={t("contact.message.playholder")}
+    >
+    </textarea>
   </div>
-  <button type="submit">{t("contact.send")}</button>
+  <button class="px-5 py-2 border rounded-lg w-fit" type="submit"
+    >{t("contact.send")}</button
+  >
 </form>
+<style>
+  .c-mx-auto {
+    margin: 0 auto;
+  }
+</style>
