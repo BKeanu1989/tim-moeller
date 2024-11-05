@@ -2,11 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --neutral-cool-grey-1: 210, 25, 7;
-    --navbar-height: 50px;
+body {
+    /* does this work */
+    /* --neutral-cool-grey-1: 210, 25, 7; */
+    --neutral-cool-grey-4: 210, 25, 7;
+    /* --navbar-height: 50px;
 
-    --navbar-offset: var(var(--navbar-height));
+    --navbar-offset: var(var(--navbar-height)); */
 }
 
 @layer base {
@@ -18,9 +20,6 @@
         src: url(/fonts/OpenSans-VariableFont_wdth,wght.ttf) format("truetype");
       }
 
-    :root {
-        --neutral-cool-grey-1-test: 210, 25, 7;
-    }
     .nav-active {
         @apply font-bold;
     }
@@ -36,7 +35,7 @@
     }
 
     .hero-bg {
-        @apply 100dvh;
+        @apply h-dvh;
     }
     .btn-blue {
       @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;

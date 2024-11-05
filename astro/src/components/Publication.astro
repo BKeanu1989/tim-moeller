@@ -1,28 +1,10 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import type { ContentEntryMap } from "astro:content";
 import type { ValidContentEntrySlug } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
 
-// type Author = {
-//   name: string;
-//   imageUrl: string;
-// };
-
-// interface Props {
-//   imageSrc: string;
-//   imageAlt: string;
-//   text: string;
-//   authors: Author[];
-//   date: Date;
-//   title: string;
-// }
-
-// const { imageSrc, imageAlt, title, text, authors, date } = Astro.props;
-type foo = string;
-
-// type C =
 type Publication = {
   auhors: string[];
   image: string;
@@ -45,7 +27,7 @@ interface Props {
 const { input } = Astro.props;
 // input.data
 const text = input.body;
-const { year, image, title } = input.data;
+const { year, image, title, imageAlt } = input.data;
 
 // import someImage from image + "";
 ---
@@ -55,7 +37,7 @@ const { year, image, title } = input.data;
     <span class="publication--year top-2 right-2 absolute">
       {year}
     </span>
-    <Image src={image} alt="st" class={"w-1/2"} />
+    <Picture src={image} alt="st" class={"w-1/2"} />
     <div class="flex flex-col">
       <h1 class="inline text-2xl publication-title">{title}</h1>
       <div class="publication-authors">

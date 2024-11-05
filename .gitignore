@@ -1,3 +1,5 @@
 *.afdesign
 
 fullstack-developer-*.md
+
+astro/public/output.css

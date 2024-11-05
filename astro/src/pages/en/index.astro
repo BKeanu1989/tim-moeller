@@ -8,7 +8,12 @@ import Footer from "@components/Footer.astro";
 <Layout title="Welcome to Astro.">
   <main class="overflow-hidden">
     <IntroDeck />
-    <ContactForm />
+    <div class="h-dvh w-3/4 mx-auto flex flex-row">
+      <div class="contact-form--intro text-end flex-grow px-5">
+        <p class="text-2xl">Schreib mir gerne eine Nachricht</p>
+      </div>
+      <ContactForm class:list={"flex-grow"} />
+    </div>
     <!--client load is not for astro components -->
     <!-- <IntroDeck client:load /> -->
     <Footer />

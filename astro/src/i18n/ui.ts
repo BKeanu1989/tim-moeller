@@ -17,7 +17,9 @@ export const ui = {
         'contact.email': 'Email',
         'contact.subject': 'Subject',
         'contact.send': 'Send',
-        'contact.message': 'Message'
+        'contact.message': 'Message',
+        'contact.message.playholder': 'your message'
+
     },
     de: {
         'nav.home': 'Home',
@@ -30,6 +32,7 @@ export const ui = {
         'contact.email': 'Email',
         'contact.subject': 'Betreff',
         'contact.send': 'Senden',
-        'contact.message': "Nachricht"
+        'contact.message': "Nachricht",
+        'contact.message.playholder': 'Deine Nachricht'
     },
 } as const;
