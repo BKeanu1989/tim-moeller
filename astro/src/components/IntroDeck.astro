@@ -14,9 +14,11 @@ import Publication from "./Publication.astro";
     <div
       class="navbar-offset place-self-center absolute w-3/4 top-1/4 left-1/2 -translate-x-1/2"
     >
-      <span class="intro-name--first text-5xl lg:text-7xl">Hi</span>
-      <span class="text-3xl lg:text-5xl">my name is </span>
-      <span class="text-7xl md:text-8xl lg:text-9xl">Tim J. Möller</span>
+      <span class="opacity-0 intro-name--first text-5xl lg:text-7xl">Hi</span>
+      <span class="opacity-0 text-3xl lg:text-5xl">my name is </span>
+      <span class="opacity-0 text-7xl md:text-8xl lg:text-9xl"
+        >Tim J. Möller</span
+      >
     </div>
     <!-- <button
     class="btn absolute w-7 h-7 scroll-to-button bg-gray-500 rounded-full text-gray-50 place-self-end navbar-offset bottom-[12.5%] left-1/2 -translate-x-1/2"
@@ -55,7 +57,7 @@ import Publication from "./Publication.astro";
     id="intro-career"
   >
     <div
-      class="flipping-card-container flex flex-col gap-5 lg:gap-10 lg:flex-row"
+      class="flipping-card-container flex flex-col flex-wrap justify-between gap-5 lg:gap-10 lg:flex-row"
     >
       <FlippingCardV2
         frontImage="/brain-scan-with-books.jpeg"
@@ -123,7 +125,7 @@ import Publication from "./Publication.astro";
     </ul> -->
   </div>
 </div>
-<div class="h-dvh flex"></div>
+<!-- <div class="h-dvh flex"></div> -->
 <!-- <img
   class="h-full w-full absolute top-0 left-0"
   src="/brain-scan-with-books.png"
@@ -165,7 +167,8 @@ import Publication from "./Publication.astro";
     [
       ".intro-name span",
       // does let it flash // we did via opacity-0 on the element before
-      { opacity: [0, 1] },
+      { opacity: 1 },
+      // { opacity: [0, 1] },
       { easing: "ease-out", duration: 1, delay: stagger(1, { start: 0.8 }) },
     ],
   ];

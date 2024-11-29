@@ -20,6 +20,7 @@ export default {
 
         // ""
       },
+
       fontFamily: {
         body: ['"Open Sans"'],
       },
@@ -36,6 +37,9 @@ export default {
         },
         ".active": {
           fontWeight: "bold",
+        },
+        ".h-cdvh": {
+          height: "calc(100dvh - var(--navbar-height, 50px))",
         },
       });
     },

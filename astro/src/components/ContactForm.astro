@@ -7,15 +7,14 @@
 
 import { getLangFromUrl, useTranslations } from "src/i18n/utils";
 import { ui } from "../i18n/ui";
+const { class: className, ...rest } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<form
-  action=""
-  class="flex flex-col justify-center border rounded-sm lg:w-1/2 bg-c-neutral-500 mx-auto c-mx-auto p-5"
->
+<form action="" class={className} {...rest}>
+  <slot />
   <div class="form-group mt-4 flex flex-col gap-1">
     <label class="w-1/4" for="name">{t("contact.name")}</label>
     <input

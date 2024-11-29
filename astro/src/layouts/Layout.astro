@@ -2,9 +2,11 @@
 interface Props {
   title: string;
 }
-import NavBar from "../components/NavBar.astro";
 import { getLangFromUrl } from "../i18n/utils";
 import { ViewTransitions } from "astro:transitions";
+
+import "../styles/index.css";
+import NavBar from "../components/NavBar.astro";
 
 const { title } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
@@ -24,12 +26,11 @@ const lang = getLangFromUrl(Astro.url);
     <!-- TODO: this is sadly not working rn -->
     <!-- <link href="/styles/output.css" rel="stylesheet" /> -->
     <!-- this is but, do we need it? -->
+    <!-- aka why not just import in mainjs -->
     <!-- <link href="/output.css" rel="stylesheet" /> -->
     <ViewTransitions />
   </head>
-  <body
-    class="min-h-dvh bg-gradient-to-br dark:from-neutral dark:to-neutral-50"
-  >
+  <body class="min-h-dvh bg-gradient-to-b from-c-neutral-900 to-c-neutral-800">
     <NavBar />
     <slot />
     <footer class="flex bg-slate-400 w-dvw h-fit"></footer>
@@ -60,30 +61,4 @@ const lang = getLangFromUrl(Astro.url);
   .navbar-offset {
     margin-top: var(--navbar-offset, -50px);
   }
-  /* :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
-    );
-  }
-  html {
-    font-family: system-ui, sans-serif;
-    background: #13151a;
-  }
-  code {
-    font-family:
-      Menlo,
-      Monaco,
-      Lucida Console,
-      Liberation Mono,
-      DejaVu Sans Mono,
-      Bitstream Vera Sans Mono,
-      Courier New,
-      monospace;
-  } */
 </style>

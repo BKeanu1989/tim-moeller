@@ -8,12 +8,21 @@ import Footer from "@components/Footer.astro";
 <Layout title="Welcome to Astro.">
   <main class="overflow-hidden">
     <IntroDeck />
-    <div class="h-dvh w-3/4 mx-auto flex flex-row">
-      <div class="contact-form--intro text-end flex-grow px-5">
-        <p class="text-2xl">Schreib mir gerne eine Nachricht</p>
+    <article class="w-3/4 mx-auto flex flex-row h-cdvh">
+      <div class="contact-form--intro flex-grow px-20">
+        <h1 class="text-4xl">Work with me</h1>
+        <p class="text-2xl max-w-xs">
+          If you are interest in a collaboration in a scientific project, in my
+          service as a lecturer, or any other inquires, please contact me via
+          email at tim.julian.moeller@gmail.com or through my contact form.
+        </p>
       </div>
-      <ContactForm class:list={"flex-grow"} />
-    </div>
+      <div class="flex flex-col">
+        <ContactForm
+          class="justify-center border rounded-sm bg-c-neutral-500 mx-auto c-mx-auto p-5"
+        />
+      </div>
+    </article>
     <!--client load is not for astro components -->
     <!-- <IntroDeck client:load /> -->
     <Footer />
