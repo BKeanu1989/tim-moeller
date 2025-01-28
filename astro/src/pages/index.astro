@@ -1,6 +1,6 @@
 ---
 import { getCollection, getEntry } from "astro:content";
-import Layout from "../layouts/Layout.astro";
+import Intro from "../layouts/Intro.astro";
 
 const allAuthors = await getCollection("authors");
 console.log("🚀 ~ allAuthors:", allAuthors);
@@ -9,25 +9,16 @@ const timAuthor = await getEntry("authors", "tim-j-moeller");
 console.log("🚀 ~ timAuthor:", timAuthor);
 ---
 
-<Layout title="Welcome to Astro.">
+<Intro title="Welcome to Astro.">
   <main>
     <!-- class="relative -z-10 hero-bg w-dvw h-dvh flex bg-gradient-to-br dark:from-slate-900 dark:to-slate-400" -->
     <div
-      class="relative -z-10 hero-bg w-dvw h-dvh flex bg-gradient-to-br dark:from-slate-900 dark:to-slate-800"
+      class="relative -z-10 hero-bg w-dvw h-dvh flex dark:from-slate-900 dark:to-slate-800"
     >
-      <!-- <img
-        class="h-full w-full absolute top-0 left-0
-        src="/brain-scan-with-books.png"
-        alt="img of tim j moeller"
-      /> -->
       <div class="intro-name">Hi, my name is Tim Julian Möller</div>
     </div>
   </main>
-  <!-- <footer class="w-dvw h-fit flex">
-    
-
-  </footer> -->
-</Layout>
+</Intro>
 
 <style>
   .hero-bg {
