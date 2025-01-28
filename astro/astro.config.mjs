@@ -17,4 +17,11 @@ export default defineConfig({
   },
 
   integrations: [tailwind(), mdx()],
+  // image: {
+  //   service: "sharp",
+  //   serviceEntryPoint: "@astrojs/image/sharp",
+  //   logLevel: "info",
+  //   cacheDir: "./.cache/image",
+  //   defaultFormat: "webp",
+  // },
 });
