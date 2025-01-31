@@ -15,6 +15,9 @@ export default defineConfig({
     //   en: "de",
     // },
   },
+  experimental: {
+    svg: true,
+  },
 
   integrations: [tailwind(), mdx()],
   // image: {

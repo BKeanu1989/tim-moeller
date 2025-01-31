@@ -1,16 +1,39 @@
 ---
-import Xing from "../assets/xing.svg?raw";
+import Xing from "../assets/xing.svg";
+// import Xing from "../assets/xing.svg?raw";
+import Github from "../assets/github.svg";
+import LinkedIn from "../assets/linkedin.svg";
+import Twitter from "../assets/twitter.svg";
 import { Image } from "astro:assets";
 import tim from "../assets/tim-j-moeller 2.png";
 ---
 
-<main class="contact-card border-2 border-white">
+<main class="contact-card border-2 border-white px-10 py-10 w-96 h-fit mx-auto flex flex-col items-center">
   <Image alt="Bild Time J Möller" src={tim} />
-  <h1>Tim Julian Möller</h1>
-  <ul>
-    <li><a href="#"><Xing /></a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
+  <h1 class="text-white text-xl">Tim Julian Möller</h1>
+  <ul class="flex">
+    <li>
+      <a href="#">
+        <!-- <Fragment class="fill-white" set:html={Xing} /> -->
+        <Xing class="fill-white stroke-white" />
+        <li>
+          <a href="#">
+            <LinkedIn class="fill-white" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <Twitter class="fill-white" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <Github class="fill-white" />
+          </a>
+        </li>
+      </a>
+    </li>
   </ul>
+  <button class="button px-5 py-2 text-white bg-blue-500">Get in contact</button
+  >
 </main>
