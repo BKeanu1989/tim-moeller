@@ -1,5 +1,5 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
+import NavSideBarLayout from "../../../layouts/NavSideBarLayout.astro";
 
 import { getCollection } from "astro:content";
 import Publication from "@components/Publication.astro";
@@ -12,7 +12,7 @@ const englishPublications = allPublications.filter((x) =>
 );
 ---
 
-<Layout title="Publications">
+<NavSideBarLayout title="Publications">
   <main class="text-white">
     <h1>Publications</h1>
     <div class="border-2 flex flex-wrap place-content-evenly gap-5">
@@ -27,4 +27,4 @@ const englishPublications = allPublications.filter((x) =>
       }
     </div>
   </main>
-</Layout>
+</NavSideBarLayout>

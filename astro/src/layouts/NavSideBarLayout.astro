@@ -3,10 +3,10 @@ interface Props {
   title: string;
 }
 import { getLangFromUrl } from "../i18n/utils";
-import { ClientRouter } from 'astro:transitions';
+import { ClientRouter } from "astro:transitions";
 
 import "../styles/index.css";
-import NavBar from "../components/NavBar.astro";
+import NavSideBar from "@components/NavSideBar.astro";
 
 const { title } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
@@ -20,19 +20,14 @@ const lang = getLangFromUrl(Astro.url);
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <!-- <meta http-equiv="refresh" content="0;url=/en/" /> -->
-
     <title>{title}</title>
-    <!-- TODO: this is sadly not working rn -->
-    <!-- <link href="/styles/output.css" rel="stylesheet" /> -->
-    <!-- this is but, do we need it? -->
-    <!-- aka why not just import in mainjs -->
-    <!-- <link href="/output.css" rel="stylesheet" /> -->
     <ClientRouter />
   </head>
   <body class="min-h-dvh bg-gradient-to-b from-c-neutral-900 to-c-neutral-800">
-    <NavBar />
-    <slot />
+    <NavSideBar />
+    <div class="flex">
+        <slot />
+    </div>
     <footer class="flex bg-slate-400 w-dvw h-fit"></footer>
   </body>
 </html>
@@ -56,9 +51,5 @@ const lang = getLangFromUrl(Astro.url);
     min-height: 100dvh; */
     height: 100%;
     /* overflow: hidden; */
-  }
-
-  .navbar-offset {
-    margin-top: var(--navbar-offset, -50px);
   }
 </style>

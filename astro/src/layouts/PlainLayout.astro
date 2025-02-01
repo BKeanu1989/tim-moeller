@@ -3,7 +3,7 @@ interface Props {
   title: string;
 }
 import { getLangFromUrl } from "../i18n/utils";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 import "../styles/index.css";
 
@@ -27,7 +27,7 @@ const lang = getLangFromUrl(Astro.url);
     <!-- this is but, do we need it? -->
     <!-- aka why not just import in mainjs -->
     <!-- <link href="/output.css" rel="stylesheet" /> -->
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body class="min-h-dvh bg-gradient-to-b from-c-neutral-900 to-c-neutral-800">
     <slot />
