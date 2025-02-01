@@ -22,3 +22,9 @@ selfhosting
 # astro doc
 
 https://docs.astro.build/en/guides/images/
+
+---
+## inspirations
+https://codepen.io/markmiro/pen/wbqMPa
+https://codepen.io/simeydotme/pen/PrQKgo - pokemon
+
