@@ -1,10 +1,10 @@
 ---
-import { Picture } from "astro:assets";
+import { Picture, Image } from "astro:assets";
 import type { ContentEntryMap } from "astro:content";
 import type { ValidContentEntrySlug } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
-
+console.log("import meta",import.meta)
 type Publication = {
   auhors: string[];
   image: string;
@@ -13,42 +13,56 @@ type Publication = {
 };
 
 interface Props {
-  // collection: CollectionEntry,
-  // id: keyof ContentEntryMap;
-  // slug: ValidContentEntrySlug<keyof ContentEntryMap>;
-  authors?: string[]; // array of file names of authors
-  // data: Publication;
+  // authors: string[]; // array of file names of authors
   input: CollectionEntry<"publications">;
 }
 
-// const image = foo?.data.image || "";
-// const title = foo?.data.title || "";
-// const text = foo?.body;
-const { input } = Astro.props;
-// input.data
+const { input,  } = Astro.props;
 const text = input.body;
-const { year, image, title, imageAlt } = input.data;
+const { year, image, title, imageAlt, authors} = input.data;
 
+// console.log("atuhors", authors)
+
+const authorData = []
+
+for await (const d of authors) {
+
+  // console.log("inside loop", d)
+  const res = await getEntry("authors", d)
+
+  // console.log("res", res)
+  authorData.push(res)
+}
+
+const foo = authorData.map((x) => {
+  // @ts-ignore
+  // x.test = "@assets" + 
+})
+
+// authors.forEach((x) => {
+//   await 
+// })
 // import someImage from image + "";
 ---
 
-<article class="publication relative bg-slate-300 rounded-md min-h-96">
+<article class="publication relative bg-c-bg-grey rounded-md min-h-96 min-w-fit text-black">
   <div class="flex flex-row relative">
     <span class="publication--year top-2 right-2 absolute">
       {year}
     </span>
-    <Picture src={image} alt="st" class={"w-1/2"} />
+    <Picture src={image} alt="st" class="" />
     <div class="flex flex-col">
       <h1 class="inline text-2xl publication-title">{title}</h1>
       <div class="publication-authors">
         <ul>
-          <!-- {
-            authors.map((author) => (
+          {
+            authorData.map((author) => (
+              author && 
               <li>
-                <img src={author.imageUrl} alt={"author " + author.name} />
+                <Image src={author.data.image} alt={"author " + author.data.name} />
               </li>
             ))
-          } -->
+          }
         </ul>
       </div>
     </div>

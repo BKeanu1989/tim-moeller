@@ -2,10 +2,12 @@ import { defineCollection, z } from 'astro:content';
 
 const authorCollection = defineCollection({
     type: 'data',
-    schema: z.object({
+    schema: ({image}) => z.object({
         name: z.string(),
         link: z.string(),
-        image: z.string().optional()
+        // image: image(),
+        image: image(),
+
     })
 })
 
