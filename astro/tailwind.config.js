@@ -17,7 +17,9 @@ export default {
         "c-neutral-700": "hsl(var(--neutral-700))",
         "c-neutral-800": "hsl(var(--neutral-800))",
         "c-neutral-900": "hsl(var(--neutral-900))",
-        "c-bg-grey": "#d9d9d9"
+        "c-bg-grey": "#d9d9d9",
+        "c-black": "#121212",
+        "c-blackish": "#202020"
         // ""
       },
 
