@@ -14,9 +14,9 @@ const pathname = new URL(Astro.request.url).pathname;
 const splittedPathName = pathname.split("/"); // remove the first "/"
 const currentPath = splittedPathName[splittedPathName.length - 1];
 ---
-<div class="sidebar bg-gray-700 w-60 flex flex-col px-4 float-left h-dvh">
+<div class="sidebar bg-c-blackish w-60 flex flex-col px-4 float-left h-dvh fixed">
     <h1 class="text-white text-2xl my-5">Tim Julian Möller</h1>
-    <nav class="text-xl">
+    <nav class="text-xl mt-5">
       <ul class="text-white flex flex-col gap-2">
         <li>    <a class={currentPath === "" ? "active" : ""} href={`/${lang}/`}
             >{t("nav.home")}</a
@@ -41,11 +41,11 @@ const currentPath = splittedPathName[splittedPathName.length - 1];
     </nav>
     <div class="mt-auto text-white">
       <ul class="flex flex-wrap gap-8 place-content-center">
-        <li><a href="#"><Facebook class="fill-white"/></a></li>
-        <li><a href="#"><Xing class="fill-white" /></a></li>
-        <li><a href="#"><LinkedIn class="fill-white" /></a></li>
-        <li><a href="#"><Twitter /></a></li>
-        <li><a href="#"><Github /></a></li>
+        <li><a href="#"><Facebook class="fill-white w-8 h-8"/></a></li>
+        <li><a href="#"><Xing class="fill-white w-8 h-8" /></a></li>
+        <li><a href="#"><LinkedIn class="fill-white w-8 h-8" /></a></li>
+        <li><a href="#"><Twitter class="w-8 h-8" /></a></li>
+        <li><a href="#"><Github class="w-8 h-8" /></a></li>
       </ul>
       <div class="legal-links my-5">
         <a href="#">Impressum</a>
