@@ -5,6 +5,10 @@ import Facebook from "../assets/facebook.svg";
 import LinkedIn from "../assets/linkedin.svg";
 import Twitter from "../assets/twitter.svg";
 import Copyright from "../assets/copyright.svg";
+import Home from "../assets/home-1.svg";
+import User from "../assets/user.svg";
+import BookStudy from "../assets/book-study.svg";
+import Message from "../assets/message.svg";
 import { getLangFromUrl, useTranslations } from "src/i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -13,29 +17,47 @@ const t = useTranslations(lang);
 const pathname = new URL(Astro.request.url).pathname;
 const splittedPathName = pathname.split("/"); // remove the first "/"
 const currentPath = splittedPathName[splittedPathName.length - 1];
+
+const currentYear = new Date().getFullYear()
+console.log("🚀 ~ currentYear:", currentYear)
 ---
 <div class="sidebar bg-c-blackish w-60 flex flex-col px-4 float-left h-dvh fixed">
     <h1 class="text-white text-2xl my-5">Tim Julian Möller</h1>
     <nav class="text-xl mt-5">
-      <ul class="text-white flex flex-col gap-2">
-        <li>    <a class={currentPath === "" ? "active" : ""} href={`/${lang}/`}
-            >{t("nav.home")}</a
+      <ul class="text-white flex flex-col gap-4">
+        <li class="">    
+          <a class="flex gap-4" :class={currentPath === "" ? "active" : ""} href={`/${lang}/`}
+            >
+            <Home class="w-8 h-8 fill-white stroke-white" />
+            {t("nav.home")}</a
           ></li>
         <li>
             <a
-            class={currentPath === "about" ? "nav-active" : ""}
-            href={`/${lang}/about`}>{t("nav.about")}</a>
+            class="flex gap-4"
+            :class={currentPath === "about" ? "nav-active" : ""}
+            href={`/${lang}/about`}>
+            <User class="w-8 h-8 fill-white" />
+            {t("nav.about")}
+          </a>
         </li>
         <li>
             <a
-            class={currentPath === "publications" ? "nav-active" : ""}
+            class="flex gap-4"
+            :class={currentPath === "publications" ? "nav-active" : ""}
             href={`/${lang}/publications-projects`}
-            >{t("nav.projects")} & {t("nav.publications")}</a>
+            >
+            <BookStudy class="w-8 h-8 fill-white" />
+            
+            {t("nav.projects")} & {t("nav.publications")}</a>
         </li>
         <li>      
             <a
-            class={currentPath === "contact" ? "nav-active" : ""}
-            href={`/${lang}/contact`}>{t("nav.contact")}</a>
+            class="flex gap-4"
+            :class={currentPath === "contact" ? "nav-active" : ""}
+            href={`/${lang}/contact`}>
+            <Message class="w-8 h-8 fill-white" />
+            
+            {t("nav.contact")}</a>
         </li>
       </ul>
     </nav>
@@ -47,13 +69,13 @@ const currentPath = splittedPathName[splittedPathName.length - 1];
         <li><a href="#"><Twitter class="w-8 h-8" /></a></li>
         <li><a href="#"><Github class="w-8 h-8" /></a></li>
       </ul>
-      <div class="legal-links my-5">
+      <div class="legal-links my-5 text-center">
         <a href="#">Impressum</a>
       </div>
 
-      <div class="flex">
+      <div class="flex justify-center">
         <Copyright class="fill-white" />
-        <span class="text-white">2025</span>
+        <span class="text-white content-center">{ currentYear }</span>
       </div>
     </div>
 </div>

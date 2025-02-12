@@ -26,11 +26,8 @@ const { year, image, title, imageAlt, authors} = input.data;
 const authorData = []
 
 for await (const d of authors) {
-
-  // console.log("inside loop", d)
   const res = await getEntry("authors", d)
 
-  // console.log("res", res)
   authorData.push(res)
 }
 
@@ -45,7 +42,7 @@ const foo = authorData.map((x) => {
 // import someImage from image + "";
 ---
 
-<article class="publication relative bg-c-bg-grey rounded-md min-h-96 min-w-fit text-black">
+<article class="publication relative bg-c-bg-grey min-h-96 min-w-fit text-black">
   <div class="flex flex-row relative">
     <span class="publication--year top-2 right-2 absolute">
       {year}
@@ -54,16 +51,24 @@ const foo = authorData.map((x) => {
     <div class="flex flex-col">
       <h1 class="inline text-2xl publication-title">{title}</h1>
       <div class="publication-authors">
-        <ul>
+        <ul class="flex gap-2">
           {
             authorData.map((author) => (
+
               author && 
               <li>
-                <Image src={author.data.image} alt={"author " + author.data.name} />
+                <Image src={author.data.image} alt={"author " + author.data.name} class="w-10 h-10 rounded-full" />
               </li>
             ))
           }
         </ul>
+        <div class="author-names">
+          { authorData.map((author) => (
+            author &&
+              <span class="text-slate-700 ml-1">({author.data.name})</span>
+
+          ))}
+        </div>
       </div>
     </div>
   </div>
