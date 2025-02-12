@@ -3,11 +3,11 @@ import { getCollection, getEntry } from "astro:content";
 // import Intro from "../layouts/Intro.astro";
 import IntroHero from "../components/IntroHero.astro";
 
-const allAuthors = await getCollection("authors");
-console.log("🚀 ~ allAuthors:", allAuthors);
+// const allAuthors = await getCollection("authors");
+// console.log("🚀 ~ allAuthors:", allAuthors);
 
-const timAuthor = await getEntry("authors", "tim-j-moeller");
-console.log("🚀 ~ timAuthor:", timAuthor);
+// const timAuthor = await getEntry("authors", "tim-j-moeller");
+// console.log("🚀 ~ timAuthor:", timAuthor);
 ---
 
 <IntroHero />
@@ -22,7 +22,7 @@ console.log("🚀 ~ timAuthor:", timAuthor);
 </Intro> -->
 <style>
   .hero-bg {
-    height: calc(100dvh - 50px);
+    /* height: calc(100dvh - 50px); */
   }
 </style>
 z

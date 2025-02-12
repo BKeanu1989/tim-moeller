@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('publications');  
+  const languages = ['en', 'de']; // Define supported languages
+
+  return languages.flatMap((lang) =>
+    posts.map((post) => ({
+      params: { lang, id: post.id }, // Generate paths for both languages
+      props: { post, lang }, // Pass post and lang as props
+    }))
+  );
+}
+
+const { post, lang } = Astro.props; // Get post data and language from props
+---
+
+<html lang={lang}>
+  <head>
+    <title>{post.data.title}</title>
+  </head>
+  <body>
+    <h1>{post.data.title}</h1>
+    <article>{post.body}</article>
+    <a href={`/${lang}/publication-projects`}>Back to Publications</a> <!-- Correct back link -->
+  </body>
+</html>
