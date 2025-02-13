@@ -4,17 +4,12 @@ import FlagDe from "./icons/flag-de.astro";
 import FlagUs from "./icons/flag-us.astro";
 ---
 
-<ul class="flex flex-row gap-2 text-slate-50 absolute right-0">
+<ul class="flex flex-row gap-2 text-slate-50 place-content-center">
   {
     Object.entries(languages).map(([lang, label]) => (
       <li class="flex">
-        <a href={`/${lang}/`}>
-          {lang} -{" "}
-          {lang === "en" ? (
-            <FlagUs class="w-12 h-12 inline-block" />
-          ) : (
-            <FlagDe class="w-12 h-12 inline-block" />
-          )}
+        <a href={`/${lang}/`} class="border-2 rounded-md p-2">
+          {lang}
         </a>
       </li>
     ))

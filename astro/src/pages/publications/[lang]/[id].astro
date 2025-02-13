@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import NavSideBarLayout from "../../../layouts/NavSideBarLayout.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection('publications');  
@@ -14,15 +15,14 @@ export async function getStaticPaths() {
 }
 
 const { post, lang } = Astro.props; // Get post data and language from props
+console.log(post)
 ---
-
-<html lang={lang}>
-  <head>
-    <title>{post.data.title}</title>
-  </head>
-  <body>
-    <h1>{post.data.title}</h1>
-    <article>{post.body}</article>
-    <a href={`/${lang}/publication-projects`}>Back to Publications</a> <!-- Correct back link -->
-  </body>
-</html>
+<NavSideBarLayout title="Test">
+  <main class="h-full min-h-dvh flex text-white">
+    <div class="bg-c-black w-[calc(100dvw-16rem)] relative">
+      <h1 class="text-2xl text-center my-5">{post.data.title}</h1>
+      <article class="text-center">{post.body}</article>
+      <a href={`/${lang}/publications-projects`}>Back to Publications</a> <!-- Correct back link -->
+    </div>
+  </main>
+</NavSideBarLayout>
