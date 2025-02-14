@@ -5,7 +5,6 @@ import { getCollection } from "astro:content";
 import Publication from "@components/Publication.astro";
 
 const allPublications = await getCollection("publications");
-console.log("🚀 ~ allPublications:", allPublications);
 
 const englishPublications = allPublications.filter((x) =>
   x.slug.includes("en/")

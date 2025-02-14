@@ -1,4 +1,4 @@
-import { ui, defaultLang } from './ui';
+import { ui, defaultLang, languages } from './ui';
 
 export function getLangFromUrl(url: URL) {
     const [, lang] = url.pathname.split('/');
@@ -9,5 +9,17 @@ export function getLangFromUrl(url: URL) {
 export function useTranslations(lang: keyof typeof ui) {
     return function t(key: keyof typeof ui[typeof defaultLang]) {
         return ui[lang][key] || ui[defaultLang][key];
+    }
+}
+
+export function getLangAndRawIdFromCollectionId(id: string) {
+    const splitted = id.split("/")
+    if (splitted.length === 0) {
+        return
+    }
+
+    return {
+        "lang": splitted[0],
+        "id": splitted[1]
     }
 }
