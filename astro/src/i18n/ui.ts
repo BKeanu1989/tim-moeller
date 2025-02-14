@@ -18,11 +18,12 @@ export const ui = {
         'contact.subject': 'Subject',
         'contact.send': 'Send',
         'contact.message': 'Message',
-        'contact.message.playholder': 'your message',
+        'contact.message.placeholder': 'your message',
         'contact.button': 'Get in contact',
         'misc.years_of_experience': 'Years of experience',
         'misc.open_source': 'Open Source',
         'misc.publications': 'Publications',
+        'misc.read_more': 'read more',
     },
     de: {
         'nav.home': 'Home',
@@ -36,12 +37,11 @@ export const ui = {
         'contact.subject': 'Betreff',
         'contact.send': 'Senden',
         'contact.message': "Nachricht",
-        'contact.message.playholder': 'Deine Nachricht',
+        'contact.message.placeholder': 'Deine Nachricht',
         'contact.button': 'Kontaktieren',
         'misc.years_of_experience': 'Jahre an Erfahrung',
         'misc.open_source': 'Open Source',
         'misc.publications': 'Publikationen',
-
-
+        'misc.read_more': 'mehr lesen',
     },
 } as const;

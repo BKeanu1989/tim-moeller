@@ -4,7 +4,12 @@ import type { ContentEntryMap } from "astro:content";
 import type { ValidContentEntrySlug } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
+
+import { getLangFromUrl, useTranslations } from "src/i18n/utils";
 console.log("import meta",import.meta)
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 type Publication = {
   auhors: string[];
   image: string;
@@ -32,14 +37,17 @@ for await (const d of authors) {
 
 <article class="publication relative bg-c-bg-grey min-h-96 min-w-fit text-black p-5">
   <div class="flex flex-row relative gap-4">
-    <span class="publication--year top-2 right-2 absolute">
-      {year}
-    </span>
+
     <div class="flex-none w-1/3">
       <Picture src={image} alt="st"  />
     </div>
     <div class="flex flex-col w-2/3 flex-auto">
-      <h1 class="inline text-2xl publication-title">{title}</h1>
+      <div class="title">
+        <span class="publication--year float-right">
+          {year}
+        </span>
+        <h1 class="inline text-2xl publication-title">{title}</h1>
+      </div>
       <div class="publication-authors">
         <ul class="flex gap-2">
           {
@@ -64,7 +72,7 @@ for await (const d of authors) {
   </div>
   <div class="flex flex-col">
     <Fragment class:list={"publication-te text-center"} set:html={text} />
-    <a class="px-5 py-2 w-fit text-white rounded bg-blue-500" href={`/publications/${input.id}`}>read more</a>
+    <a class="px-5 py-2 w-fit text-white rounded bg-blue-500" href={`/publications/${input.id}`}>{t("misc.read_more")}</a>
 
   </div>
 </article>

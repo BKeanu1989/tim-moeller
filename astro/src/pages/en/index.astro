@@ -2,29 +2,17 @@
 import { getCollection, getEntry } from "astro:content";
 // import Intro from "../layouts/Intro.astro";
 import IntroHero from "../../components/IntroHero.astro";
+import NavSideBarLayout from "src/layouts/NavSideBarLayout.astro";
 
-const allAuthors = await getCollection("authors");
-console.log("🚀 ~ allAuthors:", allAuthors);
+// const allAuthors = await getCollection("authors");
+// console.log("🚀 ~ allAuthors:", allAuthors);
 
-const timAuthor = await getEntry("authors", "tim-j-moeller");
-console.log("🚀 ~ timAuthor:", timAuthor);
+// const timAuthor = await getEntry("authors", "tim-j-moeller");
+// console.log("🚀 ~ timAuthor:", timAuthor);
 ---
 
-<IntroHero />
+<NavSideBarLayout title="Tim Julian Möller - en">
+  <IntroHero />
+</NavSideBarLayout>
 
-<!-- <Intro title="Welcome to Astro.">
-  <main>
-    <div
-      class="relative -z-10 hero-bg w-dvw h-dvh flex dark:from-slate-900 dark:to-slate-800"
-    >
-      <div class="intro-name">Hi, my name is Tim Julian Möller</div>
-    </div>
-  </main>
-</Intro> -->
-<style>
-  .hero-bg {
-    /* height: calc(100dvh - 50px); */
-  }
-</style>
-z
 

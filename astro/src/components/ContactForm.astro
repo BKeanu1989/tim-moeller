@@ -1,12 +1,7 @@
 ---
-// type Language = "en" | "de";
 
-// interface Props {
-//   language: Language;
-// }
 
 import { getLangFromUrl, useTranslations } from "src/i18n/utils";
-import { ui } from "../i18n/ui";
 const { class: className, ...rest } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -15,8 +10,8 @@ const t = useTranslations(lang);
 
 <form action="" class={className} {...rest}>
   <slot />
-  <div class="form-group mt-4 flex flex-col gap-1">
-    <label class="w-1/4" for="name">{t("contact.name")}</label>
+  <div class="form-group flex flex-col gap-1">
+    <label class="text-white w-1/4" for="name">{t("contact.name")}</label>
     <input
       class="h-8 rounded-sm p-1"
       type="text"
@@ -26,7 +21,7 @@ const t = useTranslations(lang);
     />
   </div>
   <div class="form-group mt-4 flex flex-col gap-1">
-    <label for="email">{t("contact.email")}</label>
+    <label class="text-white" for="email">{t("contact.email")}</label>
     <input
       class="h-8 rounded-sm p-1"
       type="email"
@@ -36,27 +31,26 @@ const t = useTranslations(lang);
     />
   </div>
   <div class="form-group mt-4 flex flex-col gap-1">
-    <label for="subject">{t("contact.subject")}</label>
+    <label class="text-white" for="subject">{t("contact.subject")}</label>
     <input
       class="h-8 rounded-sm p-1"
       type="text"
       id="text"
-      placeholder="subject"
+      placeholder={t("contact.subject")}
       name="subject"
     />
   </div>
   <div class="form-group mt-4 flex flex-col gap-1">
-    <label for="subject">{t("contact.message")}</label>
+    <label class="text-white" for="subject">{t("contact.message")}</label>
     <!-- <input type="text" id="message" placeholder="your message" name="message" /> -->
     <textarea
       id="message"
       name="message"
       class="text-black h-16 rounded-sm p-1"
-      placeholder={t("contact.message.playholder")}
-    >
-    </textarea>
+      placeholder={t("contact.message.placeholder")}
+    ></textarea>
   </div>
-  <button class="px-5 py-2 border rounded-lg w-fit" type="submit"
+  <button class="px-5 py-2 border rounded-lg w-fit text-white" type="submit"
     >{t("contact.send")}</button
   >
 </form>

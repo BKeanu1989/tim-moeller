@@ -1,0 +1,20 @@
+---
+import ContactForm from "@components/ContactForm.astro";
+import NavSideBarLayout from "src/layouts/NavSideBarLayout.astro";
+
+
+---
+
+<NavSideBarLayout title="Contact">
+    <main class="h-full flex min-h-dvh min-w-full flex-col">
+        <h1 class="text-center text-2xl my-10 text-white " >Contact</h1>
+        <div class="content-wrapper flex px-10 gap-10 justify-center">
+            <div class="left w-1/2 text-end text-white ">
+                If you wanna contact me, write me a message!
+            </div>
+            <div class="right w-1/2">
+                <ContactForm class="" />
+            </div>
+        </div>
+    </main>
+</NavSideBarLayout>

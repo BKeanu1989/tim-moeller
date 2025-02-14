@@ -23,12 +23,13 @@ const lang = getLangFromUrl(Astro.url);
     <title>{title}</title>
     <ClientRouter />
   </head>
-  <body class="min-h-dvh bg-gradient-to-b from-c-neutral-900 to-c-neutral-800">
+  <body class="min-h-dvh bg-c-black">
+  <!-- <body class="min-h-dvh bg-gradient-to-b from-c-neutral-900 to-c-neutral-800"> -->
     <NavSideBar />
     <div class="flex ml-60">
         <slot />
     </div>
-    <footer class="flex bg-slate-400 w-dvw h-fit"></footer>
+    <!-- <footer class="flex bg-slate-400 w-dvw h-fit"></footer> -->
   </body>
 </html>
 <style is:global>
