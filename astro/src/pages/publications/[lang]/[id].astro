@@ -7,7 +7,7 @@ export async function getStaticPaths() {
   const posts = await getCollection('publications');  
   const languages = ['en', 'de']; // Define supported languages
 
-  const all = languages.flatMap((lang) =>
+  return languages.flatMap((lang) =>
   posts.map((post) => {
     const res = getLangAndRawIdFromCollectionId(post.id)
     return {
@@ -15,40 +15,7 @@ export async function getStaticPaths() {
       props: { post, lang }, // Pass post and lang as props
     }
 }));
-  console.log("🚀 ~ getStaticPaths ~ all:", all)
-  // getStaticPaths ~ all: [
-  // {
-  //   params: { lang: 'en', id: 'en/computational-models.mdx' },
-  //   props: { post: [Object], lang: 'en' }
-  // },
-  // {
-  //   params: { lang: 'en', id: 'en/arduino-heartbeat-detection.mdx' },
-  //   props: { post: [Object], lang: 'en' }
-  // },
-  // {
-  //   params: { lang: 'en', id: 'de/real-time-ecg-analysis.mdx' },
-  //   props: { post: [Object], lang: 'en' }
-  // },
-  // {
-  //   params: { lang: 'en', id: 'en/senses-of-agony.mdx' },
-  //   props: { post: [Object], lang: 'en' }
-  // },
-  // {
-  //   params: {
-  //     lang: 'en',
-  //     id: 'en/psychoactive-substances-in-psychotherapy.mdx'
-  //   },
-  //   props: { post: [Object], lang: 'en' }
-  // },
-  // {
-  //   params: { lang: 'en', id: 'en/real-time-ecg-analysis.mdx' },
-  //   props: { post: [Object], lang: 'en' }
-  // },
-  // {
-  //   params: { lang: 'en', id: 'computational-models.mdx' },
-  //   props: { post: [Object], lang: 'en' }
-  // },
-  return all
+
 }
 
 const { post, lang } = Astro.props; // Get post data and language from props

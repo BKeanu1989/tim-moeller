@@ -30,6 +30,11 @@ const lang = getLangFromUrl(Astro.url);
         <slot />
     </div>
     <!-- <footer class="flex bg-slate-400 w-dvw h-fit"></footer> -->
+          <script>
+      import gsap from "gsap";
+      // @ts-ignore
+      window.gsap = gsap;
+     </script>
   </body>
 </html>
 <style is:global>

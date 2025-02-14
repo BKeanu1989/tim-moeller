@@ -1,7 +1,125 @@
 ---
 import NavSideBarLayout from "../../layouts/NavSideBarLayout.astro";
+import { Image } from "astro:assets";
+
+import scientificWriting from "../../assets/scientific-writing.webp"
+import psychobiology from "../../assets/psychobiology-of-psychological-disorders.webp"
+import clinicalPsychology from "../../assets/settings-in-clinical-psychology.webp"
 ---
 
 <NavSideBarLayout title="About me">
-  <main>english about me</main>
+  <main>
+    <h1 class="text-2xl">Tim Julian Möller</h1>
+
+    <div class="career-and-focus">
+      I am a Psychologist with a focus on computational psychiatry
+      <!-- <ul class="list-none">
+        <li>PhD candidate in computational psychiatry</li>
+        <li>Psychologist</li>
+        <li>Practitioner for Psychotherapy</li>
+        <li>Neuroscientist</li>
+        <li>University lecturer in Berlin, Germany</li>
+      </ul> -->
+    </div>
+    <div class="phd">
+      I completed my dissertation in computational psychiatry at Humboldt University, specializing in schizophrenia and self-disorders.
+    </div>
+    <div class="flex wrapper flex-wrap">
+      <div class="research-interests max-w-sm bg-c-neutral-50">
+        I am interested in the Neurophenomenology of patients with schizophrenia. I am mainly working with VR/AR- Technology, Eye-Tracking, Arduino-prototyping, ECG, and EEG. 
+      </div>
+      <div class="my-story max-w-sm bg-c-neutral-200">
+        I am currently in training to be a Psychotherapist at the IVB Institute for Behavior Therapy Berlin.
+      </div>
+      <input type="checkbox" />
+
+      <div class="teaching flex flex-wrap gap-10 items-start">
+        <article class="max-w-sm bg-c-neutral-400 rounded-md scientific-writing">
+          <h1 class="text-xl">Scientific Writing</h1>
+          <Image src={scientificWriting} alt="Picture of a scientific paper" height={200} />
+          <p>
+            Scientific writing involves the structured and objective communication of research findings, theories, and arguments in a clear and concise manner. It follows specific formats (e.g., APA, MLA) and includes elements like abstracts, introductions, methods, results, discussions, and references. Precision, clarity, and evidence-based arguments are key.
+          </p>
+        </article>
+        <article class="max-w-sm bg-c-neutral-400 rounded-md psychobiology">
+          <Image src={psychobiology} alt="Picture of a scientific paper" height={200} />
+
+          <h1 class="text-xl">Psychobiology of psychological disorders</h1>
+          <p>
+            This field explores the biological basis of psychological disorders, including the role of genetics, neurochemistry, brain structures, and physiological processes in mental health conditions like depression, schizophrenia, and anxiety disorders. It integrates neuroscience, psychology, and pharmacology to understand and treat disorders.
+          </p>
+        </article>
+        <article class="max-w-sm bg-c-neutral-400 rounded-md settings-clinical-psychology">
+          <Image src={clinicalPsychology} alt="Picture of a scientific paper" height={200} />
+
+          <h1 class="text-xl">Settings in clinical Psychology</h1>
+          <p>
+            Clinical psychologists work in various settings, including hospitals, private practices, community mental health centers, universities, and rehabilitation facilities. 
+            <div class="more-text hidden">
+              The setting influences the type of therapy, assessments, and interventions used, ranging from short-term crisis management to long-term psychotherapy.
+              
+            </div>
+          </p>
+        </article>
+        <article class="max-w-sm bg-c-neutral-400 rounded-md developmental-psychology">
+          <h1 class="text-xl">developmental Psychology</h1>
+          <p>
+            This branch of psychology studies how people grow and change throughout life, from infancy to old age. It examines cognitive, emotional, social, and physical development, considering factors like genetics, environment, and culture. Major theories include those of Piaget (cognitive development), Erikson (psychosocial development), and Vygotsky (sociocultural development).
+          </p>
+        </article>
+        <article class="max-w-sm bg-c-neutral-400 rounded-md psychology-motivation">
+          <h1 class="text-xl">Psychology of Motivation</h1>
+          <p>
+            This area focuses on what drives human behavior, from biological needs (e.g., hunger, thirst) to higher-order motivations like achievement, social belonging, and self-actualization. Theories include Maslow’s hierarchy of needs, self-determination theory, and intrinsic vs. extrinsic motivation.
+          </p>
+        </article>
+        <article class="max-w-sm bg-c-neutral-400 rounded-md foundations-psychology">
+          <h1 class="text-xl">Historical and philosophical foundations of Psychology</h1>
+          <p>
+            This topic traces the evolution of psychology from its philosophical roots in thinkers like Plato, Aristotle, and Descartes to the emergence of psychology as a scientific discipline in the 19th and 20th centuries. It covers major schools of thought, such as structuralism, functionalism, behaviorism, psychoanalysis, humanism, and cognitive psychology.
+          </p>
+        </article>
+        <article class="max-w-sm bg-c-neutral-400 rounded-md clinical-psychology">
+          <h1 class="text-xl">clinical Psychology</h1>
+          <p>
+            Clinical psychology focuses on diagnosing, treating, and preventing mental health disorders. It integrates psychological theories, therapeutic techniques (e.g., CBT, psychodynamic therapy), and research to help individuals manage mental health challenges. Clinical psychologists may work with individuals, groups, or families.
+          </p>
+        </article>
+      </div>
+      <div class="my-projects max-w-sm bg-c-neutral-200">
+        I am interested in Psychotherapy as well as in clinical research at the Charité University medicine Berlin and Humboldt-University Berlin. You can find some of my work in the section 'Scientific projects'.
+        I am working with virtual and augmented reality, Eye-Tracking, Electroencephalography, and Arduino-prototyping.
+        Special interest is in psychiatric disorders, especially self-disorders like schizophrenia, but also developmental disorders.
+        
+      </div>
+
+    </div>
+  </main>
+     <script>
+    document.addEventListener(
+      "astro:page-load",
+      () => {
+        const articles = document.querySelectorAll(".teaching article")
+
+        articles.forEach((article) => {
+
+          article.addEventListener("mouseover", (e) => {
+            gsap.to(article.querySelector(".more-text"), {autoAlpha: 1, display: "block"})
+          })
+
+          article.addEventListener("mouseleave", () => {
+            gsap.to(article.querySelector(".more-text"), {autoAlpha: 0, display: "none"})
+
+          })
+        })
+        const element = document.querySelector('[type="checkbox"]');
+        element?.addEventListener("change", () => {
+          // @ts-ignore
+          if (element.checked) gsap.to(".scientific-writing", { x: 200 });
+          else gsap.to(".scientific-writing", { x: 0 });
+        });
+      },
+      { once: false }
+    );
+  </script>
 </NavSideBarLayout>

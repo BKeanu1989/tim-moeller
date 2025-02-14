@@ -7,13 +7,15 @@ import NavSideBarLayout from "src/layouts/NavSideBarLayout.astro";
 
 <NavSideBarLayout title="Contact">
     <main class="h-full flex min-h-dvh min-w-full flex-col">
-        <h1 class="text-center text-2xl my-10 text-white " >Contact</h1>
-        <div class="content-wrapper flex px-10 gap-10 justify-center">
-            <div class="left w-1/2 text-end text-white ">
-                If you wanna contact me, write me a message!
+        <div class="content-wrapper flex px-10 gap-10 mt-[25%]">
+            <div class="left w-1/2 text-end text-white">
+                <h1 class="text-3xl mb-5">Work with me</h1>
+                <p>
+                    If you are interest in a collaboration in a scientific project, in my service as a lecturer, or any other inquires, please contact me via email at tim.julian.moeller@gmail.com or through my contact form. 
+                </p>
             </div>
-            <div class="right w-1/2">
-                <ContactForm class="" />
+            <div class="right w-1/2 ">
+                <ContactForm class="max-w-md border-2 rounded p-5 shadow-cyan-400/50 ring-4" />
             </div>
         </div>
     </main>

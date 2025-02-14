@@ -26,7 +26,7 @@ https://www.touroberlin.de/about-us#faculty_permanent
 
 
 My projects
- I am interested in Psychotherapy as well as in clinical research at the Charité University medicine Berlin and Humboldt-University Berlin. You can find some of my work in the section 'Scientific projects'.
+I am interested in Psychotherapy as well as in clinical research at the Charité University medicine Berlin and Humboldt-University Berlin. You can find some of my work in the section 'Scientific projects'.
 I am working with virtual and augmented reality, Eye-Tracking, Electroencephalography, and Arduino-prototyping.
 Special interest is in psychiatric disorders, especially self-disorders like schizophrenia, but also developmental disorders.
 
