@@ -1,0 +1,138 @@
+---
+import { Image } from "astro:assets";
+
+import scientificWriting from "../assets/scientific-writing.webp"
+import psychobiology from "../assets/psychobiology-of-psychological-disorders.webp"
+import clinicalPsychology from "../assets/settings-in-clinical-psychology.webp"
+
+const { class: className, ...rest } = Astro.props
+
+---
+
+<main class:list={['teachings', className]} {...rest}>
+    <h1 class="text-2xl text-center text-white my-5">
+      <span class="text-lg">I have been</span> teaching<span class="text-lg">...</span>
+    </h1>
+    <div class="teaching flex flex-col gap-10 items-start">
+        <article class="flex bg-c-neutral-400 rounded-md scientific-writing">
+          <div class="left">
+            <Image src={scientificWriting} alt="Picture of a scientific paper" height={400} />
+          </div>
+          <div class="right flex flex-col">
+            <h1 class="text-xl">Scientific Writing</h1>
+            <p>
+              Scientific writing involves the structured and objective communication of research findings, theories, and arguments in a clear and concise manner. It follows specific formats (e.g., APA, MLA) and includes elements like abstracts, introductions, methods, results, discussions, and references. Precision, clarity, and evidence-based arguments are key.
+            </p>
+          </div>
+        </article>
+        <article class="flex bg-c-neutral-400 rounded-md psychobiology">
+          <div class="left">
+            <Image src={psychobiology} alt="Picture of a scientific paper" height={400} />
+          </div>
+          <div class="right flex flex-col">
+            <h1 class="text-xl">Psychobiology of psychological disorders</h1>
+            <p>
+              This field explores the biological basis of psychological disorders, including the role of genetics, neurochemistry, brain structures, and physiological processes in mental health conditions like depression, schizophrenia, and anxiety disorders. It integrates neuroscience, psychology, and pharmacology to understand and treat disorders.
+            </p>
+          </div>
+        </article>
+        <article class="flex bg-c-neutral-400 rounded-md settings-clinical-psychology">
+          <div class="left">
+            <Image src={clinicalPsychology} alt="Picture of a scientific paper" height={400} />
+          </div>
+          <div class="right flex flex-col">
+            <h1 class="text-xl">Settings in clinical Psychology</h1>
+            <p>
+              Clinical psychologists work in various settings, including hospitals, private practices, community mental health centers, universities, and rehabilitation facilities. 
+              <div class="more-text hidden">
+                The setting influences the type of therapy, assessments, and interventions used, ranging from short-term crisis management to long-term psychotherapy.
+                
+              </div>
+            </p>
+          </div>
+        </article>
+        <article class="flex bg-c-neutral-400 rounded-md developmental-psychology">
+          <div class="left">
+
+          </div>
+          <div class="right flex flex-col">
+            <h1 class="text-xl">developmental Psychology</h1>
+            <p>
+              This branch of psychology studies how people grow and change throughout life, from infancy to old age. It examines cognitive, emotional, social, and physical development, considering factors like genetics, environment, and culture. Major theories include those of Piaget (cognitive development), Erikson (psychosocial development), and Vygotsky (sociocultural development).
+            </p>
+          </div>
+        </article>
+        <article class="flex bg-c-neutral-400 rounded-md psychology-motivation">
+          <div class="left">
+
+          </div>
+          <div class="right flex flex-col">
+            <h1 class="text-xl">Psychology of Motivation</h1>
+            <p>
+              This area focuses on what drives human behavior, from biological needs (e.g., hunger, thirst) to higher-order motivations like achievement, social belonging, and self-actualization. Theories include Maslow’s hierarchy of needs, self-determination theory, and intrinsic vs. extrinsic motivation.
+            </p>
+          </div>
+        </article>
+        <article class="flex bg-c-neutral-400 rounded-md foundations-psychology">
+          <div class="left">
+
+          </div>
+          <div class="right flex flex-col">
+            <h1 class="text-xl">Historical and philosophical foundations of Psychology</h1>
+            <p>
+              This topic traces the evolution of psychology from its philosophical roots in thinkers like Plato, Aristotle, and Descartes to the emergence of psychology as a scientific discipline in the 19th and 20th centuries. It covers major schools of thought, such as structuralism, functionalism, behaviorism, psychoanalysis, humanism, and cognitive psychology.
+            </p>
+          </div>
+        </article>
+        <article class="flex bg-c-neutral-400 rounded-md clinical-psychology">
+          <div class="left">
+
+          </div>
+          <div class="right flex flex-col">
+            <h1 class="text-xl">clinical Psychology</h1>
+            <p>
+              Clinical psychology focuses on diagnosing, treating, and preventing mental health disorders. It integrates psychological theories, therapeutic techniques (e.g., CBT, psychodynamic therapy), and research to help individuals manage mental health challenges. Clinical psychologists may work with individuals, groups, or families.
+            </p>
+          </div>
+        </article>
+      </div>
+</main>
+<script>
+    document.addEventListener(
+      "astro:page-load",
+      () => {
+
+        // document.addEventListener("scroll", (e) => {
+        //   console.log(e, window.scrollY)
+        //   const midScreen = window.screen.height / 2
+        //   console.log("midscreen", midScreen)
+        //   console.log("scrolltop", e)
+        // })
+
+        const articles = document.querySelectorAll(".teaching article")
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px 0px', // important: needs units on all values
+          threshold: 0
+        };
+
+        const Observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach(entry => {
+              console.log(entry)
+              if (entry.intersectionRatio > 0) {
+                gsap.fromTo(entry.target, {yPercent: 200}, {yPercent: 0, autoAlpha: 1, duration: 0.5})
+                Observer.unobserve(entry.target); 
+              }
+            });
+          }, 
+          observerOptions
+        );
+        // @ts-ignore
+        articles.forEach(el => {
+          Observer.observe(el);
+        });
+      },
+      { once: false }
+    );
+  </script>
