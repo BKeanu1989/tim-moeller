@@ -21,11 +21,16 @@ export async function getStaticPaths() {
 const { post, lang } = Astro.props; // Get post data and language from props
 ---
 <NavSideBarLayout title={post.data.title}>
-  <main class="h-full min-h-dvh flex text-white">
+  <main class="h-full min-h-dvh flex text-white w-4/5 mx-auto">
     <div class="bg-c-black w-[calc(100dvw-16rem)] relative">
       <h1 class="text-2xl text-center my-5">{post.data.title}</h1>
-      <article class="text-center">{post.body}</article>
-      <a href={`/${lang}/publications-projects`}>Back to Publications</a> <!-- Correct back link -->
+      <article class="text-center my-5">
+        <Fragment class:list={"text-center"} set:html={post.body} />
+
+      </article>
+      <button type="button" class="px-5 py-2 bg-c-neutral-500 hover:bg-c-neutral-700 rounded">
+        <a href={`/${lang}/publications-projects`}>Back to Publications</a> <!-- Correct back link -->
+      </button>
     </div>
   </main>
 </NavSideBarLayout>
