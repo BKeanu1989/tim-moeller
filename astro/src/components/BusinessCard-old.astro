@@ -1,0 +1,105 @@
+---
+import { getLangFromUrl, useTranslations } from "src/i18n/utils";
+import ContactCard from "./ContactCard.astro"
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+---
+<style>
+    .business-card {
+        background: linear-gradient(135deg, #000 20%, #222 50%, #000 80%);
+
+        transition-duration: 300ms;
+        transition-property: transform, box-shadow;
+        transition-timing-function: ease-out;
+        transform: rotate3d(0);
+        box-shadow: 0 1px 5px 5px #eee
+        
+        /* box-shadow: 0px 0px 10px 10px #00c2cb; */
+        /* 0px 0px 10px 10px #00c2cb; */
+        /* box-shadow: 0 1px 5px 5px #00000099; */
+        /* 0px 0px 10px 10px #00c2cb; */
+
+
+    }
+
+     .shine {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        
+        background-image: radial-gradient(circle at 50% -20%, #ffffff22, #0000000f);
+     }
+
+     @keyframes shineMove {
+            0% { transform: translate(-100%, -100%) rotate(25deg); }
+            100% { transform: translate(100%, 100%) rotate(25deg); }
+        }
+</style>
+<div class="business-card relative w-5/6 mx-auto rounded p-5">
+    <ContactCard class=""/>
+    <div class="bottom text-white text-xl flex gap-x-5 place-self-end place-content-around w-full py-5">
+      <div class="experience uppercase"><span class="intro-hero-numbers text-blue-600">6+</span> {t("misc.years_of_experience")} </div>
+      <div class="uppercase"><span class="intro-hero-numbers text-blue-600">4 </span>open source</div>
+      <div class="uppercase"><span class="intro-hero-numbers text-blue-600">3 </span> {t("misc.publications")}</div>
+    </div>
+    <div class="_shine"></div>
+</div>
+
+<script>
+const $card = document.querySelector('.business-card') as HTMLElement;
+let bounds: any;
+
+function rotateToMouse(e: MouseEvent) {
+  const mouseX = e.clientX;
+  const mouseY = e.clientY;
+  const leftX = mouseX - bounds.x;
+  const topY = mouseY - bounds.y;
+  const center = {
+    x: leftX - bounds.width / 2,
+    y: topY - bounds.height / 2
+  }
+  const distance = Math.sqrt(center.x**2 + center.y**2);
+  
+//   scale3d(1.07, 1.07, 1.07)
+// scale3d(1.01, 1.01, 1.01)
+  $card.style.transform = `
+    rotate3d(
+      ${center.y / 100},
+      ${-center.x / 100},
+      0,
+      ${Math.log(distance)* 2}deg
+    )
+  `;
+  
+  //   ${center.x * 2 + bounds.width/2}px
+  //   ${center.y * 2 + bounds.height/2}px,
+  //   #ffffff55,
+  // #8a8a8a,
+  // @ts-ignore
+  $card.querySelector('.shine')!.style.backgroundImage = `
+    radial-gradient(
+      circle at 
+     ${center.x + bounds.width/2}px
+     ${center.y + bounds.height/2}px,
+      #bbb,
+      #0000000f
+    )
+  `;
+}
+
+$card.addEventListener('mouseenter', () => {
+  bounds = $card.getBoundingClientRect();
+  // document.addEventListener('mousemove', rotateToMouse);
+});
+
+$card.addEventListener('mouseleave', () => {
+  // document.removeEventListener('mousemove', rotateToMouse);
+  $card.style.transform = '';
+  $card.style.background = '';
+});
+
+</script>
