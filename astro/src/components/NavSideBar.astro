@@ -196,26 +196,9 @@ const currentYear = new Date().getFullYear();
       }
     }
 
-
-    // Toggle menu on button click
+    
     elements.button.addEventListener('click', (e) => {
-      if (isTransitioning) {
-        console.log("transitioning - blocking");
-        return
-      } else {
-        console.log("wtf")
-      }
-      
-      isTransitioning = true;
-
-      setTimeout(() => {
-        console.log("transitioning - unblocking");
-        if (isTransitioning) {
-          isTransitioning = false;
-        }
-      }, 300);
-      console.log("clicked button", e);
-      e.stopPropagation();
+      e.stopImmediatePropagation()
       toggleMenu(elements);
     });
 
