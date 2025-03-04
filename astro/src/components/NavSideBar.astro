@@ -147,6 +147,7 @@ const currentYear = new Date().getFullYear();
 
 <script>
   function setupMobileMenu() {
+    let isTransitioning = false;
     const button = document.getElementById('mobile-menu-button');
     const sidebar = document.getElementById('sidebar');
     const menuIcon = document.getElementById('menu-icon');
@@ -177,6 +178,7 @@ const currentYear = new Date().getFullYear();
     };
 
     function toggleMenu(elements: MenuElements) {
+      console.log("toogle menu")
       const isOpen = elements.sidebar.classList.contains('translate-x-0');
       
       if (isOpen) {
@@ -194,8 +196,25 @@ const currentYear = new Date().getFullYear();
       }
     }
 
+
     // Toggle menu on button click
     elements.button.addEventListener('click', (e) => {
+      if (isTransitioning) {
+        console.log("transitioning - blocking");
+        return
+      } else {
+        console.log("wtf")
+      }
+      
+      isTransitioning = true;
+
+      setTimeout(() => {
+        console.log("transitioning - unblocking");
+        if (isTransitioning) {
+          isTransitioning = false;
+        }
+      }, 300);
+      console.log("clicked button", e);
       e.stopPropagation();
       toggleMenu(elements);
     });
