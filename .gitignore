@@ -5,3 +5,5 @@ fullstack-developer-*.md
 astro/public/output.css
 
 ignore-folder
+
+node_modules

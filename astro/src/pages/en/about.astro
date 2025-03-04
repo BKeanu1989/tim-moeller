@@ -5,30 +5,69 @@ import NavSideBarLayout from "../../layouts/NavSideBarLayout.astro";
 ---
 
 <NavSideBarLayout title="About me">
-  <main class="w-4/5 mx-auto">
-    <h1 class="text-5xl text-white text-center my-5">About me</h1>
+  <main class="max-w-4xl mx-auto px-4 py-12 text-gray-200">
+    <div class="space-y-16">
+      <!-- Hero Section -->
+      <section class="text-center space-y-4">
+        <h1 class="text-5xl font-light text-white">About me</h1>
+        <p class="text-3xl font-light tracking-wide max-w-2xl mx-auto">
+          I am a <span class="font-medium text-white">Psychologist</span> with a focus on computational psychiatry
+        </p>
+      </section>
 
-    <div class="career-and-focus text-white text-4xl tracking-wider max-w-lg">
-      I am a <b>Psychologist</b> with a focus on computational psychiatry
-    </div>
-    <div class="phd text-white max-w-lg">
-      I completed my <b>dissertation</b> in computational psychiatry at Humboldt University, specializing in schizophrenia and self-disorders.
-    </div>
-    <div class="flex wrapper flex-wrap">
-      <div class="research-interests max-w-sm bg-c-neutral-50">
-        I am interested in the Neurophenomenology of patients with schizophrenia. I am mainly working with VR/AR- Technology, Eye-Tracking, Arduino-prototyping, ECG, and EEG. 
-      </div>
-      <div class="my-story max-w-sm bg-c-neutral-200">
-        I am currently in training to be a Psychotherapist at the IVB Institute for Behavior Therapy Berlin.
-      </div>
-      
-      <div class="my-projects max-w-sm bg-c-neutral-200">
-        I am interested in Psychotherapy as well as in clinical research at the Charité University medicine Berlin and Humboldt-University Berlin. You can find some of my work in the section 'Scientific projects'.
-        I am working with virtual and augmented reality, Eye-Tracking, Electroencephalography, and Arduino-prototyping.
-        Special interest is in psychiatric disorders, especially self-disorders like schizophrenia, but also developmental disorders.
-      </div>
-      <TeachingArticles class="mt-10" />
+      <!-- Background Section -->
+      <section class="prose prose-invert prose-lg max-w-2xl mx-auto">
+        <p class="text-lg">
+          I completed my <span class="font-medium text-white">dissertation</span> in computational psychiatry at Humboldt University, specializing in schizophrenia and self-disorders.
+        </p>
+      </section>
+
+      <!-- Research Grid -->
+      <section class="grid md:grid-cols-2 gap-8">
+        <div class="bg-gray-800/50 p-6 rounded-lg backdrop-blur">
+          <h2 class="text-xl font-medium text-white mb-4">Research Interests</h2>
+          <p>
+            I am interested in the Neurophenomenology of patients with schizophrenia. I am mainly working with VR/AR- Technology, Eye-Tracking, Arduino-prototyping, ECG, and EEG.
+          </p>
+        </div>
+
+        <div class="bg-gray-800/50 p-6 rounded-lg backdrop-blur">
+          <h2 class="text-xl font-medium text-white mb-4">Current Focus</h2>
+          <p>
+            I am currently in training to be a Psychotherapist at the IVB Institute for Behavior Therapy Berlin.
+          </p>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section class="bg-gray-800/50 p-8 rounded-lg backdrop-blur">
+        <h2 class="text-xl font-medium text-white mb-4">Projects & Expertise</h2>
+        <p class="leading-relaxed">
+          I am interested in Psychotherapy as well as in clinical research at the Charité University medicine Berlin and Humboldt-University Berlin. You can find some of my work in the section 'Scientific projects'.
+          I am working with virtual and augmented reality, Eye-Tracking, Electroencephalography, and Arduino-prototyping.
+          Special interest is in psychiatric disorders, especially self-disorders like schizophrenia, but also developmental disorders.
+        </p>
+      </section>
+
+      <!-- Teaching Section -->
+      <TeachingArticles />
     </div>
   </main>
-
 </NavSideBarLayout>
+
+<style>
+  /* Add smooth scrolling to the page */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom prose styles for better dark mode readability */
+  :global(.prose) {
+    max-width: none;
+  }
+  
+  :global(.prose p) {
+    margin: 0;
+    line-height: 1.75;
+  }
+</style>

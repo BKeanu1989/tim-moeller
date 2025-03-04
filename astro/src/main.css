@@ -1,57 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* @plugin "@tailwindcss/typography"; */
 
 body {
-    /* does this work */
-    /* --neutral-cool-grey-1: 210, 25, 7; */
-    --neutral-cool-grey-4: 210, 25, 7;
-    /* --navbar-height: 50px;
+	/* does this work */
+	/* --neutral-cool-grey-1: 210, 25, 7; */
+	--neutral-cool-grey-4: 210, 25, 7;
+	/* --navbar-height: 50px;
 
     --navbar-offset: var(var(--navbar-height)); */
 }
 
 @layer base {
-    @font-face {
-        font-family: "Open Sans";
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
-        src: url(/fonts/OpenSans-VariableFont_wdth,wght.ttf) format("truetype");
-      }
+	@font-face {
+		font-family: 'Open Sans';
+		font-style: normal;
+		font-weight: 400;
+		font-display: swap;
+		src: url(/fonts/OpenSans-VariableFont_wdth,wght.ttf) format('truetype');
+	}
 
-    .nav-active {
-        @apply font-bold;
-    }
+	.nav-active {
+		@apply font-bold;
+	}
 
-    .nav-offset {
-        margin-top: -50px;
-    }
+	.nav-offset {
+		margin-top: -50px;
+	}
 }
 
 @layer components {
-    .nav-active {
-        @apply font-bold;
-    }
+	.nav-active {
+		@apply font-bold;
+	}
 
-    .hero-bg {
-        @apply h-dvh;
-    }
-    .btn-blue {
-      @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;
-    }
+	.hero-bg {
+		@apply h-dvh;
+	}
+	.btn-blue {
+		@apply rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700;
+	}
 }
 
 @layer utilities {
-    .nav-active {
-        @apply font-bold;
-    }
+	.nav-active {
+		@apply font-bold;
+	}
 }
 
 .nav-active {
-    @apply font-bold;
+	@apply font-bold;
 }
 
 .active {
-    @apply font-bold;
+	@apply font-bold;
 }
