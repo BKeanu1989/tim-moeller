@@ -7,6 +7,8 @@ import { ClientRouter } from "astro:transitions";
 
 import "../styles/index.css";
 import NavSideBar from "@components/NavSideBar.astro";
+import '@fontsource-variable/roboto';
+import '@fontsource-variable/inter';
 
 const { title } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
@@ -26,7 +28,7 @@ const lang = getLangFromUrl(Astro.url);
   <body class="min-h-dvh bg-c-black">
   <!-- <body class="min-h-dvh bg-gradient-to-b from-c-neutral-900 to-c-neutral-800"> -->
     <NavSideBar />
-    <div class="flex lg:ml-60 ml-0">
+    <div class="flex lg:ml-72 ml-0">
         <slot />
     </div>
     <!-- <footer class="flex bg-slate-400 w-dvw h-fit"></footer> -->
