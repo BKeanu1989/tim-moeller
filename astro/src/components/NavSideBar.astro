@@ -133,7 +133,7 @@ const currentYear = new Date().getFullYear();
 
       <!-- Legal Links -->
       <div class="text-center">
-        <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors">
+        <a href={`/${lang}/impressum`} class="text-sm text-gray-400 hover:text-white transition-colors">
           Impressum
         </a>
       </div>
@@ -180,7 +180,6 @@ const currentYear = new Date().getFullYear();
     };
 
     function toggleMenu(elements: MenuElements) {
-      console.log("toogle menu")
       const isOpen = elements.sidebar.classList.contains('translate-x-0');
       
       if (isOpen) {
@@ -205,7 +204,8 @@ const currentYear = new Date().getFullYear();
     });
 
     // Close menu when clicking overlay
-    elements.overlay.addEventListener('click', () => {
+    elements.overlay.addEventListener('click', (e) => {
+      e.stopImmediatePropagation()
       toggleMenu(elements);
     });
 

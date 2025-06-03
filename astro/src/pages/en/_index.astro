@@ -1,30 +1,30 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import IntroDeck from "../../components/IntroDeck.astro";
-import ContactForm from "@components/ContactForm.astro";
-import Footer from "@components/Footer.astro";
+import Layout from '../../layouts/Layout.astro'
+import IntroDeck from '../../components/IntroDeck.astro'
+import ContactForm from '@components/ContactForm.astro'
+import Footer from '@components/Footer.astro'
 ---
 
 <Layout title="Welcome to Astro.">
-  <main class="overflow-hidden">
-    <IntroDeck />
-    <article class="w-3/4 mx-auto flex flex-row h-cdvh">
-      <div class="contact-form--intro flex-grow px-20">
-        <h1 class="text-4xl">Work with me</h1>
-        <p class="text-2xl max-w-xs">
-          If you are interest in a collaboration in a scientific project, in my
-          service as a lecturer, or any other inquires, please contact me via
-          email at tim.julian.moeller@gmail.com or through my contact form.
-        </p>
-      </div>
-      <div class="flex flex-col">
-        <ContactForm
-          class="justify-center border rounded-sm bg-c-neutral-500 mx-auto c-mx-auto p-5"
-        />
-      </div>
-    </article>
-    <!--client load is not for astro components -->
-    <!-- <IntroDeck client:load /> -->
-    <Footer />
-  </main>
+	<main class="overflow-hidden">
+		<IntroDeck />
+		<article class="h-cdvh mx-auto flex w-3/4 flex-row">
+			<div class="contact-form--intro flex-grow px-20">
+				<h1 class="text-4xl">Work with me</h1>
+				<p class="max-w-xs text-2xl">
+					If you are interest in a collaboration in a scientific project, in my service as a
+					lecturer, or any other inquires, please contact me via email at
+					tim.julian.moeller@gmail.com or through my contact form.
+				</p>
+			</div>
+			<div class="flex flex-col">
+				<ContactForm
+					class="bg-c-neutral-500 c-mx-auto mx-auto justify-center rounded-sm border p-5"
+				/>
+			</div>
+		</article>
+		<!--client load is not for astro components -->
+		<!-- <IntroDeck client:load /> -->
+		<Footer />
+	</main>
 </Layout>

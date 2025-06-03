@@ -5,7 +5,6 @@
 // const { id } = Astro.params;
 // // const post = posts.find((p) => p.id === id);
 
-
 // export function getStaticPaths() {
 //   return posts.map((post) => ({
 //     params: { id: post.id }, // Generate a path for each post
@@ -19,27 +18,26 @@
 //   throw new Error(`Post not found: ${id}`);
 // }
 
-import { getCollection } from 'astro:content';
-
+import { getCollection } from 'astro:content'
 
 export async function getStaticPaths() {
-  const posts = await getCollection('publications');
-  return posts.map((post) => ({
-    params: { id: post.id }, // Generate a path for each post
-    props: { post }, // Pass post data as props
-  }));
+	const posts = await getCollection('publications')
+	return posts.map((post) => ({
+		params: { id: post.id }, // Generate a path for each post
+		props: { post } // Pass post data as props
+	}))
 }
 
-const { post } = Astro.props; // Get the passed post data
+const { post } = Astro.props // Get the passed post data
 ---
 
 <html>
-  <head>
-    <title>{post.data.title}</title>
-  </head>
-  <body>
-    <h1>{post.data.title}</h1>
-    <article>{post.body}</article>
-    <!-- <a href="/blog">Back to Blog</a> -->
-  </body>
+	<head>
+		<title>{post.data.title}</title>
+	</head>
+	<body>
+		<h1>{post.data.title}</h1>
+		<article>{post.body}</article>
+		<!-- <a href="/blog">Back to Blog</a> -->
+	</body>
 </html>

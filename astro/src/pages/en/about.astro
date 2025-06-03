@@ -1,73 +1,171 @@
 ---
-import TeachingArticles from "@components/TeachingArticles.astro";
-import NavSideBarLayout from "../../layouts/NavSideBarLayout.astro";
+import TeachingArticles from '@components/TeachingArticles.astro'
+import NavSideBarLayout from '../../layouts/NavSideBarLayout.astro'
 
+import Hat from '@assets/hat.svg'
 ---
 
 <NavSideBarLayout title="About me">
-  <main class="max-w-4xl mx-auto px-4 py-12 text-gray-200">
-    <div class="space-y-16">
-      <!-- Hero Section -->
-      <section class="text-center space-y-4">
-        <h1 class="text-5xl font-light text-white">About me</h1>
-        <p class="text-3xl font-light tracking-wide max-w-2xl mx-auto">
-          I am a <span class="font-medium text-white">Psychologist</span> with a focus on computational psychiatry
-        </p>
-      </section>
+	<main class="w-full text-gray-200">
+		<div class="space-y-16">
+			<!-- Hero Section -->
+			<div
+				class="hero-wrapper relative flex h-lvh flex-col overflow-hidden md:h-[100lvh] lg:flex-row"
+				id="hero"
+			>
+				<div
+					class="hero-bg absolute -z-10 hidden bg-gradient-to-tr from-neutral-700 to-stone-700 lg:block"
+				>
+				</div>
+				<section
+					class="left flex h-1/2 w-full flex-col justify-center space-y-4 px-5 text-center md:h-full"
+				>
+					<h1 class="my-5 text-5xl font-light text-white">About me</h1>
+					<p class="mx-auto max-w-2xl text-3xl font-light tracking-wide">
+						I am a <span class="font-medium text-white">Psychologist</span> with a focus on computational
+						psychiatry
+					</p>
+				</section>
 
-      <!-- Background Section -->
-      <section class="prose prose-invert prose-lg max-w-2xl mx-auto">
-        <p class="text-lg">
-          I completed my <span class="font-medium text-white">dissertation</span> in computational psychiatry at Humboldt University, specializing in schizophrenia and self-disorders.
-        </p>
-      </section>
+				<!-- Background Section -->
+				<section
+					class="prose prose-invert prose-lg right flex h-1/2 w-full flex-col justify-center px-5 text-center md:h-full"
+				>
+					<Hat class={'w-20 h-20 mx-auto'} />
+					<p class="text-2xl">
+						I completed my <span class="font-medium text-white">dissertation</span> in computational
+						psychiatry at Humboldt University, specializing in schizophrenia and self-disorders.
+					</p>
+				</section>
+			</div>
 
-      <!-- Research Grid -->
-      <section class="grid md:grid-cols-2 gap-8">
-        <div class="bg-gray-800/50 p-6 rounded-lg backdrop-blur">
-          <h2 class="text-xl font-medium text-white mb-4">Research Interests</h2>
-          <p>
-            I am interested in the Neurophenomenology of patients with schizophrenia. I am mainly working with VR/AR- Technology, Eye-Tracking, Arduino-prototyping, ECG, and EEG.
-          </p>
-        </div>
+			<!-- Research Grid -->
+			<div class="grid gap-8 md:grid-cols-2">
+				<section id="resarch">
+					<div class="rounded-lg bg-gray-800/50 p-6 backdrop-blur">
+						<h2 class="mb-4 text-xl font-medium text-white">Research Interests</h2>
+						<p>
+							I am interested in the Neurophenomenology of patients with schizophrenia. I am mainly
+							working with VR/AR- Technology, Eye-Tracking, Arduino-prototyping, ECG, and EEG.
+						</p>
+					</div>
+				</section>
 
-        <div class="bg-gray-800/50 p-6 rounded-lg backdrop-blur">
-          <h2 class="text-xl font-medium text-white mb-4">Current Focus</h2>
-          <p>
-            I am currently in training to be a Psychotherapist at the IVB Institute for Behavior Therapy Berlin.
-          </p>
-        </div>
-      </section>
+				<section id="current-focus">
+					<div class="rounded-lg bg-gray-800/50 p-6 backdrop-blur">
+						<h2 class="mb-4 text-xl font-medium text-white">Current Focus</h2>
+						<p>
+							I am currently in training to be a Psychotherapist at the IVB Institute for Behavior
+							Therapy Berlin.
+						</p>
+					</div>
+				</section>
+			</div>
 
-      <!-- Projects Section -->
-      <section class="bg-gray-800/50 p-8 rounded-lg backdrop-blur">
-        <h2 class="text-xl font-medium text-white mb-4">Projects & Expertise</h2>
-        <p class="leading-relaxed">
-          I am interested in Psychotherapy as well as in clinical research at the Charité University medicine Berlin and Humboldt-University Berlin. You can find some of my work in the section 'Scientific projects'.
-          I am working with virtual and augmented reality, Eye-Tracking, Electroencephalography, and Arduino-prototyping.
-          Special interest is in psychiatric disorders, especially self-disorders like schizophrenia, but also developmental disorders.
-        </p>
-      </section>
+			<!-- Projects Section -->
+			<section class="rounded-lg bg-gray-800/50 p-8 backdrop-blur">
+				<h2 class="mb-4 text-xl font-medium text-white">Projects & Expertise</h2>
+				<p class="leading-relaxed">
+					I am interested in Psychotherapy as well as in clinical research at the Charité University
+					medicine Berlin and Humboldt-University Berlin. You can find some of my work in the
+					section 'Scientific projects'. I am working with virtual and augmented reality,
+					Eye-Tracking, Electroencephalography, and Arduino-prototyping. Special interest is in
+					psychiatric disorders, especially self-disorders like schizophrenia, but also
+					developmental disorders.
+				</p>
+			</section>
 
-      <!-- Teaching Section -->
-      <TeachingArticles />
-    </div>
-  </main>
+			<!-- Teaching Section -->
+			<TeachingArticles />
+		</div>
+	</main>
 </NavSideBarLayout>
 
 <style>
-  /* Add smooth scrolling to the page */
-  html {
-    scroll-behavior: smooth;
-  }
+	/* Add smooth scrolling to the page */
+	html {
+		scroll-behavior: smooth;
+	}
 
-  /* Custom prose styles for better dark mode readability */
-  :global(.prose) {
-    max-width: none;
-  }
-  
-  :global(.prose p) {
-    margin: 0;
-    line-height: 1.75;
-  }
+	/* Custom prose styles for better dark mode readability */
+	:global(.prose) {
+		max-width: none;
+	}
+
+	:global(.prose p) {
+		margin: 0;
+		line-height: 1.75;
+	}
+
+	.hero-bg {
+		background: linear-gradient(45deg, oklch(20.5% 0 0), oklch(21% 0.006 285.885));
+		width: 550px;
+		height: 100lvh;
+
+		left: 38%;
+		width: 62%;
+
+		clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+	}
+
+	#research {
+		visibility: hidden;
+	}
 </style>
+
+<script>
+	import gsap from 'gsap'
+	// import { SplitText } from "gsap/all";
+	import { SplitText } from 'gsap/SplitText'
+
+	gsap.registerPlugin(SplitText)
+
+	gsap.registerPlugin(SplitText)
+
+	document.fonts.ready.then(() => {
+		// do stuff here
+		// @ts-ignore
+		//   let spl = SplitText.create(".research", {
+		//      type: "words, lines", // only split into words and lines (not characters)
+		// mask: "lines", // adds extra wrapper element around lines with overflow: clip (v3.13.0+)
+		// linesClass: "line++", // adds "line" class to each line element, plus an incremented one too ("line1", "line2", "line3", etc.)
+		//   })
+
+		gsap.set('#hero .left', { opacity: 1 })
+
+		let split = SplitText.create('#hero .left', {
+			type: 'lines',
+			mask: 'lines',
+			linesClass: 'line++'
+		})
+		let split2 = SplitText.create('#hero .right', {
+			type: 'lines',
+			mask: 'lines',
+			linesClass: 'line++'
+		})
+		//now animate each character into place from 20px below, fading in:
+		// gsap.from(split.lines, {
+		//   y: 20,
+		//   autoAlpha: 0,
+		//   stagger: 0.05
+		// });
+
+		let tl = gsap.timeline()
+
+		// Animate the split characters
+		tl.from(split.lines, {
+			duration: 2,
+			y: 100,
+			autoAlpha: 0,
+			stagger: 0.5
+			// delay:
+		})
+
+		tl.from(split2.lines, {
+			duration: 1,
+			y: 100,
+			autoAlpha: 0,
+			stagger: 0.2
+		})
+	})
+</script>

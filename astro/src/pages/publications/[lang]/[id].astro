@@ -28,9 +28,9 @@ const { post, lang } = Astro.props; // Get post data and language from props
         <Fragment class:list={"text-center"} set:html={post.body} />
 
       </article>
-      <button type="button" class="px-5 py-2 bg-c-neutral-500 hover:bg-c-neutral-700 rounded">
-        <a href={`/${lang}/publications-projects`}>Back to Publications</a> <!-- Correct back link -->
-      </button>
+      <!-- <button type="button" class="px-5 py-2 bg-c-neutral-500 hover:bg-c-neutral-700 rounded"> -->
+        <a class="px-5 py-2 bg-c-neutral-500 hover:bg-c-neutral-700 rounded" href={`/${lang}/publications-projects`}>Back to Publications</a> <!-- Correct back link -->
+      <!-- </button> -->
     </div>
   </main>
 </NavSideBarLayout>

@@ -56,3 +56,9 @@ body {
 .active {
 	@apply font-bold;
 }
+
+@theme {
+	--font-sans: 'Roboto','Inter', 'sans-serif';
+	/* --font-display: "Oswald", "sans-serif";  */
+
+}
