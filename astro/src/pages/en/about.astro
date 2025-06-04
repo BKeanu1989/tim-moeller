@@ -40,11 +40,11 @@ import Hat from '@assets/hat.svg'
 			</div>
 
 			<!-- Research Grid -->
-			<div class="grid gap-8 md:grid-cols-2">
+			<div class="grid gap-8 md:grid-cols-1 h-[100lvh] min-h-fit" id="focus-and-interests">
 				<section id="resarch">
-					<div class="rounded-lg bg-gray-800/50 p-6 backdrop-blur">
+				<div class="rounded-lg max-w-full w-2/3 h-[33lvh] mx-auto p-6 backdrop-blur">
 						<h2 class="mb-4 text-xl font-medium text-white">Research Interests</h2>
-						<p>
+						<p class="tracking-wide">
 							I am interested in the Neurophenomenology of patients with schizophrenia. I am mainly
 							working with VR/AR- Technology, Eye-Tracking, Arduino-prototyping, ECG, and EEG.
 						</p>
@@ -52,28 +52,28 @@ import Hat from '@assets/hat.svg'
 				</section>
 
 				<section id="current-focus">
-					<div class="rounded-lg bg-gray-800/50 p-6 backdrop-blur">
+					<div class="rounded-lg max-w-full w-2/3 h-[33lvh] mx-auto p-6 backdrop-blur">
 						<h2 class="mb-4 text-xl font-medium text-white">Current Focus</h2>
-						<p>
+						<p class="tracking-widek">
 							I am currently in training to be a Psychotherapist at the IVB Institute for Behavior
 							Therapy Berlin.
 						</p>
 					</div>
 				</section>
+				<!-- Projects Section -->
+				<section class="rounded-lg max-w-full w-2/3 h-[33lvh] mx-auto p-8 backdrop-blur">
+					<h2 class="mb-4 text-xl font-medium text-white">Projects & Expertise</h2>
+					<p class="leading-relaxed tracking-wide">
+						I am interested in Psychotherapy as well as in clinical research at the Charité University
+						medicine Berlin and Humboldt-University Berlin. You can find some of my work in the
+						section 'Scientific projects'. I am working with virtual and augmented reality,
+						Eye-Tracking, Electroencephalography, and Arduino-prototyping. Special interest is in
+						psychiatric disorders, especially self-disorders like schizophrenia, but also
+						developmental disorders.
+					</p>
+				</section>
 			</div>
 
-			<!-- Projects Section -->
-			<section class="rounded-lg bg-gray-800/50 p-8 backdrop-blur">
-				<h2 class="mb-4 text-xl font-medium text-white">Projects & Expertise</h2>
-				<p class="leading-relaxed">
-					I am interested in Psychotherapy as well as in clinical research at the Charité University
-					medicine Berlin and Humboldt-University Berlin. You can find some of my work in the
-					section 'Scientific projects'. I am working with virtual and augmented reality,
-					Eye-Tracking, Electroencephalography, and Arduino-prototyping. Special interest is in
-					psychiatric disorders, especially self-disorders like schizophrenia, but also
-					developmental disorders.
-				</p>
-			</section>
 
 			<!-- Teaching Section -->
 			<TeachingArticles />
@@ -111,10 +111,24 @@ import Hat from '@assets/hat.svg'
 	#research {
 		visibility: hidden;
 	}
+
+	#focus-and-interests section {
+		visibility: hidden;
+	}
+
+	#focus-and-interests section:nth-child(odd) {
+		transform: translateX(-50px);
+	}
+
+	#focus-and-interests section:nth-child(even) {
+		transform: translateX(50px);
+	}
+
 </style>
 
 <script>
 	import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 	// import { SplitText } from "gsap/all";
 	import { SplitText } from 'gsap/SplitText'
 
@@ -123,16 +137,7 @@ import Hat from '@assets/hat.svg'
 	gsap.registerPlugin(SplitText)
 
 	document.fonts.ready.then(() => {
-		// do stuff here
-		// @ts-ignore
-		//   let spl = SplitText.create(".research", {
-		//      type: "words, lines", // only split into words and lines (not characters)
-		// mask: "lines", // adds extra wrapper element around lines with overflow: clip (v3.13.0+)
-		// linesClass: "line++", // adds "line" class to each line element, plus an incremented one too ("line1", "line2", "line3", etc.)
-		//   })
-
 		gsap.set('#hero .left', { opacity: 1 })
-
 		let split = SplitText.create('#hero .left', {
 			type: 'lines',
 			mask: 'lines',
@@ -143,13 +148,6 @@ import Hat from '@assets/hat.svg'
 			mask: 'lines',
 			linesClass: 'line++'
 		})
-		//now animate each character into place from 20px below, fading in:
-		// gsap.from(split.lines, {
-		//   y: 20,
-		//   autoAlpha: 0,
-		//   stagger: 0.05
-		// });
-
 		let tl = gsap.timeline()
 
 		// Animate the split characters
@@ -158,7 +156,6 @@ import Hat from '@assets/hat.svg'
 			y: 100,
 			autoAlpha: 0,
 			stagger: 0.5
-			// delay:
 		})
 
 		tl.from(split2.lines, {
@@ -167,5 +164,24 @@ import Hat from '@assets/hat.svg'
 			autoAlpha: 0,
 			stagger: 0.2
 		})
+
+		// 
+		const p2Sections = gsap.utils.toArray("#focus-and-interests section")
+		p2Sections.forEach((section) => {
+			gsap.to(section, {
+				x: 0,
+				scrollTrigger: {
+					immediateRender: false,
+					scrub: true,
+					// markers: true,
+					trigger: section
+				},
+				autoAlpha: 1,
+			})
+
+		})
+
+		
+		
 	})
 </script>
