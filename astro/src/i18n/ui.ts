@@ -24,6 +24,7 @@ export const ui = {
         'misc.open_source': 'Open Source',
         'misc.publications': 'Publications',
         'misc.read_more': 'read more',
+        'button.back_to_publications': 'Back to publications',
     },
     de: {
         'nav.home': 'Home',
@@ -43,5 +44,7 @@ export const ui = {
         'misc.open_source': 'Open Source',
         'misc.publications': 'Publikationen',
         'misc.read_more': 'mehr lesen',
+        'button.back_to_publications': 'Zurück zu Projekte',
+
     },
 } as const;

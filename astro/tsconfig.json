@@ -6,10 +6,8 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@utils/*": ["src/utils/*"]
     },
-    "files": [
-      "node_modules/gsap/types/index.d.ts"
-    ]
   }
 }

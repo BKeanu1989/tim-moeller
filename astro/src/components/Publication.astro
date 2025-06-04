@@ -5,6 +5,8 @@ import type { ValidContentEntrySlug } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
 
+import {buildI18nLink} from "@utils/utils"
+
 import { getLangFromUrl, useTranslations } from "src/i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -22,7 +24,7 @@ interface Props {
 
 const { input } = Astro.props;
 const text = input.body;
-const { year, image, title, imageAlt, authors } = input.data;
+const { year, image, title, imageAlt, authors, tags } = input.data;
 
 const authorData = []
 
@@ -30,6 +32,7 @@ for await (const d of authors) {
   const res = await getEntry("authors", d)
   authorData.push(res)
 }
+
 ---
 
 <article class="publication relative bg-gray-900/50 backdrop-blur-sm rounded-xl overflow-hidden group">
@@ -78,6 +81,16 @@ for await (const d of authors) {
           }
         </ul>
       </div>
+      <div class="tags">
+          {
+            tags?.map((tag) => (
+              tag && 
+              <span class="tag font-thin text-xs border rounded border-sky-100 px-1 py-1 bg-stone-700/50">
+                {tag}
+              </span>
+            ))
+          }
+      </div>
 
       <!-- Abstract -->
       <div class="text-gray-300 leading-relaxed">
@@ -86,10 +99,26 @@ for await (const d of authors) {
 
       <!-- Read More Button -->
       <a 
-        href={`/publications/${input.id}`}
+      href={`/publications/${input.id}`}
         class="inline-flex items-center gap-2 px-4 py-2 mt-2 text-sm text-white bg-cyan-500/10 hover:bg-cyan-500/20 rounded-lg transition-colors duration-300 w-fit group/button"
       >
         {t("misc.read_more")}
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          class="h-4 w-4 transform transition-transform duration-300 group-hover/button:translate-x-1" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+            <a 
+      href={buildI18nLink(input)}
+
+        class="inline-flex items-center gap-2 px-4 py-2 mt-2 text-sm text-white bg-cyan-500/10 hover:bg-cyan-500/20 rounded-lg transition-colors duration-300 w-fit group/button"
+      >
+        {t("misc.read_more")} - new
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           class="h-4 w-4 transform transition-transform duration-300 group-hover/button:translate-x-1" 
