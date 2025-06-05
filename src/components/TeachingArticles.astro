@@ -1,0 +1,160 @@
+---
+import { Image } from "astro:assets";
+
+import scientificWriting from "../assets/scientific-writing.webp"
+import psychobiology from "../assets/psychobiology-of-psychological-disorders.webp"
+import clinicalPsychology from "../assets/settings-in-clinical-psychology.webp"
+
+const { class: className, ...rest } = Astro.props
+
+---
+
+<section class:list={['teachings', className]} {...rest}>
+  <h2 class="text-3xl font-light text-white text-center mb-12">
+    Teaching Experience
+  </h2>
+  
+  <div class="grid gap-8">
+    <article class="bg-gray-800/50 rounded-lg overflow-hidden backdrop-blur transform transition-transform hover:scale-[1.02]">
+      <div class="grid md:grid-cols-[300px,1fr]">
+        <div class="aspect-[3/4] overflow-hidden">
+          <Image 
+            src={scientificWriting} 
+            alt="Picture of a scientific paper" 
+            class="object-cover w-full h-full"
+          />
+        </div>
+        <div class="p-6 flex flex-col justify-center">
+          <h3 class="text-xl font-medium text-white mb-4">Scientific Writing</h3>
+          <p class="text-gray-300 leading-relaxed">
+            Scientific writing involves the structured and objective communication of research findings, theories, and arguments in a clear and concise manner. It follows specific formats (e.g., APA, MLA) and includes elements like abstracts, introductions, methods, results, discussions, and references. Precision, clarity, and evidence-based arguments are key.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <article class="bg-gray-800/50 rounded-lg overflow-hidden backdrop-blur transform transition-transform hover:scale-[1.02]">
+      <div class="grid md:grid-cols-[300px,1fr]">
+        <div class="aspect-[3/4] overflow-hidden">
+          <Image 
+            src={psychobiology} 
+            alt="Illustration of brain processes" 
+            class="object-cover w-full h-full"
+          />
+        </div>
+        <div class="p-6 flex flex-col justify-center">
+          <h3 class="text-xl font-medium text-white mb-4">Psychobiology of Psychological Disorders</h3>
+          <p class="text-gray-300 leading-relaxed">
+            This field explores the biological basis of psychological disorders, including the role of genetics, neurochemistry, brain structures, and physiological processes in mental health conditions like depression, schizophrenia, and anxiety disorders. It integrates neuroscience, psychology, and pharmacology to understand and treat disorders.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <article class="bg-gray-800/50 rounded-lg overflow-hidden backdrop-blur transform transition-transform hover:scale-[1.02]">
+      <div class="grid md:grid-cols-[300px,1fr]">
+        <div class="aspect-[3/4] overflow-hidden">
+          <Image 
+            src={clinicalPsychology} 
+            alt="Clinical psychology setting" 
+            class="object-cover w-full h-full"
+          />
+        </div>
+        <div class="p-6 flex flex-col justify-center">
+          <h3 class="text-xl font-medium text-white mb-4">Settings in Clinical Psychology</h3>
+          <p class="text-gray-300 leading-relaxed">
+            Clinical psychologists work in various settings, including hospitals, private practices, community mental health centers, universities, and rehabilitation facilities. The setting influences the type of therapy, assessments, and interventions used, ranging from short-term crisis management to long-term psychotherapy.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Additional subjects without images -->
+    <div class="grid md:grid-cols-2 gap-8">
+      <article class="bg-gray-800/50 rounded-lg p-6 backdrop-blur">
+        <h3 class="text-xl font-medium text-white mb-4">Developmental Psychology</h3>
+        <p class="text-gray-300 leading-relaxed">
+          This branch of psychology studies how people grow and change throughout life, from infancy to old age. It examines cognitive, emotional, social, and physical development, considering factors like genetics, environment, and culture. Major theories include those of Piaget, Erikson, and Vygotsky.
+        </p>
+      </article>
+
+      <article class="bg-gray-800/50 rounded-lg p-6 backdrop-blur">
+        <h3 class="text-xl font-medium text-white mb-4">Psychology of Motivation</h3>
+        <p class="text-gray-300 leading-relaxed">
+          This area focuses on what drives human behavior, from biological needs to higher-order motivations like achievement, social belonging, and self-actualization. Theories include Maslow's hierarchy of needs, self-determination theory, and intrinsic vs. extrinsic motivation.
+        </p>
+      </article>
+
+      <article class="bg-gray-800/50 rounded-lg p-6 backdrop-blur">
+        <h3 class="text-xl font-medium text-white mb-4">Historical and Philosophical Foundations</h3>
+        <p class="text-gray-300 leading-relaxed">
+          This topic traces the evolution of psychology from its philosophical roots to its emergence as a scientific discipline. It covers major schools of thought, such as structuralism, functionalism, behaviorism, psychoanalysis, humanism, and cognitive psychology.
+        </p>
+      </article>
+
+      <article class="bg-gray-800/50 rounded-lg p-6 backdrop-blur">
+        <h3 class="text-xl font-medium text-white mb-4">Clinical Psychology</h3>
+        <p class="text-gray-300 leading-relaxed">
+          Clinical psychology focuses on diagnosing, treating, and preventing mental health disorders. It integrates psychological theories, therapeutic techniques, and research to help individuals manage mental health challenges.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      const articles = document.querySelectorAll(".teachings article");
+      const observerOptions = {
+        root: null,
+        rootMargin: '50px',
+        threshold: 0.1
+      };
+
+      const Observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const element = entry.target as HTMLElement;
+              element.style.opacity = "0";
+              gsap.fromTo(
+                element, 
+                {
+                  opacity: 0,
+                  y: 50
+                },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.8,
+                  ease: "power2.out"
+                }
+              );
+              Observer.unobserve(element);
+            }
+          });
+        },
+        observerOptions
+      );
+
+      articles.forEach(el => {
+        const element = el as HTMLElement;
+        element.style.opacity = "0";
+        Observer.observe(element);
+      });
+    },
+    { once: false }
+  );
+</script>
+
+<style>
+  .teachings article {
+    transition: transform 0.3s ease;
+  }
+  
+  .teachings article:hover {
+    transform: translateY(-4px);
+  }
+</style>

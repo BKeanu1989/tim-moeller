@@ -1,0 +1,61 @@
+---
+
+
+import { getLangFromUrl, useTranslations } from "src/i18n/utils";
+const { class: className, ...rest } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<form action="" class={className} {...rest}>
+  <slot />
+  <div class="form-group flex flex-col gap-1">
+    <label class="text-white w-1/4" for="name">{t("contact.name")}</label>
+    <input
+      class="h-8 rounded-sm p-1"
+      type="text"
+      id="name"
+      placeholder="Jane Doe"
+      name="name"
+    />
+  </div>
+  <div class="form-group mt-4 flex flex-col gap-1">
+    <label class="text-white" for="email">{t("contact.email")}</label>
+    <input
+      class="h-8 rounded-sm p-1"
+      type="email"
+      id="email"
+      placeholder="your@email.com"
+      name="email"
+    />
+  </div>
+  <div class="form-group mt-4 flex flex-col gap-1">
+    <label class="text-white" for="subject">{t("contact.subject")}</label>
+    <input
+      class="h-8 rounded-sm p-1"
+      type="text"
+      id="text"
+      placeholder={t("contact.subject")}
+      name="subject"
+    />
+  </div>
+  <div class="form-group mt-4 flex flex-col gap-1">
+    <label class="text-white" for="subject">{t("contact.message")}</label>
+    <!-- <input type="text" id="message" placeholder="your message" name="message" /> -->
+    <textarea
+      id="message"
+      name="message"
+      class="text-black h-16 rounded-sm p-1"
+      placeholder={t("contact.message.placeholder")}
+    ></textarea>
+  </div>
+  <button class="px-5 py-2 border mt-4 rounded-lg w-fit text-white" type="submit"
+    >{t("contact.send")}</button
+  >
+</form>
+<style>
+  .c-mx-auto {
+    margin: 0 auto;
+  }
+</style>

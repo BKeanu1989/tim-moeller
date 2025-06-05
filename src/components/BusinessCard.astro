@@ -1,0 +1,195 @@
+---
+import { getLangFromUrl, useTranslations } from "src/i18n/utils";
+import ContactCard from "./ContactCard.astro"
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+---
+<div class="business-card relative w-full max-w-3xl mx-auto rounded-xl p-8 group">
+    <div class="card-content relative z-10 backdrop-blur-sm">
+        <ContactCard class="mb-8"/>
+        <div class="stats grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div class="stat-item">
+                <span class="stat-number">6+</span>
+                <span class="stat-label">{t("misc.years_of_experience")}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">4</span>
+                <span class="stat-label">Open Source</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">3</span>
+                <span class="stat-label">{t("misc.publications")}</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Background Effects -->
+    <div class="card-bg absolute inset-0 z-0">
+        <div class="shine"></div>
+        <div class="gradient-bg"></div>
+    </div>
+</div>
+
+<style>
+    .business-card {
+        background: linear-gradient(135deg, 
+            rgba(17, 17, 17, 0.9) 0%,
+            rgba(35, 35, 35, 0.8) 50%,
+            rgba(17, 17, 17, 0.9) 100%
+        );
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        transform-style: preserve-3d;
+        perspective: 1000px;
+        box-shadow: 
+            0 0 20px rgba(0, 0, 0, 0.3),
+            0 0 40px rgba(0, 194, 203, 0.1),
+            inset 0 0 15px rgba(0, 194, 203, 0.05);
+    }
+
+    .card-bg {
+        border-radius: inherit;
+        overflow: hidden;
+    }
+
+    .gradient-bg {
+        position: absolute;
+        inset: -2px;
+        background: linear-gradient(135deg,
+            rgba(0, 194, 203, 0.1),
+            rgba(0, 194, 203, 0.05) 20%,
+            transparent 50%,
+            rgba(0, 194, 203, 0.05) 80%,
+            rgba(0, 194, 203, 0.1)
+        );
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    .business-card:hover .gradient-bg {
+        opacity: 1;
+    }
+
+    .shine {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 50%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .business-card:hover .shine {
+        opacity: 1;
+    }
+
+    /* Stats Styling */
+    .stats {
+        color: #fff;
+        font-weight: 300;
+    }
+
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .stat-item:hover {
+        transform: translateY(-2px);
+        background: rgba(0, 194, 203, 0.1);
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 600;
+        background: linear-gradient(135deg, #00c2cb, #4F46E5);
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+
+    .stat-label {
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        letter-spacing: 0.05em;
+        opacity: 0.8;
+    }
+
+    @media (hover: hover) {
+        .business-card {
+            will-change: transform;
+        }
+    }
+</style>
+
+<script>
+    function setupCard() {
+        const card = document.querySelector('.business-card') as HTMLElement;
+        if (!card) return;
+
+        let bounds: DOMRect;
+
+        function updateMousePosition(e: MouseEvent) {
+            if (!bounds) return;
+            
+            const mouseX = e.clientX - bounds.left;
+            const mouseY = e.clientY - bounds.top;
+            
+            // Update CSS variables for shine effect
+            card.style.setProperty('--mouse-x', `${(mouseX / bounds.width) * 100}%`);
+            card.style.setProperty('--mouse-y', `${(mouseY / bounds.height) * 100}%`);
+
+            // Calculate rotation
+            const centerX = bounds.width / 2;
+            const centerY = bounds.height / 2;
+            const rotateX = (mouseY - centerY) / 20;
+            const rotateY = (centerX - mouseX) / 20;
+
+            card.style.transform = `
+                perspective(1000px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                scale3d(1.02, 1.02, 1.02)
+            `;
+        }
+
+        function resetCard() {
+            card.style.transform = '';
+            card.style.setProperty('--mouse-x', '50%');
+            card.style.setProperty('--mouse-y', '50%');
+        }
+
+        function updateBounds() {
+            bounds = card.getBoundingClientRect();
+        }
+
+        // Event listeners
+        card.addEventListener('mouseenter', () => {
+            updateBounds();
+            document.addEventListener('mousemove', updateMousePosition);
+        });
+
+        card.addEventListener('mouseleave', () => {
+            document.removeEventListener('mousemove', updateMousePosition);
+            resetCard();
+        });
+
+        // Update bounds on resize
+        window.addEventListener('resize', updateBounds);
+
+        // Initial bounds
+        updateBounds();
+    }
+
+    // Setup on initial load and view transitions
+    setupCard();
+    document.addEventListener('astro:page-load', setupCard);
+</script>

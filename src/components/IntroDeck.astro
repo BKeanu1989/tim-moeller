@@ -1,0 +1,206 @@
+---
+import CareerCard from "./CareerCard.astro";
+import FlippingCard from "./FlippingCard.astro";
+import FlippingCardRefactored from "./FlippingCardRefactored.astro";
+import FlippingCardV2 from "./FlippingCardV2.astro";
+import Publication from "./Publication.astro";
+// import BottomArrow from '../'
+---
+
+<div class="intro relative snap-mandatory snap-y z-10 w-dvw max-w-full">
+  <div
+    class="intro-name h-c-dvh flex min-w-full min-h-full relative text-4xl lg:text-9xl snap-start text-gray-50 w-fit font-body-col place-content-center"
+  >
+    <div
+      class="navbar-offset place-self-center absolute w-3/4 top-1/4 left-1/2 -translate-x-1/2"
+    >
+      <span class="opacity-0 intro-name--first text-5xl lg:text-7xl">Hi</span>
+      <span class="opacity-0 text-3xl lg:text-5xl">my name is </span>
+      <span class="opacity-0 text-7xl md:text-8xl lg:text-9xl"
+        >Tim J. Möller</span
+      >
+    </div>
+    <!-- <button
+    class="btn absolute w-7 h-7 scroll-to-button bg-gray-500 rounded-full text-gray-50 place-self-end navbar-offset bottom-[12.5%] left-1/2 -translate-x-1/2"
+    data-scrollTraget="intro-career">yes</button
+    > -->
+    <div
+      class="proceed border rounded-full w-12 h-12 place-self-end items-center animate-bounce"
+    >
+      <svg
+        viewBox="0 0 1024 1024"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="#000000"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            fill="#000000"
+            d="M544 805.888V168a32 32 0 1 0-64 0v637.888L246.656 557.952a30.72 30.72 0 0 0-45.312 0 35.52 35.52 0 0 0 0 48.064l288 306.048a30.72 30.72 0 0 0 45.312 0l288-306.048a35.52 35.52 0 0 0 0-48 30.72 30.72 0 0 0-45.312 0L544 805.824z"
+          >
+          </path>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="h-c-dvh">
+    <!-- <Publication -->
+  </div>
+
+  <div
+    class="intro-career content-center min-w-full min-h-full relative snap-start text-8xl text-gray-50 w-2/3 font-body h-c-dvh flex justify-center flex-col gap-5 sm:gap-8 sm:flex-row flex-wrap"
+    id="intro-career"
+  >
+    <div
+      class="flipping-card-container flex flex-col flex-wrap justify-between gap-5 lg:gap-10 lg:flex-row"
+    >
+      <FlippingCardV2
+        frontImage="/brain-scan-with-books.jpeg"
+        title="Test Title"
+        frontImageAlt="some books for example alt"
+        frontText="PhD candidate in computational psychiatry"
+        backText="v2 back"
+      />
+      <FlippingCardRefactored
+        frontImage="/brain-scan-with-books.jpeg"
+        title="Test Title"
+        frontImageAlt="some books for example alt"
+        frontText="PhD candidate in computational psychiatry"
+        backText="I am a Psychologist and finished writing my dissertation in computational psychiatry at the Humboldt University of Berlin. I specialize in schizophrenia and disorders of the self in psychiatry."
+      />
+      <FlippingCard
+        frontImage="/brain-scan-with-books.png"
+        frontImageAlt="some books for example alt"
+        frontText="PhD candidate in computational psychiatry"
+        backText="I am a Psychologist and finished writing my dissertation in computational psychiatry at the Humboldt University of Berlin. I specialize in schizophrenia and disorders of the self in psychiatry."
+      />
+      <FlippingCard
+        frontImage="/brain-scan-with-books.jpeg"
+        frontImageAlt="some books for example alt"
+        frontText="Teaching"
+        backText="I have been teaching psychobiological principles of psychological disorders,  clinical psychology, settings in psychotherapy, developmental psychology, developmental disorders, Psychology of Motivation, Historical and philosophical foundations of psychology, Neuropsychology, and scientific writing at different universities and other institutions."
+      />
+    </div>
+    <!-- <ul class="flex flex-col navbar-offset">
+      <li class="opacity-0">
+        <CareerCard
+          title="Psycholgist"
+          src="/brain-scan-with-books.jpeg"
+          alt="example for now">Psycholgist</CareerCard
+        >
+      </li>
+      <li class="opacity-0">
+        <CareerCard
+          title="University lecturer in Berlin, Germany"
+          src="/brain-scan-with-books.jpeg"
+          alt="example for now">Psycholgist</CareerCard
+        >
+      </li>
+      <li class="opacity-0">
+        <CareerCard
+          title="PhD Candidate in computional psyiatry"
+          src="/brain-scan-with-books.jpeg"
+          alt="example for now">Candidate in computional psyiatry</CareerCard
+        >
+      </li>
+      <li class="opacity-0">
+        <CareerCard
+          title="Neuroscientist"
+          src="/brain-scan-with-books.jpeg"
+          alt="example for now">Neuroscientist</CareerCard
+        >
+      </li>
+      <li class="opacity-0">
+        <CareerCard
+          title="Practitioner for Psychotherapy"
+          src="/brain-scan-with-books.jpeg"
+          alt="example for now">Practitioner for Psychotherapy</CareerCard
+        >
+      </li>
+    </ul> -->
+  </div>
+</div>
+<!-- <div class="h-dvh flex"></div> -->
+<!-- <img
+  class="h-full w-full absolute top-0 left-0"
+  src="/brain-scan-with-books.png"
+  alt="img of tim j moeller"
+/> -->
+
+<style is:global>
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  /* .intro::-webkit-scrollbar {
+    display: none;
+  } */
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .intro {
+    /* -ms-overflow-style: none;*/ /* IE and Edge */
+    /* scrollbar-width: none;*/ /* Firefox */
+
+    scroll-behavior: smooth;
+  }
+
+  .content-center {
+    align-content: center;
+  }
+
+  .intro-name,
+  .h-c-dvh {
+    height: calc(100dvh - var(--navbar-height, 50px));
+  }
+
+  .intro-name--first:after {
+    content: ",";
+  }
+</style>
+
+<script>
+  import { animate, timeline, stagger, inView } from "motion";
+
+  const secquence = [
+    [
+      ".intro-name span",
+      // does let it flash // we did via opacity-0 on the element before
+      { opacity: 1 },
+      // { opacity: [0, 1] },
+      { easing: "ease-out", duration: 1, delay: stagger(1, { start: 0.8 }) },
+    ],
+  ];
+  // @ts-ignore
+  timeline(secquence, {});
+  inView(".intro-career .flipping-card-container", (element) => {
+    // console.log("🚀 ~ inView ~ element:", element);
+    let listElements = element.target.querySelectorAll("article");
+    animate(
+      listElements!,
+      { opacity: [0, 1] }, // [initial,to]
+      { duration: 1, easing: "ease-out", delay: stagger(2, { start: 0.8 }) }
+    );
+  });
+  const buttons = document.querySelectorAll("button.scroll-to-button");
+  console.log("🚀 ~ buttons:", buttons);
+
+  Array.from(buttons).forEach((x) => {
+    // console.log("🚀 ~ buttons.forEach ~ x:", x);
+    x.addEventListener("click", (e) => {
+      //   alert("clicked button to scroll to target");
+      //   console.warn(e);
+    });
+  });
+
+  //   const buttonsv2 = document.querySelectorAll("button.scroll-to-button");
+
+  //   // Handle clicks on each button.
+  //   buttonsv2.forEach((button) => {
+  //     button.addEventListener("click", (e) => {
+  //       alert("Button was clicked!");
+  //       //   console.warn(e);
+  //     });
+  //   });
+</script>

@@ -1,0 +1,138 @@
+---
+import { getLangFromUrl, useTranslations } from "src/i18n/utils";
+import ContactCard from "./ContactCard.astro"
+import { getCollection } from "astro:content";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const allPublications = await getCollection("publications");
+
+const langPublications = allPublications.filter((x) =>
+  x.slug.includes(`${lang}/`)
+);
+
+const openSourcePubs = langPublications.filter((x) => {
+  if (x.data.tags?.length) {
+    return x.data.tags.some((y) => {
+      if (y.toLowerCase() == 'open source') {
+        return true
+      }
+    })
+  }
+})
+
+const currentYear = new Date().getFullYear();
+const startOfPracticeYear = 2019
+---
+<style>
+    .business-card {
+        background: linear-gradient(135deg, #000 20%, #222 50%, #000 80%);
+
+        /* transition-duration: 300ms;
+        transition-property: transform, box-shadow;
+        transition-timing-function: ease-out;
+        transform: rotate3d(0); */
+        box-shadow: 0 1px 5px 5px #eee
+    }
+
+</style>
+<div class="business-card relative w-5/6 mx-auto rounded p-5">
+    <ContactCard class="mb-8"/>
+    <div class="stats bottom text-white text-xl flex gap-x-5 place-self-end place-content-around w-full py-5">
+      <div class="experience stat-item">
+        <span class="intro-hero-numbers text-blue-600">{currentYear - startOfPracticeYear}+</span> 
+        <span class="intro-hero-label uppercase">
+        {t("misc.years_of_experience")}
+        </span>
+      </div>
+      <div class="stat-item">
+        <span class="intro-hero-numbers text-blue-600">{openSourcePubs.length}</span>
+        <span class="intro-hero-label uppercase">
+          open source
+        </span> 
+      </div>
+      <div class="stat-item">
+        <span class="intro-hero-numbers text-blue-600">{langPublications.length}</span>
+        <span class="intro-hero-label uppercase">
+          {t("misc.publications")}
+        </span>
+      </div>
+    </div>
+    <div class="_shine"></div>
+</div>
+
+<script>
+const $card = document.querySelector('.business-card') as HTMLElement;
+let bounds: any;
+
+function rotateToMouse(e: MouseEvent) {
+  const mouseX = e.clientX;
+  const mouseY = e.clientY;
+  const leftX = mouseX - bounds.x;
+  const topY = mouseY - bounds.y;
+  const center = {
+    x: leftX - bounds.width / 2,
+    y: topY - bounds.height / 2
+  }
+  const distance = Math.sqrt(center.x**2 + center.y**2);
+  
+//   scale3d(1.07, 1.07, 1.07)
+// scale3d(1.01, 1.01, 1.01)
+  $card.style.transform = `
+    rotate3d(
+      ${center.y / 100},
+      ${-center.x / 100},
+      0,
+      ${Math.log(distance)* 2}deg
+    )
+  `;
+  
+  //   ${center.x * 2 + bounds.width/2}px
+  //   ${center.y * 2 + bounds.height/2}px,
+  //   #ffffff55,
+  // #8a8a8a,
+  // @ts-ignore
+  $card.querySelector('.shine')!.style.backgroundImage = `
+    radial-gradient(
+      circle at 
+     ${center.x + bounds.width/2}px
+     ${center.y + bounds.height/2}px,
+      #bbb,
+      #0000000f
+    )
+  `;
+}
+
+$card.addEventListener('mouseenter', () => {
+  bounds = $card.getBoundingClientRect();
+  // document.addEventListener('mousemove', rotateToMouse);
+});
+
+$card.addEventListener('mouseleave', () => {
+  // document.removeEventListener('mousemove', rotateToMouse);
+  $card.style.transform = '';
+  $card.style.background = '';
+});
+
+</script>
+<style>
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .stat-item:hover {
+        transform: translateY(-2px);
+        background: rgba(0, 194, 203, 0.1);
+    }
+
+    .intro-hero-label {
+      
+    }
+
+</style>
