@@ -99,26 +99,10 @@ for await (const d of authors) {
 
       <!-- Read More Button -->
       <a 
-      href={`/publications/${input.id}`}
+      href={`/tim-moeller/publications/${input.id}`}
         class="inline-flex items-center gap-2 px-4 py-2 mt-2 text-sm text-white bg-cyan-500/10 hover:bg-cyan-500/20 rounded-lg transition-colors duration-300 w-fit group/button"
       >
         {t("misc.read_more")}
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          class="h-4 w-4 transform transition-transform duration-300 group-hover/button:translate-x-1" 
-          fill="none" 
-          viewBox="0 0 24 24" 
-          stroke="currentColor"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </a>
-            <a 
-      href={buildI18nLink(input)}
-
-        class="inline-flex items-center gap-2 px-4 py-2 mt-2 text-sm text-white bg-cyan-500/10 hover:bg-cyan-500/20 rounded-lg transition-colors duration-300 w-fit group/button"
-      >
-        {t("misc.read_more")} - new
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           class="h-4 w-4 transform transition-transform duration-300 group-hover/button:translate-x-1" 
