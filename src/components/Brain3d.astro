@@ -1,0 +1,49 @@
+---
+
+---
+
+<script>
+  import * as THREE from "three";
+  import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  );
+  const renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  // Lighting
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(1, 1, 1).normalize();
+  scene.add(light);
+
+  // Load 3D Model
+  const loader = new GLTFLoader();
+
+  loader.load("/Brain.glb", (gltf) => {
+    // version 1 unsupported
+    //   loader.load("/BrainStem-1.gltf", (gltf) => {
+    // working, but cant move yet
+    //   loader.load("/Brain.glb", (gltf) => {
+    // not working ... -> brainstem0.bin not found
+    //   loader.load("/BrainStem.gltf", (gltf) => {
+    const brain = gltf.scene;
+    brain.scale.set(0.5, 0.5, 0.5); // Adjust size
+    scene.add(brain);
+  });
+
+  // Camera position
+  camera.position.z = 2;
+
+  // Animate the scene
+  function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+  }
+  animate();
+</script>

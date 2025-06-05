@@ -1,0 +1,232 @@
+---
+import TeachingArticles from '@components/TeachingArticles.astro'
+import NavSideBarLayout from '../../layouts/NavSideBarLayout.astro'
+
+import Hat from '@assets/hat.svg'
+---
+
+<NavSideBarLayout title="About me">
+	<main class="w-full text-gray-200">
+		<div class="space-y-16">
+			<!-- Hero Section -->
+			<div
+				class="hero-wrapper relative flex h-lvh flex-col overflow-hidden md:h-[100lvh] lg:flex-row"
+				id="hero"
+			>
+				<div
+					class="hero-bg absolute -z-10 hidden bg-gradient-to-tr from-neutral-700 to-stone-700 lg:block"
+				>
+				</div>
+				<section
+					class="left flex h-1/2 w-full flex-col justify-center space-y-4 px-5 text-center md:h-full"
+				>
+					<h1 class="my-5 text-5xl font-light text-white">About me</h1>
+					<p class="mx-auto max-w-2xl text-3xl font-light tracking-wide">
+						I am a <span class="font-medium text-white">Psychologist</span> with a focus on computational
+						psychiatry
+					</p>
+				</section>
+
+				<!-- Background Section -->
+				<section
+					class="prose prose-invert prose-lg right flex h-1/2 w-full flex-col justify-center px-5 text-center md:h-full"
+				>
+					<Hat class={'w-20 h-20 mx-auto'} />
+					<p class="text-2xl">
+						I completed my <span class="font-medium text-white">dissertation</span> in computational
+						psychiatry at Humboldt University, specializing in schizophrenia and self-disorders.
+					</p>
+				</section>
+			</div>
+
+			<!-- Focus and Interests -->
+			<div class="grid gap-8 md:grid-cols-1 h-[100lvh] min-h-fit" id="focus-and-interests">
+				<section id="resarch">
+				<div class="rounded-lg max-w-full w-2/3 h-[33lvh] mx-auto p-6 backdrop-blur">
+						<h2 class="mb-4 text-xl font-medium text-white">Research Interests</h2>
+						<p class="tracking-wide">
+							I am interested in the Neurophenomenology of patients with schizophrenia. I am mainly
+							working with VR/AR- Technology, Eye-Tracking, Arduino-prototyping, ECG, and EEG.
+						</p>
+					</div>
+				</section>
+
+				<section id="current-focus">
+					<div class="rounded-lg max-w-full w-2/3 h-[33lvh] mx-auto p-6 backdrop-blur">
+						<h2 class="mb-4 text-xl font-medium text-white">Current Focus</h2>
+						<p class="tracking-widek">
+							I am currently in training to be a Psychotherapist at the IVB Institute for Behavior
+							Therapy Berlin.
+						</p>
+					</div>
+				</section>
+				<!-- Projects Section -->
+				<section  id="projects">
+					<div class="rounded-lg max-w-full w-2/3 h-[33lvh] mx-auto p-8 backdrop-blur">
+						<h2 class="mb-4 text-xl font-medium text-white">Projects & Expertise</h2>
+						<p class="leading-relaxed tracking-wide">
+							I am interested in Psychotherapy as well as in clinical research at the Charité University
+							medicine Berlin and Humboldt-University Berlin. You can find some of my work in the
+							section 'Scientific projects'. I am working with virtual and augmented reality,
+							Eye-Tracking, Electroencephalography, and Arduino-prototyping. Special interest is in
+							psychiatric disorders, especially self-disorders like schizophrenia, but also
+							developmental disorders.
+						</p>
+					</div>
+				</section>
+			</div>
+
+
+			<!-- Teaching Section -->
+			<TeachingArticles />
+		</div>
+	</main>
+</NavSideBarLayout>
+
+<style>
+	/* Add smooth scrolling to the page */
+	html {
+		scroll-behavior: smooth;
+	}
+
+	/* Custom prose styles for better dark mode readability */
+	:global(.prose) {
+		max-width: none;
+	}
+
+	:global(.prose p) {
+		margin: 0;
+		line-height: 1.75;
+	}
+
+	.hero-bg {
+		background: linear-gradient(45deg, oklch(20.5% 0 0), oklch(21% 0.006 285.885));
+		width: 550px;
+		height: 100lvh;
+
+		left: 38%;
+		width: 62%;
+
+		clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+	}
+
+	#research {
+		visibility: hidden;
+	}
+
+	#focus-and-interests {
+		position: relative;
+		height: 100vh;
+		overflow: hidden;
+	}
+
+	#focus-and-interests section {
+		opacity: 0;
+		transform: translateY(50px);
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		pointer-events: none;
+	}
+
+	#focus-and-interests section.active {
+		pointer-events: auto;
+	}
+
+</style>
+
+<script>
+	import gsap from 'gsap'
+	import { ScrollTrigger } from 'gsap/ScrollTrigger'
+	import { SplitText } from 'gsap/SplitText'
+
+	gsap.registerPlugin(SplitText, ScrollTrigger)
+
+	document.fonts.ready.then(() => {
+		// Hero section animations
+		gsap.set('#hero .left', { opacity: 1 })
+		let split = SplitText.create('#hero .left', {
+			type: 'lines',
+			mask: 'lines',
+			linesClass: 'line++'
+		})
+		let split2 = SplitText.create('#hero .right', {
+			type: 'lines',
+			mask: 'lines',
+			linesClass: 'line++'
+		})
+		let tl = gsap.timeline()
+
+		// Animate the split characters
+		tl.from(split.lines, {
+			duration: 2,
+			y: 100,
+			autoAlpha: 0,
+			stagger: 0.5
+		})
+
+		tl.from(split2.lines, {
+			duration: 1,
+			y: 100,
+			autoAlpha: 0,
+			stagger: 0.2
+		})
+
+		// Focus and Interests sections animations
+		const sections = gsap.utils.toArray<HTMLElement>("#focus-and-interests section")
+		const container = document.querySelector("#focus-and-interests")
+		
+		// Create a timeline for the entire scroll sequence
+		const masterTl = gsap.timeline({
+			scrollTrigger: {
+				trigger: container,
+				start: "top top",
+				end: "+=300%", // This gives us enough scroll space for all sections
+				scrub: 1,
+				markers: false,
+				pin: true,
+				anticipatePin: 1
+			}
+		})
+
+		// Add each section to the timeline
+		sections.forEach((section, index) => {
+			// Calculate the position in the timeline
+			const start = index * 0.33 // Each section gets 1/3 of the scroll
+			const exitStart = start + 0.25 // Start exit animation earlier
+
+			// Add the section entrance animation
+			masterTl.fromTo(section,
+				{
+					y: 50,
+					opacity: 0
+				},
+				{
+					y: 0,
+					opacity: 1,
+					duration: 0.2, // Faster entrance
+					ease: "power2.out"
+				},
+				start
+			)
+
+			// Add the section exit animation (except for the last section)
+			if (index < sections.length - 1) {
+				masterTl.to(section,
+					{
+						y: -50,
+						opacity: 0,
+						duration: 0.1, // Much faster exit
+						ease: "power2.in"
+					},
+					exitStart
+				)
+			}
+		})
+	})
+</script>

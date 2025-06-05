@@ -1,0 +1,17 @@
+---
+import { languages } from "../i18n/ui";
+import FlagDe from "./icons/flag-de.astro";
+import FlagUs from "./icons/flag-us.astro";
+---
+
+<ul class="flex flex-row gap-2 text-slate-50 place-content-center">
+  {
+    Object.entries(languages).map(([lang, label]) => (
+      <li class="flex">
+        <a href={`/${lang}/`} class="border-2 rounded-md p-2">
+          {lang}
+        </a>
+      </li>
+    ))
+  }
+</ul>

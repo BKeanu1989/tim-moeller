@@ -1,0 +1,53 @@
+---
+import { getCollection, render } from 'astro:content';
+import NavSideBarLayout from "../../../layouts/NavSideBarLayout.astro";
+import { getLangAndRawIdFromCollectionId, getLangFromUrl, useTranslations } from 'src/i18n/utils';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('publications');
+  const languages = ['en', 'de'];
+
+  const paths = languages.flatMap(lang => {
+    // Filter pages for the current language
+    const langPages = pages.filter(page => {
+      const [pageLang] = page.id.split('/');
+      return pageLang === lang;
+    });
+
+    // Generate paths for each page in this language
+    return langPages.map(page => {
+      const [, ...slugParts] = page.id.split('/');
+      const slug = slugParts.join('/');
+      return {
+        params: { lang, slug },
+        props: { page }
+      };
+    });
+  });
+
+  return paths;
+}
+
+// const { post, lang } = Astro.props; // Get post data and language from props
+
+const { lang, slug } = Astro.params;
+const { page } = Astro.props;
+// const formattedDate = page.data.date.toLocaleString(lang);
+
+const lang2 = getLangFromUrl(Astro.url);
+const t = useTranslations(lang2);
+
+const { Content } = await render(page);
+
+---
+<NavSideBarLayout title={page.data.title}>
+  <main class="h-full min-h-dvh flex text-white w-4/5 mx-auto">
+    <div class="bg-c-black w-[calc(100dvw-16rem)] relative">
+      <h1 class="text-2xl text-center my-5">{page.data.title}</h1>
+      <article class="text-center my-5">
+        <Content />
+      </article>
+      <a class="px-5 py-2 bg-c-neutral-500 hover:bg-c-neutral-700 rounded" href={`/${lang}/publications-projects`}>{t("button.back_to_publications")}</a>
+    </div>
+  </main>
+</NavSideBarLayout>

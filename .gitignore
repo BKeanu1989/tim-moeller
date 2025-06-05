@@ -1,0 +1,25 @@
+*.afdesign
+
+fullstack-developer-*.md
+
+astro/public/output.css
+
+ignore-folder
+
+node_modules
+
+not-sorted-assets
+
+# build output
+dist/
+
+# generated types
+.astro/
+
+# environment variables
+.env
+.env.production
+
+
+
+tmp.txt
