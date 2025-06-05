@@ -62,7 +62,7 @@ const startOfPracticeYear = 2019
 		</div>
 	</div>
 	<div class="_shine"></div>
-	<div class="shiny-box"></div>
+	<!-- <div class="shiny-box"></div> -->
 </div>
 
 <script>
@@ -130,12 +130,14 @@ const startOfPracticeYear = 2019
 		backdrop-filter: blur(10px);
 		transition:
 			transform 0.3s ease,
-			background 0.3s ease;
+			background 0.3s ease,
+			box-shadow 0.3 ease;
 		overflow: hidden;
 	}
 
 	.stat-item:hover {
-		transform: translateY(-2px);
+		/* transform: translateY(-2px); */
+		box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
 	}
 
 	.stat-item::before {
@@ -143,8 +145,8 @@ const startOfPracticeYear = 2019
 		position: absolute;
 		top: -50%;
 		left: -50%;
-		width: 200%;
-		height: 200%;
+		width: 400%;
+		height: 400%;
 		background: linear-gradient(
 			120deg,
 			rgba(255, 255, 255, 0.1) 0%,
@@ -155,7 +157,7 @@ const startOfPracticeYear = 2019
 		opacity: 0;
 		transition:
 			opacity 0.3s ease,
-			transform 0.5s ease;
+			transform 1.5s ease;
 	}
 
 	.stat-item:hover::before {
