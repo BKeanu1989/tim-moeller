@@ -33,7 +33,7 @@ for await (const d of authors) {
 ---
 
 <article
-	class="publication-single group relative mx-auto w-full overflow-hidden rounded-xl bg-gray-900/50 backdrop-blur-sm sm:w-2/3"
+	class="publication-single c-gradient group relative mx-auto w-full overflow-hidden rounded-xl backdrop-blur-sm sm:w-2/3"
 >
 	<div class="flex flex-col gap-6 p-6">
 		<!-- Image Section -->
@@ -107,6 +107,8 @@ for await (const d of authors) {
 </article>
 
 <style>
+	@reference "tailwindcss";
+
 	.publication {
 		box-shadow:
 			0 0 20px rgba(0, 0, 0, 0.2),
@@ -127,5 +129,9 @@ for await (const d of authors) {
 			color, background-color, border-color, text-decoration-color, fill, stroke, opacity,
 			box-shadow, transform, filter, backdrop-filter;
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.c-gradient {
+		@apply bg-gradient-to-br from-black from-20% via-[#222] via-50% to-black to-80%;
 	}
 </style>

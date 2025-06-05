@@ -25,18 +25,24 @@ const startOfPracticeYear = 2019
 <style>
 	.business-card {
 		background: linear-gradient(135deg, #000 20%, #222 50%, #000 80%);
-
+		transition-duration: 300ms;
+		transition-property: transform, box-shadow;
+		transition-timing-function: ease-out;
 		/* transition-duration: 300ms;
         transition-property: transform, box-shadow;
         transition-timing-function: ease-out;
         transform: rotate3d(0); */
 		/* box-shadow: 0 1px 5px 5px #eee; */
 	}
+
+	.business-card:hover {
+		box-shadow: 0 1px 5px 5px #eee;
+	}
 </style>
 <div class="business-card relative mx-auto max-h-lvh w-full rounded p-5 sm:w-5/6">
 	<ContactCard class="mb-8" />
 	<div
-		class="stats bottom flex w-full flex-col place-content-around gap-x-5 place-self-end py-2 text-xl text-white sm:flex-row lg:py-5"
+		class="stats bottom flex w-full flex-col place-content-around gap-x-5 gap-y-2 place-self-end py-2 text-xl text-white sm:flex-row lg:py-5"
 	>
 		<div
 			class="experience stat-item c-gradient flex flex-col gap-1 p-1 text-center lg:gap-2 lg:p-4 lg:text-left"

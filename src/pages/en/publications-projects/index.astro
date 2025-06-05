@@ -10,13 +10,13 @@ const englishPublications = allPublications.filter((x) => x.slug.includes('en/')
 ---
 
 <NavSideBarLayout title="Publications">
-	<main class="text-white">
-		<h1 class="py-5 text-center text-2xl">Publications</h1>
-		<div class="flex flex-wrap place-content-evenly gap-5">
+	<main class="w-full text-white">
+		<h1 class="py-5 text-center text-4xl">Publications</h1>
+		<div class="flex flex-col flex-wrap place-content-evenly gap-5 md:flex-row">
 			{
 				englishPublications.map((x) => {
 					return (
-						<div class="single-publication w-2/5 rounded-sm">
+						<div class="single-publication mx-auto w-[90lvw] rounded-sm md:w-2/5">
 							<Publication class:list={'h-full'} input={x} />
 						</div>
 					)
