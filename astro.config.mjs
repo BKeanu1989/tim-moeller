@@ -5,6 +5,8 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://bkeanu1989.github.io/",
+  base: "tim-moeller",
   i18n: {
     prefixDefaultLocale: true,
 
