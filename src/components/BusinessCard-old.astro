@@ -1,138 +1,204 @@
 ---
-import { getLangFromUrl, useTranslations } from "src/i18n/utils";
-import ContactCard from "./ContactCard.astro"
-import { getCollection } from "astro:content";
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const allPublications = await getCollection("publications");
+import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
+import ContactCard from './ContactCard.astro'
+import { getCollection } from 'astro:content'
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const allPublications = await getCollection('publications')
 
-const langPublications = allPublications.filter((x) =>
-  x.slug.includes(`${lang}/`)
-);
+const langPublications = allPublications.filter((x) => x.slug.includes(`${lang}/`))
 
 const openSourcePubs = langPublications.filter((x) => {
-  if (x.data.tags?.length) {
-    return x.data.tags.some((y) => {
-      if (y.toLowerCase() == 'open source') {
-        return true
-      }
-    })
-  }
+	if (x.data.tags?.length) {
+		return x.data.tags.some((y) => {
+			if (y.toLowerCase() == 'open source') {
+				return true
+			}
+		})
+	}
 })
 
-const currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear()
 const startOfPracticeYear = 2019
 ---
-<style>
-    .business-card {
-        background: linear-gradient(135deg, #000 20%, #222 50%, #000 80%);
 
-        /* transition-duration: 300ms;
+<style>
+	.business-card {
+		background: linear-gradient(135deg, #000 20%, #222 50%, #000 80%);
+
+		/* transition-duration: 300ms;
         transition-property: transform, box-shadow;
         transition-timing-function: ease-out;
         transform: rotate3d(0); */
-        box-shadow: 0 1px 5px 5px #eee
-    }
-
+		/* box-shadow: 0 1px 5px 5px #eee; */
+	}
 </style>
-<div class="business-card relative w-5/6 mx-auto rounded p-5">
-    <ContactCard class="mb-8"/>
-    <div class="stats bottom text-white text-xl flex gap-x-5 place-self-end place-content-around w-full py-5">
-      <div class="experience stat-item">
-        <span class="intro-hero-numbers text-blue-600">{currentYear - startOfPracticeYear}+</span> 
-        <span class="intro-hero-label uppercase">
-        {t("misc.years_of_experience")}
-        </span>
-      </div>
-      <div class="stat-item">
-        <span class="intro-hero-numbers text-blue-600">{openSourcePubs.length}</span>
-        <span class="intro-hero-label uppercase">
-          open source
-        </span> 
-      </div>
-      <div class="stat-item">
-        <span class="intro-hero-numbers text-blue-600">{langPublications.length}</span>
-        <span class="intro-hero-label uppercase">
-          {t("misc.publications")}
-        </span>
-      </div>
-    </div>
-    <div class="_shine"></div>
+<div class="business-card relative mx-auto max-h-lvh w-full rounded p-5 sm:w-5/6">
+	<ContactCard class="mb-8" />
+	<div
+		class="stats bottom flex w-full flex-col place-content-around gap-x-5 place-self-end py-2 text-xl text-white sm:flex-row lg:py-5"
+	>
+		<div
+			class="experience stat-item c-gradient flex flex-col gap-1 p-1 text-center lg:gap-2 lg:p-4 lg:text-left"
+		>
+			<span class="intro-hero-numbers text-blue-600">{currentYear - startOfPracticeYear}+</span>
+			<span class="intro-hero-label uppercase">
+				{t('misc.years_of_experience')}
+			</span>
+		</div>
+		<div
+			class="stat-item open-source c-gradient flex flex-col gap-1 p-1 text-center lg:gap-2 lg:p-4 lg:text-left"
+		>
+			<span class="intro-hero-numbers text-blue-600">{openSourcePubs.length}</span>
+			<span class="intro-hero-label uppercase"> open source </span>
+		</div>
+		<div
+			class="stat-item publications flex flex-col gap-1 bg-gradient-to-br from-black from-20% via-[#222] via-50% to-black to-80% p-1 text-center lg:gap-2 lg:p-4 lg:text-left"
+		>
+			<span class="intro-hero-numbers text-blue-600">{langPublications.length}</span>
+			<span class="intro-hero-label uppercase">
+				{t('misc.publications')}
+			</span>
+		</div>
+	</div>
+	<div class="_shine"></div>
+	<div class="shiny-box"></div>
 </div>
 
 <script>
-const $card = document.querySelector('.business-card') as HTMLElement;
-let bounds: any;
+	const $card = document.querySelector('.business-card') as HTMLElement
+	let bounds: any
 
-function rotateToMouse(e: MouseEvent) {
-  const mouseX = e.clientX;
-  const mouseY = e.clientY;
-  const leftX = mouseX - bounds.x;
-  const topY = mouseY - bounds.y;
-  const center = {
-    x: leftX - bounds.width / 2,
-    y: topY - bounds.height / 2
-  }
-  const distance = Math.sqrt(center.x**2 + center.y**2);
-  
-//   scale3d(1.07, 1.07, 1.07)
-// scale3d(1.01, 1.01, 1.01)
-  $card.style.transform = `
+	function rotateToMouse(e: MouseEvent) {
+		const mouseX = e.clientX
+		const mouseY = e.clientY
+		const leftX = mouseX - bounds.x
+		const topY = mouseY - bounds.y
+		const center = {
+			x: leftX - bounds.width / 2,
+			y: topY - bounds.height / 2
+		}
+		const distance = Math.sqrt(center.x ** 2 + center.y ** 2)
+
+		//   scale3d(1.07, 1.07, 1.07)
+		// scale3d(1.01, 1.01, 1.01)
+		$card.style.transform = `
     rotate3d(
       ${center.y / 100},
       ${-center.x / 100},
       0,
-      ${Math.log(distance)* 2}deg
+      ${Math.log(distance) * 2}deg
     )
-  `;
-  
-  //   ${center.x * 2 + bounds.width/2}px
-  //   ${center.y * 2 + bounds.height/2}px,
-  //   #ffffff55,
-  // #8a8a8a,
-  // @ts-ignore
-  $card.querySelector('.shine')!.style.backgroundImage = `
+  `
+
+		//   ${center.x * 2 + bounds.width/2}px
+		//   ${center.y * 2 + bounds.height/2}px,
+		//   #ffffff55,
+		// #8a8a8a,
+		// @ts-ignore
+		$card.querySelector('.shine')!.style.backgroundImage = `
     radial-gradient(
       circle at 
-     ${center.x + bounds.width/2}px
-     ${center.y + bounds.height/2}px,
+     ${center.x + bounds.width / 2}px
+     ${center.y + bounds.height / 2}px,
       #bbb,
       #0000000f
     )
-  `;
-}
+  `
+	}
 
-$card.addEventListener('mouseenter', () => {
-  bounds = $card.getBoundingClientRect();
-  // document.addEventListener('mousemove', rotateToMouse);
-});
+	$card.addEventListener('mouseenter', () => {
+		bounds = $card.getBoundingClientRect()
+		// document.addEventListener('mousemove', rotateToMouse);
+	})
 
-$card.addEventListener('mouseleave', () => {
-  // document.removeEventListener('mousemove', rotateToMouse);
-  $card.style.transform = '';
-  $card.style.background = '';
-});
-
+	$card.addEventListener('mouseleave', () => {
+		// document.removeEventListener('mousemove', rotateToMouse);
+		$card.style.transform = ''
+		$card.style.background = ''
+	})
 </script>
 <style>
-    .stat-item {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        background: rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(10px);
-        transition: transform 0.3s ease, background 0.3s ease;
-    }
+	@reference "tailwindcss";
 
-    .stat-item:hover {
-        transform: translateY(-2px);
-        background: rgba(0, 194, 203, 0.1);
-    }
+	.c-gradient {
+		@apply bg-gradient-to-br from-black from-20% via-[#222] via-50% to-black to-80%;
+	}
 
-    .intro-hero-label {
-      
-    }
+	.stat-item {
+		position: relative;
+		backdrop-filter: blur(10px);
+		transition:
+			transform 0.3s ease,
+			background 0.3s ease;
+		overflow: hidden;
+	}
 
+	.stat-item:hover {
+		transform: translateY(-2px);
+	}
+
+	.stat-item::before {
+		content: '';
+		position: absolute;
+		top: -50%;
+		left: -50%;
+		width: 200%;
+		height: 200%;
+		background: linear-gradient(
+			120deg,
+			rgba(255, 255, 255, 0.1) 0%,
+			rgba(255, 255, 255, 0.4) 50%,
+			rgba(255, 255, 255, 0.1) 100%
+		);
+		transform: rotate(25deg);
+		opacity: 0;
+		transition:
+			opacity 0.3s ease,
+			transform 0.5s ease;
+	}
+
+	.stat-item:hover::before {
+		transform: translateX(100%) rotate(25deg);
+		opacity: 1;
+	}
+
+	.shiny-box {
+		width: 200px;
+		height: 200px;
+		background-color: black;
+		position: relative;
+		overflow: hidden;
+		border-radius: 8px;
+		transition: box-shadow 0.3s ease;
+		box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+	}
+
+	.shiny-box::before {
+		content: '';
+		position: absolute;
+		top: -50%;
+		left: -50%;
+		width: 200%;
+		height: 200%;
+		background: linear-gradient(
+			120deg,
+			rgba(255, 255, 255, 0.1) 0%,
+			rgba(255, 255, 255, 0.4) 50%,
+			rgba(255, 255, 255, 0.1) 100%
+		);
+		transform: rotate(25deg);
+		opacity: 1;
+		transition:
+			opacity 0.3s ease,
+			transform 0.5s ease;
+	}
+
+	.shiny-box:hover::before {
+		transform: translateX(100%) rotate(25deg);
+		opacity: 1;
+	}
+
+	.shiny-box:hover {
+	}
 </style>

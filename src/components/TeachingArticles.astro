@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import scientificWriting from "../assets/scientific-writing.webp"
 import psychobiology from "../assets/psychobiology-of-psychological-disorders.webp"
 import clinicalPsychology from "../assets/settings-in-clinical-psychology.webp"
+import developmentPsychology from "../assets/developmental-psychology.jpg"
 
 const { class: className, ...rest } = Astro.props
 
@@ -70,12 +71,22 @@ const { class: className, ...rest } = Astro.props
     </article>
 
     <!-- Additional subjects without images -->
-    <div class="grid md:grid-cols-2 gap-8">
-      <article class="bg-gray-800/50 rounded-lg p-6 backdrop-blur">
-        <h3 class="text-xl font-medium text-white mb-4">Developmental Psychology</h3>
-        <p class="text-gray-300 leading-relaxed">
-          This branch of psychology studies how people grow and change throughout life, from infancy to old age. It examines cognitive, emotional, social, and physical development, considering factors like genetics, environment, and culture. Major theories include those of Piaget, Erikson, and Vygotsky.
-        </p>
+    <!-- <div class="grid md:grid-cols-2 gap-8"> -->
+      <article class="bg-gray-800/50 rounded-lg overflow-hidden backdrop-blur transform transition-transform hover:scale-[1.02]">
+        <div class="grid md:grid-cols-[300px,1fr]">
+          <div class="aspect-[3/4] overflow-hidden">
+            <Image 
+              src={developmentPsychology} 
+              alt="Developmental Psychology" 
+              class="object-cover w-full h-full"
+            />
+          </div>
+          <div class="p-6 flex flex-col justify-center">
+            <h3 class="text-xl font-medium text-white mb-4">Developmental Psychology</h3>
+            <p class="text-gray-300 leading-relaxed">
+              This branch of psychology studies how people grow and change throughout life, from infancy to old age. It examines cognitive, emotional, social, and physical development, considering factors like genetics, environment, and culture. Major theories include those of Piaget, Erikson, and Vygotsky.            </p>
+          </div>
+        </div>
       </article>
 
       <article class="bg-gray-800/50 rounded-lg p-6 backdrop-blur">
@@ -98,7 +109,7 @@ const { class: className, ...rest } = Astro.props
           Clinical psychology focuses on diagnosing, treating, and preventing mental health disorders. It integrates psychological theories, therapeutic techniques, and research to help individuals manage mental health challenges.
         </p>
       </article>
-    </div>
+    <!-- </div> -->
   </div>
 </section>
 
