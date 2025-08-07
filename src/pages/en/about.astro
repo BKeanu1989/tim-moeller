@@ -29,7 +29,7 @@ import Hat from '@assets/hat.svg'
 
 				<!-- Background Section -->
 				<section
-					class="prose prose-invert prose-lg right flex h-1/2 w-full flex-col justify-center px-5 text-center md:h-full"
+					class="right prose prose-lg prose-invert flex h-1/2 w-full flex-col justify-center px-5 text-center md:h-full"
 				>
 					<Hat class={'w-20 h-20 mx-auto'} />
 					<p class="text-2xl">
@@ -40,9 +40,9 @@ import Hat from '@assets/hat.svg'
 			</div>
 
 			<!-- Focus and Interests -->
-			<div class="grid gap-8 md:grid-cols-1 h-[100lvh] min-h-fit" id="focus-and-interests">
+			<div class="grid h-[100lvh] min-h-fit gap-8 md:grid-cols-1" id="focus-and-interests">
 				<section id="resarch">
-				<div class="rounded-lg max-w-full w-2/3 h-[33lvh] mx-auto p-6 backdrop-blur">
+					<div class="mx-auto h-[33lvh] w-2/3 max-w-full rounded-lg p-6 backdrop-blur">
 						<h2 class="mb-4 text-xl font-medium text-white">Research Interests</h2>
 						<p class="tracking-wide">
 							I am interested in the Neurophenomenology of patients with schizophrenia. I am mainly
@@ -52,7 +52,7 @@ import Hat from '@assets/hat.svg'
 				</section>
 
 				<section id="current-focus">
-					<div class="rounded-lg max-w-full w-2/3 h-[33lvh] mx-auto p-6 backdrop-blur">
+					<div class="mx-auto h-[33lvh] w-2/3 max-w-full rounded-lg p-6 backdrop-blur">
 						<h2 class="mb-4 text-xl font-medium text-white">Current Focus</h2>
 						<p class="tracking-widek">
 							I am currently in training to be a Psychotherapist at the IVB Institute for Behavior
@@ -61,24 +61,25 @@ import Hat from '@assets/hat.svg'
 					</div>
 				</section>
 				<!-- Projects Section -->
-				<section  id="projects">
-					<div class="rounded-lg max-w-full w-2/3 h-[33lvh] mx-auto p-8 backdrop-blur">
+				<section id="projects">
+					<div class="mx-auto h-[33lvh] w-2/3 max-w-full rounded-lg p-8 backdrop-blur">
 						<h2 class="mb-4 text-xl font-medium text-white">Projects & Expertise</h2>
 						<p class="leading-relaxed tracking-wide">
-							I am interested in Psychotherapy as well as in clinical research at the Charité University
-							medicine Berlin and Humboldt-University Berlin. You can find some of my work in the
-							section 'Scientific projects'. I am working with virtual and augmented reality,
-							Eye-Tracking, Electroencephalography, and Arduino-prototyping. Special interest is in
-							psychiatric disorders, especially self-disorders like schizophrenia, but also
-							developmental disorders.
+							I am interested in Psychotherapy as well as in clinical research at the Charité
+							University medicine Berlin and Humboldt-University Berlin. You can find some of my
+							work in the section 'Scientific projects'. I am working with virtual and augmented
+							reality, Eye-Tracking, Electroencephalography, and Arduino-prototyping. Special
+							interest is in psychiatric disorders, especially self-disorders like schizophrenia,
+							but also developmental disorders.
 						</p>
 					</div>
 				</section>
 			</div>
 
-
 			<!-- Teaching Section -->
-			<TeachingArticles />
+			<div class="teaching-wrapper px-20">
+				<TeachingArticles />
+			</div>
 		</div>
 	</main>
 </NavSideBarLayout>
@@ -137,7 +138,6 @@ import Hat from '@assets/hat.svg'
 	#focus-and-interests section.active {
 		pointer-events: auto;
 	}
-
 </style>
 
 <script>
@@ -178,15 +178,15 @@ import Hat from '@assets/hat.svg'
 		})
 
 		// Focus and Interests sections animations
-		const sections = gsap.utils.toArray<HTMLElement>("#focus-and-interests section")
-		const container = document.querySelector("#focus-and-interests")
-		
+		const sections = gsap.utils.toArray<HTMLElement>('#focus-and-interests section')
+		const container = document.querySelector('#focus-and-interests')
+
 		// Create a timeline for the entire scroll sequence
 		const masterTl = gsap.timeline({
 			scrollTrigger: {
 				trigger: container,
-				start: "top top",
-				end: "+=300%", // This gives us enough scroll space for all sections
+				start: 'top top',
+				end: '+=300%', // This gives us enough scroll space for all sections
 				scrub: 1,
 				markers: false,
 				pin: true,
@@ -201,7 +201,8 @@ import Hat from '@assets/hat.svg'
 			const exitStart = start + 0.25 // Start exit animation earlier
 
 			// Add the section entrance animation
-			masterTl.fromTo(section,
+			masterTl.fromTo(
+				section,
 				{
 					y: 50,
 					opacity: 0
@@ -210,19 +211,20 @@ import Hat from '@assets/hat.svg'
 					y: 0,
 					opacity: 1,
 					duration: 0.2, // Faster entrance
-					ease: "power2.out"
+					ease: 'power2.out'
 				},
 				start
 			)
 
 			// Add the section exit animation (except for the last section)
 			if (index < sections.length - 1) {
-				masterTl.to(section,
+				masterTl.to(
+					section,
 					{
 						y: -50,
 						opacity: 0,
 						duration: 0.1, // Much faster exit
-						ease: "power2.in"
+						ease: 'power2.in'
 					},
 					exitStart
 				)
