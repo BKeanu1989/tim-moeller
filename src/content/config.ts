@@ -17,7 +17,7 @@ const publicationCollection = defineCollection({
 		z.object({
 			title: z.string(),
 			subTitle: z.string().optional(),
-			year: z.number().optional(),
+			year: z.number(),
 			// text: z.string().optional(),
 			image: image(),
 			imageAlt: z.string(),
