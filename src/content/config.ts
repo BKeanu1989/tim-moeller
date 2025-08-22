@@ -1,3 +1,4 @@
+import { file } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content'
 
 const authorCollection = defineCollection({
@@ -27,7 +28,22 @@ const publicationCollection = defineCollection({
 		})
 })
 
+const careerCollection = defineCollection({
+	loader: file("src/content/career/all.json"),
+	schema: ({ image }) => z.object({
+		// id: z.string(),
+		title: z.string(),
+		description: z.string(),
+		image: image(),
+		imageAlt: z.string(),
+		// temperament: z.array(z.string()),
+		start: z.number(),
+		end: z.number().optional()
+	}),
+});
+
 export const collections = {
 	authors: authorCollection,
-	publications: publicationCollection
+	publications: publicationCollection,
+	careers: careerCollection,
 }
