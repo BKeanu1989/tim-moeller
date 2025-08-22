@@ -9,7 +9,7 @@ import FlagGb2 from './icons/flag-gb2.astro'
 	{
 		Object.entries(languages).map(([lang, label]) => (
 			<li class="flex">
-				<a href={`/tim-moeller/${lang}/`} class="rounded-md p-2">
+				<a href={`/${lang}/`} class="rounded-md p-2">
 					{/* {lang} */}
 					{lang === 'en' ? <FlagGb /> : <FlagDe />}
 				</a>
