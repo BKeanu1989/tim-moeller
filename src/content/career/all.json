@@ -1,0 +1,107 @@
+[
+	{
+		"title": "Postdoctoral researcher at LMU",
+		"description": "Postdoctoral research with patients suffering from schizophrenia using EEG, Eye-Tracking, Computational modeling, Virtual reality, and ECG. ",
+		"start": 2024,
+		"image": "@assets/lmu.avif",
+		"imageAlt": "das ist die bildbeschreibung",
+		"slug": "lmu",
+		"lang": "en"
+	},
+	{
+		"title": "Graduate Dean at Touro University Berlin",
+		"description": "Graduate Dean for General Psychology and MBA. Writing grants, teaching, thesis supervision, research, development of curricula, Establishing an experimental psychology lab and a counselling center. ",
+		"start": 2022,
+		"image": "@assets/touro-university.avif",
+		"imageAlt": "Touro University Logo",
+		"slug": "touro",
+		"lang": "en"
+	},
+	{
+		"title": "Hardware, Software, and ECG development for the HeartRater project",
+		"description": "Software and Hardware development for the HeartRater ",
+		"start": 2022,
+		"image": "@assets/heartrater-project.webp",
+		"imageAlt": "Heartrater Project Logo",
+		"slug": "heartrater-project",
+		"lang": "en"
+	},
+	{
+		"title": "Psychotherapist in training at the hospital of the german military armed forces",
+		"description": "Diagnostics, as well as individual and group psychotherapy with soldiers.",
+		"start": 2023,
+		"end": 2024,
+		"image": "@assets/bundeswehr.avif",
+		"imageAlt": "Bundeswehr Logo",
+		"slug": "bundeswehr",
+		"lang": "en"
+	},
+	{
+		"title": "Associate member of the Research Training Group 2386 Extrospection ",
+		"description": "\"Extrospection\" is an independent research project attached to the Berlin School of Mind and Brain.",
+		"start": 2022,
+		"end": 2024,
+		"image": "@assets/research-training-group.webp",
+		"imageAlt": "Research Training Group Logo",
+		"slug": "research-training-group",
+		"lang": "en"
+	},
+	{
+		"title": "Psychotherapist in training at iVB Berlin",
+		"description": "Psychotherapy training at the Institute for behavioral therapy Berlin for adults, children, and group psychotherapy.",
+		"start": 2021,
+		"image": "@assets/institut-verhaltenstherapie.webp",
+		"imageAlt": "iVB Institut für Verhaltenstherapie Berlin Logo",
+		"slug": "ivb",
+		"lang": "en"
+	},
+	{
+		"title": "Member of the ethics committee of the Humboldt-University of Berlin ",
+		"description": "Review of ethics applications for scientific studies at the Institute for Psychology of the Humboldt University Berlin",
+		"start": 2021,
+		"image": "@assets/humboldt-university.avif",
+		"imageAlt": "Humboldt Universität zu Berlin Logo",
+		"slug": "hu",
+		"lang": "en"
+	},
+	{
+		"title": "Lecturer at the International Psychoanalytic University Berlin",
+		"description": "Review of ethics applications for scientific studies at the Institute for Psychology of the Humboldt University Berlin",
+		"start": 2020,
+		"end": 2024,
+		"image": "@assets/psychoanalytic-university.webp",
+		"imageAlt": "International Psychoanalytic University Logo",
+		"slug": "international-psychoanalytic",
+		"lang": "en"
+	},
+	{
+		"title": "Visiting scholar at the Charité University medicine Berlin ",
+		"description": "Experiments with patients with schizophrenia investigating disorders of the self and anomalous self experience",
+		"start": 2019,
+		"end": 2024,
+		"image": "@assets/charite.webp",
+		"imageAlt": "Charité Logo",
+		"slug": "charité",
+		"lang": "en"
+	},
+	{
+		"title": "Scientist at the DFG special priority program (SPP) \"The Active Self\"",
+		"description": " The Priority Program brings together cognitive and behavioral scientists from various disciplines, including psychology and robotics, to study the sensorimotor grounding of the human minimal self.",
+		"start": 2019,
+		"end": 2025,
+		"image": "@assets/active-self-1.avif",
+		"imageAlt": "The Active Self Logo",
+		"slug": "active-self",
+		"lang": "en"
+	},
+	{
+		"title": "Lecturer at the Elbe-Weser Welten gGmbH",
+		"description": "Teaching developmental Psychology and developmental disorders to auxiliary school assistants",
+		"start": 2018,
+		"end": 2021,
+		"image": "@assets/elbe-weser-welten.webp",
+		"imageAlt": "Elbe Weser Welten Logo",
+		"slug": "elbe-weser-welten",
+		"lang": "en"
+	}
+]

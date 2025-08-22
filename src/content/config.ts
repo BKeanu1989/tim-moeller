@@ -30,6 +30,7 @@ const publicationCollection = defineCollection({
 
 const careerCollection = defineCollection({
 	loader: file("src/content/career/all.json"),
+	// type: 'content',
 	schema: ({ image }) => z.object({
 		// id: z.string(),
 		title: z.string(),
@@ -38,7 +39,9 @@ const careerCollection = defineCollection({
 		imageAlt: z.string(),
 		// temperament: z.array(z.string()),
 		start: z.number(),
-		end: z.number().optional()
+		end: z.number().optional(),
+		lang: z.string(),
+		link: z.string().optional()
 	}),
 });
 

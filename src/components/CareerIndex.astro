@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content'
+import CareerElement from './CareerElement.astro'
+import { Image } from 'astro:assets'
+
+const { lang } = Astro.props
+const allCareers = await getCollection('careers')
+
+interface Props {
+	lang: string
+}
+
+const langCareers = allCareers.filter((x) => x.data.lang.includes(`${lang}`))
+---
+
+<div class="career-container flex flex-wrap gap-y-4">
+	{
+		langCareers.map(
+			(career) =>
+				career && (
+					// <article>
+					// 	<Image src={career.data.image} alt={career.data.imageAlt} />
+					// 	<h2>{career.data.title}</h2>
+					// </article>
+					<CareerElement input={career} />
+				)
+		)
+	}
+</div>
