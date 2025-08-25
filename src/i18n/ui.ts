@@ -35,7 +35,7 @@ export const ui = {
         'nav.publications': 'Publikationen',
         'nav.contact': 'Kontakt',
         'nav.shop': 'Shop',
-        'nav.data_protection': 'Datenschutz',
+        'nav.data_protection': 'Datenschutzerklärung',
         'contact.name': 'Name',
         'contact.email': 'Email',
         'contact.subject': 'Betreff',

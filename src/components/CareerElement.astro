@@ -21,12 +21,12 @@ const { input } = Astro.props
 const { title, description, image, imageAlt, start, end } = input.data
 ---
 
-<article class="flex w-1/4 flex-col gap-2 px-4">
+<article class="flex flex-col gap-2 px-4">
 	<div class="career-image-container flex items-center justify-center">
-		<Picture class="" src={image} alt={imageAlt || title} />
+		<Picture class="max-h-40 w-full" src={image} alt={imageAlt || title} />
 	</div>
 	<h1 class="text-2xl">{title}</h1>
-	<div class="start-end">
+	<div class="start-end text-xl text-neutral-400">
 		{end ? `${start} - ${end}` : `Since ${start}`}
 	</div>
 	<div>

@@ -5,8 +5,17 @@
 		"start": 2024,
 		"image": "@assets/lmu.avif",
 		"imageAlt": "das ist die bildbeschreibung",
-		"slug": "lmu",
+		"slug": "en/lmu",
 		"lang": "en"
+	},
+	{
+		"title": "Postdoktorand an der LMU",
+		"description": "Postdoktorale Forschung mit Patient:innen mit Schizophrenie unter Einsatz von EEG, Eye-Tracking, Computermodellierung, Virtual Reality und EKG.",
+		"start": 2024,
+		"image": "@assets/lmu.avif",
+		"imageAlt": "das ist die bildbeschreibung",
+		"slug": "de/lmu",
+		"lang": "de"
 	},
 	{
 		"title": "Graduate Dean at Touro University Berlin",
@@ -14,8 +23,17 @@
 		"start": 2022,
 		"image": "@assets/touro-university.avif",
 		"imageAlt": "Touro University Logo",
-		"slug": "touro",
+		"slug": "en/touro",
 		"lang": "en"
+	},
+	{
+		"title": "Graduate Dean an der Touro University Berlin",
+		"description": "Graduate Dean für Allgemeine Psychologie und MBA. Antragstellung für Fördermittel, Lehre, Betreuung von Abschlussarbeiten, Forschung, Curriculumentwicklung, Aufbau eines experimentellen Psychologielabors und eines Beratungszentrums.",
+		"start": 2022,
+		"image": "@assets/touro-university.avif",
+		"imageAlt": "Touro University Logo",
+		"slug": "de/touro",
+		"lang": "de"
 	},
 	{
 		"title": "Hardware, Software, and ECG development for the HeartRater project",
@@ -23,18 +41,37 @@
 		"start": 2022,
 		"image": "@assets/heartrater-project.webp",
 		"imageAlt": "Heartrater Project Logo",
-		"slug": "heartrater-project",
+		"slug": "en/heartrater-project",
 		"lang": "en"
+	},
+	{
+		"title": "Hardware-, Software- und EKG-Entwicklung für das HeartRater-Projekt",
+		"description": "Software- und Hardwareentwicklung für das HeartRater-Projekt.",
+		"start": 2022,
+		"image": "@assets/heartrater-project.webp",
+		"imageAlt": "Heartrater Project Logo",
+		"slug": "de/heartrater-project",
+		"lang": "de"
 	},
 	{
 		"title": "Psychotherapist in training at the hospital of the german military armed forces",
 		"description": "Diagnostics, as well as individual and group psychotherapy with soldiers.",
 		"start": 2023,
 		"end": 2024,
-		"image": "@assets/bundeswehr.avif",
+		"image": "@assets/cropped-bundeswehr.avif",
 		"imageAlt": "Bundeswehr Logo",
-		"slug": "bundeswehr",
+		"slug": "en/bundeswehr",
 		"lang": "en"
+	},
+	{
+		"title": "Psychotherapeut in Ausbildung am Bundeswehrkrankenhaus",
+		"description": "Diagnostik sowie Einzel- und Gruppentherapie mit Soldaten.",
+		"start": 2023,
+		"end": 2024,
+		"image": "@assets/cropped-bundeswehr.avif",
+		"imageAlt": "Bundeswehr Logo",
+		"slug": "de/bundeswehr",
+		"lang": "de"
 	},
 	{
 		"title": "Associate member of the Research Training Group 2386 Extrospection ",
@@ -43,8 +80,18 @@
 		"end": 2024,
 		"image": "@assets/research-training-group.webp",
 		"imageAlt": "Research Training Group Logo",
-		"slug": "research-training-group",
+		"slug": "en/research-training-group",
 		"lang": "en"
+	},
+	{
+		"title": "Assoziiertes Mitglied des Graduiertenkollegs 2386 Extrospection",
+		"description": "„Extrospection“ ist ein unabhängiges Forschungsprojekt an der Berlin School of Mind and Brain.",
+		"start": 2022,
+		"end": 2024,
+		"image": "@assets/research-training-group.webp",
+		"imageAlt": "Research Training Group Logo",
+		"slug": "de/research-training-group/de",
+		"lang": "de"
 	},
 	{
 		"title": "Psychotherapist in training at iVB Berlin",
@@ -52,8 +99,17 @@
 		"start": 2021,
 		"image": "@assets/institut-verhaltenstherapie.webp",
 		"imageAlt": "iVB Institut für Verhaltenstherapie Berlin Logo",
-		"slug": "ivb",
+		"slug": "en/ivb",
 		"lang": "en"
+	},
+	{
+		"title": "Psychotherapeut in Ausbildung am iVB Berlin",
+		"description": "Psychotherapieausbildung am Institut für Verhaltenstherapie Berlin für Erwachsene, Kinder und Gruppenpsychotherapie.",
+		"start": 2021,
+		"image": "@assets/institut-verhaltenstherapie.webp",
+		"imageAlt": "iVB Institut für Verhaltenstherapie Berlin Logo",
+		"slug": "de/ivb",
+		"lang": "de"
 	},
 	{
 		"title": "Member of the ethics committee of the Humboldt-University of Berlin ",
@@ -61,8 +117,17 @@
 		"start": 2021,
 		"image": "@assets/humboldt-university.avif",
 		"imageAlt": "Humboldt Universität zu Berlin Logo",
-		"slug": "hu",
+		"slug": "en/hu",
 		"lang": "en"
+	},
+	{
+		"title": "Mitglied der Ethikkommission der Humboldt-Universität zu Berlin",
+		"description": "Begutachtung von Ethikanträgen für wissenschaftliche Studien am Institut für Psychologie der Humboldt-Universität zu Berlin.",
+		"start": 2021,
+		"image": "@assets/humboldt-university.avif",
+		"imageAlt": "Humboldt Universität zu Berlin Logo",
+		"slug": "de/hu",
+		"lang": "de"
 	},
 	{
 		"title": "Lecturer at the International Psychoanalytic University Berlin",
@@ -71,8 +136,18 @@
 		"end": 2024,
 		"image": "@assets/psychoanalytic-university.webp",
 		"imageAlt": "International Psychoanalytic University Logo",
-		"slug": "international-psychoanalytic",
+		"slug": "en/international-psychoanalytic",
 		"lang": "en"
+	},
+	{
+		"title": "Dozent an der International Psychoanalytic University Berlin",
+		"description": "Lehre und Betreuung an der International Psychoanalytic University Berlin.",
+		"start": 2020,
+		"end": 2024,
+		"image": "@assets/psychoanalytic-university.webp",
+		"imageAlt": "International Psychoanalytic University Logo",
+		"slug": "de/international-psychoanalytic",
+		"lang": "de"
 	},
 	{
 		"title": "Visiting scholar at the Charité University medicine Berlin ",
@@ -81,8 +156,18 @@
 		"end": 2024,
 		"image": "@assets/charite.webp",
 		"imageAlt": "Charité Logo",
-		"slug": "charité",
+		"slug": "en/charité",
 		"lang": "en"
+	},
+	{
+		"title": "Gastwissenschaftler an der Charité – Universitätsmedizin Berlin",
+		"description": "Experimente mit Patient:innen mit Schizophrenie zur Untersuchung von Störungen des Selbst und abweichenden Selbsterfahrungen.",
+		"start": 2019,
+		"end": 2024,
+		"image": "@assets/charite.webp",
+		"imageAlt": "Charité Logo",
+		"slug": "de/charité",
+		"lang": "de"
 	},
 	{
 		"title": "Scientist at the DFG special priority program (SPP) \"The Active Self\"",
@@ -91,8 +176,18 @@
 		"end": 2025,
 		"image": "@assets/active-self-1.avif",
 		"imageAlt": "The Active Self Logo",
-		"slug": "active-self",
+		"slug": "en/active-self",
 		"lang": "en"
+	},
+	{
+		"title": "Wissenschaftler im DFG-Schwerpunktprogramm (SPP) „The Active Self“",
+		"description": "Das Schwerpunktprogramm vereint kognitive und Verhaltenswissenschaftler:innen aus verschiedenen Disziplinen, darunter Psychologie und Robotik, um die sensomotorische Verankerung des minimalen Selbst zu erforschen.",
+		"start": 2019,
+		"end": 2025,
+		"image": "@assets/active-self-1.avif",
+		"imageAlt": "The Active Self Logo",
+		"slug": "de/active-self",
+		"lang": "de"
 	},
 	{
 		"title": "Lecturer at the Elbe-Weser Welten gGmbH",
@@ -101,7 +196,17 @@
 		"end": 2021,
 		"image": "@assets/elbe-weser-welten.webp",
 		"imageAlt": "Elbe Weser Welten Logo",
-		"slug": "elbe-weser-welten",
+		"slug": "en/elbe-weser-welten",
 		"lang": "en"
+	},
+	{
+		"title": "Dozent bei der Elbe-Weser Welten gGmbH",
+		"description": "Unterricht in Entwicklungspsychologie und Entwicklungsstörungen für schulische Assistenzkräfte.",
+		"start": 2018,
+		"end": 2021,
+		"image": "@assets/elbe-weser-welten.webp",
+		"imageAlt": "Elbe Weser Welten Logo",
+		"slug": "de/elbe-weser-welten",
+		"lang": "de"
 	}
 ]

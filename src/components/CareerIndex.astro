@@ -10,12 +10,16 @@ interface Props {
 	lang: string
 }
 
-const langCareers = allCareers.filter((x) => x.data.lang.includes(`${lang}`))
+// const langCareers = allCareers.filter((x) => x.data.lang == `${lang}`)
+const langCareers = allCareers.filter((x) => {
+	return x.data.lang == `${lang}`
+})
 ---
 
 <div class="career-container">
-	<h1 class="text-3xl">Affiliations and Contributions</h1>
-	<div class="flex flex-wrap gap-y-4">
+	<h1 class="my-5 text-3xl">Affiliations and Contributions</h1>
+	<div class="grid gap-4 md:grid-cols-4">
+		<!-- <div class="flex flex-wrap gap-y-4"> -->
 		{
 			langCareers.map(
 				(career) =>
@@ -24,7 +28,7 @@ const langCareers = allCareers.filter((x) => x.data.lang.includes(`${lang}`))
 						// 	<Image src={career.data.image} alt={career.data.imageAlt} />
 						// 	<h2>{career.data.title}</h2>
 						// </article>
-						<CareerElement input={career} />
+						<CareerElement class:list={'abc'} input={career} />
 					)
 			)
 		}
