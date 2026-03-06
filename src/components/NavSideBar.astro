@@ -81,8 +81,10 @@ const currentYear = new Date().getFullYear()
 						class:list={[
 							'flex items-center gap-3 rounded-lg px-4 py-3 transition-colors',
 							'hover:bg-gray-800/50',
-							currentPath === '' ? 'bg-blue-600/10 text-white' : 'text-gray-300'
+							'text-gray-300'
+							// currentPath === '' ? 'bg-blue-600/10 text-white' : 'text-gray-300'
 						]}
+						data-link="timjmoeller.com"
 					>
 						<Home class="h-6 w-6" />
 						<!-- <Fragment set:html={Home} class="w-6 h-6" /> -->
@@ -95,8 +97,10 @@ const currentYear = new Date().getFullYear()
 						class:list={[
 							'flex items-center gap-3 rounded-lg px-4 py-3 transition-colors',
 							'hover:bg-gray-800/50',
-							currentPath === 'about' ? 'bg-blue-600/10 text-white' : 'text-gray-300'
+							'text-gray-300'
+							// currentPath === 'about' ? 'bg-blue-600/10 text-white' : 'text-gray-300'
 						]}
+						data-link="about"
 					>
 						<User class="h-6 w-6" />
 						<span>{t('nav.about')}</span>
@@ -108,10 +112,12 @@ const currentYear = new Date().getFullYear()
 						class:list={[
 							'flex items-center gap-3 rounded-lg px-4 py-3 transition-colors',
 							'hover:bg-gray-800/50',
-							currentPath === 'publications-projects'
-								? 'bg-blue-600/10 text-white'
-								: 'text-gray-300'
+							'text-gray-300'
+							// currentPath === 'publications-projects'
+							// 	? 'bg-blue-600/10 text-white'
+							// 	: 'text-gray-300'
 						]}
+						data-link="publications-projects"
 					>
 						<BookStudy class="h-6 w-6 fill-white" />
 						<span>{t('nav.projects')} & {t('nav.publications')}</span>
@@ -123,8 +129,10 @@ const currentYear = new Date().getFullYear()
 						class:list={[
 							'flex items-center gap-3 rounded-lg px-4 py-3 transition-colors',
 							'hover:bg-gray-800/50',
-							currentPath === 'contact' ? 'bg-blue-600/10 text-white' : 'text-gray-300'
+							'text-gray-300'
+							// currentPath === 'contact' ? 'bg-blue-600/10 text-white' : 'text-gray-300'
 						]}
+						data-link="contact"
 					>
 						<Message class="h-6 w-6 fill-white" />
 						<span>{t('nav.contact')}</span>
@@ -279,6 +287,31 @@ const currentYear = new Date().getFullYear()
 
 	// Setup on view transitions
 	document.addEventListener('astro:page-load', setupMobileMenu)
+	document.addEventListener('astro:page-load', highlightActiveNavigation)
+
+	function highlightActiveNavigation() {
+		const activeNavLocation = document.location.href
+		const splitPath = activeNavLocation.split('/').filter((x) => x)
+		const activeLocation = splitPath[splitPath.length - 1]
+		if (activeLocation) {
+			let $activeLocation
+			switch (activeLocation) {
+				case 'localhost:4321':
+				case 'en':
+				case 'de':
+				case 'timjmoeller.com':
+					$activeLocation = document.querySelector(`a[data-link="timjmoeller.com"]`)
+					break
+				default:
+					$activeLocation = document.querySelector(`a[data-link="${activeLocation}"]`)
+					break
+			}
+
+			if ($activeLocation) {
+				$activeLocation.classList.toggle('active-nav')
+			}
+		}
+	}
 </script>
 
 <style>
