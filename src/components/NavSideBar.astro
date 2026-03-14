@@ -10,6 +10,7 @@ import Home from '../assets/home-1.svg'
 import User from '../assets/user.svg'
 import BookStudy from '../assets/book-study.svg'
 import Message from '../assets/message.svg'
+import Download from '../assets/download-white.svg'
 import LanguagePicker from './LanguagePicker.astro'
 import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
 
@@ -136,6 +137,21 @@ const currentYear = new Date().getFullYear()
 					>
 						<Message class="h-6 w-6 fill-white" />
 						<span>{t('nav.contact')}</span>
+					</a>
+				</li>
+				<li>
+					<a
+						href={`/downloads`}
+						class:list={[
+							'flex items-center gap-3 rounded-lg px-4 py-3 transition-colors',
+							'hover:bg-gray-800/50',
+							'text-gray-300'
+							// currentPath === 'contact' ? 'bg-blue-600/10 text-white' : 'text-gray-300'
+						]}
+						data-link="downloads"
+					>
+						<Download class="h-6 w-6 fill-white" />
+						<span>Downloads</span>
 					</a>
 				</li>
 			</ul>
