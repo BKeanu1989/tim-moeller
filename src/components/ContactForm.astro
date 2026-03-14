@@ -8,7 +8,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<form action="" class={className} {...rest}>
+<form action="/mail.php" method="POST" class={className} {...rest}>
   <slot />
   <div class="form-group flex flex-col gap-1">
     <label class="text-white w-1/4" for="name">{t("contact.name")}</label>
