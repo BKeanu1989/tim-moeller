@@ -25,6 +25,21 @@ const lang = getLangFromUrl(Astro.url)
 		<title>{title}</title>
 		<ClientRouter />
 	</head>
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G0B00QVBJ8"></script>
+<script>
+	//@ts-ignore
+  window.dataLayer = window.dataLayer || [];
+	//@ts-ignore
+
+  function gtag(){dataLayer.push(arguments);}
+	//@ts-ignore
+
+  gtag('js', new Date());
+	//@ts-ignore
+
+  gtag('config', 'G-G0B00QVBJ8');
+</script>
 	<body class="min-h-dvh bg-c-black">
 		<!-- <body class="min-h-dvh bg-gradient-to-b from-c-neutral-900 to-c-neutral-800"> -->
 		<NavSideBar />
