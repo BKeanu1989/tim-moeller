@@ -8,6 +8,13 @@ require '/usr/www/users/timjmo/phpmailer/src/PHPMailer.php';
 require '/usr/www/users/timjmo/phpmailer/src/SMTP.php';
 
 
+// header('Access-Control-Allow-Origin: http://localhost:4321');
+// header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+// header('Access-Control-Allow-Headers: Content-Type');
+// require '/home/devkev/Projects/tim-moeller/phpmailer/src/Exception.php';
+// require '/home/devkev/Projects/tim-moeller/phpmailer/src/PHPMailer.php';
+// require '/home/devkev/Projects/tim-moeller/phpmailer/src/SMTP.php';
+
 
 $errors = [
     "name" => false,
@@ -57,21 +64,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail = new PHPMailer(true);
 
     try {
-        $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'developer.kevinfechner@gmail.com';                     //SMTP username
-        $mail->Password   = 'cpmd lkgj uqcj pdad';                               //SMTP password
+        $mail->isSMTP();                                            
+        $mail->Host       = 'smtp.gmail.com';                     
+        $mail->SMTPAuth   = true;                                 
+        $mail->Username   = 'developer.kevinfechner@gmail.com';   
+        $mail->Password   = 'cpmd lkgj uqcj pdad';                
 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;                                 //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->Port       = 587;                                 
 
-        // OPTION B: implicit TLS on 465
-        // $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        // $mail->Port       = 465;
-
-        //Recipients
-        // $mail->setFrom('developer.kevinfechner@gmail.com', 'Kevin');
         $mail->setFrom($email, $name);
         $mail->addAddress('developer.kevinfechner@gmail.com', 'Me');     //Add a recipient
 
@@ -88,9 +89,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(["success" => true]);
         exit();
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        echo json_encode(["success" => false, "error" => $mail->ErrorInfo]);
+        exit();
     }
-
-
+} else {
+    http_response_code(400);
+    echo json_encode(["success" => false, "error" => "no post method used"]);
+    exit();
 
 }

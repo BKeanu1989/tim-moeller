@@ -22,6 +22,8 @@ export const ui = {
         'contact.message.placeholder': 'your message',
         'contact.button': 'Get in contact',
         'contact.copied': 'Copied!',
+        'contact.email_sent': 'Email sent',
+        'contact.email_error': 'Couldn\'t send email',
         'misc.years_of_experience': 'Years of experience',
         'misc.open_source': 'Open Source',
         'misc.publications': 'Publications',
@@ -44,11 +46,13 @@ export const ui = {
         'contact.message.placeholder': 'Deine Nachricht',
         'contact.button': 'Kontaktieren',
         'contact.copied': 'Kopiert!',
+        'contact.email_sent': 'Email gesendet',
+        'contact.email_error': 'Email konnte nicht verschickt werden',
         'misc.years_of_experience': 'Jahre an Erfahrung',
         'misc.open_source': 'Open Source',
         'misc.publications': 'Publikationen',
         'misc.read_more': 'mehr lesen',
         'button.back_to_publications': 'Zurück zu Projekte',
-
+        'misc.loading': 'laden...'
     },
 } as const;
