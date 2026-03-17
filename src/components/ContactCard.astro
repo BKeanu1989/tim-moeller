@@ -6,6 +6,8 @@ import Twitter from '../assets/twitter.svg'
 import { Image } from 'astro:assets'
 import tim from '../assets/tim-j-moeller.png'
 import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
+import Button from './Button.astro'
+
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 ---
@@ -13,7 +15,7 @@ const t = useTranslations(lang)
 <div
 	class="contact-card mx-auto flex h-fit w-96 flex-col items-center rounded border-2 border-white px-10 py-10"
 >
-	<Image alt="Bild Time J Möller" src={tim} />
+	<Image alt="Bild Tim J Möller" src={tim} />
 	<h1 class="my-4 text-xl text-white">Tim Julian Möller</h1>
 	<ul class="mb-4 flex gap-4">
 		<li>
@@ -43,4 +45,5 @@ const t = useTranslations(lang)
 	<a href={`/${lang}/contact`} class="button rounded bg-blue-500 px-5 py-2 text-lg text-white">
 		{t('contact.button')}
 	</a>
+	<Button class=''>{t('contact.button')}</Button>
 </div>
