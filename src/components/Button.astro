@@ -1,51 +1,56 @@
 ---
-import Loading from './icons/loading.astro';
-
+import Loading from './icons/loading.astro'
 
 type ButtonType = 'default' | 'primary' | 'warning'
 
 interface Props {
-	title?: string;
-	body?: string;
-	href?: string;
-    type?: ButtonType;
-    class: string;
+	title?: string
+	body?: string
+	href?: string
+	type?: ButtonType
+	class: string
 }
 
-const { href, title, body, type = 'default',class: className, ...rest} = Astro.props;
+const { href, title, body, type = 'default', class: className, ...rest } = Astro.props
 
 const buttonClasses = ['px-5', 'py-2', 'btn', 'loading', '']
 
 switch (type) {
-    case 'default':
-        
-        break;
+	case 'default':
+		break
 
-    default:
-        break;
+	default:
+		break
 }
-
 ---
-<div class=""> 
 
-    <button data-status="none" class:list={[buttonClasses, className]}>{ buttonClasses.includes('loading') && <Loading class="animate-spin hidden" /> }
-        <slot /></button>
+<div class="" x-data="{loading: false}" @notify.window="alert($event.detail)" x-on:click=""  @set-loading.window="alert('alert set loading' + $event.details)">
+	<button data-status="none" class:list={[buttonClasses, className]}>
+		<template x-if="loading">
+			<Loading class="animate-spin" />)
+		</template>
+		<slot />
+    </button
+	>
+    <div @notify="alert('Hello World!')">
+    <button @click="$dispatch('notify')">
+        Notify
+    </button>
+</div>
 </div>
 <button aria-label="" class:list={['bg-', '']} {...rest}>{title}</button>
 
 <style>
-    button {
-        display: flex;
-    }
-    
-    button.loading {
-        svg {
-            width: 25px;
-            height: 25px;
-        }
-    }
+	button {
+		display: flex;
+	}
+
+	button.loading {
+		svg {
+			width: 25px;
+			height: 25px;
+		}
+	}
 </style>
 
-<script>
-    
-</script>
+<script></script>

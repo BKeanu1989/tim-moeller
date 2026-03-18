@@ -55,7 +55,7 @@ const t = useTranslations(lang);
   <button class="px-5 py-2 border mt-4 rounded-lg w-fit text-white" type="submit"
     >{t("contact.send")}</button
   >
-  <Button class="test">{t("contact.send")}</Button>
+  <Button client:load class="test" @click="$dispatch(set-loading, true)">{t("contact.send")}</Button>
   <span class="email-status fade-out text-white" data-email-success={t('contact.email_sent')} data-email-error={t('contact.email_error')} ></span>
 </form>
 <script>
@@ -73,7 +73,9 @@ const t = useTranslations(lang);
         $emailStatus.classList.remove('text-green-700')
         $emailStatus.classList.remove('text-red-700')
   
-        fetch('/mail.php', {
+        // fetch('/mail.php', {
+          
+        fetch('http://localhost:8080/mail.php', {
           method: 'POST',
           body: formData
         })

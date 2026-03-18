@@ -3,13 +3,18 @@ import { languages } from '../i18n/ui'
 import FlagDe from './icons/flag-de.astro'
 import FlagGb from './icons/flag-gb.astro'
 import FlagGb2 from './icons/flag-gb2.astro'
+
+import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
 <ul class="flex flex-row place-content-center gap-2 text-slate-50">
 	{
 		Object.entries(languages).map(([lang, label]) => (
 			<li class="flex">
-				<a href={`/${lang}/`} class="rounded-md p-2">
+				<a href={`/${lang}/`} class="rounded-md p-2" aria-label={lang === 'en' ? 'Link to english version' : 'Link zur deutschen Version'}>
 					{/* {lang} */}
 					{lang === 'en' ? <FlagGb /> : <FlagDe />}
 				</a>

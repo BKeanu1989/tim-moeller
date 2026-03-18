@@ -8,6 +8,8 @@ export const defaultLang = 'en';
 export const ui = {
     en: {
         'nav.home': 'Home',
+        'nav.home.label': 'Link to Homepage',
+        'nav.flag': 'Link to english version',
         'nav.about': 'About me',
         'nav.projects': 'Projects',
         'nav.publications': 'Publications',
@@ -32,6 +34,9 @@ export const ui = {
     },
     de: {
         'nav.home': 'Home',
+        'nav.home.label': 'Link zur Homepage',
+        'nav.flag': 'Link zur deutschen Version',
+
         'nav.about': 'Über mich',
         'nav.projects': 'Projekte',
         'nav.publications': 'Publikationen',

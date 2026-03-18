@@ -3,18 +3,22 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '/usr/www/users/timjmo/phpmailer/src/Exception.php';
-require '/usr/www/users/timjmo/phpmailer/src/PHPMailer.php';
-require '/usr/www/users/timjmo/phpmailer/src/SMTP.php';
+// require '/usr/www/users/timjmo/phpmailer/src/Exception.php';
+// require '/usr/www/users/timjmo/phpmailer/src/PHPMailer.php';
+// require '/usr/www/users/timjmo/phpmailer/src/SMTP.php';
 
 
-// header('Access-Control-Allow-Origin: http://localhost:4321');
-// header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-// header('Access-Control-Allow-Headers: Content-Type');
-// require '/home/devkev/Projects/tim-moeller/phpmailer/src/Exception.php';
-// require '/home/devkev/Projects/tim-moeller/phpmailer/src/PHPMailer.php';
-// require '/home/devkev/Projects/tim-moeller/phpmailer/src/SMTP.php';
 
+header('Access-Control-Allow-Origin: http://localhost:4322');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+require '/home/devkev/Projects/tim-moeller/phpmailer/src/Exception.php';
+require '/home/devkev/Projects/tim-moeller/phpmailer/src/PHPMailer.php';
+require '/home/devkev/Projects/tim-moeller/phpmailer/src/SMTP.php';
+
+$ini_array = parse_ini_file("prod.ini");
+// print_r($ini_array);
+   
 
 $errors = [
     "name" => false,
@@ -65,16 +69,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         $mail->isSMTP();                                            
-        $mail->Host       = 'smtp.gmail.com';                     
+        $mail->Host       = $ini_array["HOST"];                     
         $mail->SMTPAuth   = true;                                 
-        $mail->Username   = 'developer.kevinfechner@gmail.com';   
-        $mail->Password   = 'cpmd lkgj uqcj pdad';                
+        $mail->Username   = $ini_array["USERNAME"];   
+        $mail->Password   = $ini_array["SMTP"];                
 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;                                 
 
         $mail->setFrom($email, $name);
-        $mail->addAddress('developer.kevinfechner@gmail.com', 'Me');     //Add a recipient
+        $mail->addAddress($ini_array["ADDADDRESS"], 'Me');     //Add a recipient
 
         $mail->isHTML(false);
 

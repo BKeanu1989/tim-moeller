@@ -21,6 +21,8 @@ dist/
 .env.production
 
 
+production.ini
+prod.ini
 
 tmp.txt
 
