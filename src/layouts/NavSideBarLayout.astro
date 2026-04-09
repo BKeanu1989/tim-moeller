@@ -9,9 +9,14 @@ import '../styles/index.css'
 import NavSideBar from '@components/NavSideBar.astro'
 import '@fontsource-variable/roboto'
 import '@fontsource-variable/inter'
+import CookieBanner from '@components/CookieBanner.astro'
 
 const { title } = Astro.props
 const lang = getLangFromUrl(Astro.url)
+const now = new Date()
+
+const bar = now.getTime()
+
 ---
 
 <!doctype html>
@@ -22,7 +27,8 @@ const lang = getLangFromUrl(Astro.url)
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/tmp-favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		<script defer src={"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" + '?' + bar}></script>
+		<!-- <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script> -->
 		<title>{title}</title>
 		<ClientRouter />
 	</head>
@@ -31,8 +37,8 @@ const lang = getLangFromUrl(Astro.url)
 <script>
 	//@ts-ignore
   window.dataLayer = window.dataLayer || [];
-	//@ts-ignore
-
+  //@ts-ignore
+  window.gtag = gtag
   function gtag(){dataLayer.push(arguments);}
 	//@ts-ignore
 
@@ -40,12 +46,22 @@ const lang = getLangFromUrl(Astro.url)
 	//@ts-ignore
 
   gtag('config', 'G-G0B00QVBJ8');
+
+  //@ts-ignore
+  gtag('consent', 'default', {
+	ad_storage: 'denied',
+	ad_user_data: 'denied',
+	ad_personalization: 'denied',
+	analytics_storage: 'denied',
+	wait_for_update: 500
+});
 </script>
 	<body class="min-h-dvh bg-c-black">
 		<!-- <body class="min-h-dvh bg-gradient-to-b from-c-neutral-900 to-c-neutral-800"> -->
 		<NavSideBar />
-		<div class="ml-0 flex lg:ml-72">
+		<div class="ml-0 flex lg:ml-72 relative">
 			<slot />
+			<CookieBanner />		
 		</div>
 		<!-- <footer class="flex bg-slate-400 w-dvw h-fit"></footer> -->
 		<script>

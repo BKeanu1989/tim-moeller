@@ -1,0 +1,80 @@
+---
+import { getLangFromUrl, useTranslations } from "src/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<div class="cookie-banner absolute bottom-0 right-5 border bg-slate-500" data-status="closed">
+    <button class="rounded text-white" data-target="cookie-button">{t('misc.cookies_button')}</button>
+    <div class="banner hidden h-full flex flex-col py-5 justify-between" data-target="cookie-banner">
+        <div class="cookie-banner--text">
+            Wir verwenden Cookies und ähnliche Technologien, um unsere Website zu betreiben, Statistiken zu erstellen und unsere Inhalte zu verbessern.
+Mit Ihrer Zustimmung dürfen wir Google Analytics zur Analyse der Nutzung einsetzen. Dabei können Daten auch in die USA übertragen werden. Sie können Ihre Auswahl jederzeit ändern oder widerrufen.
+        </div>
+        <div class="cookie-banner--buttons">
+            <button class="decline">{t('misc.decline')}</button>
+            <button class="accept">{t('misc.accept')}</button>
+        </div>
+    </div>
+</div>
+<script>
+    const cookieWrapper = document.querySelector("div.cookie-banner") as HTMLElement
+    const cookieBanner = document.querySelector(".cookie-banner div[data-target='cookie-banner']") as HTMLElement
+    const cookieButton = document.querySelector(".cookie-banner [data-target='cookie-button']") as HTMLElement
+    console.log(cookieBanner, cookieButton, cookieWrapper)
+
+    cookieButton?.addEventListener('click', (e) => {
+        // console.log(e.target.dataset)
+        // @ts-ignore
+        let cookieStatus = e.target.dataset.status
+        const event = new CustomEvent('open-banner', {detail: ''})
+
+        cookieBanner?.classList.remove('hidden')
+        window.dispatchEvent(event)
+
+    })
+
+    window.addEventListener('close-banner', (e) => {
+        console.log("cookie banner close")
+        cookieBanner?.classList.add('hidden')
+        cookieButton?.classList.remove('hidden')
+        if (cookieWrapper) {
+            cookieWrapper.dataset.status = "closed"
+        }
+    })
+
+    window.addEventListener('open-banner', (e) => {
+        console.log("cookie banner open")
+        cookieBanner?.classList.remove('hidden')  
+        cookieButton?.classList.add('hidden')
+        if (cookieWrapper) {
+            cookieWrapper.dataset.status = "open"
+        }
+    })
+
+    document.querySelector(".cookie-banner .accept")?.addEventListener('click', (e) => {
+        // @ts-ignore
+        gtag('consent', 'update', {
+            analytics_storage: 'granted'
+        });
+        const event = new CustomEvent('close-banner')
+        window.dispatchEvent(event)
+    })
+
+    document.querySelector(".cookie-banner .decline")?.addEventListener('click', (e) => {
+        // @ts-ignore
+        gtag('consent', 'update', {
+            analytics_storage: 'denied'
+        });
+        const event = new CustomEvent('close-banner')
+        window.dispatchEvent(event)
+    })
+
+</script>
+<style>
+    .cookie-banner[data-status="open"] {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>

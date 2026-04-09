@@ -2,7 +2,6 @@
 
 
 import { getLangFromUrl, useTranslations } from "src/i18n/utils";
-import Button from "./Button.astro";
 const { class: className, ...rest } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
@@ -55,7 +54,6 @@ const t = useTranslations(lang);
   <button class="px-5 py-2 border mt-4 rounded-lg w-fit text-white" type="submit"
     >{t("contact.send")}</button
   >
-  <Button client:load class="test" @click="$dispatch(set-loading, true)">{t("contact.send")}</Button>
   <span class="email-status fade-out text-white" data-email-success={t('contact.email_sent')} data-email-error={t('contact.email_error')} ></span>
 </form>
 <script>

@@ -30,6 +30,11 @@ export const ui = {
         'misc.open_source': 'Open Source',
         'misc.publications': 'Publications',
         'misc.read_more': 'read more',
+        'misc.show_more': 'show more',
+        'misc.accept': 'accept',
+        'misc.decline': 'decline',
+        'misc.cookies_button': 'Show Cookies',
+
         'button.back_to_publications': 'Back to publications',
     },
     de: {
@@ -57,6 +62,10 @@ export const ui = {
         'misc.open_source': 'Open Source',
         'misc.publications': 'Publikationen',
         'misc.read_more': 'mehr lesen',
+        'misc.show_more': 'Mehr anzeigen',
+        'misc.accept': 'Akzeptieren',
+        'misc.decline': 'Ablehnen',
+        'misc.cookies_button': 'Cookies anzeigen',
         'button.back_to_publications': 'Zurück zu Projekte',
         'misc.loading': 'laden...'
     },
