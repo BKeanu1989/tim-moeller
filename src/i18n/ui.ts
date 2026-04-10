@@ -34,7 +34,8 @@ export const ui = {
         'misc.accept': 'accept',
         'misc.decline': 'decline',
         'misc.cookies_button': 'Show Cookies',
-
+        'cookie.statistics': 'Statistics',
+        'cookie.title': 'Cookie Settings',
         'button.back_to_publications': 'Back to publications',
     },
     de: {
@@ -66,6 +67,8 @@ export const ui = {
         'misc.accept': 'Akzeptieren',
         'misc.decline': 'Ablehnen',
         'misc.cookies_button': 'Cookies anzeigen',
+        'cookie.statistics': 'Statistik',
+        'cookie.title': 'Cookie Einstellungen',
         'button.back_to_publications': 'Zurück zu Projekte',
         'misc.loading': 'laden...'
     },
