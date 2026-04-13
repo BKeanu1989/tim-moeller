@@ -36,6 +36,7 @@ export const ui = {
         'misc.cookies_button': 'Show Cookies',
         'cookie.statistics': 'Statistics',
         'cookie.title': 'Cookie Settings',
+        'cookie.text': 'We use cookies and similar technologies to operate our website, generate statistics, and improve our content. With your consent, we may use Google Analytics to analyze usage. In the process, data may also be transferred to the United States. You can change or withdraw your consent at any time.',
         'button.back_to_publications': 'Back to publications',
     },
     de: {
@@ -69,6 +70,7 @@ export const ui = {
         'misc.cookies_button': 'Cookies anzeigen',
         'cookie.statistics': 'Statistik',
         'cookie.title': 'Cookie Einstellungen',
+        'cookie.text': 'Wir verwenden Cookies und ähnliche Technologien, um unsere Website zu betreiben, Statistiken zu erstellen und unsere Inhalte zu verbessern. Mit Ihrer Zustimmung dürfen wir Google Analytics zur Analyse der Nutzung einsetzen. Dabei können Daten auch in die USA übertragen werden. Sie können Ihre Auswahl jederzeit ändern oder widerrufen. ',
         'button.back_to_publications': 'Zurück zu Projekte',
         'misc.loading': 'laden...'
     },
