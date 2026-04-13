@@ -4,9 +4,9 @@ import { getLangFromUrl, useTranslations } from "src/i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
-<div class="cookie-banner fixed bottom-0 right-5 border bg-slate-500" data-status="closed">
-    <button class="rounded text-white" data-target="cookie-button">{t('misc.cookies_button')}</button>
-    <div class="banner hidden h-full py-5 justify-between" data-target="cookie-banner">
+<div class="cookie-banner fixed bottom-0 right-5 bg-slate-500" data-status="closed">
+    <button class="rounded-t-[0.25rem] text-white py-2 px-5 open-cookie-banner" data-target="cookie-button">{t('misc.cookies_button')}</button>
+    <div class="banner hidden h-full py-5 justify-between border" data-target="cookie-banner">
         <form action="" class="flex flex-col h-full">
             <div class="cookie-banner--text">
                 <h1 class="mx-auto text-3xl text-center">{t('cookie.title')}</h1>
@@ -28,61 +28,159 @@ const t = useTranslations(lang);
     const cookieWrapper = document.querySelector("div.cookie-banner") as HTMLElement
     const cookieBanner = document.querySelector(".cookie-banner div[data-target='cookie-banner']") as HTMLElement
     const cookieButton = document.querySelector(".cookie-banner [data-target='cookie-button']") as HTMLElement
-    console.log(cookieBanner, cookieButton, cookieWrapper)
+
+    const statisticsInput = document.getElementById('statistics') as HTMLInputElement
 
     cookieButton?.addEventListener('click', (e) => {
-        // console.log(e.target.dataset)
-        // @ts-ignore
-        let cookieStatus = e.target.dataset.status
-        const event = new CustomEvent('open-banner', {detail: ''})
-
-        cookieBanner?.classList.remove('hidden')
+        const event = new CustomEvent('open-banner')
         window.dispatchEvent(event)
+    })
 
+    document.querySelector(".cookie-banner .accept")?.addEventListener('click', (e) => {
+        e.preventDefault()
+        try {
+            // @ts-ignore
+            window.gtag('consent', 'update', {
+                analytics_storage: 'granted'
+            });
+            statisticsInput.checked = true
+            emitCloseBanner()
+            
+        } catch (error) {
+            console.error(error)
+        }
+    })
+
+    document.querySelector(".cookie-banner .decline")?.addEventListener('click', (e) => {
+        e.preventDefault()
+        try {
+            // @ts-ignore
+            window.gtag('consent', 'update', {
+                analytics_storage: 'denied'
+            });
+            statisticsInput.checked = false
+
+            emitCloseBanner()
+            
+        } catch (error) {
+            console.error(error)
+        }
+    })
+
+    document.addEventListener('click', (event) => {
+        if (cookieWrapper.dataset.status === 'open') {
+            console.log("outside trigger")
+            const withinBoundaries = event.composedPath().includes(cookieWrapper)
+    
+            if (!withinBoundaries) {
+                emitCloseBanner()
+            } 
+        }
     })
 
     window.addEventListener('close-banner', (e) => {
-        console.log("cookie banner close")
-        cookieBanner?.classList.add('hidden')
-        cookieButton?.classList.remove('hidden')
-        if (cookieWrapper) {
-            cookieWrapper.dataset.status = "closed"
+        try {
+            console.log("close banner event")
+
+            cookieBanner?.classList.add('hidden')
+            cookieButton?.classList.remove('hidden')
+            if (cookieWrapper) {
+                cookieWrapper.dataset.status = "closed"
+            }
+            
+        } catch (error) {
+            console.error(error)
         }
     })
 
     window.addEventListener('open-banner', (e) => {
-        console.log("cookie banner open")
-        cookieBanner?.classList.remove('hidden')  
-        cookieButton?.classList.add('hidden')
-        if (cookieWrapper) {
-            cookieWrapper.dataset.status = "open"
+        try {
+            cookieBanner?.classList.remove('hidden')  
+            cookieButton?.classList.add('hidden')
+            if (cookieWrapper) {
+                cookieWrapper.dataset.status = "open"
+            }
+        } catch (error) {
+            console.error(error)
         }
     })
 
-    document.querySelector(".cookie-banner .accept")?.addEventListener('click', (e) => {
-        // @ts-ignore
-        gtag('consent', 'update', {
-            analytics_storage: 'granted'
-        });
+    function emitCloseBanner() {
         const event = new CustomEvent('close-banner')
         window.dispatchEvent(event)
-    })
-
-    document.querySelector(".cookie-banner .decline")?.addEventListener('click', (e) => {
-        // @ts-ignore
-        gtag('consent', 'update', {
-            analytics_storage: 'denied'
-        });
-        const event = new CustomEvent('close-banner')
-        window.dispatchEvent(event)
-    })
+    }
 
 </script>
 <style>
 
+    button[data-target="cookie-button"] {
+        background: var(--card-bg);
+        backdrop-filter: blur(16px);
+
+        /* border: 1px solid var(--border);
+        border-radius: var(--radius); */
+
+        /* box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05); */
+
+
+            
+        color: var(--text);
+    }
     .cookie-banner[data-status="open"] {
         left: calc(50% + (18rem / 2)); /* 18rem for sidebar divided by 2 for left an right */ 
         top: 50%;
         transform: translate(-50%, -50%);
+    }
+
+    .cookie-banner {
+        --bg-dark: #0b0f14;
+        --card-bg: rgba(255, 255, 255, 0.04);
+        --border: rgba(255, 255, 255, 0.12);
+        --text: rgba(255, 255, 255, 0.85);
+        --muted: rgba(255, 255, 255, 0.5);
+        --accent: #3b82f6;
+
+        --radius: 14px;
+
+
+        position: fixed;
+        /* bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: 420px;
+        max-width: calc(100% - 32px);
+
+        padding: 20px 22px; */
+
+        background: var(--card-bg);
+        backdrop-filter: blur(16px);
+
+        /* border: 1px solid var(--border);
+        border-radius: var(--radius); */
+
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+        color: var(--text);
+        
+    }
+
+    .cookie-banner::before {
+        content: "";
+        position: absolute;
+        inset: -40px;
+        z-index: -1;
+
+        background: radial-gradient(
+            circle at center,
+            rgba(59, 130, 246, 0.15),
+            transparent 70%
+        );
+
+        filter: blur(40px);
     }
 </style>
