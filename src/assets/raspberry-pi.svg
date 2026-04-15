@@ -1,0 +1,16 @@
+<svg width="205" height="133" viewBox="0 0 205 133" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="1.5" y="1.5" width="193" height="127" rx="10.5" stroke="white" stroke-width="3"/>
+<circle cx="139.5" cy="9.5" r="6.5" stroke="white" stroke-width="2"/>
+<circle cx="10.5" cy="9.5" r="6.5" stroke="white" stroke-width="2"/>
+<circle cx="10.5" cy="120.5" r="6.5" stroke="white" stroke-width="2"/>
+<circle cx="139.5" cy="120.5" r="6.5" stroke="white" stroke-width="2"/>
+<line x1="14.5" y1="39.5" x2="14.5" y2="80.5" stroke="white" stroke-width="7" stroke-linecap="round"/>
+<rect x="55" y="45" width="32" height="32" rx="4" fill="white"/>
+<rect x="162" y="7" width="43" height="33" rx="5" fill="white"/>
+<rect x="162" y="44" width="43" height="33" rx="5" fill="white"/>
+<rect x="153" y="82" width="52" height="40" rx="5" fill="white"/>
+<rect x="113" y="98" width="16" height="35" rx="3" fill="white"/>
+<rect x="20" y="112" width="16" height="21" rx="3" fill="white"/>
+<rect x="53" y="98" width="38" height="35" rx="6" fill="white"/>
+<path d="M20 1H130V10C130 12.7614 127.761 15 125 15H25C22.2386 15 20 12.7614 20 10V1Z" fill="white"/>
+</svg>

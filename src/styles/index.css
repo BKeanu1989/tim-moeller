@@ -40,3 +40,7 @@ h3 {
 .active-nav {
 	@apply bg-blue-600/10 text-white;
 }
+
+.divider {
+	@apply bg-gradient-to-r from-c-black from-0% via-slate-300 via-50% to-c-black to-100% h-[1px];
+}

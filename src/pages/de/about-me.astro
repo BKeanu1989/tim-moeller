@@ -1,0 +1,120 @@
+---
+import NavSideBarLayout from '../../layouts/NavSideBarLayout.astro'
+import Education from "@components/icons/education.astro"
+import ECG from "@assets/ecg.svg"
+import Raspberry from "@assets/raspberry-pi.svg"
+import Therapy from '@assets/therapy.svg'
+
+import { getLangFromUrl, useTranslations } from "src/i18n/utils";
+
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<NavSideBarLayout title="About me">
+	<main class="w-full text-gray-200 min-h-dvh flex items-center">
+		<div class="atf lg:w-8/12 mx-auto p-5">
+            <div class="intro my-5">
+                <h1 class="text-3xl text-center">About me</h1>
+                 <div class="w-52 mx-auto divider my-5"></div>
+                <div class="titles mx-auto text-center text-slate-300">
+                    <span class="educator">{t('about.professor')},</span>
+                    <span class="therapist">{t('about.therapist')}</span>
+                    <span class="therapist">& {t('about.opensource-enthusiast')}</span>
+                </div>
+            </div>
+            <div class="pillars grid grid-cols-1 grid-rows-3 lg:grid-cols-3 lg:grid-rows-1 gap-5 place-items-center justify-center">
+                <div class="business-card education-pillar flex flex-col gap-2 h-full p-5 rounded-lg">
+                    <div class="education-icon mb-2">
+                        <Education class="w-16 mx-auto" />
+                    </div>
+                    <div class="divider"></div>
+                    <div class="education-title text-2xl text-center">
+                        {t('about.professor')}
+                    </div>
+                    <div class="divider"></div>
+                    <div class="education-subtitle text-lg text-center">
+                        {t('about.education-subtitle')}
+                    </div>
+                    <div class="divider"></div>
+                    <div class="education-text">
+                        <ul class="text-center">
+                            <li>{t('about.education-text-1')}</li>
+                            <li>{t('about.education-text-2')}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="business-card therapy-pillar flex flex-col  gap-2 h-full p-5 rounded-lg">
+                    <div class="therapy-icon mb-2 flex justify-center">
+                        <Therapy class="w-20 h-16" />
+                    </div>
+                    <div class="divider"></div>
+                    <div class="therapy-title text-2xl text-center">
+                        {t('about.therapist')}
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="therapy-subtitle text-lg text-center">
+                        {t('about.therapy-subtitle')}
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="therapy-text">
+                        <ul class="text-center">
+                            <li>{t('about.therapy-text-1')}</li>
+                            <li>{t('about.therapy-text-2')}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="business-card opensource-pillar flex flex-col gap-2 h-full p-5 rounded-lg">
+                    <div class="opensource-icon mb-2 flex gap-5 items-center justify-center">
+                        <!-- <Opensource class="w-16 mx-auto"/> -->
+                        <ECG class="w-16 h-16" />
+                        <Raspberry class="w-8 h-8" />
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="opensource-title text-2xl text-center">
+                        {t('about.opensource-enthusiast')}
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="opensource-subtitle text-lg text-center">
+                        {t('about.opensource-subtitle')}
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="opensource-text">
+                        <ul class="text-center">
+                            <li>{t('about.opensource-text-1')}</li>
+                            <li>{t('about.opensource-text-2')}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</main>
+</NavSideBarLayout>
+
+<style>
+    .business-card {
+		background: linear-gradient(135deg, #000 20%, #131313 50%, #000 80%);
+		transition-duration: 300ms;
+		transition-property: transform, box-shadow;
+		transition-timing-function: ease-out;
+	}
+
+	.business-card:hover {
+		box-shadow: 0 1px 2px 2px #eee;
+	}
+
+    .opensource-subtitle, .education-subtitle, .therapy-subtitle {
+        /* color: @apply text-; */
+        @apply text-blue-500;
+    }
+</style>
+
+<script>
+	
+</script>
