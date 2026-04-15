@@ -71,7 +71,7 @@ const t = useTranslations(lang);
         })
     
         document.addEventListener('click', (event) => {
-            if (cookieWrapper.dataset.status === 'open') {
+            if (cookieWrapper && cookieWrapper.dataset.status === 'open') {
                 console.log("outside trigger")
                 const withinBoundaries = event.composedPath().includes(cookieWrapper)
         
@@ -135,12 +135,19 @@ const t = useTranslations(lang);
             
         color: var(--text);
     }
+    
     .cookie-banner[data-status="open"] {
         left: calc(50% + (18rem / 2)); /* 18rem for sidebar divided by 2 for left an right */ 
         top: 50%;
         transform: translate(-50%, -50%);
     }
-
+    
+    @media screen and (max-width: 1023px) {
+        .cookie-banner[data-status="open"] {
+            left: 50%;
+        }
+    }
+    
     .cookie-banner {
         --bg-dark: #0b0f14;
         --card-bg: rgba(255, 255, 255, 0.04);
