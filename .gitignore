@@ -23,7 +23,9 @@ dist/
 
 production.ini
 prod.ini
+dev.ini
 
 tmp.txt
 
 public/output.css
+sensitive.md
