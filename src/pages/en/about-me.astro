@@ -6,6 +6,7 @@ import Raspberry from "@assets/raspberry-pi.svg"
 import Therapy from '@assets/therapy.svg'
 
 import { getLangFromUrl, useTranslations } from "src/i18n/utils";
+import CareerIndex from '@components/CareerIndex.astro'
 
 
 const lang = getLangFromUrl(Astro.url);
@@ -13,7 +14,7 @@ const t = useTranslations(lang);
 ---
 
 <NavSideBarLayout title="About me">
-	<main class="w-full text-gray-200 min-h-dvh flex items-center">
+	<main class="w-full text-gray-200 min-h-dvh flex flex-col items-center">
 		<div class="atf lg:w-8/12 mx-auto p-5">
             <div class="intro my-5">
                 <h1 class="text-3xl text-center">About me</h1>
@@ -93,6 +94,9 @@ const t = useTranslations(lang);
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="career-wrapper px-5 md:px-20">
+            <CareerIndex lang="en" />
         </div>
 	</main>
 </NavSideBarLayout>
