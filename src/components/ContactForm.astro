@@ -2,13 +2,18 @@
 
 
 import { getLangFromUrl, useTranslations } from "src/i18n/utils";
+
 const { class: className, ...rest } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const api_url = import.meta.env.PUBLIC_API_URL
+
 ---
 
 <form action="/mail.php" method="POST" class={className} {...rest}>
+  <!-- <iframe src="/" /> -->
 <!-- <form action="http://localhost:8000/mail.php" method="POST" class={className} {...rest}> -->
   <slot />
   <div class="form-group flex flex-col gap-1">
@@ -51,12 +56,33 @@ const t = useTranslations(lang);
       placeholder={t("contact.message.placeholder")}
     ></textarea>
   </div>
+  <div class="form-group mt-4 flex flex-col gap-1">
+    <button type="button" class="form-group bg-red-500 toggle">TOGGLE VERIFY</button>
+    <span class="button-response-holder"></span>
+  </div>
+  <div class="form-group mt-4 flex flex-col gap-1">
+    <img src=`${api_url}/captcha.php?rand=` id='captcha_image'>
+    </p>
+    <p>Can't read the image?
+    <button type="button" class="anker anker-reload-captcha">click here</button>
+    to refresh</p>
+    <label class="text-white" for="captcha">{t("contact.captcha")}</label>
+    <input
+      class="h-8 rounded-sm p-1"
+      type="text"
+      id="captcha"
+      placeholder={t("contact.captcha")}
+      name="captcha"
+    />
+  </div>
   <button class="px-5 py-2 border mt-4 rounded-lg w-fit text-white" type="submit"
     >{t("contact.send")}</button
   >
   <span class="email-status fade-out text-white" data-email-success={t('contact.email_sent')} data-email-error={t('contact.email_error')} ></span>
 </form>
 <script>
+  const api_url = import.meta.env.PUBLIC_API_URL
+
   let $form = document.querySelector('form')
   if ($form) {
     $form.addEventListener('submit', (e) => {
@@ -69,36 +95,105 @@ const t = useTranslations(lang);
         if (!$emailStatus) return
         $emailStatus.classList.remove('fade-out')
         $emailStatus.classList.remove('text-green-700')
-        $emailStatus.classList.remove('text-red-700')
+        $emailStatus.classList.remove('text-red-700');
   
-        // fetch('/mail.php', {
-          
-        fetch('http://localhost:8080/mail.php', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => {
-  
-          // console.log(response)
-          return response.text()
-          // return response.json()
-        })
-        .then(data => {
-          data = JSON.parse(data)
-          //@ts-ignore
-          if (data.success) {
-          //@ts-ignore
-            $emailStatus.innerHTML = $emailStatus.dataset.emailSuccess
-            $emailStatus.classList.add('text-green-700')
-          } else {
-          //@ts-ignore
+        
+        (async function() {
+          try {
+            let response = await fetch(`/api/verify.php`, {
+              method: 'POST',
+              credentials: 'include',
+              body: formData
+            })
+            let data = await response.json()
+            console.log(data)
+            if (data.success) {
+              // $form.reset()
+            } else {
+              removeCaptchaInput()
+              console.log("end submit and remove captcha input")
+              return
+            }
+            
+          } catch (error) {
+            console.log(error)
+          }
+          console.log("verified")
+          try {
+            let response = await fetch(`/api/mail.php`, {
+              method: 'POST',
+              credentials: 'include',
+              body: formData
+            })
+            let data = await response.json()
+            console.log(data)
+            if (data.success) {
+              // $form.reset()
+              // @ts-ignore
+              $emailStatus.innerHTML = $emailStatus.dataset.emailSuccess
+              $emailStatus.classList.add('text-green-700')
+            } else {
+              // removeCaptchaInput()
+              // console.log("end submit and remove captcha input")
+              // return
 
+            // @ts-ignore
             $emailStatus.innerHTML = $emailStatus.dataset.emailError            
             $emailStatus.classList.add('text-red-700')
-
+            }
+          } catch (error) {
+            console.log(error)
           }
-          $form.reset()
-        });
+
+        })()
+        
+
+        // fetch().then((res) => res.json()).then((data) => {
+        //   console.log("response", data)
+        // }).catch(err => console.error).then(() => {
+        //   fetch(`/api/mail.php`, {
+        //     method: 'POST',
+        //     credentials: 'include',
+        //     body: formData
+        //   }).then((res) => {
+        //     console.log("api call")
+        //     return res.json()}
+        //   ).then((data) => {
+        //     console.log(data)
+        //   }).catch(err => console.error)
+        //   .finally(() => {
+        //     $form.reset()
+        //   })
+        // })
+
+        // fetch('/mail.php', {
+        // fetch(`${api_url}mail.php`, {
+        //   method: 'POST',
+        //   credentials: 'include',
+        //   body: formData
+        // })
+        // .then(response => {
+  
+        //   // console.log(response)
+        //   return response.text()
+        //   // return response.json()
+        // })
+        // .then(data => {
+        //   data = JSON.parse(data)
+        //   //@ts-ignore
+        //   if (data.success) {
+        //   //@ts-ignore
+        //     $emailStatus.innerHTML = $emailStatus.dataset.emailSuccess
+        //     $emailStatus.classList.add('text-green-700')
+        //   } else {
+        //   //@ts-ignore
+
+        //     $emailStatus.innerHTML = $emailStatus.dataset.emailError            
+        //     $emailStatus.classList.add('text-red-700')
+
+        //   }
+        //   $form.reset()
+        // });
         setTimeout(() => {
           $emailStatus?.classList.add('fade-out') 
         }, 5000)
@@ -108,6 +203,79 @@ const t = useTranslations(lang);
     })
 
   }
+
+let removeCaptchaInput = () => {
+  let ele = document.querySelector("#captcha_image") as HTMLInputElement
+  if (ele) {
+    ele.value = ""
+  }
+} 
+
+function randomNumber() {
+  return Math.random()*1000
+}
+
+function refreshCaptcha() {
+  console.log("refresh captcha")
+  let rand = randomNumber();
+  fetch(`/api/captcha.php?rand=${rand}`, {
+    credentials: 'include',
+    method: "GET",
+  }).then(res => res.json()).catch((err) => console.log(err)).then((data) => {
+    console.log(data)
+
+    if (data.image) {
+      let captchaImage = document.querySelector("#captcha_image") as HTMLImageElement
+      if (!captchaImage) {
+        console.error("captcha image not found")
+      }
+      captchaImage.src = `data:image/jpeg;base64,${data.image}`
+    }
+  })  
+
+    // @ts-ignore
+    // var img = document.images['captcha_image'];
+    // img.src = img.src.substring(
+		// 0,img.src.lastIndexOf("?")
+		// )+"?rand="+randomNumber();
+
+}
+
+// @ts-ignore
+function toggle(e) {
+  console.log("toggle", e)
+}
+
+(function() {
+  refreshCaptcha()
+
+  try {
+    let button = document.querySelector(".toggle")
+    let buttonResponseHolder = document.querySelector(".button-response-holder")
+    if (button && buttonResponseHolder) {
+      button.addEventListener("click", (e) => {
+        console.log(e)
+        buttonResponseHolder.innerHTML = ""
+        buttonResponseHolder.innerHTML = "<iframe src='http://0.0.0.0:8080/verify.php' />"
+
+      })
+    }
+  } catch (error) {
+    console.error(error)
+  }
+
+  try {
+    let button = document.querySelector(".anker-reload-captcha")
+    if (button) {
+      button.addEventListener("click", (e) => {
+        console.log(e)
+        refreshCaptcha()
+      })
+    }
+  } catch (error) {
+    console.error(error)
+  }
+})()
 </script>
 
 <style>

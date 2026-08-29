@@ -21,7 +21,16 @@ export default defineConfig({
 	// experimental: {
 	//   svg: true,
 	// },
-
+	vite: { 
+		server: { 
+			proxy: { 
+				'/api': { 
+					target: 'http://localhost:8080', changeOrigin: true, 
+					rewrite: (path) => path.replace(/^\/api/, ''), 
+				}, 
+			}, 
+		}, 
+	},
 	integrations: [tailwind(), mdx()]
 	// image: {
 	//   service: "sharp",

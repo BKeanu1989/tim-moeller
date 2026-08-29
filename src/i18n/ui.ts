@@ -19,6 +19,7 @@ export const ui = {
         'contact.name': 'Name',
         'contact.email': 'Email',
         'contact.subject': 'Subject',
+        'contact.captcha': 'Captcha',
         'contact.send': 'Send',
         'contact.message': 'Message',
         'contact.message.placeholder': 'your message',
@@ -65,6 +66,8 @@ export const ui = {
         'contact.name': 'Name',
         'contact.email': 'Email',
         'contact.subject': 'Betreff',
+        'contact.captcha': 'Captcha',
+
         'contact.send': 'Senden',
         'contact.message': "Nachricht",
         'contact.message.placeholder': 'Deine Nachricht',

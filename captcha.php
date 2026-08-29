@@ -1,12 +1,61 @@
 <?php
 
+$allowedOrigins = [
+    'http://localhost:4321',
+    'https://www.example.com',
+];
+
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+
+if (in_array($origin, $allowedOrigins, true)) {
+    header("Access-Control-Allow-Origin: $origin");
+    header('Access-Control-Allow-Credentials: true');
+}
+
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(204);
+    exit;
+}
+
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'secure' => false,
+    'httponly' => true,
+    'samesite' => 'Lax',
+]);
+
 session_start();
+
+error_log('CAPTCHA.php');
+error_log('SESSION ID: ' . session_id());
+error_log('SESSION: ' . print_r($_SESSION, true));
+error_log('COOKIE: ' . print_r($_COOKIE, true));
+error_log('---');
+
+
+// delete on prod
+// header('Access-Control-Allow-Origin: http://localhost:4321');
+// // header('Access-Control-Allow-Origin: http://localhost:4322');
+// header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+// header('Access-Control-Allow-Headers: Content-Type');
+// header('Access-Control-Allow-Credentials: true');
+
+
+
+
+
 //You can customize your captcha settings here
+
+
 
 $captcha_code = '';
 $captcha_image_height = 50;
 $captcha_image_width = 130;
-$total_characters_on_image = 6;
+$total_characters_on_image = 5;
 
 //The characters that can be used in the CAPTCHA code.
 //avoid all confusing characters and numbers (For example: l, 1 and i)
@@ -106,13 +155,43 @@ imagettftext(
 $_SESSION['captcha'] = $captcha_code;
 /* Show captcha image in the html page */
 // defining the image type to be shown in browser widow
-header('Content-Type: image/jpeg'); 
-imagejpeg($captcha_image); //showing the image
-imagedestroy($captcha_image); //destroying the image instance
+// header('Content-Type: image/jpeg'); 
+// imagejpeg($captcha_image); //showing the image
+// imagedestroy($captcha_image); //destroying the image instance
+
+
+
+
+
+error_log("setting captcha in .php");
+error_log(print_r($_SESSION, 1));
+
+ob_start();
+imagejpeg($captcha_image); // Use imagepng() or imagegif() as needed
+$imageData = ob_get_clean();
+
+// Encode to Base64
+$base64String = base64_encode($imageData);
+
+// Optional: Create a Data URI for embedding in HTML/CSS
+// $dataUri = 'data:image/jpeg;base64,' . $base64String;
+
+// Clean up GD resource
+imagedestroy($captcha_image);
+
+echo json_encode([
+	// "session_id" => session_id(),
+	"session_id" => session_id(),
+	"status" => 200,
+	"image" => $base64String
+]);
+
+
+
 
 function hextorgb ($hexstring){
   $integar = hexdec($hexstring);
   return array("red" => 0xFF & ($integar >> 0x10),
                "green" => 0xFF & ($integar >> 0x8),
                "blue" => 0xFF & $integar);
-			   }
+}
