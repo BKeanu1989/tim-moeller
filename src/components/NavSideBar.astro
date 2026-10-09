@@ -10,6 +10,8 @@ import Home from '../assets/home-1.svg'
 import User from '../assets/user.svg'
 import BookStudy from '../assets/book-study.svg'
 import Message from '../assets/message.svg'
+import Therapy from '@assets/therapy.svg'
+
 import Download from '../assets/download-white.svg'
 import LanguagePicker from './LanguagePicker.astro'
 import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
@@ -86,7 +88,7 @@ const currentYear = new Date().getFullYear()
 							// currentPath === '' ? 'bg-blue-600/10 text-white' : 'text-gray-300'
 						]}
 						data-link="timjmoeller.com"
-						aria-label={t('nav.home.label')}
+						aria-label={t('misc.link_to') + " '" + t('nav.home') + "'"}
 					>
 						<Home class="h-6 w-6" />
 						<!-- <Fragment set:html={Home} class="w-6 h-6" /> -->
@@ -103,6 +105,7 @@ const currentYear = new Date().getFullYear()
 							// currentPath === 'about' ? 'bg-blue-600/10 text-white' : 'text-gray-300'
 						]}
 						data-link="about"
+						aria-label={t('misc.link_to') + " '" + t('nav.about') + "'"}
 					>
 						<User class="h-6 w-6" />
 						<span>{t('nav.about')}</span>
@@ -120,9 +123,27 @@ const currentYear = new Date().getFullYear()
 							// 	: 'text-gray-300'
 						]}
 						data-link="publications-projects"
+						aria-label={t('misc.link_to') + " '" + t('nav.projects') + " & " + t('nav.publications') + "'"}
 					>
 						<BookStudy class="h-6 w-6 fill-white" />
 						<span>{t('nav.projects')} & {t('nav.publications')}</span>
+					</a>
+				</li>
+				<li>
+					<a
+						href={`/${lang}/therapy`}
+						class:list={[
+							'flex items-center gap-3 rounded-lg px-4 py-3 transition-colors',
+							'hover:bg-gray-800/50',
+							'text-gray-300'
+							// currentPath === 'contact' ? 'bg-blue-600/10 text-white' : 'text-gray-300'
+						]}
+						data-link="therapy"
+						aria-label={t('misc.link_to') + " '" + t('nav.therapy') + "'"}
+
+					>
+						<Therapy class="h-6 w-6 fill-white" />
+						<span>{t('nav.therapy')}</span>
 					</a>
 				</li>
 				<li>
@@ -135,6 +156,7 @@ const currentYear = new Date().getFullYear()
 							// currentPath === 'contact' ? 'bg-blue-600/10 text-white' : 'text-gray-300'
 						]}
 						data-link="contact"
+						aria-label={t('misc.link_to') + " '" + t('nav.contact') + "'"}
 					>
 						<Message class="h-6 w-6 fill-white" />
 						<span>{t('nav.contact')}</span>
@@ -150,6 +172,7 @@ const currentYear = new Date().getFullYear()
 							// currentPath === 'contact' ? 'bg-blue-600/10 text-white' : 'text-gray-300'
 						]}
 						data-link="downloads"
+						aria-label={t('misc.link_to') + " 'Downloads'"}
 					>
 						<Download class="h-6 w-6 fill-white" />
 						<span>Downloads</span>
