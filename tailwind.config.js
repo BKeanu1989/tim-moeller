@@ -19,12 +19,17 @@ export default {
         "c-neutral-900": "hsl(210 24 16)",
         "c-bg-grey": "#d9d9d9",
         "c-black": "#121212",
-        "c-blackish": "#202020"
+        "c-blackish": "#202020",
+        "c-dark-blue": "#1D536C",
+        "c-bg-black": "#061013",
+        "c-muted-grey": "#718087"
         // ""
       },
 
       fontFamily: {
         body: ['"Open Sans"'],
+        inter: ['Inter', 'sans-serif'],
+        cormorant: ['Cormorant', 'serif']
       },
     },
   },
