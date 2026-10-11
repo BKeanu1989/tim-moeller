@@ -8,6 +8,7 @@ import { getEntry } from 'astro:content'
 import { buildI18nLink } from '@utils/utils'
 
 import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
+import MyTag from './MyTag.astro'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
@@ -23,9 +24,8 @@ interface Props {
 }
 
 const { input } = Astro.props
-const text = input.body
-const { year, image, title, imageAlt, authors, tags } = input.data
-
+// const text = input.body
+const { year, image, title, imageAlt, authors, tags, excerpt } = input.data
 const authorData = []
 
 for await (const d of authors) {
@@ -41,11 +41,15 @@ for await (const d of authors) {
 		<!-- Image Section -->
 		<div class="overflow-hidden rounded-lg md:w-1/3">
 			<div class="relative aspect-[4/3] overflow-hidden">
-				<Picture
+				{
+					(image) && 
+					<Picture
 					src={image}
 					alt={imageAlt || title}
 					class="h-full w-full transform object-cover transition-transform duration-500 group-hover:scale-105"
-				/>
+				/> 
+				}
+				
 				<div
 					class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
 				>
@@ -94,9 +98,9 @@ for await (const d of authors) {
 					tags?.map(
 						(tag) =>
 							tag && (
-								<span class="tag rounded border border-sky-100 bg-stone-700/50 px-1 py-1 text-xs font-thin">
+								<MyTag>
 									{tag}
-								</span>
+								</MyTag>
 							)
 					)
 				}
@@ -104,7 +108,7 @@ for await (const d of authors) {
 
 			<!-- Abstract -->
 			<div class="leading-relaxed text-gray-300">
-				<Fragment set:html={text} />
+				<Fragment set:html={excerpt} />
 			</div>
 
 			<!-- Read More Button -->

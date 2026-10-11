@@ -6,6 +6,7 @@ import type { CollectionEntry } from 'astro:content'
 import { getEntry } from 'astro:content'
 
 import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
+import MyTag from './MyTag.astro'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
@@ -37,22 +38,26 @@ for await (const d of authors) {
 >
 	<div class="flex flex-col gap-6 p-6">
 		<!-- Image Section -->
+		{ (image) &&
 		<div class="relative mx-auto overflow-hidden rounded-lg md:w-2/3">
 			<div class="relative aspect-[4/3] overflow-hidden">
-				<Picture
+					 
+					<Picture
 					src={image}
 					alt={imageAlt || title}
-					class="h-full w-full transform object-cover transition-transform duration-500 group-hover:scale-105"
+					class="h-full w-full transform object-cover transition-transform duration-500"
 				/>
+				
 				<div
 					class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-				>
+					>
 				</div>
 			</div>
 			<span class="absolute right-4 top-2 whitespace-nowrap text-sm text-gray-100">
 				{year}
 			</span>
 		</div>
+				}
 
 		<!-- Content Section -->
 		<div class="mx-auto flex flex-col gap-4 md:w-2/3">
@@ -74,7 +79,7 @@ for await (const d of authors) {
 										<Image
 											src={author.data.image}
 											alt={`Author: ${author.data.name}`}
-											class="h-10 w-10 rounded border-2 border-gray-800 transition-transform duration-300 group-hover/author:z-10 group-hover/author:scale-110"
+											class="h-10 w-10 rounded-full border-2 border-gray-800 transition-transform duration-300 group-hover/author:z-10 group-hover/author:scale-110"
 										/>
 										<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-800 px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-300 group-hover/author:opacity-100">
 											{author.data.name}
@@ -90,9 +95,9 @@ for await (const d of authors) {
 					tags?.map(
 						(tag) =>
 							tag && (
-								<span class="tag rounded border border-sky-100 bg-stone-700/50 px-1 py-1 text-xs font-thin">
+								<MyTag>
 									{tag}
-								</span>
+								</MyTag>
 							)
 					)
 				}
