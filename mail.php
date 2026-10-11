@@ -1,5 +1,9 @@
 <?php
 
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -9,14 +13,18 @@ use PHPMailer\PHPMailer\Exception;
 
 
 
-header('Access-Control-Allow-Origin: http://localhost:4322');
+header('Access-Control-Allow-Origin: http://localhost:4321');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 require '/home/devkev/Projects/tim-moeller/phpmailer/src/Exception.php';
 require '/home/devkev/Projects/tim-moeller/phpmailer/src/PHPMailer.php';
 require '/home/devkev/Projects/tim-moeller/phpmailer/src/SMTP.php';
 
-$ini_array = parse_ini_file("prod.ini");
+require './turnstile.php';
+
+
+// $ini_array = parse_ini_file("prod.ini");
+$ini_array = parse_ini_file("dev.ini");
 // print_r($ini_array);
    
 
@@ -28,6 +36,33 @@ $errors = [
 ];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $secret_key = $ini_array["SECRET_KEY"];
+    $token = $_POST['cf-turnstile-response'] ?? '';
+    $remoteip = $_SERVER['HTTP_CF_CONNECTING_IP'] ??
+    $_SERVER['HTTP_X_FORWARDED_FOR'] ??
+    $_SERVER['REMOTE_ADDR'];
+
+    error_log("secret key: " . $secret_key);
+    $validation = validateTurnstile($token, $secret_key, $remoteip);
+
+    if ($validation['success']) {
+    // Valid token - process form
+        // echo "Form submission successful!";
+    // Process your form data here
+        error_log('Turnstile validation successfull: ');
+
+    } else {
+        // Invalid token - show error
+        // echo "Verification failed. Please try again.";
+        error_log('Turnstile validation failed: ' . implode(', ', $validation['error-codes']));
+    }
+
+    if (!$validation['success']) {
+        echo json_encode(["success" => false, "message" => "verification failed"]);
+        return;
+    }
+
+
     $any_error_found = false;
     if (!isset($_POST["name"]) || empty($_POST["name"])) {
         $errors["name"] = true;

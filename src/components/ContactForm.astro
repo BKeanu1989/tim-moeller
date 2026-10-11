@@ -3,13 +3,15 @@
 
 import { getLangFromUrl, useTranslations } from "src/i18n/utils";
 const { class: className, ...rest } = Astro.props;
-
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : '' 
 ---
 
-<form action="/mail.php" method="POST" class={className} {...rest}>
-<!-- <form action="http://localhost:8000/mail.php" method="POST" class={className} {...rest}> -->
+<!-- <form action="/mail.php" method="POST" class={className} {...rest}> -->
+<form action={baseURLPrefix + "/mail.php"} method="POST" class={className} {...rest}>
   <slot />
   <div class="form-group flex flex-col gap-1">
     <label class="text-white w-1/4" for="name">{t("contact.name")}</label>
@@ -51,12 +53,20 @@ const t = useTranslations(lang);
       placeholder={t("contact.message.placeholder")}
     ></textarea>
   </div>
+  <div class="mt-4 cf-turnstile" data-sitekey={siteKey} data-theme="dark" 
+    data-callback="onSuccess"
+		data-error-callback="onError"
+		data-expired-callback="onExpired"
+		data-timeout-callback="onTimeout"></div>
+
   <button class="px-5 py-2 border mt-4 rounded-lg w-fit text-white" type="submit"
-    >{t("contact.send")}</button
+    >{t("contact.send")} </button
   >
   <span class="email-status fade-out text-white" data-email-success={t('contact.email_sent')} data-email-error={t('contact.email_error')} ></span>
+  <span class="hidden" id="hidden-info" data-url-prefix={baseURLPrefix}></span>
 </form>
 <script>
+  const urlPrefix = document.getElementById("hidden-info")?.dataset.urlPrefix
   let $form = document.querySelector('form')
   if ($form) {
     $form.addEventListener('submit', (e) => {
@@ -73,31 +83,33 @@ const t = useTranslations(lang);
   
         // fetch('/mail.php', {
           
-        fetch('http://localhost:8080/mail.php', {
+        fetch(`${urlPrefix}/mail.php`, {
           method: 'POST',
           body: formData
         })
         .then(response => {
-  
-          // console.log(response)
           return response.text()
           // return response.json()
         })
         .then(data => {
-          data = JSON.parse(data)
-          //@ts-ignore
-          if (data.success) {
-          //@ts-ignore
-            $emailStatus.innerHTML = $emailStatus.dataset.emailSuccess
-            $emailStatus.classList.add('text-green-700')
-          } else {
-          //@ts-ignore
-
-            $emailStatus.innerHTML = $emailStatus.dataset.emailError            
-            $emailStatus.classList.add('text-red-700')
-
+          try {
+            data = JSON.parse(data)
+            //@ts-ignore
+            if (data.success) {
+            //@ts-ignore
+              $emailStatus.innerHTML = $emailStatus.dataset.emailSuccess
+              $emailStatus.classList.add('text-green-700')
+            } else {
+            //@ts-ignore
+  
+              $emailStatus.innerHTML = $emailStatus.dataset.emailError            
+              $emailStatus.classList.add('text-red-700')
+  
+            }
+            $form.reset()
+          } catch (error) {
+            console.log(error)            
           }
-          $form.reset()
         });
         setTimeout(() => {
           $emailStatus?.classList.add('fade-out') 
@@ -108,6 +120,8 @@ const t = useTranslations(lang);
     })
 
   }
+
+
 </script>
 
 <style>

@@ -26,8 +26,14 @@ const bar = now.getTime()
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/tmp-favicon.svg" />
+		<link rel="preconnect" href="https://challenges.cloudflare.com" />
 		<meta name="generator" content={Astro.generator} />
 		<script defer src={"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" + '?' + bar}></script>
+		<script
+	src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+	async
+	defer
+></script>
 		<!-- <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script> -->
 		<title>{title}</title>
 		<ClientRouter />
