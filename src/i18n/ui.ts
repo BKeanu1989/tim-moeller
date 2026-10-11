@@ -30,6 +30,7 @@ export const ui = {
         'misc.years_of_experience': 'Years of experience',
         'misc.open_source': 'Open Source',
         'misc.publications': 'Publications',
+        'misc.projects_publications': 'Projects & Publications',
         'misc.read_more': 'read more',
         'misc.show_more': 'show more',
         'misc.accept': 'accept',
@@ -78,6 +79,8 @@ export const ui = {
         'misc.years_of_experience': 'Jahre an Erfahrung',
         'misc.open_source': 'Open Source',
         'misc.publications': 'Publikationen',
+        'misc.projects_publications': 'Projekte & Publikationen',
+
         'misc.read_more': 'mehr lesen',
         'misc.show_more': 'Mehr anzeigen',
         'misc.accept': 'Akzeptieren',
