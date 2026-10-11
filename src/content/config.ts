@@ -19,9 +19,10 @@ const publicationCollection = defineCollection({
 			title: z.string(),
 			subTitle: z.string().optional(),
 			year: z.number(),
+			excerpt: z.string(),
 			// text: z.string().optional(),
-			image: image(),
-			imageAlt: z.string(),
+			image: image().optional(),
+			imageAlt: z.string().optional(),
 			// image: z.string(),
 			authors: z.array(z.string()),
 			tags: z.array(z.string()).optional()
