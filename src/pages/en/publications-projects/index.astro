@@ -3,6 +3,7 @@ import NavSideBarLayout from '../../../layouts/NavSideBarLayout.astro'
 
 import { getCollection } from 'astro:content'
 import Publication from '@components/Publication.astro'
+import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
 
 const allPublications = await getCollection('publications')
 console.log('🚀 ~ allPublications:', allPublications)
@@ -18,11 +19,16 @@ englishPublications.sort((a, b) => {
 
 	return 0
 })
+
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 ---
 
-<NavSideBarLayout title="Publications">
+<NavSideBarLayout title={t('misc.projects_publications')}>
 	<main class="w-full text-white">
-		<h1 class="py-5 text-center text-4xl">Publications</h1>
+		<h1 class="py-5 text-center text-4xl">{t('misc.projects_publications')}</h1>
 		<div class="flex flex-col flex-wrap place-content-evenly gap-5 md:flex-row">
 			{
 				englishPublications.map((x) => {

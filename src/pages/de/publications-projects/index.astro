@@ -22,11 +22,13 @@ publications.sort((a, b) => {
 
 	return 0
 })
+
+
 ---
 
-<NavSideBarLayout title="Publikationen">
+<NavSideBarLayout title={t('misc.projects_publications')}>
 	<main class="text-white">
-		<h1 class="py-5 text-center text-2xl">Publikationen</h1>
+		<h1 class="py-5 text-center text-2xl">{t('misc.projects_publications')}</h1>
 		<div class="flex flex-wrap place-content-evenly gap-5">
 			{
 				publications.map((x) => {

@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import PublicationSingle from '@components/PublicationSingle.astro'
+import Publication from '@components/Publication.astro'
 
 import NavSideBarLayout from "../../../layouts/NavSideBarLayout.astro";
 import { getLangAndRawIdFromCollectionId, getLangFromUrl, useTranslations } from 'src/i18n/utils';
@@ -44,6 +45,7 @@ const t = useTranslations(lang2);
       <a class="px-5 py-2 bg-c-neutral-500 hover:bg-c-neutral-700 rounded" href={`/${lang}/publications-projects`}>{t("button.back_to_publications")}</a> 
     </div>
   </main> -->
+  <!-- <Publication class:list={'h-full'} input={post} /> -->
   <PublicationSingle class:list={'h-full'} input={post} />
 
 </NavSideBarLayout>

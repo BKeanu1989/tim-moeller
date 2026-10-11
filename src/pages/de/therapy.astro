@@ -1,0 +1,67 @@
+---
+import { Picture } from 'astro:assets'
+import NavSideBarLayout from '../../layouts/NavSideBarLayout.astro'
+
+import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
+import DarkSofa from "@assets/dark-themed-chair.png"
+import dunkleWandPflanze from "@assets/background-therapy-2-chairs-plant.jpeg"
+import ContactForm from '@components/ContactForm.astro'
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
+<NavSideBarLayout title={t('nav.therapy')}>
+	<main class="flex flex-col w-full text-gray-200">
+		<!-- <h1 class="text-3xl text-center">{t('nav.therapy')}</h1> -->
+        <div class="atf flex flex-row h-[80vh] md:min-h-[900px] relative">
+            <div class="atf-image--wrapper absolute w-full -z-50">
+                <Picture class="-z-10 w-full blur-[2px]"  src={dunkleWandPflanze} alt="Dunkle Hintergrundwand mit Lichteinstrahlung von Links"></Picture>
+                <div class="bg-overlay left-0 top-0 w-full h-full z-10 absolute bg-black/60 "></div>
+                
+            </div>
+            <section class="w-1/2 relative left pt-5 px-5">
+                <!-- <Picture class="absolute left-0 top-0 -z-10" src={dunkleWandPflanze} alt="Dunkle Hintergrundwand mit Lichteinstrahlung von Links"></Picture> -->
+                <!-- <Picture class="absolute left-0 top-0 -z-10" src={DarkSofa} alt="Ruhige Atmosphäre"></Picture> -->
+                <h2 class="text-7xl left--text text-c-dark-blue font-cormorant">Verhaltenstherapie,</h2>
+                <p class="text-2xl left--text font-inter" >die Raum für Veränderung schafft.</p>
+                <p class="text-xl left--text text-c-muted-grey cormorant" >
+                    <span class="left--text">Ein geschützter Rahmen,</span> <span class="left--text">um Gedanken zu verstehen,</span> <span class="left--text">neue Perspektiven zu entwickeln</span>
+                    <span class="left--text">und Schritt für Schritt</span> <span class="left--text">wieder mehr Sicherheit im Alltag zu gewinnen.</span>
+                </p>
+            </section>
+            <section class="w-1/2">
+                <p class="text-xl my-5">Haben Sie bereits Interesse? Melden Sie sich hier direkt.</p>
+                <ContactForm />
+            </section>
+        </div>
+        <section class="mx-auto w-10/12">
+            <p class="text-2xl text-center my-5">Willst du erstmal mehr Wissen?</p>
+
+            <h2 class="text-center text-2xl my-5">Zusammenfassung Verhaltenstherapie</h2>
+<p>
+    Verhaltenstherapie ist eine der <b>evidenzbasiertesten Psychotherapieformen</b> weltweit und besonders wirksam bei Angststörungen, Depressionen und Zwangsstörungen. Im Gegensatz zu tiefenpsychologischen oder humanistischen Ansätzen setzt sie auf <b>konkrete Übungen, Exposition und Verhaltensmodifikation</b>, was sie zu einer der <b>kosteneffektivsten Optionen</b> macht. Allerdings hat sie <b>begrenzte Anwendungsbereiche</b> bei schweren Traumafolgen oder komplexen Persönlichkeitsstörungen.
+
+</p>
+<p>
+    Dieser Bericht analysiert: 
+    <ul>
+        <li>
+            ✅ **Vorteile und Nachteile** der Verhaltenstherapie 
+        </li>    
+        <li>
+            ✅ **Vergleich mit anderen Therapieformen** (KVT, Psychoanalyse, Systemische Therapie) 
+        </li>
+        <li>
+            ✅ **Kostenerstattungsverfahren** in Deutschland (GKV/PKV) 
+        </li>
+        <li>
+            ✅ **Ideale Einsatzgebiete** und **Schwächen**
+        </li>
+    </ul> 
+
+</p>
+
+        </section>
+	</main>
+	<section></section>
+</NavSideBarLayout>
