@@ -20,6 +20,7 @@ const publicationCollection = defineCollection({
 			subTitle: z.string().optional(),
 			year: z.number(),
 			excerpt: z.string(),
+			outgoingLink: z.string().optional(),
 			// text: z.string().optional(),
 			image: image().optional(),
 			imageAlt: z.string().optional(),
