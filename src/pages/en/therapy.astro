@@ -1,9 +1,38 @@
 ---
+import { Picture } from 'astro:assets'
 import NavSideBarLayout from '../../layouts/NavSideBarLayout.astro'
 
-
+import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
+// import dunkleWandPflanze from "@assets/background-therapy-2-chairs-plant.jpeg"
+import dunkleWandPflanze from "@assets/background-therapy-2-chairs-plant-left-upscaled.jpeg"
+import ContactForm from '@components/ContactForm.astro'
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
-<NavSideBarLayout title="Therapy">
-    <main></main>
+<NavSideBarLayout title={t('nav.therapy')}>
+	<main class="flex flex-col w-full text-gray-200">
+        <div class="atf flex flex-row h-[80vh] md:min-h-[900px] relative">
+            <div class="atf-image--wrapper absolute w-full -z-50">
+                <Picture class="-z-10 w-full h-dvh"  src={dunkleWandPflanze} alt="Dunkle Hintergrundwand mit Lichteinstrahlung von Links"></Picture>
+                <div class="bg-overlay left-0 top-0 w-full h-full z-10 absolute bg-black/60 "></div>
+                
+            </div>
+            <section class="w-full relative left pt-5 px-10 mt-20">
+                <h2 class="text-7xl left--text text-c-dark-blue font-bold font-cormorant lg:leading-snug lg:tracking-tight">Cognitive Behavioral Therapy,</h2>
+                <p class="text-5xl left--text font-inter lg:leading-snug" >creating space for change.</p>
+                <div class="w-1/2">
+                    <p class="text-xl left--text text-c-bg-grey font-inter lg:leading-7 mt-8" >
+                        <span class="left--text">A safe and supportive space</span> <span class="left--text">to understand your thoughts,</span> <span class="left--text">develop new perspectives,</span>
+                        <span class="left--text">and gradually regain</span> <span class="left--text">a greater sense of security in everyday life.</span>
+                    </p>
+                    <div class="lg:w-[70%] mt-10">
+                        <ContactForm />
+                    </div>
+
+                </div>
+            </section>
+        </div>
+	</main>
+	<section></section>
 </NavSideBarLayout>
