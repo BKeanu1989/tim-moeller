@@ -113,6 +113,23 @@ const currentYear = new Date().getFullYear()
 				</li>
 				<li>
 					<a
+						href={`/${lang}/therapy`}
+						class:list={[
+							'flex items-center gap-3 rounded-lg px-4 py-3 transition-colors',
+							'hover:bg-gray-800/50',
+							'text-gray-300'
+							// currentPath === 'contact' ? 'bg-blue-600/10 text-white' : 'text-gray-300'
+						]}
+						data-link="therapy"
+						aria-label={t('misc.link_to') + " '" + t('nav.therapy') + "'"}
+
+					>
+						<Therapy class="h-6 w-6 fill-white" />
+						<span>{t('nav.therapy')}</span>
+					</a>
+				</li>
+				<li>
+					<a
 						href={`/${lang}/publications-projects`}
 						class:list={[
 							'flex items-center gap-3 rounded-lg px-4 py-3 transition-colors',
@@ -127,23 +144,6 @@ const currentYear = new Date().getFullYear()
 					>
 						<BookStudy class="h-6 w-6 fill-white" />
 						<span>{t('nav.projects')} & {t('nav.publications')}</span>
-					</a>
-				</li>
-				<li>
-					<a
-						href={`/${lang}/therapy`}
-						class:list={[
-							'flex items-center gap-3 rounded-lg px-4 py-3 transition-colors',
-							'hover:bg-gray-800/50',
-							'text-gray-300'
-							// currentPath === 'contact' ? 'bg-blue-600/10 text-white' : 'text-gray-300'
-						]}
-						data-link="therapy"
-						aria-label={t('misc.link_to') + " '" + t('nav.therapy') + "'"}
-
-					>
-						<Therapy class="h-6 w-6 fill-white" />
-						<span>{t('nav.therapy')}</span>
 					</a>
 				</li>
 				<li>
@@ -190,19 +190,13 @@ const currentYear = new Date().getFullYear()
 
 			<!-- Social Links -->
 			<div class="flex flex-wrap justify-center gap-4">
-				<a href="#" class="text-gray-400 transition-colors hover:text-white">
-					<Facebook class="h-6 w-6 fill-white" />
-				</a>
 				<a href="https://www.xing.com/profile/Tim_Moeller75/web_profiles" target="_blank" class="text-gray-400 transition-colors hover:text-white">
 					<Xing class="h-6 w-6 fill-white" />
 				</a>
-				<a href="#" class="text-gray-400 transition-colors hover:text-white">
+				<a href="https://www.linkedin.com/in/tim-möller-abbb22163/" class="text-gray-400 transition-colors hover:text-white">
 					<LinkedIn class="h-6 w-6 fill-white" />
 				</a>
-				<a href="#" class="text-gray-400 transition-colors hover:text-white">
-					<Twitter class="h-6 w-6" />
-				</a>
-				<a href="#" class="text-gray-400 transition-colors hover:text-white">
+				<a href="https://github.com/nalgi" class="text-gray-400 transition-colors hover:text-white">
 					<Github class="h-6 w-6" />
 				</a>
 			</div>

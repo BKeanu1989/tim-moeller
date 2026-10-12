@@ -7,8 +7,6 @@ import { ClientRouter } from 'astro:transitions'
 
 import '../styles/index.css'
 import NavSideBar from '@components/NavSideBar.astro'
-import '@fontsource-variable/roboto'
-import '@fontsource-variable/inter'
 import CookieBanner from '@components/CookieBanner.astro'
 
 const { title } = Astro.props
@@ -41,10 +39,13 @@ const bar = now.getTime()
 	<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G0B00QVBJ8"></script>
 <script>
+	
 	//@ts-ignore
   window.dataLayer = window.dataLayer || [];
   //@ts-ignore
   window.gtag = gtag
+  //@ts-ignore
+
   function gtag(){dataLayer.push(arguments);}
 	//@ts-ignore
 

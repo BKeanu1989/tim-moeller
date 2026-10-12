@@ -12,6 +12,7 @@ not-sorted-assets
 
 # build output
 dist/
+_dist/
 
 # generated types
 .astro/
