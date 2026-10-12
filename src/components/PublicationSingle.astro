@@ -4,6 +4,7 @@ import type { ContentEntryMap } from 'astro:content'
 import type { ValidContentEntrySlug } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
 import { getEntry } from 'astro:content'
+import unknownImage from "@assets/unknown.svg"
 
 import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
 import MyTag from './MyTag.astro'
@@ -23,13 +24,35 @@ interface Props {
 
 const { input } = Astro.props
 const text = input.body
-const { year, image, title, imageAlt, authors, tags } = input.data
+const { year, image, title, imageAlt, authors, tags, outgoingLink } = input.data
 
 const authorData = []
 
+function nameTagToName(str: string) {
+	// jenny-tatum-blub -> Jenny Tatum Blub
+	return str.split("-").map((x) => x.charAt(0).toUpperCase() + x.slice(1)).join(" ")
+}
+
 for await (const d of authors) {
-	const res = await getEntry('authors', d)
-	authorData.push(res)
+	try {
+		let res = await getEntry('authors', d)
+		if (!res) {
+			let foo = {
+				data: {
+					name: nameTagToName(d),
+					image: unknownImage,
+					link: ''
+				}
+			}
+			authorData.push(foo)
+			continue
+		}
+		authorData.push(res)
+		
+	} catch (error) {
+		console.log(error)
+	}
+
 }
 ---
 
@@ -104,9 +127,18 @@ for await (const d of authors) {
 			</div>
 
 			<!-- Abstract -->
-			<div class="leading-relaxed text-gray-300">
+			<div class="leading-relaxed text-gray-300 mb-5">
+
+			{
+				(outgoingLink) && 
+
+				<a href={outgoingLink} target="_blank">
+					{t('misc.to_publisher')}
+				</a>
+			}
 				<Fragment set:html={text} />
 			</div>
+
 		</div>
 	</div>
 </article>
