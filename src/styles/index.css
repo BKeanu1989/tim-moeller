@@ -21,6 +21,22 @@
 	src: url(/fonts/OpenSans-VariableFont_wdth,wght.ttf) format('truetype');
 }
 
+@font-face {
+	font-family: 'Inter';
+	src: url(/fonts/Inter-VariableFont_opsz,wght.ttf) format('truetype');
+	font-display: swap;
+	font-weight: 100 900;
+
+}
+
+@font-face {
+	font-family: 'Cormorant';
+	src: url(/fonts/CormorantGaramond-VariableFont_wght.ttf) format('truetype');
+	font-display: swap;
+	font-weight: 100 900;
+
+}
+
 .nav-offset {
 	margin-top: -50px;
 }
@@ -44,3 +60,20 @@ h3 {
 .divider {
 	@apply bg-gradient-to-r from-c-black from-0% via-slate-300 via-50% to-c-black to-100% h-[1px];
 }
+
+.cormorant {
+	font-family: 'Cormorant', 'serif';
+}
+
+
+
+article.publication-single a {
+	color: #bcc6f3;
+	text-decoration: underline;
+}
+
+article.publication-single a:visited {
+	color: #7166a9;
+
+}
+
