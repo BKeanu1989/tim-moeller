@@ -2,6 +2,7 @@
 
 
 import { getLangFromUrl, useTranslations } from "src/i18n/utils";
+import TertiaryButton from "./buttons/TertiaryButton.astro";
 const { class: className, ...rest } = Astro.props;
 const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 const lang = getLangFromUrl(Astro.url);
@@ -59,9 +60,9 @@ const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : ''
 		data-expired-callback="onExpired"
 		data-timeout-callback="onTimeout"></div>
 
-  <button class="px-5 py-2 border mt-4 rounded-lg w-fit text-white" type="submit"
-    >{t("contact.send")} </button
-  >
+    <TertiaryButton>
+      {t("contact.send")} 
+    </TertiaryButton>
   <span class="email-status fade-out text-white" data-email-success={t('contact.email_sent')} data-email-error={t('contact.email_error')} ></span>
   <span class="hidden" id="hidden-info" data-url-prefix={baseURLPrefix}></span>
 </form>
