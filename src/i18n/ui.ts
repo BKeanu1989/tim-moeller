@@ -37,6 +37,7 @@ export const ui = {
         'misc.decline': 'decline',
         'misc.cookies_button': 'Show Cookies',
         'misc.link_to': 'Link to',
+        'misc.to_publisher': 'to the publisher',
         'cookie.statistics': 'Statistics',
         'cookie.title': 'Cookie Settings',
         'cookie.text': 'We use cookies and similar technologies to operate our website, generate statistics, and improve our content. With your consent, we may use Google Analytics to analyze usage. In the process, data may also be transferred to the United States. You can change or withdraw your consent at any time.',
@@ -87,6 +88,7 @@ export const ui = {
         'misc.decline': 'Ablehnen',
         'misc.cookies_button': 'Cookies anzeigen',
         'misc.link_to': 'Verlinkung zu',
+        'misc.to_publisher': 'zum Verlag',
 
         'cookie.statistics': 'Statistik',
         'cookie.title': 'Cookie Einstellungen',
