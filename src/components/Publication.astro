@@ -1,7 +1,7 @@
 ---
 import { Picture, Image } from 'astro:assets'
-import type { ContentEntryMap } from 'astro:content'
-import type { ValidContentEntrySlug } from 'astro:content'
+// import type { ContentEntryMap } from 'astro:content'
+// import type { ValidContentEntrySlug } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
 import { getEntry } from 'astro:content'
 
@@ -134,7 +134,9 @@ for await (const d of authors) {
 </article>
 
 <style>
-	@reference "tailwindcss";
+	/* @reference "tailwindcss"; */
+  @reference "../main.css";
+
 	.publication {
 		box-shadow:
 			0 0 20px rgba(0, 0, 0, 0.2),
