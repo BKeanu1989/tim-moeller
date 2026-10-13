@@ -1,5 +1,7 @@
 import { defineConfig } from 'astro/config'
 import mdx from '@astrojs/mdx'
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 import tailwind from '@astrojs/tailwind'
 
@@ -13,21 +15,23 @@ export default defineConfig({
 
 		defaultLocale: 'en',
 		locales: ['de', 'en']
-		// fallback: {
-		//   de: "en",
-		//   en: "de",
-		// },
 	},
-	// experimental: {
-	//   svg: true,
-	// },
-
-	integrations: [tailwind(), mdx()]
-	// image: {
-	//   service: "sharp",
-	//   serviceEntryPoint: "@astrojs/image/sharp",
-	//   logLevel: "info",
-	//   cacheDir: "./.cache/image",
-	//   defaultFormat: "webp",
-	// },
+	  vite: {
+    server: {
+      watch: {
+        ignored: ['**/node_modules_backup/**']
+      }
+    },
+    optimizeDeps: {
+      exclude: ['node_modules_backup']
+    }
+  },
+	integrations: [tailwind(), mdx({
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
+  })],
+	  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
+  },
 })
