@@ -108,9 +108,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->SMTPAuth   = true;                                 
         $mail->Username   = $ini_array["USERNAME"];   
         $mail->Password   = $ini_array["SMTP"];                
-
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;                                 
+        $mail->Sender     =  $ini_array["SENDER"];
 
         $mail->setFrom($email, $name);
         $mail->addAddress($ini_array["ADDADDRESS"], 'Me');     //Add a recipient
