@@ -110,11 +110,18 @@ const t = useTranslations(lang);
         window.addEventListener('open-banner', (e) => {
             try {
                 console.log("open-banner")
+                
                 cookieBanner?.classList.remove('hidden')  
                 cookieButton?.classList.add('hidden')
                 if (cookieWrapper) {
                     cookieWrapper.dataset.status = "open"
                 }
+
+
+                if (window.Complianz.getStatistics()) {
+                    statisticsInput.checked = true;
+                }
+
             } catch (error) {
                 console.error(error)
             }
@@ -125,10 +132,10 @@ const t = useTranslations(lang);
         foo = new CookieBannerObserver();
         window.Complianz.attach(foo)
 
-        if (window.Complianz.getAnswered() == false) {
-            const event = new CustomEvent('open-banner')
-            window.dispatchEvent(event)
-        }
+        // if (window.Complianz.getAnswered() == false) {
+        //     const event = new CustomEvent('open-banner')
+        //     window.dispatchEvent(event)
+        // }
 
         if (window.Complianz.getStatistics() == true) {
             statisticsInput.checked = true
@@ -171,6 +178,8 @@ const t = useTranslations(lang);
         left: calc(50% + (18rem / 2)); /* 18rem for sidebar divided by 2 for left an right */ 
         top: 50%;
         transform: translate(-50%, -50%);
+
+        min-width: 320px;
     }
     
     @media screen and (max-width: 1023px) {

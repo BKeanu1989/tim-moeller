@@ -163,6 +163,7 @@ import { CookieBannerObserver } from "src/scripts/cookiebanner"
   }
 
   let intervalInc: any = null;
+  let timeout: any;
   document.addEventListener("astro:page-load", () => {
     bar = new CookieBannerObserver();
     window.Complianz.attach(bar)
@@ -171,12 +172,22 @@ import { CookieBannerObserver } from "src/scripts/cookiebanner"
     intervalInc = setInterval(() => {
       checkStatistics()
     }, 2500);
+
+    setTimeout(() => {
+      let statisticPerm = window.Complianz.getStatistics();
+      if (!statisticPerm) {
+        window.Complianz.openCookieBanner();
+      }
+      
+    }, 1500);
   })
 
   document.addEventListener("astro:before-swap", () => {
     clearInterval(intervalInc)
     window.Complianz.detach(bar)
     bar = null;
+
+    clearTimeout(timeout)
   })
 
 
