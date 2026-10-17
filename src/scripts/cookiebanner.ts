@@ -41,9 +41,7 @@ export class MyComplz {
     }
 
     initFromLocalstorage() {
-        console.log("get lcaol storage");
         (Object.keys(this.$storage) as ComplzLocalStorageKey[]).forEach((type) => {
-            console.log(type)
             let typeSetting = window.localStorage.getItem(type)
             if (typeSetting !== null) {
                 if (type === "statistics" || type === "storage" || type === "answered" ) {
@@ -64,9 +62,13 @@ export class MyComplz {
 
     checkLastAnsweredTime() {
             let diff = ((Math.floor(Date.now() / 1000) - Math.floor(this.getTimestamp() / 1000)));
-            console.log(diff)
-            if (diff > 60 * 5) {
-                console.log("RESET - 500")
+            const MINUTE = 60;
+            const HOUR = MINUTE * 60;
+            const DAY = HOUR * 24;
+
+            // if (diff > DAY * 7) {
+            if (diff > MINUTE * 5) {
+                console.log("TIMEOUT new permission")
                 this.deleteLocalStorage()
                 this.resetStorage()
             }
@@ -140,6 +142,11 @@ export class MyComplz {
         //     }
         // })
         console.log(this.$storage)
+    }
+
+    openCookieBanner() {
+        const event = new CustomEvent('open-banner')
+            window.dispatchEvent(event)
     }
 }
 

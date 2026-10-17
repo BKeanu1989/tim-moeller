@@ -8,6 +8,7 @@ interface Props {
   class?: string;
   htmlType?: 'button' | 'submit' | 'reset';
   href?: string;
+  download?: boolean | string;
   disabled?: boolean;
 }
 
@@ -16,6 +17,8 @@ const {
   class: className = '',
   htmlType = 'button',
   href,
+    download,
+
   disabled = false,
 } = Astro.props;
 
@@ -37,7 +40,12 @@ const classes = [
 ---
 
 {href ? (
-  <a class={classes} href={href} aria-disabled={disabled || undefined}>
+  <a
+    class={classes}
+    href={href}
+    download={download}
+    aria-disabled={disabled || undefined}
+  >
     <slot />
   </a>
 ) : (

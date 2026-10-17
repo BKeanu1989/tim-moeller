@@ -17,9 +17,7 @@ const t = useTranslations(lang);
                 <input type="checkbox" name="statistics" id="statistics">
             </div>
             <div class="cookie-banner--buttons mt-auto">
-                <!-- <button class="decline">{t('misc.decline')}</button> -->
-                <!-- <button class="">{t('misc.accept')}</button> -->
-                <MyButton type="alarm" class="accept">{t('misc.decline')}</MyButton>
+                <MyButton type="alarm" class="decline">{t('misc.decline')}</MyButton>
                 <MyButton type="ok" class="accept">{t('misc.accept')}</MyButton>
             </div>
         </form>
@@ -40,9 +38,6 @@ const t = useTranslations(lang);
         cookieBanner = document.querySelector(".cookie-banner div[data-target='cookie-banner']") as HTMLElement
         cookieButton = document.querySelector(".cookie-banner [data-target='cookie-button']") as HTMLElement
 
-
-
-        
         cookieButton?.addEventListener('click', (e) => {
             const event = new CustomEvent('open-banner')
             window.dispatchEvent(event)

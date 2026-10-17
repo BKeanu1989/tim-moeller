@@ -3,6 +3,7 @@
 
 import { getLangFromUrl, useTranslations } from "src/i18n/utils";
 import TertiaryButton from "./buttons/TertiaryButton.astro";
+import MyButton from "./buttons/MyButton.astro";
 const { class: className, ...rest } = Astro.props;
 const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 const lang = getLangFromUrl(Astro.url);
@@ -60,18 +61,31 @@ const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : ''
 		data-expired-callback="onExpired"
 		data-timeout-callback="onTimeout"></div>
 
-    <TertiaryButton>
+    <!-- <TertiaryButton>
+    </TertiaryButton> -->
+    <MyButton type="tertiary" htmlType="submit">
+      
       {t("contact.send")} 
-    </TertiaryButton>
+    </MyButton>
   <span class="email-status fade-out text-white" data-email-success={t('contact.email_sent')} data-email-error={t('contact.email_error')} ></span>
+  <span class="hidden text-red-800" id="cmplz-status" data-cmplz-error={t('misc.complianz_error_message')}></span>
   <span class="hidden" id="hidden-info" data-url-prefix={baseURLPrefix}></span>
 </form>
 <script>
-  const urlPrefix = document.getElementById("hidden-info")?.dataset.urlPrefix
+  const urlPrefix = document.getElementById("hidden-info")?.dataset.urlPrefix ?? ''
+  let $cmplSt: HTMLElement | null
+  let $submitButton: HTMLButtonElement | null 
+
   let $form = document.querySelector('form')
   if ($form) {
+
+    
     $form.addEventListener('submit', (e) => {
       e.preventDefault();
+      if (!window.Complianz.getStatistics()) {
+        window.Complianz.openCookieBanner()
+        return;
+      }
 
       let $emailStatus = document.querySelector("span.email-status")
       try {
@@ -121,6 +135,42 @@ const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : ''
     })
 
   }
+
+
+
+  
+  function checkStatistics() {
+    // reset
+    $cmplSt?.classList.add("hidden")
+    $submitButton?.removeAttribute("disabled")
+
+
+    let statisticsPermission = window.Complianz.getStatistics()
+    if (statisticsPermission) {
+      // console.info("statistics perm")
+    } else {
+      if ($cmplSt) {
+        $cmplSt.classList.remove("hidden")
+        // @ts-ignore
+        $cmplSt.innerHTML = $cmplSt.dataset.cmplzError
+        $submitButton?.setAttribute("disabled", "true")
+      }
+    }
+
+  }
+
+  let intervalInc: any = null;
+  document.addEventListener("astro:page-load", () => {
+    $cmplSt = document.getElementById("cmplz-status")
+    $submitButton = document.querySelector("button[type='submit'")
+    intervalInc = setInterval(() => {
+      checkStatistics()
+    }, 5000);
+  })
+
+  document.addEventListener("astro:before-swap", () => {
+    clearInterval(intervalInc)
+  })
 
 
 </script>

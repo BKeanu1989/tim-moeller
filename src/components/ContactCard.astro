@@ -6,6 +6,8 @@ import Twitter from '../assets/twitter.svg'
 import { Image } from 'astro:assets'
 import tim from '../assets/tim-j-moeller.png'
 import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
+import TertiaryButton from './buttons/TertiaryButton.astro'
+import MyButton from './buttons/MyButton.astro'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
@@ -39,7 +41,10 @@ const t = useTranslations(lang)
 	<a href={`/${lang}/contact`} class="button rounded bg-blue-500 px-5 py-2 text-lg text-white">
 		{t('contact.button')}
 	</a>
-	<a href={`https://timjmoeller.com/CV.pdf`} download="CV.pdf" class="button rounded bg-blue-500 px-5 py-2 text-lg text-white my-5">
-		Download CV
-	</a>
+	<!-- <MyButton type='tertiary'>CV</MyButton>
+	<TertiaryButton>CV</TertiaryButton> -->
+	<!-- <a href= download="CV.pdf" class="button rounded bg-blue-500 px-5 py-2 text-lg text-white my-5">
+		CV
+	</a> -->
+	<MyButton type='tertiary' href={`https://timjmoeller.com/CV.pdf`} download="CV.pdf">CV</MyButton>
 </div>
