@@ -72,6 +72,8 @@ const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : ''
   <span class="hidden" id="hidden-info" data-url-prefix={baseURLPrefix}></span>
 </form>
 <script>
+import { CookieBannerObserver } from "src/scripts/cookiebanner"
+
   const urlPrefix = document.getElementById("hidden-info")?.dataset.urlPrefix ?? ''
   let $cmplSt: HTMLElement | null
   let $submitButton: HTMLButtonElement | null 
@@ -136,6 +138,7 @@ const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : ''
 
   }
 
+  let bar: any;
 
 
   
@@ -161,15 +164,19 @@ const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : ''
 
   let intervalInc: any = null;
   document.addEventListener("astro:page-load", () => {
+    bar = new CookieBannerObserver();
+    window.Complianz.attach(bar)
     $cmplSt = document.getElementById("cmplz-status")
     $submitButton = document.querySelector("button[type='submit'")
     intervalInc = setInterval(() => {
       checkStatistics()
-    }, 5000);
+    }, 2500);
   })
 
   document.addEventListener("astro:before-swap", () => {
     clearInterval(intervalInc)
+    window.Complianz.detach(bar)
+    bar = null;
   })
 
 

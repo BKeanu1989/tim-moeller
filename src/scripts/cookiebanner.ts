@@ -8,10 +8,34 @@ type ComplzlocalStorage = {
 type ComplzLocalStorageKey = keyof ComplzlocalStorage;
 
 
-export class MyComplz {
+export interface Subject {
+    // Attach an observer to the subject.
+    attach(observer: Observer): void;
+
+    // Detach an observer from the subject.
+    detach(observer: Observer): void;
+
+    // Notify all observers about an event.
+    notify(): void;
+}
+
+export interface Observer {
+    // Receive update from subject.
+    update(subject: Subject): void;
+}
+
+    export class CookieBannerObserver implements Observer {
+        update(subject: Subject) {
+            console.log("update called from within observer", subject)
+        }
+    } 
+
+export class MyComplz implements Subject{
     // handles checks for granted permissions for cookies and co.
     // get & setter for localstorage
     static #instance: MyComplz;
+
+    private observers: Observer[] = [];
 
     private $storage: ComplzlocalStorage = {
         statistics: false,
@@ -24,6 +48,36 @@ export class MyComplz {
         // read values or default
         this.initFromLocalstorage()
         this.installWindowListeners()
+    }
+
+    attach(observer: Observer) {
+        const isExist = this.observers.includes(observer);
+        if (isExist) {
+            return console.log('Subject: Observer has been attached already.');
+        }
+
+        console.log('Subject: Attached an observer.');
+        this.observers.push(observer);
+    }
+
+    public detach(observer: Observer): void {
+        const observerIndex = this.observers.indexOf(observer);
+        if (observerIndex === -1) {
+            return console.log('Subject: Nonexistent observer.');
+        }
+
+        this.observers.splice(observerIndex, 1);
+        console.log('Subject: Detached an observer.');
+    }
+
+    /**
+     * Trigger an update in each subscriber.
+     */
+    public notify(): void {
+        console.log('Subject: Notifying observers...');
+        for (const observer of this.observers) {
+            observer.update(this);
+        }
     }
 
     public static get instance() :MyComplz  {
@@ -58,6 +112,7 @@ export class MyComplz {
             }
         })
         this.checkLastAnsweredTime()
+        this.notify()
     }
 
     checkLastAnsweredTime() {
@@ -119,6 +174,7 @@ export class MyComplz {
                     window.localStorage.setItem(type, `${res}`)
                 }
         })
+        this.notify()
     }
 
     deleteLocalStorage() {
@@ -146,7 +202,7 @@ export class MyComplz {
 
     openCookieBanner() {
         const event = new CustomEvent('open-banner')
-            window.dispatchEvent(event)
+        window.dispatchEvent(event)
     }
 }
 

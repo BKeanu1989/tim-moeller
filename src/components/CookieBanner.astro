@@ -24,15 +24,18 @@ const t = useTranslations(lang);
     </div>
 </div>
 <script>
+    // import 
+    import {CookieBannerObserver} from "../scripts/cookiebanner"
     let cookieWrapper: HTMLElement | null  
     let cookieBanner: HTMLElement  | null
     let cookieButton: HTMLElement | null
-
     let statisticsInput = document.getElementById('statistics') as HTMLInputElement
+    let foo: any;
 
     
     function initCookieBanner() {
-        console.info("init cookie banner", window.Complianz.getAnswered())
+
+        console.info("init cookie banner", window.Complianz.getStatistics())
         // window.Complianz.
         cookieWrapper = document.querySelector("div.cookie-banner") as HTMLElement
         cookieBanner = document.querySelector(".cookie-banner div[data-target='cookie-banner']") as HTMLElement
@@ -118,6 +121,10 @@ const t = useTranslations(lang);
         })
 
 
+
+        foo = new CookieBannerObserver();
+        window.Complianz.attach(foo)
+
         if (window.Complianz.getAnswered() == false) {
             const event = new CustomEvent('open-banner')
             window.dispatchEvent(event)
@@ -126,9 +133,15 @@ const t = useTranslations(lang);
         if (window.Complianz.getStatistics() == true) {
             statisticsInput.checked = true
         }
+
     }
 
     document.addEventListener('astro:page-load', initCookieBanner);
+
+    document.addEventListener("astro:before-swap", () => {
+        window.Complianz.detach(foo)
+        foo = null;
+    })
 
     function emitCloseBanner() {
         const event = new CustomEvent('close-banner')
