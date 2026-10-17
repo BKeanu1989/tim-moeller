@@ -121,8 +121,8 @@ export class MyComplz implements Subject{
             const HOUR = MINUTE * 60;
             const DAY = HOUR * 24;
 
-            // if (diff > DAY * 7) {
-            if (diff > MINUTE * 5) {
+            if (diff > DAY * 7) {
+            // if (diff > MINUTE * 5) {
                 console.log("TIMEOUT new permission")
                 this.deleteLocalStorage()
                 this.resetStorage()
@@ -201,6 +201,7 @@ export class MyComplz implements Subject{
     }
 
     openCookieBanner() {
+        console.log("open cookie banner via complianz")
         const event = new CustomEvent('open-banner')
         window.dispatchEvent(event)
     }
