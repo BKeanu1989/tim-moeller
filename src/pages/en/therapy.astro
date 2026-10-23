@@ -4,35 +4,188 @@ import NavSideBarLayout from '../../layouts/NavSideBarLayout.astro'
 
 import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
 // import dunkleWandPflanze from "@assets/background-therapy-2-chairs-plant.jpeg"
-import dunkleWandPflanze from "@assets/background-therapy-2-chairs-plant-left-upscaled.jpeg"
+import dunkleWandPflanze from "@assets/background-therapy-2-chairs-plant-left-upscaled-cropped-1200w-1530h.jpeg"
 import ContactForm from '@components/ContactForm.astro'
+import MyTag from '@components/MyTag.astro'
+import MyButton from '@components/buttons/MyButton.astro'
+import MyTimeLine from '@components/MyTimeLine.astro'
+import MyTimeLineItem from '@components/MyTimeLineItem.astro'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
+
+const backgroundUrl = `url(${dunkleWandPflanze.src})`
 ---
 
+
 <NavSideBarLayout title={t('nav.therapy')}>
-	<main class="flex flex-col w-full text-gray-200">
-        <div class="atf flex flex-row h-[80vh] md:min-h-[900px] relative">
-            <div class="atf-image--wrapper absolute w-full -z-50">
-                <Picture class="-z-10 w-full h-dvh"  src={dunkleWandPflanze} alt="Dunkle Hintergrundwand mit Lichteinstrahlung von Links"></Picture>
-                <div class="bg-overlay left-0 top-0 w-full h-full z-10 absolute bg-black/60 "></div>
+	<main class="flex flex-col w-full text-gray-200 therapy">
+        <div class="atf flex flex-row h-[99vh] pb-5 min-h-fit lg:w-1/2 m-5 relative rounded-xl border">
+            <div class="atf-image--wrapper absolute w-full h-full" >
+                <div class="bg-overlay left-0 top-0 w-full h-full rounded-xl z-10 absolute bg-black/60 "></div>
                 
             </div>
-            <section class="w-full relative left pt-5 px-10 mt-20">
-                <h2 class="text-7xl left--text text-c-dark-blue font-bold font-cormorant lg:leading-snug lg:tracking-tight">Cognitive Behavioral Therapy,</h2>
-                <p class="text-5xl left--text font-inter lg:leading-snug" >creating space for change.</p>
-                <div class="lg:w-1/2">
-                    <p class="text-xl left--text text-c-bg-grey font-inter lg:leading-7 mt-8" >
-                        <span class="left--text">A safe and supportive space</span> <span class="left--text">to understand your thoughts,</span> <span class="left--text">develop new perspectives,</span>
-                        <span class="left--text">and gradually regain</span> <span class="left--text">a greater sense of security in everyday life.</span>
-                    </p>
-                    <div class="lg:w-[70%] mt-10">
-                        <ContactForm />
-                    </div>
-
+            <section class="w-full relative left pt-5 px-10 mt-20 z-20">
+                <h1 class="lg:text-7xl text-5xl left--text text-blue-500 font-bold italic hyphens-auto font-cormorant leading-snug lg:tracking-tight">Cognitive Behavioural Therapy,</h1>
+                <p class="lg:text-5xl text-3xl left--text font-inter lg:leading-snug" >creating space for change.</p>
+                <p class="text-xl left--text text-c-bg-grey font-inter lg:leading-7 mt-8" >
+                    <span class="left--text">A safe and supportive space</span> <span class="left--text">to understand your thoughts,</span> <span class="left--text">developing new perspectives</span>
+                    <span class="left--text">and gradually regain </span> <span class="left--text">a greater sense of security in everyday life.</span>
+                </p>
+                <div class="lg:w-[70%] mt-10">
+                    <ContactForm />
                 </div>
             </section>
         </div>
+        <div class="px-10 lg:w-1/2">
+            <hr>
+        </div>
+        <section class="about-me px-10 lg:w-1/2">
+            <div class="section-label text-blue-500 mb-4">{t('nav.about')}</div>
+            <div class="about-me--text flex flex-col gap-5 text-c-gray">
+                <p>
+My name is Dr Tim Julian Möller. I am a licensed psychological psychotherapist specialising in Cognitive Behavioural Therapy (CBT).                </p>
+                <p>
+In my work, I support people experiencing depression, anxiety disorders, burnout, the effects of trauma, or life crises, using evidence-based methods and a genuine interest in their individual stories.                </p>
+                <p>
+For me, therapy is not a rigid protocol, but a collaborative process tailored to the individual. I offer therapy in both German and English.                </p>
+                <h2 class="font-cormorant text-4xl font-bold text-white">My areas of specialisation</h2>
+                <div class="tag-list flex gap-5">
+                    <MyTag>Depression</MyTag>
+                    <MyTag>Trauma</MyTag>
+                    <MyTag>Anxiety Disorders</MyTag>
+    
+                </div>
+            </div>
+            
+
+        </section>
+        <div class="px-10 lg:w-1/2">
+            <hr>
+        </div>
+        <section class="how-i-work px-10 lg:w-1/2">
+            <div class="section-label uppercase text-lg text-blue-500 mb-2">Behandlungsansatz</div>
+            <h2 class="font-cormorant text-4xl font-bold mb-4 leading-5">Wie ich arbeite</h2>
+
+            <div class="flex flex-col gap-5">
+                <p class="text-c-gray">
+                    It is important to me that you feel comfortable in therapy and are able to speak openly about what is on your mind, even when it is difficult to express, seems contradictory, or has not yet taken clear shape in words. You do not need to know exactly what the problem is or how you would like things to change. We can work that out together.
+                </p>
+                <p class="text-c-gray">
+My approach is based on Cognitive Behavioural Therapy. Together, we explore how your past experiences, thoughts, feelings, and behaviours are connected. Many things that cause difficulties today may once have served a useful purpose or made sense in a particular context. For me, understanding these connections is the starting point for exploring new possibilities together.                </p>
+                <p class="text-c-gray">
+My work in research and teaching also shapes my therapeutic approach. I aim to explain clearly why I recommend a particular course of action and to explore with you whether it is helpful. Your experiences and feedback are just as important as my professional knowledge. Doubts and criticism are also welcome and can be discussed openly.                </p>
+                <p class="text-c-gray">
+                    Therapie soll sich für Sie im Alltag bemerkbar machen. Deshalb arbeiten wir an konkreten Situationen und an Veränderungen, die zu Ihren Zielen und Lebensumständen passen. Dabei ist mir ein respektvoller, direkter und menschlicher Umgang Therapy should make a tangible difference in your everyday life. That is why we work with concrete situations and focus on changes that fit your goals and circumstances. Throughout this process, I value an approach that is respectful, direct, and genuinely human.
+                </p>
+            </div>
+        </section>
+        <div class="px-10 lg:w-1/2">
+            <hr>
+        </div>
+        <section class="qualification px-10">
+            <div class="section-label uppercase text-lg text-blue-500 mb-2">{t('misc.qualifications')}</div>
+            <h2 class="">Ausbildung & Werdegang</h2>
+
+            <MyTimeLine class:list={"pl-5"}>
+                <MyTimeLineItem year={"2021 - " + t('misc.today')} role="Psychological psychotherapist in training (focus on
+behavioral therapy)" place="IVB Institute for Behavioral Therapy Berlin GmbH"></MyTimeLineItem>
+                <MyTimeLineItem year="2023 - 2024" role="Psychotherapist in training" place="Hospital of the military armed forces Berlin"></MyTimeLineItem>
+                <MyTimeLineItem year="2019 - 2024" role="PhD Psychology" place="Humboldt-University Berlin"></MyTimeLineItem>
+                <MyTimeLineItem year="2016 - 2019" role="M.Sc. Neurocognitive Psychology" place="Carl von Ossietzky University Oldenburg"></MyTimeLineItem>
+                <MyTimeLineItem year="2013 - 2016" role="B.Sc. Psychology" place="Carolo Wilhelmina Elite-University Braunschweig"></MyTimeLineItem>
+            </MyTimeLine>
+        </section>
+        <div class="px-10 lg:w-1/2">
+            <hr>
+        </div>
+        <section class="lg:w-1/2 px-10">
+            <div class="section-label text-blue-500 uppercase text-lg font-bold mb-2">{t('practice.info_header')}</div>
+            <h2 class="mb-4 font-cormorant font-bold">{t('practice.info_sub_header')}</h2>
+                <div class="info-grid">
+                <dl class="info-row">
+                    <dt>{t('practice.key.1')}</dt>
+                    <dd>{t('practice.value.1')}</dd>
+                </dl>
+                <dl class="info-row">
+                    <dt>{t('practice.key.2')}</dt>
+                    <dd>{t('practice.value.2')}</dd>
+                </dl>
+                <dl class="info-row">
+                    <dt>{t('practice.key.3')}</dt>
+                    <dd>{t('practice.value.3')}</dd>
+                </dl>
+                <dl class="info-row">
+                    <dt>{t('practice.key.4')}</dt>
+                    <dd>{t('practice.value.4')}</dd>
+                </dl>
+                <dl class="info-row">
+                    <dt>{t('practice.key.5')}</dt>
+                    <dd>{t('practice.value.5')}</dd>
+                </dl>
+                <dl class="info-row">
+                    <dt>{t('practice.key.6')}</dt>
+                    <dd>{t('practice.value.6')}</dd>
+                </dl>
+            </div>
+        </section>
+        <div class="lg:w-1/2 px-10">
+
+            <hr class="">
+        </div>
+
+        <section id="contact" class=" px-10 lg:w-1/2">
+            <div class="section-label">{t('nav.contact')}</div>
+            <h2>{t('misc.write_me')}</h2>
+
+            <p>I usually respond within 24 hours. For urgent matters, you can reach me by phone during consultation hours.</p>
+
+            <div class="contact-box">
+            <div class="contact-row">
+                <div class="contact-icon">
+                <svg width="16" height="16" fill="none" stroke="#3b82f6" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div>
+                <div class="contact-label">E-Mail</div>
+                <div class="contact-value">praxis@timjmoeller.com</div>
+                </div>
+            </div>
+            <!-- <div class="contact-row">
+                <div class="contact-icon">
+                <svg width="16" height="16" fill="none" stroke="#3b82f6" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.07 11.07 19.8 19.8 0 01.03 2.38 2 2 0 012 .18h3a2 2 0 012 1.72 12.6 12.6 0 00.57 2.57 2 2 0 01-.45 2.11L5.91 7.09a16 16 0 006 6l.71-.71a2 2 0 012.11-.45 12.6 12.6 0 002.57.57A2 2 0 0122 14.92z"/></svg>
+                </div>
+                <div>
+                <div class="contact-label">Telefon · Mo–Fr 9–12 Uhr</div>
+                <div class="contact-value">+49 30 1234 5678</div>
+                </div>
+            </div>
+            <div class="contact-row">
+                <div class="contact-icon">
+                <svg width="16" height="16" fill="none" stroke="#3b82f6" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                <div class="contact-label">Adresse</div>
+                <div class="contact-value">Torstraße 42, 10119 Berlin-Mitte</div>
+                </div>
+            </div> -->
+
+            <div class="contact-cta">
+                <MyButton href="mailto:praxis@timjmoeller.com" type="primary">{t('contact.send_message')}</MyButton>
+                <!-- <a href="tel:+493012345678" class="btn-ghost">Anrufen</a> -->
+            </div>
+            </div>
+
+        </section>
+
 	</main>
 	<section></section>
+    <style define:vars={{backgroundUrl}}>
+main#therapy {
+    --foo: var(--backgroundUrl);
+}
+        
+.atf {
+    background-image: var(--backgroundUrl);
+    background-size: cover;
+}
+    </style>
 </NavSideBarLayout>

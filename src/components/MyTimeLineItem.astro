@@ -1,0 +1,44 @@
+---
+
+const { role, year, place } = Astro.props
+---
+
+<div class="my-timeline-item">
+    <div class="my-timeline-year">{year}</div>
+    <div class="my-timeline-role">{role}</div>
+    <div class="my-timeline-place">{place}</div>
+</div>
+
+
+<style>
+     .my-timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .my-timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -29px;
+    top: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    border: 2px solid var(--accent);
+  }
+  .my-timeline-year {
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 3px;
+  }
+  .my-timeline-role {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  .my-timeline-place {
+    font-size: 13px;
+    color: var(--muted);
+  }
+</style>

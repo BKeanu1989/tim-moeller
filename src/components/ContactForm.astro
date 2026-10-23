@@ -12,13 +12,12 @@ const t = useTranslations(lang);
 const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : '' 
 ---
 
-<!-- <form action="/mail.php" method="POST" class={className} {...rest}> -->
 <form action={baseURLPrefix + "/mail.php"} method="POST" class={className} {...rest}>
   <slot />
   <div class="form-group flex flex-col gap-1">
     <label class="text-white w-1/4" for="name">{t("contact.name")}</label>
     <input
-      class="h-8 rounded-sm p-1"
+      class="h-8 rounded-sm p-1 text-white"
       type="text"
       id="name"
       placeholder="Jane Doe"
@@ -28,7 +27,7 @@ const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : ''
   <div class="form-group mt-4 flex flex-col gap-1">
     <label class="text-white" for="email">{t("contact.email")}</label>
     <input
-      class="h-8 rounded-sm p-1"
+      class="h-8 rounded-sm p-1 text-white"
       type="email"
       id="email"
       placeholder="your@email.com"
@@ -38,7 +37,7 @@ const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : ''
   <div class="form-group mt-4 flex flex-col gap-1">
     <label class="text-white" for="subject">{t("contact.subject")}</label>
     <input
-      class="h-8 rounded-sm p-1"
+      class="h-8 rounded-sm p-1 text-white"
       type="text"
       id="text"
       placeholder={t("contact.subject")}
@@ -51,15 +50,15 @@ const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : ''
     <textarea
       id="message"
       name="message"
-      class="text-black h-16 rounded-sm p-1"
+      class="text-white h-16 rounded-sm p-1"
       placeholder={t("contact.message.placeholder")}
     ></textarea>
   </div>
-  <div class="mt-4 cf-turnstile" data-sitekey={siteKey} data-theme="dark" 
+  <!-- <div class="mt-4 cf-turnstile" data-sitekey={siteKey} data-theme="dark" 
     data-callback="onSuccess"
 		data-error-callback="onError"
 		data-expired-callback="onExpired"
-		data-timeout-callback="onTimeout"></div>
+		data-timeout-callback="onTimeout"></div> -->
 
     <!-- <TertiaryButton>
     </TertiaryButton> -->
@@ -104,13 +103,25 @@ import { CookieBannerObserver } from "src/scripts/cookiebanner"
           method: 'POST',
           body: formData
         })
-        .then(response => {
-          return response.text()
+        .then( async (response) => {
+          // return response.text()
+    const text = await response.text();
+    console.log(text)
+
+    console.log('HTTP status:', response.status);
+    console.log('Content-Type:', response.headers.get('content-type'));
+    console.log('PHP response:', text);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    return JSON.parse(text);
           // return response.json()
         })
         .then(data => {
           try {
-            data = JSON.parse(data)
+            // data = JSON.parse(data)
             //@ts-ignore
             if (data.success) {
             //@ts-ignore
@@ -206,4 +217,5 @@ import { CookieBannerObserver } from "src/scripts/cookiebanner"
 .fade-out {
   animation: fadeOut 3s ease-in-out forwards;
 }
+
 </style>

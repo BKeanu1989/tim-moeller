@@ -30,7 +30,7 @@
     border-left: 1px solid var(--border);
     /* padding-left: 24px; */
   }
-  .timeline-item {
+  /* .timeline-item {
     position: relative;
     margin-bottom: 20px;
   }
@@ -59,7 +59,7 @@
   .timeline-place {
     font-size: 13px;
     color: var(--muted);
-  }
+  } */
 
   .info-grid {
     display: grid;
@@ -156,15 +156,25 @@
     text-transform: uppercase;
     margin-bottom: 8px;
   }
+  
+  section:not(.atf) {
+    h2 {
+      @apply mb-4 font-cormorant font-bold text-3xl;
+    }
+  }
 
-  h2 {
+  p {
+    @apply text-c-gray;
+  }
+
+  /* h2 {
     font-family: 'DM Serif Display', serif;
     font-size: 26px;
     font-weight: 400;
     color: var(--text);
     margin-bottom: 18px;
     line-height: 1.25;
-  }
+  } */
 }
 
 

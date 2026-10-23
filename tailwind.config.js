@@ -23,7 +23,8 @@ export default {
         "c-dark-blue": "#1D536C",
         "c-bg-black": "#061013",
         "c-muted-grey": "#718087",
-        "c-gray": "#b0b0c4"
+        "c-gray": "#b0b0c4",
+        // "c-primary": "",
         // ""
       },
 
