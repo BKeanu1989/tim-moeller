@@ -6,21 +6,24 @@ import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
 // import dunkleWandPflanze from "@assets/background-therapy-2-chairs-plant.jpeg"
 import dunkleWandPflanze from "@assets/background-therapy-2-chairs-plant-left-upscaled.jpeg"
 import ContactForm from '@components/ContactForm.astro'
+import MyTag from '@components/MyTag.astro'
+import MyButton from '@components/buttons/MyButton.astro'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 ---
 
+
 <NavSideBarLayout title={t('nav.therapy')}>
-	<main class="flex flex-col w-full text-gray-200">
+	<main class="flex flex-col w-full text-gray-200 therapy">
 		<!-- <h1 class="text-3xl text-center">{t('nav.therapy')}</h1> -->
-        <div class="atf flex flex-row h-[80vh] md:min-h-[900px] relative">
+        <div class="atf flex flex-row h-[95vh] md:min-h-[900px] relative">
             <div class="atf-image--wrapper absolute w-full -z-50">
                 <Picture class="-z-10 w-full h-dvh"  src={dunkleWandPflanze} alt="Dunkle Hintergrundwand mit Lichteinstrahlung von Links"></Picture>
                 <div class="bg-overlay left-0 top-0 w-full h-full z-10 absolute bg-black/60 "></div>
                 
             </div>
             <section class="lg:w-1/2 relative left pt-5 px-10 mt-20">
-                <h2 class="text-7xl left--text text-c-dark-blue font-bold font-cormorant lg:leading-snug lg:tracking-tight">Verhaltenstherapie,</h2>
+                <h2 class="text-7xl left--text text-blue-500 font-bold font-cormorant lg:leading-snug lg:tracking-tight">Verhaltenstherapie,</h2>
                 <p class="text-5xl left--text font-inter lg:leading-snug" >die Raum für Veränderung schafft.</p>
                 <p class="text-xl left--text text-c-bg-grey font-inter lg:leading-7 mt-8" >
                     <span class="left--text">Ein geschützter Rahmen,</span> <span class="left--text">um Gedanken zu verstehen,</span> <span class="left--text">neue Perspektiven zu entwickeln</span>
@@ -31,6 +34,159 @@ const t = useTranslations(lang)
                 </div>
             </section>
         </div>
+        <div class="px-10 lg:w-1/2">
+            <hr>
+        </div>
+        <div class="about-me px-10 lg:w-1/2">
+            <h1 class="text-blue-500">{t('nav.about')}</h1>
+            <p>Ich spezialisiere mich auf:</p>
+            <MyTag>Depression</MyTag>
+            <div class="flex flex-col gap-5">
+
+                <p class="text-c-gray">
+                    Mir ist wichtig, dass Sie sich in der Therapie wohlfühlen und offen sagen können, was Sie beschäftigt – auch wenn es schwerfällt, widersprüchlich erscheint oder sich noch nicht gut in Worte fassen lässt. Sie müssen nicht schon wissen, was genau das Problem ist oder wie Sie etwas verändern möchten. Das können wir gemeinsam herausfinden.
+                
+                </p>
+                <p class="text-c-gray">
+                
+                    Ich arbeite verhaltenstherapeutisch. Dabei schauen wir darauf, wie Ihre bisherigen Erfahrungen, Gedanken, Gefühle und Verhaltensweisen zusammenhängen. Vieles, was heute Schwierigkeiten macht, war vielleicht einmal hilfreich oder verständlich. Dieses Verständnis ist für mich ein Ausgangspunkt, um gemeinsam neue Möglichkeiten auszuprobieren.
+                </p>
+                
+                <p class="text-c-gray">
+                
+                    Meine Arbeit in Forschung und Lehre prägt auch meinen therapeutischen Blick. Ich möchte nachvollziehbar erklären, weshalb ich ein Vorgehen vorschlage, und mit Ihnen prüfen, ob es für Sie hilfreich ist. Ihre Erfahrungen und Ihre Rückmeldungen sind dabei ebenso wichtig wie mein fachliches Wissen. Auch Zweifel oder Kritik dürfen offen angesprochen werden.
+                </p>
+                
+                <p class="text-c-gray">
+                    Therapie soll sich für Sie im Alltag bemerkbar machen. Deshalb arbeiten wir an konkreten Situationen und an Veränderungen, die zu Ihren Zielen und Lebensumständen passen. Dabei ist mir ein respektvoller, direkter und menschlicher Umgang wichtig
+                </p>
+            </div>
+        </div>
+        <div class="px-10 lg:w-1/2">
+            <hr>
+        </div>
+        <div class="how-i-work px-10">
+            <h2 class="uppercase text-lg text-blue-500">Behandlungsansatz</h2>
+            <h3 class="font-cormorant text-4xl font-bold">Wie ich arbeite</h3>
+        </div>
+        <div class="px-10 lg:w-1/2">
+            <hr>
+        </div>
+        <div class="qualification px-10">
+            <h2 class="uppercase text-lg text-blue-500">{t('misc.qualifications')}</h2>
+            <h3 class="font-cormorant text-4xl font-bold">Ausbildung & Werdegang</h3>
+
+            <div class="timeline pl-5 lg:pl-12">
+                <div class="timeline-item">
+                    <div class="timeline-year">2024 – heute</div>
+                    <div class="timeline-role">Privatpraxis</div>
+                    <div class="timeline-place">Berlin-Mitte</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2020 – 2024</div>
+                    <div class="timeline-role">Psychologischer Psychotherapeut (Approbation)</div>
+                    <div class="timeline-place">Charité Universitätsmedizin Berlin</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2018 – 2022</div>
+                    <div class="timeline-role">Ausbildung zum Psychologischen Psychotherapeuten (KVT)</div>
+                    <div class="timeline-place">Institut für Verhaltenstherapie Berlin</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2016 – 2018</div>
+                    <div class="timeline-role">Master of Science Psychologie</div>
+                    <div class="timeline-place">Humboldt-Universität zu Berlin</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2013 – 2016</div>
+                    <div class="timeline-role">Bachelor of Science Psychologie</div>
+                    <div class="timeline-place">Ruprecht-Karls-Universität Heidelberg</div>
+                </div>
+            </div>
+        </div>
+        
+
+        <section class="lg:w-1/2 px-10">
+            <div class="section-label text-blue-500 uppercase text-lg font-bold">Praxisinformationen</div>
+            <h2 class="">Was Sie wissen sollten</h2>
+                <div class="info-grid">
+                <dl class="info-row">
+                    <dt>Sitzungsdauer</dt>
+                    <dd>50 Minuten</dd>
+                </dl>
+                <dl class="info-row">
+                    <dt>Honorar</dt>
+                    <dd>120 € / Sitzung</dd>
+                </dl>
+                <dl class="info-row">
+                    <dt>Erstgespräch</dt>
+                    <dd>Kostenlos · 25 Minuten</dd>
+                </dl>
+                <dl class="info-row">
+                    <dt>Abrechnung</dt>
+                    <dd>Privatversicherung · Selbstzahler · Kostenerstattung</dd>
+                </dl>
+                <dl class="info-row">
+                    <dt>Format</dt>
+                    <dd>Präsenz & Online</dd>
+                </dl>
+                <dl class="info-row">
+                    <dt>Sprachen</dt>
+                    <dd>Deutsch · Englisch</dd>
+                </dl>
+            </div>
+        </section>
+        <div class="lg:w-1/2 px-10">
+
+            <hr class="">
+        </div>
+
+        <section id="contact" class=" px-10 lg:w-1/2">
+            <div class="section-label">Kontakt</div>
+            <h2>Schreiben Sie mir</h2>
+
+            <p>Ich melde mich in der Regel innerhalb von 24 Stunden. Für dringende Anliegen erreichen Sie mich telefonisch zu den Sprechzeiten.</p>
+
+            <div class="contact-box">
+            <div class="contact-row">
+                <div class="contact-icon">
+                <svg width="16" height="16" fill="none" stroke="#3b82f6" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div>
+                <div class="contact-label">E-Mail</div>
+                <div class="contact-value">praxis@timjmoeller.com</div>
+                </div>
+            </div>
+            <!-- <div class="contact-row">
+                <div class="contact-icon">
+                <svg width="16" height="16" fill="none" stroke="#3b82f6" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.07 11.07 19.8 19.8 0 01.03 2.38 2 2 0 012 .18h3a2 2 0 012 1.72 12.6 12.6 0 00.57 2.57 2 2 0 01-.45 2.11L5.91 7.09a16 16 0 006 6l.71-.71a2 2 0 012.11-.45 12.6 12.6 0 002.57.57A2 2 0 0122 14.92z"/></svg>
+                </div>
+                <div>
+                <div class="contact-label">Telefon · Mo–Fr 9–12 Uhr</div>
+                <div class="contact-value">+49 30 1234 5678</div>
+                </div>
+            </div>
+            <div class="contact-row">
+                <div class="contact-icon">
+                <svg width="16" height="16" fill="none" stroke="#3b82f6" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                <div class="contact-label">Adresse</div>
+                <div class="contact-value">Torstraße 42, 10119 Berlin-Mitte</div>
+                </div>
+            </div> -->
+
+            <div class="contact-cta">
+                <MyButton href="mailto:praxis@timjmoeller.com" type="primary">Nachricht senden</MyButton>
+                <a href="tel:+493012345678" class="btn-ghost">Anrufen</a>
+            </div>
+            </div>
+
+        </section>
+
 	</main>
 	<section></section>
+    <style>
+
+    </style>
 </NavSideBarLayout>
