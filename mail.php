@@ -42,25 +42,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SERVER['HTTP_X_FORWARDED_FOR'] ??
     $_SERVER['REMOTE_ADDR'];
 
-    error_log("secret key: " . $secret_key);
-    $validation = validateTurnstile($token, $secret_key, $remoteip);
+    // error_log("secret key: " . $secret_key);
+    // $validation = validateTurnstile($token, $secret_key, $remoteip);
 
-    if ($validation['success']) {
-    // Valid token - process form
-        // echo "Form submission successful!";
-    // Process your form data here
-        error_log('Turnstile validation successfull: ');
+    // if ($validation['success']) {
+    // // Valid token - process form
+    //     // echo "Form submission successful!";
+    // // Process your form data here
+    //     error_log('Turnstile validation successfull: ');
 
-    } else {
-        // Invalid token - show error
-        // echo "Verification failed. Please try again.";
-        error_log('Turnstile validation failed: ' . implode(', ', $validation['error-codes']));
-    }
+    // } else {
+    //     // Invalid token - show error
+    //     // echo "Verification failed. Please try again.";
+    //     error_log('Turnstile validation failed: ' . implode(', ', $validation['error-codes']));
+    // }
 
-    if (!$validation['success']) {
-        echo json_encode(["success" => false, "message" => "verification failed"]);
-        return;
-    }
+    // if (!$validation['success']) {
+    //     echo json_encode(["success" => false, "message" => "verification failed"]);
+    //     return;
+    // }
 
 
     $any_error_found = false;
