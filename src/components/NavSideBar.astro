@@ -1,4 +1,6 @@
 ---
+import {Picture} from "astro:assets"
+
 import Xing from '../assets/xing.svg'
 import Github from '../assets/github.svg'
 import Facebook from '../assets/facebook.svg'
@@ -11,6 +13,7 @@ import User from '../assets/user.svg'
 import BookStudy from '../assets/book-study.svg'
 import Message from '../assets/message.svg'
 import Therapy from '@assets/therapy.svg'
+import MollerConsoltungLogo from '@assets/Moller_Consulting_logo-transparent-white-cropped.png'
 
 import Download from '../assets/download-white.svg'
 import LanguagePicker from './LanguagePicker.astro'
@@ -72,7 +75,9 @@ const currentYear = new Date().getFullYear()
 	<div class="flex h-full flex-col overflow-y-auto px-6">
 		<!-- Header -->
 		<header class="border-b border-gray-700/50 py-8 text-center">
-			<h1 class="text-2xl font-light text-white">Tim Julian Möller</h1>
+				<a href={`/${lang}`} class="flex justify-center">
+					<Picture src={MollerConsoltungLogo} class={"max-w-36	"} alt="Moeller Consulting Logo"></Picture>
+				</a>
 		</header>
 
 		<!-- Navigation -->
