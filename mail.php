@@ -1,140 +1,128 @@
 <?php
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require '/usr/www/users/timjmo/phpmailer/src/Exception.php';
-// require '/usr/www/users/timjmo/phpmailer/src/PHPMailer.php';
-// require '/usr/www/users/timjmo/phpmailer/src/SMTP.php';
+require __DIR__ . '/mailer.php';
+require __DIR__ . '/turnstile.php';
+require __DIR__ . '/SimpleLogger.php';
 
+ini_set('display_errors', '0');
+error_reporting(E_ALL);
 
+// Local: start the PHP server with `APP_ENV=dev php -S localhost:8000`.
+$isDev = getenv('APP_ENV') === 'dev';
+$configFile = __DIR__ . ($isDev ? '/dev.ini' : '/prod.ini');
 
-header('Access-Control-Allow-Origin: http://localhost:4321');
-header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
-require '/home/devkev/Projects/tim-moeller/phpmailer/src/Exception.php';
-require '/home/devkev/Projects/tim-moeller/phpmailer/src/PHPMailer.php';
-require '/home/devkev/Projects/tim-moeller/phpmailer/src/SMTP.php';
+$ini_array = @parse_ini_file($configFile);
 
-require './turnstile.php';
+if (!empty($ini_array['LOG_FILE'])) {
+    SimpleLogger::setFile($ini_array['LOG_FILE']);
+}
 
+function respond($status, array $body) {
+    http_response_code($status);
+    echo json_encode($body);
+    exit();
+}
 
-// $ini_array = parse_ini_file("prod.ini");
-$ini_array = parse_ini_file("dev.ini");
-// print_r($ini_array);
-   
+header('Content-Type: application/json; charset=utf-8');
+
+if ($isDev) {
+    header('Access-Control-Allow-Origin: http://localhost:4321');
+    header('Access-Control-Allow-Methods: POST, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type');
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    respond(204, []);
+}
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Allow: POST');
+    respond(405, ["success" => false, "error" => "method_not_allowed"]);
+}
+
+if ($ini_array === false) {
+    SimpleLogger::error('could not read config file', $configFile);
+    respond(500, ["success" => false, "error" => "server_error"]);
+}
+
+foreach (['HOST', 'USERNAME', 'SMTP', 'ADDADDRESS', 'SECRET_KEY'] as $key) {
+    if (empty($ini_array[$key])) {
+        SimpleLogger::error('missing config key', $key);
+        respond(500, ["success" => false, "error" => "server_error"]);
+    }
+}
+
+$token = $_POST['cf-turnstile-response'] ?? '';
+$validation = validateTurnstile($token, $ini_array["SECRET_KEY"], $_SERVER['REMOTE_ADDR'] ?? null);
+
+if (!$validation['success']) {
+    $errorCodes = $validation['error-codes'];
+    $context = ['error-codes' => $errorCodes];
+    if (isset($validation['internal-message'])) {
+        $context['internal-message'] = $validation['internal-message'];
+    }
+
+    // internal-error / invalid-json mean *we* couldn't verify, not that the visitor is a bot.
+    if (array_intersect($errorCodes, ['internal-error', 'invalid-json'])) {
+        SimpleLogger::error('turnstile verification could not be performed', $context);
+        respond(502, ["success" => false, "error" => "verification_unavailable"]);
+    }
+
+    SimpleLogger::warn('turnstile validation failed', $context);
+    respond(403, ["success" => false, "error" => "verification_failed"]);
+}
+
+SimpleLogger::info('turnstile validation successful', ['hostname' => $validation['hostname'] ?? null]);
+
+$name = trim((string) ($_POST["name"] ?? ''));
+$email = trim((string) ($_POST["email"] ?? ''));
+$subject = trim((string) ($_POST["subject"] ?? ''));
+$message = trim((string) ($_POST["message"] ?? ''));
 
 $errors = [
-    "name" => false,
-    "email" => false,
-    "subject" => false,
-    "message" => false
+    "name" => $name === '' || mb_strlen($name) > 100,
+    "email" => !PHPMailer::validateAddress($email) || mb_strlen($email) > 254,
+    "subject" => $subject === '' || mb_strlen($subject) > 200,
+    "message" => $message === '' || mb_strlen($message) > 10000
 ];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $secret_key = $ini_array["SECRET_KEY"];
-    $token = $_POST['cf-turnstile-response'] ?? '';
-    $remoteip = $_SERVER['HTTP_CF_CONNECTING_IP'] ??
-    $_SERVER['HTTP_X_FORWARDED_FOR'] ??
-    $_SERVER['REMOTE_ADDR'];
+if (in_array(true, $errors, true)) {
+    SimpleLogger::info('invalid form input', array_keys(array_filter($errors)));
+    respond(400, ["success" => false, "error" => "invalid_input", "fields" => $errors]);
+}
 
-    // error_log("secret key: " . $secret_key);
-    // $validation = validateTurnstile($token, $secret_key, $remoteip);
+// Names/subjects end up in mail headers; strip line breaks so nothing can be injected.
+$name = str_replace(["\r", "\n"], ' ', $name);
+$subject = str_replace(["\r", "\n"], ' ', $subject);
 
-    // if ($validation['success']) {
-    // // Valid token - process form
-    //     // echo "Form submission successful!";
-    // // Process your form data here
-    //     error_log('Turnstile validation successfull: ');
+// --- 3. Send via Hetzner SMTP -----------------------------------------------
+$mail = null;
 
-    // } else {
-    //     // Invalid token - show error
-    //     // echo "Verification failed. Please try again.";
-    //     error_log('Turnstile validation failed: ' . implode(', ', $validation['error-codes']));
-    // }
+try {
+    $mail = createMailer($ini_array);
 
-    // if (!$validation['success']) {
-    //     echo json_encode(["success" => false, "message" => "verification failed"]);
-    //     return;
-    // }
+    // Only enable when debugging SMTP problems; the transcript contains credentials (base64).
+    // $mail->SMTPDebug   = \PHPMailer\PHPMailer\SMTP::DEBUG_SERVER;
+    // $mail->Debugoutput = function ($str, $level) { SimpleLogger::debug('smtp', trim($str)); };
 
+    $mail->addReplyTo($email, $name);
+    $mail->addAddress($ini_array["ADDADDRESS"]);
 
-    $any_error_found = false;
-    if (!isset($_POST["name"]) || empty($_POST["name"])) {
-        $errors["name"] = true;
-        $any_error_found = true;
-    }
+    $mail->isHTML(false);
 
-    if (!isset($_POST["email"]) || empty($_POST["email"])) {
-        $errors["email"] = true;
-        $any_error_found = true;
+    $preMessage = "Du hast eine Email von " . $name . " mit der Email Adresse " . $email . " erhalten.\r\n\r\n";
 
-    }
+    $mail->Subject = $subject;
+    $mail->Body    = $preMessage . $message;
 
-    if (!isset($_POST["subject"]) || empty($_POST["subject"])) {
-        $errors["subject"] = true;
-        $any_error_found = true;
-
-    }
-
-    if (!isset($_POST["message"]) || empty($_POST["message"])) {
-        $any_error_found = true;
-        $errors["message"] = true;
-    }
-
-    if ($any_error_found) {
-        // return json_encode()
-        http_response_code(400);        
-
-        echo json_encode(["success" => false]);
-        exit();
-    }
-        
-        
-
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $subject = $_POST["subject"];
-    $message = $_POST["message"];
-    $mail = new PHPMailer(true);
-
-    try {
-        $mail->isSMTP();                                            
-        $mail->Host       = $ini_array["HOST"];                     
-        $mail->SMTPAuth   = true;                                 
-        $mail->Username   = $ini_array["USERNAME"];   
-        $mail->Password   = $ini_array["SMTP"];                
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;                                 
-        $mail->Sender     =  $ini_array["SENDER"];
-
-        $mail->setFrom($email, $name);
-        $mail->addAddress($ini_array["ADDADDRESS"], 'Me');     //Add a recipient
-
-        $mail->isHTML(false);
-
-        $preMessage = "Du hast eine Email von " . $name . " mit der Email Adresse " . $email . " erhalten.\r\n";
-
-        $mail->Subject = $subject;
-        $mail->Body    = $preMessage . $message;
-        $mail->AltBody = $preMessage . $message;
-
-        $mail->send();
-        http_response_code(200);
-        echo json_encode(["success" => true]);
-        exit();
-    } catch (Exception $e) {
-        // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        echo json_encode(["success" => false, "error" => $mail->ErrorInfo]);
-        exit();
-    }
-} else {
-    http_response_code(400);
-    echo json_encode(["success" => false, "error" => "no post method used"]);
-    exit();
-
+    $mail->send();
+    SimpleLogger::info('mail sent', ['message-id' => $mail->getLastMessageID()]);
+    respond(200, ["success" => true]);
+} catch (Exception $e) {
+    SimpleLogger::error('mail could not be sent', $mail ? $mail->ErrorInfo : null);
+    SimpleLogger::exception($e, 'PHPMailer exception');
+    respond(500, ["success" => false, "error" => "send_failed"]);
 }
