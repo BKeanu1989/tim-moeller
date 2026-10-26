@@ -5,7 +5,7 @@ import MyButton from "./buttons/MyButton.astro";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
-<div class="cookie-banner h-min fixed bottom-0 right-5 bg-slate-500" data-status="closed">
+<div class="cookie-banner h-min fixed bottom-0 right-5 bg-slate-500 z-20" data-status="closed">
     <button class="rounded-t-[0.25rem] text-white py-2 px-5 open-cookie-banner" data-target="cookie-button">{t('misc.cookies_button')}</button>
     <div class="banner h-min hidden py-5 justify-between border" data-target="cookie-banner">
         <form action="" class="flex flex-col h-full p-5 gap-5">

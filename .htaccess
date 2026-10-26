@@ -1,0 +1,4 @@
+<FilesMatch "\.(ini|log)$">
+  Require all denied
+</FilesMatch>
+

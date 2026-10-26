@@ -54,11 +54,7 @@ const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : ''
       placeholder={t("contact.message.placeholder")}
     ></textarea>
   </div>
-  <!-- <div class="mt-4 cf-turnstile" data-sitekey={siteKey} data-theme="dark" 
-    data-callback="onSuccess"
-		data-error-callback="onError"
-		data-expired-callback="onExpired"
-		data-timeout-callback="onTimeout"></div> -->
+  <div class="mt-4" id="turnstile-widget" data-sitekey={siteKey}></div>
 
     <!-- <TertiaryButton>
     </TertiaryButton> -->
@@ -136,8 +132,12 @@ import { CookieBannerObserver } from "src/scripts/cookiebanner"
             }
             $form.reset()
           } catch (error) {
-            console.log(error)            
+            console.log(error)
           }
+        })
+        .finally(() => {
+          // turnstile tokens single-use, get a new one after submit
+          (window as any).turnstile?.reset("#turnstile-widget")
         });
         setTimeout(() => {
           $emailStatus?.classList.add('fade-out') 
@@ -173,9 +173,22 @@ import { CookieBannerObserver } from "src/scripts/cookiebanner"
 
   }
 
+  function renderTurnstile() {
+    const $widget = document.getElementById("turnstile-widget")
+    if (!$widget || $widget.dataset.rendered) return
+    const turnstile = (window as any).turnstile
+    if (!turnstile) {
+      setTimeout(renderTurnstile, 200)
+      return
+    }
+    turnstile.render($widget, { sitekey: $widget.dataset.sitekey, theme: "dark" })
+    $widget.dataset.rendered = "true"
+  }
+
   let intervalInc: any = null;
   let timeout: any;
   document.addEventListener("astro:page-load", () => {
+    renderTurnstile()
     bar = new CookieBannerObserver();
     window.Complianz.attach(bar)
     $cmplSt = document.getElementById("cmplz-status")

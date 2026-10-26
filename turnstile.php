@@ -3,8 +3,6 @@
  * Validates a Cloudflare Turnstile token server-side.
  * Docs: https://developers.cloudflare.com/turnstile/get-started/server-side-validation/
  *
- * Always returns an array with at least 'success' (bool) and 'error-codes' (array),
- * so callers never have to deal with null / malformed responses.
  */
 function validateTurnstile($token, $secret, $remoteip = null, $timeout = 10) {
     $url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';

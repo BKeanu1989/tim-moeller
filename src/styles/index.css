@@ -243,3 +243,6 @@ article.publication-single a:visited {
 
 }
 
+article.publication-single p {
+  @apply mt-5;
+}
