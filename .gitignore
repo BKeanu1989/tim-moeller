@@ -34,3 +34,6 @@ public/output.css
 sensitive.md
 
 backup-online
+
+secret-note-*.*
+*.log

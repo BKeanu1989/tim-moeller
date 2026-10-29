@@ -28,6 +28,7 @@ export const ui = {
         'contact.copied': 'Copied!',
         'contact.email_sent': 'Email sent',
         'contact.email_error': 'Couldn\'t send email',
+        'meta.description': 'Site of Dr. Tim Julian Möller - Cognitive Behavioural Therapist',
         'misc.accept': 'accept',
         'misc.complianz_error_message': 'We do not have cookie consent',
         'misc.years_of_experience': 'Years of experience',
@@ -98,6 +99,8 @@ export const ui = {
         'contact.copied': 'Kopiert!',
         'contact.email_sent': 'Email gesendet',
         'contact.email_error': 'Email konnte nicht verschickt werden',
+        'meta.description': 'Seite von Dr. Tim Julian Möller - Psychologischer Psychotherapeut mit Schwerpunkt Kognitive Verhaltenstherapie',
+
         'misc.complianz_error_message': 'Wir haben keine Cookie Zustimmung von Ihnen',
         'misc.years_of_experience': 'Jahre an Erfahrung',
         'misc.open_source': 'Open Source',

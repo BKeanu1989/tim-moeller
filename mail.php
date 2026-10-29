@@ -18,6 +18,8 @@ $ini_array = @parse_ini_file($configFile);
 
 if (!empty($ini_array['LOG_FILE'])) {
     SimpleLogger::setFile($ini_array['LOG_FILE']);
+} else {
+    SimpleLogger::setFile(__DIR__ . '/mail.log');
 }
 
 function respond($status, array $body) {

@@ -45,6 +45,8 @@ if ($ini_array === false) {
 
 if (!empty($ini_array['LOG_FILE'])) {
     SimpleLogger::setFile($ini_array['LOG_FILE']);
+} else {
+    SimpleLogger::setFile(__DIR__ . '/email-test.log');
 }
 
 $missing = array_filter(['HOST', 'USERNAME', 'SMTP', 'ADDADDRESS'], function ($key) use ($ini_array) {
@@ -80,7 +82,8 @@ try {
     }
 
     if (isset($opts['reply-to'])) {
-        $mail->addReplyTo($opts['reply-to'], 'Testbesucher');
+        $mail->addReplyTo($opts['reply-to'], '');
+        // $mail->addReplyTo($opts['reply-to'], 'Testbesucher');
     }
     $mail->addAddress($to);
 

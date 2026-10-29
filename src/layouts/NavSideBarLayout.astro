@@ -2,7 +2,7 @@
 interface Props {
 	title: string
 }
-import { getLangFromUrl } from '../i18n/utils'
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
 import { ClientRouter } from 'astro:transitions'
 
 import '../styles/index.css'
@@ -16,6 +16,7 @@ const lang = getLangFromUrl(Astro.url)
 const now = new Date()
 
 const bar = now.getTime()
+const t = useTranslations(lang);
 
 ---
 
@@ -23,7 +24,7 @@ const bar = now.getTime()
 <html lang={lang} class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content={t('meta.description')} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
