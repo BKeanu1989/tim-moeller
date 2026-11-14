@@ -1,4 +1,6 @@
 ---
+import { Picture, Image } from 'astro:assets'
+
 import { getCollection, getEntry } from 'astro:content'
 // import Intro from "../layouts/Intro.astro";
 import IntroHero from '../../components/IntroHero.astro'
@@ -9,8 +11,339 @@ import NavSideBarLayout from 'src/layouts/NavSideBarLayout.astro'
 
 // const timAuthor = await getEntry("authors", "tim-j-moeller");
 // console.log("🚀 ~ timAuthor:", timAuthor);
+import HeroImage from "@assets/mountains.jpg";
+import MyButton from '@components/buttons/MyButton.astro';
+import tim from '../assets/tim-j-moeller.png'
+
 ---
 
 <NavSideBarLayout title="Dr. Tim Julian Möller">
-	<IntroHero />
+
+<main id="home" class="w-full">
+
+<!-- ============ HERO ============ -->
+<section class="hero relative h-dvh p-0" id="hero">
+  <div class="hero-bg absolute -z-10">
+	<div class="bg bg-black/70 absolute w-full h-full"></div>
+	<div class="hero-image-container h-dvh ">
+		<Picture priority  src={HeroImage} widths={[360, 720, 1400, 1920]} sizes={`(max-width: 400px) 360px, (max-width: 800px) 720px, (max-width: 1400px) 1400px, 1920px`} class={"-z-20 max-h-dvh hidden lg:block"} alt="Berglandschaft"></Picture>
+
+	</div>
+  </div>
+  <!-- <div class="hero-veil"></div> -->
+  <div class="wrap hero-inner flex flex-col lg:w-1/2 mx-auto justify-center h-dvh">
+    <span class="eyebrow text-c-accent font-bold">Kognitive Verhaltenstherapie für Erwachsene · Online-Psychotherapie </span>
+    <h1>Wenn der Alltag zunehmend schwerfällt – <em class="italic text-c-accent">begleite ich Sie</em> dabei, wieder Raum zu gewinnen.</h1>
+    <p class="text-c-muted-grey-light">Manchmal nehmen Ängste, Niedergeschlagenheit oder belastende Erfahrungen so viel Raum ein, dass der Alltag zunehmend schwerfällt. Vielleicht wissen Sie bereits, wobei Sie Unterstützung suchen. Vielleicht möchten Sie zunächst herausfinden, was gerade mit Ihnen los ist.</p>
+    <div class="hero-ctas">
+		<MyButton type='primary' href='#kontakt'>
+			Erstgespräch anfragen
+        <svg class="inline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+
+		</MyButton>
+    </div>
+    <div class="hero-badges">
+      <span class="badge"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>100 % online per Videosprechstunde</span>
+      <span class="badge"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg>Deutsch &amp; Englisch</span>
+      <span class="badge"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>Kostenloses Kennenlerngespräch · 25 Min.</span>
+    </div>
+  </div>
+  <div class="scroll-hint"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></div>
+</section>
+
+<!-- ============ STATEMENT ============ -->
+<section class="statement">
+  <div class="wrap">
+    <p class="reveal">„In meiner Privatpraxis begleite ich Sie dabei, Ihre Schwierigkeiten besser zu verstehen und konkrete Veränderungen anzugehen. Dabei verbinden wir Ihre persönlichen Erfahrungen mit einem wissenschaftlich fundierten therapeutischen Vorgehen."</p>
+    <p class="src reveal">Alle Termine finden online per Videosprechstunde statt.</p>
+  </div>
+</section>
+
+<!-- ============ LEISTUNGEN ============ -->
+<section id="leistungen">
+  <div class="wrap">
+    <span class="section-title ">Mein Leistungsangebot</span>
+    <h2 class="reveal text-4xl tracking-wide">Psychotherapeutische Unterstützung,<br>die zu Ihrer Situation passt</h2>
+    <p class="section-lead reveal">Ich biete kognitive Verhaltenstherapie für Erwachsene im Einzelsetting an. Die Gespräche finden ausschließlich online statt und können auf Deutsch oder Englisch geführt werden.</p>
+    <p class="section-lead reveal" style="margin-top:1.2rem">Zu Beginn nehmen wir uns Zeit für Ihr Anliegen: Was belastet Sie aktuell? Welche Erfahrungen spielen dabei eine Rolle? Was haben Sie bereits versucht, und was möchten Sie verändern? Auf dieser Grundlage entwickeln wir gemeinsam einen Behandlungsplan. Dabei prüfen wir auch, ob eine Onlinebehandlung für Ihre Situation geeignet ist.</p>
+
+    <div class="tiles">
+      <div class="tile reveal">
+        <div class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4 7 7 0 0 0 20 13.5z"/></svg></div>
+        <h3>Depressionen und anhaltende Niedergeschlagenheit</h3>
+        <p>Wenn Energie und Freude fehlen, kann selbst Alltägliches anstrengend werden. Vielleicht ziehen Sie sich zurück, grübeln viel oder begegnen sich selbst mit großer Härte. In der Therapie arbeiten wir daran, diese Zusammenhänge zu verstehen, hilfreiche Aktivitäten wieder aufzubauen und einen anderen Umgang mit belastenden Gedanken zu entwickeln.</p>
+      </div>
+      <div class="tile reveal">
+        <div class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></div>
+        <h3>Ängste, Sorgen und Panik</h3>
+        <p>Bestimmen Sorgen Ihre Gedanken, oder vermeiden Sie zunehmend Situationen, die Ihnen Angst machen? Gemeinsam untersuchen wir, wodurch Ihre Ängste ausgelöst und aufrechterhalten werden. Darauf aufbauend entwickeln wir konkrete Schritte, mit denen Sie sich angstauslösenden Situationen wieder annähern und mehr Handlungsspielraum gewinnen können.</p>
+      </div>
+      <div class="tile reveal">
+        <div class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l7 3v5c0 4.6-3 8.4-7 10-4-1.6-7-5.4-7-10V6l7-3z"/></svg></div>
+        <h3>Belastende und traumatische Erfahrungen</h3>
+        <p>Manche Erlebnisse wirken lange nach – etwa durch aufdrängende Erinnerungen, starke Anspannung oder das Gefühl, nicht mehr sicher zu sein. Eine psychotherapeutische Behandlung kann dabei unterstützen, diese Folgen zu verstehen und das Erlebte zu verarbeiten. Welche Vorgehensweise und welcher Behandlungsrahmen dafür geeignet sind, klären wir sorgfältig zu Beginn.</p>
+      </div>
+      <div class="tile reveal">
+        <div class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Erschöpfung, Überforderung und Lebensveränderungen</h3>
+        <p>Vielleicht funktionieren Sie nach außen weiter, fühlen sich innerlich aber zunehmend erschöpft. Oder eine Trennung, berufliche Veränderung oder andere Belastung hat Ihr bisheriges Gleichgewicht durcheinandergebracht. Gemeinsam schauen wir darauf, was Sie belastet, welche Bedürfnisse zu wenig Raum bekommen und welche Veränderungen möglich sind.</p>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <strong>Gute zu wissen:</strong> Nicht jede schwierige Lebensphase erfordert eine Psychotherapie. Im Erstgespräch klären wir deshalb, ob eine behandlungsbedürftige psychische Erkrankung vorliegt und welches Unterstützungsangebot zu Ihrem Anliegen passt.
+    </div>
+  </div>
+</section>
+
+<!-- ============ WARUM PSYCHOTHERAPIE ============ -->
+<section id="warum" style="background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap split">
+    <div class="sticky reveal">
+      <span class="section-title">Warum Psychotherapie?</span>
+      <h2>Sie müssen nicht erst an Ihre Grenzen kommen, um Unterstützung zu suchen</h2>
+      <p>Sie dürfen auch mit Unsicherheit ins erste Gespräch kommen. Wir finden gemeinsam heraus, welche Unterstützung für Sie sinnvoll ist.</p>
+	  <MyButton class='mt-5' href='#kontakt'>Erstgespräch anfragen</MyButton>
+    </div>
+    <div>
+      <p class="reveal">Vielleicht beschäftigt Sie schon länger die Frage, ob eine Psychotherapie für Sie sinnvoll wäre. Gleichzeitig denken Sie möglicherweise, dass Sie Ihre Schwierigkeiten allein bewältigen müssten oder dass andere Menschen größere Probleme haben.</p>
+      <p class="reveal">Entscheidend ist jedoch, wie es <strong>Ihnen</strong> geht. Wenn Ängste, Niedergeschlagenheit oder andere Beschwerden anhalten und Ihren Alltag, Ihre Beziehungen oder Ihre Lebensqualität beeinträchtigen, kann es sinnvoll sein, professionelle Unterstützung in Anspruch zu nehmen. Sie müssen dafür noch keine Diagnose kennen.</p>
+      <p class="reveal">Psychische Erkrankungen sind kein persönliches Versagen. Ihre Entstehung lässt sich nicht auf eine einzelne Ursache reduzieren: Körperliche Voraussetzungen, persönliche Erfahrungen und soziale Lebensbedingungen können zusammenwirken. In der Therapie geht es deshalb nicht darum, Schuld zu suchen, sondern Ihre Situation möglichst gut zu verstehen.</p>
+      <p class="reveal">In unseren Gesprächen nehmen wir uns Zeit für das, was Sie beschäftigt. Wir betrachten wiederkehrende Schwierigkeiten, Ihre bisherigen Bewältigungsversuche und die Fähigkeiten, auf die Sie bereits zurückgreifen können. Daraus entwickeln wir konkrete Schritte, die zu Ihren Bedürfnissen und Möglichkeiten passen.</p>
+      <p class="reveal">Das Ziel ist nicht, dass Sie einfach noch besser funktionieren. Es geht darum, Belastungen zu verringern und wieder mehr Möglichkeiten zu gewinnen, Ihr Leben nach Ihren eigenen Vorstellungen zu gestalten.</p>
+    </div>
+  </div>
+</section>
+<!-- ============ VERHALTENSTHERAPIE ============ -->
+<section id="verhaltenstherapie">
+  <div class="wrap split">
+    <div>
+      <span class="section-title">Was ist kognitive Verhaltenstherapie?</span>
+      <h2 class="reveal">Verstehen, wie Schwierigkeiten entstehen – und herausfinden, was sich verändern lässt</h2>
+      <p class="reveal">Die kognitive Verhaltenstherapie betrachtet das Zusammenspiel von Gedanken, Gefühlen, körperlichen Reaktionen und Verhalten. Auch Ihre bisherigen Erfahrungen und Ihre aktuellen Lebensbedingungen werden dabei berücksichtigt. Gemeinsam untersuchen wir, wodurch Beschwerden entstanden sind und welche Faktoren dazu beitragen, dass sie bestehen bleiben.</p>
+      <p class="reveal"><strong>„Kognitiv“</strong> bezieht sich auf unser Denken: etwa darauf, wie wir Situationen einschätzen, welche Erwartungen wir haben und welche Bedeutung wir unseren Erfahrungen geben. Der <strong>verhaltenstherapeutische Teil</strong> richtet den Blick darauf, wie wir handeln – und welche neuen Erfahrungen durch verändertes Handeln möglich werden.</p>
+      <p class="reveal">Dabei geht es nicht darum, sich Schwierigkeiten schönzureden oder unangenehme Gefühle einfach abzustellen. In meiner Arbeit möchte ich mit Ihnen prüfen, welche Sichtweisen und Reaktionen Ihnen helfen und welche Sie inzwischen einschränken. Wir suchen nach Alternativen, die sich nicht nur im Gespräch überzeugend anhören, sondern auch in Ihrem Alltag erproben lassen.</p>
+      <p class="reveal">Ihre Lebensgeschichte bleibt dabei wichtig. Sie kann verständlich machen, weshalb bestimmte Muster entstanden sind. Gleichzeitig richten wir den Blick auf die Gegenwart: Was brauchen Sie heute, und an welchen Stellen können Veränderungen beginnen?</p>
+    </div>
+    <div style="margin-top:2.6rem">
+      <div class="sub-block reveal">
+        <h3>Warum ich mit kognitiver Verhaltenstherapie arbeite</h3>
+        <p>Die kognitive Verhaltenstherapie gehört zu den am besten untersuchten psychotherapeutischen Verfahren. Sie wird unter anderem bei Depressionen, Angststörungen und Zwangsstörungen eingesetzt. Welches Vorgehen sinnvoll ist, hängt jedoch immer vom jeweiligen Beschwerdebild und der individuellen Situation ab.</p>
+        <p style="margin-top:.8rem">An diesem Ansatz schätze ich besonders, dass wir Verständnis und praktische Veränderung miteinander verbinden können. Wir besprechen nicht nur, was schwierig ist, sondern entwickeln gemeinsam Möglichkeiten, anders damit umzugehen.</p>
+        <p style="margin-top:.8rem">Mir ist wichtig, dass Sie nachvollziehen können, weshalb ich eine bestimmte Übung oder Vorgehensweise vorschlage. Wir vereinbaren Ziele, überprüfen unsere Fortschritte und passen die Behandlung an, wenn etwas nicht hilfreich ist. Ihre Rückmeldungen gehören ausdrücklich dazu.</p>
+      </div>
+      <div class="sub-block reveal">
+        <h3>Wie sieht das in der Therapie konkret aus?</h3>
+        <p>Je nach Anliegen können wir beispielsweise daran arbeiten, belastende Bewertungen zu überprüfen, vermiedene Situationen schrittweise wieder aufzusuchen oder hilfreiche Aktivitäten in Ihren Alltag zurückzubringen. Die Auswahl richtet sich nach Ihren Beschwerden und den gemeinsam vereinbarten Zielen.</p>
+        <p style="margin-top:.8rem">Zwischen den Sitzungen können Sie ausgewählte Schritte ausprobieren. Dabei geht es nicht darum, Aufgaben perfekt zu erledigen. Auch Schwierigkeiten oder Zweifel liefern wichtige Hinweise, die wir im nächsten Gespräch gemeinsam aufgreifen können.</p>
+        <p style="margin-top:.8rem">Die Therapie soll Ihnen nicht vorgeben, wie Sie leben müssen. Sie soll Ihnen helfen, Ihre Möglichkeiten besser zu erkennen und bewusster zu nutzen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABLAUF ============ -->
+<section id="ablauf" style="background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap split">
+    <div class="sticky reveal">
+      <span class="section-title">So läuft die Online-Psychotherapie ab</span>
+      <h2>So beginnt unsere Zusammenarbeit</h2>
+      <p>Der Weg ist bewusst einfach gehalten: vom ersten Kontakt bis zur gemeinsamen Therapieplanung. Sie müssen sich nicht besonders vorbereiten oder bereits eine fertige Erklärung für Ihre Schwierigkeiten mitbringen.</p>
+      <ul class="check-list">
+        <li>Kontaktaufnahme per E-Mail – unverbindlich</li>
+        <li>Kostenloses Kennenlerngespräch (25 Minuten)</li>
+        <li>Diagnostische Abklärung &amp; Therapieplanung</li>
+        <li>Online-Sitzungen per Videosprechstunde</li>
+      </ul>
+      <p style="font-size:.9rem;margin-top:1.4rem">Technische Voraussetzung ist ein stabiles Internet, ein Gerät mit Kamera und Mikrofon sowie ein ruhiger, geschützter Raum während der Sitzungen. Ob das Onlineformat für Ihre Situation geeignet ist, prüfen wir gemeinsam zu Beginn.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num"></div>
+        <div>
+          <h3>Kontaktaufnahme</h3>
+          <p>Schreiben Sie mir kurz, was Sie beschäftigt – oder einfach nur, dass Sie Unterstützung suchen. Sie müssen dafür keine Diagnose kennen und sich nicht perfekt ausdrücken.</p>
+          <span class="tag">Per E-Mail · unverbindlich</span>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num"></div>
+        <div>
+          <h3>Kostenloses Kennenlerngespräch · 25 Minuten</h3>
+          <p>Im ersten Gespräch können Sie schildern, was Sie aktuell beschäftigt und was Sie sich von einer Behandlung erhoffen. Sie haben außerdem Gelegenheit, mich und meine Arbeitsweise kennenzulernen – und ich kann Ihnen einen ersten Eindruck geben, wie ich Ihr Anliegen einschätze.</p>
+          <span class="tag">Kostenlos · 25 Minuten · online</span>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num"></div>
+        <div>
+          <h3>Diagnostische Abklärung &amp; gemeinsame Therapieplanung</h3>
+          <p>Anschließend klären wir Ihre Beschwerden und die Rahmenbedingungen einer möglichen Behandlung genauer. Dazu gehört auch die Frage, ob mein Onlineangebot für Sie geeignet ist. Wenn wir uns für eine Zusammenarbeit entscheiden, vereinbaren wir gemeinsam die nächsten Schritte und Ziele.</p>
+          <span class="tag">Auf Wunsch mit schriftlichem Kostenvoranschlag</span>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num"></div>
+        <div>
+          <h3>Die Therapie-Sitzungen</h3>
+          <p>Die Behandlung findet per Videosprechstunde statt – auf Deutsch oder Englisch. Wir arbeiten an den Zielen, die uns wichtig sind, überprüfen regelmäßig unsere Fortschritte und passen die Vorgehensweise an, wenn etwas nicht hilfreich ist.</p>
+          <span class="tag">50 Minuten · wöchentlich oder nach Vereinbarung</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KOSTEN ============ -->
+<section id="kosten">
+  <div class="wrap">
+    <span class="section-title">Kosten und Erstattung</span>
+    <h2 class="reveal">Transparente Kosten – drei Wege der Finanzierung</h2>
+    <p class="section-lead reveal">Meine Praxis arbeitet ohne Kassenzulassung. Das bedeutet: Es besteht kein direktes Abrechnungsverhältnis mit gesetzlichen Krankenkassen. Die folgenden Optionen stehen Ihnen dennoch offen.</p>
+
+    <div class="price-cards">
+      <div class="price-card featured reveal">
+        <span class="free-tag">Kennenlernen</span>
+        <h3>Kostenloses Kennenlerngespräch</h3>
+        <div class="price-big">0,- €</div>
+        <div class="price-sub">25 Minuten · unverbindlich · online</div>
+        <p>Lernen wir uns kennen: Sie schildern Ihr Anliegen, ich gebe Ihnen einen ersten Eindruck von meiner Arbeitsweise. Anschließend entscheiden Sie in Ruhe, ob Sie einen weiteren Schritt wünschen.</p>
+      </div>
+      <div class="price-card reveal">
+        <span class="free-tag" style="background:rgba(138,184,172,.14);color:var(--teal)">Behandlung</span>
+        <h3>Einzeltherapie-Sitzung</h3>
+        <div class="price-big">135,53 €</div>
+        <div class="price-sub">pro 50 Minuten · Stand 2026</div>
+        <p>Als Selbstzahler erhalten Sie nach jeder Sitzung eine Rechnung zur Überweisung. Das Honorar gilt pro 50-minütiger Therapieeinheit; über Sitzungsfrequenz und Umfang vereinbaren wir transparent im Voraus.</p>
+      </div>
+      <div class="price-card reveal">
+        <span class="free-tag" style="background:rgba(138,184,172,.14);color:var(--teal)">Erstattung</span>
+        <h3>Privat versichert oder Kostenerstattung?</h3>
+        <div class="price-big" style="font-size:1.6rem;padding-top:.9rem">Kostenzusage prüfen</div>
+        <div class="price-sub">Vor Beginn der Behandlung</div>
+        <p>Privat Versicherte wenden sich bitte vorab an ihre Krankenversicherung, um die Bedingungen der Kostenübernahme zu klären. Gesetzlich Versicherte können bei ihrer Krankenkasse ein Kostenerstattungsverfahren beantragen – ich stelle Ihnen dafür gerne einen Kostenvoranschlag aus.</p>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <strong>Wichtig:</strong> Bitte klären Sie die Kostenübernahme mit Ihrer Versicherung, <strong>bevor</strong> die Behandlung beginnt. Ich unterstütze Sie dabei mit den nötigen Unterlagen wie Kostenvoranschlag oder Rechnungen nach GOÄ/GOÄ-Analog.
+    </div>
+  </div>
+</section>
+<!-- ============ ÜBER MICH ============ -->
+<section id="ueber-mich" style="background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap about-grid">
+    <div class="portrait reveal">
+      <span>Tim Julian Möller<small>Psychotherapie · Kognitive Verhaltenstherapie</small></span>
+    </div>
+    <div>
+      <span class="eyebrow section-title">Über mich und meine Arbeitsweise</span>
+      <h2 class="reveal">Verstehen und Veränderung – beides gehört für mich zusammen</h2>
+      <p class="reveal">Ich bin Psychotherapeut und arbeite im Verfahren der kognitiven Verhaltenstherapie. <!-- HINWEIS: Qualifikation bitte anpassen (z. B. „approbierter Psychotherapeut" oder „Psychotherapeut in Ausbildung unter Supervision") --> In meiner Privatpraxis behandle ich Erwachsene ausschließlich online – auf Deutsch und Englisch.</p>
+      <p class="reveal">Meine Haltung ist es, Ihre persönlichen Erfahrungen ernst zu nehmen und mit einem wissenschaftlich fundierten therapeutischen Vorgehen zu verbinden. Sie sind die Expertin oder der Experte für Ihr Leben; ich bringe methodisches Wissen und Erfahrung im therapeutischen Prozess ein. Zusammen entwickeln wir Verständnis für Ihre Situation und konkrete Wege, die zu Ihrem Alltag passen.</p>
+      <p class="reveal">Mir ist wichtig, dass Sie jederzeit nachvollziehen können, wohin wir gehen: Wir vereinbaren Ziele gemeinsam, überprüfen regelmäßig unsere Fortschritte und passen die Behandlung an, wenn etwas nicht hilfreich ist. Ihre Rückmeldungen sind ausdrücklich Teil des Prozesses – auch wenn sie kritisch sind.</p>
+      <p class="reveal">Neben meiner therapeutischen Tätigkeit bin ich in <strong>Forschung und Lehre</strong> tätig. Dieser Hintergrund prägt meine Arbeit: Ich orientiere mich an gut untersuchten Methoden und daran, was für Ihre Situation tatsächlich hilfreich ist.</p>
+	  <MyButton type='tertiary' href="#kontakt">Lernen wir uns kennen</MyButton>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div style="text-align:center">
+      <span class="eyebrow section-title">Häufige Fragen</span>
+      <h2 class="reveal">Was Therapiesuchende mich oft fragen</h2>
+    </div>
+    <div class="faq">
+      <details class="reveal" open>
+        <summary>Brauche ich bereits eine Diagnose?<span class="plus"></span></summary>
+        <div class="answer"><p>Nein. Viele Menschen kommen mit dem Gefühl, dass etwas nicht stimmt, ohne zu wissen, was genau. Wir klären gemeinsam, ob eine behandlungsbedürftige psychische Erkrankung vorliegt und welches Angebot zu Ihrem Anliegen passt. Sie müssen sich nicht vorbereiten oder eine fertige Erklärung mitbringen.</p></div>
+      </details>
+      <details class="reveal">
+        <summary>Wie bereite ich mich auf den ersten Termin vor?<span class="plus"></span></summary>
+        <div class="answer"><p>Gar nicht besonders. Suchen Sie sich für das Videogespräch einen ruhigen Ort, an dem Sie ungestört sind, und sorgen Sie für eine stabile Internetverbindung sowie ein Gerät mit Kamera und Mikrofon. Alles Weitere ergibt sich im Gespräch – Sie dürfen auch mit Unsicherheit kommen.</p></div>
+      </details>
+      <details class="reveal">
+        <summary>Wie häufig finden Sitzungen statt?<span class="plus"></span></summary>
+        <div class="answer"><p>Üblich ist zu Beginn ein wöchentlicher Rhythmus, damit wir kontinuierlich an Ihren Zielen arbeiten können. Je nach Fortschritt und Situation passen wir die Frequenz gemeinsam an. Eine Sitzung dauert 50 Minuten; das kostenlose Kennenlerngespräch dauert 25 Minuten.</p></div>
+      </details>
+      <details class="reveal">
+        <summary>Was passiert, wenn eine Onlinebehandlung nicht ausreicht?<span class="plus"></span></summary>
+        <div class="answer"><p>Dann sprechen wir das offen an. Nicht jedes Anliegen ist für ein reines Onlineformat geeignet – etwa bei akuten Krisen oder bestimmten Beschwerdebildern. In diesem Fall helfe ich Ihnen bei der Suche nach einer passenden Alternative, zum Beispiel einer Präsenzbehandlung oder einer anderen Anlaufstelle. Ihr Wohl steht dabei immer an erster Stelle.</p></div>
+      </details>
+      <details class="reveal">
+        <summary>Übernimmt meine Krankenkasse die Kosten?<span class="plus"></span></summary>
+        <div class="answer"><p>Meine Praxis ist nicht kassenzugelassen. Als Selbstzahler erhalten Sie eine Rechnung über 135,53 € pro 50-minütiger Sitzung. Privat Versicherte klären die Übernahme bitte vorab mit ihrer Versicherung. Gesetzlich Versicherte können ein Kostenerstattungsverfahren bei ihrer Krankenkasse beantragen – ich stelle Ihnen dafür gerne einen Kostenvoranschlag aus.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA / KONTAKT ============ -->
+<section id="kontakt" style="padding-top:20px">
+  <div class="wrap">
+    <div class="cta-banner reveal">
+      <div class="bg"></div>
+      <div class="veil"></div>
+      <div>
+        <span class="eyebrow section-title">Der erste Schritt</span>
+        <h2>Bereit, das zu verändern, was Sie belastet?</h2>
+        <p>Schreiben Sie mir – unverbindlich und ohne Vorbereitungsdruck. Wir vereinbaren ein kostenloses Kennenlerngespräch und finden gemeinsam heraus, welche Unterstützung zu Ihnen passt.</p>
+		<MyButton type='primary' href="mailto:kontakt@praxis-moeller.de?subject=Erstgespräch%20anfragen">
+			Erstgespräch anfragen
+          <svg class="inline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+		</MyButton>
+        <p style="margin-top:1.6rem;font-size:.88rem;color:var(--muted)">kontakt@praxis-moeller.de · Antwort in der Regel innerhalb von 2 Werktagen</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<style>
+	svg {
+		@apply h-5 w-5;
+	}
+</style>
+
+<script>
+	document.addEventListener("astro:page-load", () => {
+		(function(){
+			var main=document.querySelector('main');
+			// @ts-ignore
+	  function onScroll(){main.classList.toggle('scrolled',window.scrollY>40);}
+	  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+	
+	  document.querySelectorAll('details').forEach(function(d){
+		d.addEventListener('toggle',function(){
+			if (d.open) {
+				document.querySelectorAll('details[open]').forEach(function(o) {
+					if (o!==d) {
+					// @ts-ignore
+					o.open=false
+				};
+
+			});}
+	
+		});
+	  });
+	
+	  // Sanftes Einblenden beim Scrollen
+	  var io = new IntersectionObserver(function(entries) {
+		entries.forEach(function(e) { 
+			if(e.isIntersecting){ 
+				e.target.classList.add('visible');
+				io.unobserve(e.target);
+			}
+		});
+	  },{threshold:.12});
+
+	  document.querySelectorAll('.reveal').forEach(function(el) {
+		io.observe(el);
+	});
+	})();
+})
+</script>
 </NavSideBarLayout>

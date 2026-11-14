@@ -37,3 +37,6 @@ backup-online
 
 secret-note-*.*
 *.log
+
+message.txt
+test.html

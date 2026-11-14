@@ -27,8 +27,25 @@ const t = useTranslations(lang);
 ---
 
 <NavSideBarLayout title={t('misc.projects_publications')}>
-	<main class="w-full text-white">
-		<h1 class="py-5 text-center text-4xl">{t('misc.projects_publications')}</h1>
+	<main class="w-full text-white" id="publications">
+
+	<header class="page-head">
+		<p class="eyebrow">Forschung &amp; Entwicklung</p>
+		<h1>{t('misc.projects_publications')}</h1>
+		<p class="lede">
+			Eine Übersicht unserer aktuellen Projekte, veröffentlichten Arbeiten und
+			offenen Beiträge. Jeder Eintrag verlinkt auf den vollständigen Beitrag
+			bzw. das zugehörige Repository.
+		</p>
+	</header>
+
+  <nav class="filters" aria-label="Nach Kategorie filtern">
+    <button class="filter-chip" data-filter="alle" aria-pressed="true">Alle</button>
+    <button class="filter-chip" data-filter="projekt" aria-pressed="false">Projekt</button>
+    <button class="filter-chip" data-filter="publikation" aria-pressed="false">Publikation</button>
+    <button class="filter-chip" data-filter="open-source" aria-pressed="false">Open Source</button>
+    <button class="filter-chip" data-filter="preprint" aria-pressed="false">Preprint</button>
+  </nav>
 		<div class="flex flex-col flex-wrap place-content-evenly gap-5 md:flex-row">
 			{
 				englishPublications.map((x) => {

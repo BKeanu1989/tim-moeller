@@ -4,7 +4,7 @@
 		"description": "Postdoctoral research with patients suffering from schizophrenia using EEG, Eye-Tracking, Computational modeling, Virtual reality, and ECG. ",
 		"start": 2024,
 		"image": "@assets/lmu.avif",
-		"imageAlt": "das ist die bildbeschreibung",
+		"imageAlt": "LMU Logo",
 		"slug": "en/lmu",
 		"lang": "en"
 	},
@@ -13,7 +13,7 @@
 		"description": "Postdoktorale Forschung mit Patient:innen mit Schizophrenie unter Einsatz von EEG, Eye-Tracking, Computermodellierung, Virtual Reality und EKG.",
 		"start": 2024,
 		"image": "@assets/lmu.avif",
-		"imageAlt": "das ist die bildbeschreibung",
+		"imageAlt": "LMU Logo",
 		"slug": "de/lmu",
 		"lang": "de"
 	},
