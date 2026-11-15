@@ -1,0 +1,140 @@
+<?php
+
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// require '/usr/www/users/timjmo/phpmailer/src/Exception.php';
+// require '/usr/www/users/timjmo/phpmailer/src/PHPMailer.php';
+// require '/usr/www/users/timjmo/phpmailer/src/SMTP.php';
+
+
+
+header('Access-Control-Allow-Origin: http://localhost:4321');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+require '/home/devkev/Projects/tim-moeller/phpmailer/src/Exception.php';
+require '/home/devkev/Projects/tim-moeller/phpmailer/src/PHPMailer.php';
+require '/home/devkev/Projects/tim-moeller/phpmailer/src/SMTP.php';
+
+require './turnstile.php';
+
+
+// $ini_array = parse_ini_file("prod.ini");
+$ini_array = parse_ini_file("dev.ini");
+// print_r($ini_array);
+   
+
+$errors = [
+    "name" => false,
+    "email" => false,
+    "subject" => false,
+    "message" => false
+];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $secret_key = $ini_array["SECRET_KEY"];
+    $token = $_POST['cf-turnstile-response'] ?? '';
+    $remoteip = $_SERVER['HTTP_CF_CONNECTING_IP'] ??
+    $_SERVER['HTTP_X_FORWARDED_FOR'] ??
+    $_SERVER['REMOTE_ADDR'];
+
+    // error_log("secret key: " . $secret_key);
+    // $validation = validateTurnstile($token, $secret_key, $remoteip);
+
+    // if ($validation['success']) {
+    // // Valid token - process form
+    //     // echo "Form submission successful!";
+    // // Process your form data here
+    //     error_log('Turnstile validation successfull: ');
+
+    // } else {
+    //     // Invalid token - show error
+    //     // echo "Verification failed. Please try again.";
+    //     error_log('Turnstile validation failed: ' . implode(', ', $validation['error-codes']));
+    // }
+
+    // if (!$validation['success']) {
+    //     echo json_encode(["success" => false, "message" => "verification failed"]);
+    //     return;
+    // }
+
+
+    $any_error_found = false;
+    if (!isset($_POST["name"]) || empty($_POST["name"])) {
+        $errors["name"] = true;
+        $any_error_found = true;
+    }
+
+    if (!isset($_POST["email"]) || empty($_POST["email"])) {
+        $errors["email"] = true;
+        $any_error_found = true;
+
+    }
+
+    if (!isset($_POST["subject"]) || empty($_POST["subject"])) {
+        $errors["subject"] = true;
+        $any_error_found = true;
+
+    }
+
+    if (!isset($_POST["message"]) || empty($_POST["message"])) {
+        $any_error_found = true;
+        $errors["message"] = true;
+    }
+
+    if ($any_error_found) {
+        // return json_encode()
+        http_response_code(400);        
+
+        echo json_encode(["success" => false]);
+        exit();
+    }
+        
+        
+
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $subject = $_POST["subject"];
+    $message = $_POST["message"];
+    $mail = new PHPMailer(true);
+
+    try {
+        $mail->isSMTP();                                            
+        $mail->Host       = $ini_array["HOST"];                     
+        $mail->SMTPAuth   = true;                                 
+        $mail->Username   = $ini_array["USERNAME"];   
+        $mail->Password   = $ini_array["SMTP"];                
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;                                 
+        $mail->Sender     =  $ini_array["SENDER"];
+
+        $mail->setFrom($email, $name);
+        $mail->addAddress($ini_array["ADDADDRESS"], 'Me');     //Add a recipient
+
+        $mail->isHTML(false);
+
+        $preMessage = "Du hast eine Email von " . $name . " mit der Email Adresse " . $email . " erhalten.\r\n";
+
+        $mail->Subject = $subject;
+        $mail->Body    = $preMessage . $message;
+        $mail->AltBody = $preMessage . $message;
+
+        $mail->send();
+        http_response_code(200);
+        echo json_encode(["success" => true]);
+        exit();
+    } catch (Exception $e) {
+        // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        echo json_encode(["success" => false, "error" => $mail->ErrorInfo]);
+        exit();
+    }
+} else {
+    http_response_code(400);
+    echo json_encode(["success" => false, "error" => "no post method used"]);
+    exit();
+
+}

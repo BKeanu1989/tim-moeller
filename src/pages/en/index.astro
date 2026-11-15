@@ -13,7 +13,8 @@ import NavSideBarLayout from 'src/layouts/NavSideBarLayout.astro'
 // console.log("🚀 ~ timAuthor:", timAuthor);
 import HeroImage from "@assets/mountains.jpg";
 import MyButton from '@components/buttons/MyButton.astro';
-import tim from '../assets/tim-j-moeller.png'
+import tim from '@assets/tim-j-moeller-bigger.png'
+
 
 ---
 
@@ -22,7 +23,7 @@ import tim from '../assets/tim-j-moeller.png'
 <main id="home" class="w-full">
 
 <!-- ============ HERO ============ -->
-<section class="hero relative h-dvh p-0" id="hero">
+<section class="hero relative h-dvh p-0 h-" id="hero">
   <div class="hero-bg absolute -z-10">
 	<div class="bg bg-black/70 absolute w-full h-full"></div>
 	<div class="hero-image-container h-dvh ">
@@ -233,17 +234,20 @@ import tim from '../assets/tim-j-moeller.png'
 <!-- ============ ÜBER MICH ============ -->
 <section id="ueber-mich" style="background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap about-grid">
-    <div class="portrait reveal">
-      <span>Tim Julian Möller<small>Psychotherapie · Kognitive Verhaltenstherapie</small></span>
+    <div class="portrait reveal relative">
+      <Image src={tim} class={"absolute left-0 top-0 z-10"} alt="Foto von Tim Julian Möller"></Image>
+      <div class="portrait-bg"></div>
+      <span class="z-20">Tim Julian Möller<small>Psychotherapie · Kognitive Verhaltenstherapie</small></span>
+      
     </div>
-    <div>
+    <div class="flex flex-col">
       <span class="eyebrow section-title">Über mich und meine Arbeitsweise</span>
       <h2 class="reveal">Verstehen und Veränderung – beides gehört für mich zusammen</h2>
       <p class="reveal">Ich bin Psychotherapeut und arbeite im Verfahren der kognitiven Verhaltenstherapie. <!-- HINWEIS: Qualifikation bitte anpassen (z. B. „approbierter Psychotherapeut" oder „Psychotherapeut in Ausbildung unter Supervision") --> In meiner Privatpraxis behandle ich Erwachsene ausschließlich online – auf Deutsch und Englisch.</p>
       <p class="reveal">Meine Haltung ist es, Ihre persönlichen Erfahrungen ernst zu nehmen und mit einem wissenschaftlich fundierten therapeutischen Vorgehen zu verbinden. Sie sind die Expertin oder der Experte für Ihr Leben; ich bringe methodisches Wissen und Erfahrung im therapeutischen Prozess ein. Zusammen entwickeln wir Verständnis für Ihre Situation und konkrete Wege, die zu Ihrem Alltag passen.</p>
       <p class="reveal">Mir ist wichtig, dass Sie jederzeit nachvollziehen können, wohin wir gehen: Wir vereinbaren Ziele gemeinsam, überprüfen regelmäßig unsere Fortschritte und passen die Behandlung an, wenn etwas nicht hilfreich ist. Ihre Rückmeldungen sind ausdrücklich Teil des Prozesses – auch wenn sie kritisch sind.</p>
       <p class="reveal">Neben meiner therapeutischen Tätigkeit bin ich in <strong>Forschung und Lehre</strong> tätig. Dieser Hintergrund prägt meine Arbeit: Ich orientiere mich an gut untersuchten Methoden und daran, was für Ihre Situation tatsächlich hilfreich ist.</p>
-	  <MyButton type='tertiary' href="#kontakt">Lernen wir uns kennen</MyButton>
+	    <MyButton class="mt-5 reveal" type='tertiary' href="#kontakt">Lernen wir uns kennen</MyButton>
     </div>
   </div>
 </section>
@@ -292,7 +296,9 @@ import tim from '../assets/tim-j-moeller.png'
         <p>Schreiben Sie mir – unverbindlich und ohne Vorbereitungsdruck. Wir vereinbaren ein kostenloses Kennenlerngespräch und finden gemeinsam heraus, welche Unterstützung zu Ihnen passt.</p>
 		<MyButton type='primary' href="mailto:kontakt@praxis-moeller.de?subject=Erstgespräch%20anfragen">
 			Erstgespräch anfragen
+      <!-- <BottomArrow></BottomArrow> -->
           <svg class="inline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+
 		</MyButton>
         <p style="margin-top:1.6rem;font-size:.88rem;color:var(--muted)">kontakt@praxis-moeller.de · Antwort in der Regel innerhalb von 2 Werktagen</p>
       </div>
@@ -344,6 +350,29 @@ import tim from '../assets/tim-j-moeller.png'
 		io.observe(el);
 	});
 	})();
+
+  (function() {
+    const chips = document.querySelectorAll('.filter-chip');
+    const cards = document.querySelectorAll('.card');
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.setAttribute('aria-pressed', 'false'));
+        chip.setAttribute('aria-pressed', 'true');
+
+        // @ts-ignore
+        const f = chip.dataset.filter;
+        if (!f) {
+          console.warn("no filter found")
+        }
+        cards.forEach(card => {
+        // @ts-ignore
+          const show = f === 'alle' || card.dataset.tags.split(' ').includes(f);
+          card.classList.toggle('hidden', !show);
+        });
+      });
+    });
+  })()
 })
 </script>
 </NavSideBarLayout>

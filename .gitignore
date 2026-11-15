@@ -36,6 +36,8 @@ sensitive.md
 backup-online
 
 secret-note-*.*
+
+secret-*.html
 *.log
 
 message.txt

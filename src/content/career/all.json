@@ -1,5 +1,6 @@
 [
 	{
+		"shortTitle": "LMU",
 		"title": "Postdoctoral researcher at LMU",
 		"description": "Postdoctoral research with patients suffering from schizophrenia using EEG, Eye-Tracking, Computational modeling, Virtual reality, and ECG. ",
 		"start": 2024,
@@ -9,6 +10,7 @@
 		"lang": "en"
 	},
 	{
+	"shortTitle": "LMU",
 		"title": "Postdoktorand an der LMU",
 		"description": "Postdoktorale Forschung mit Patient:innen mit Schizophrenie unter Einsatz von EEG, Eye-Tracking, Computermodellierung, Virtual Reality und EKG.",
 		"start": 2024,
@@ -18,6 +20,7 @@
 		"lang": "de"
 	},
 	{
+		"shortTitle": "TOU",
 		"title": "Graduate Dean at Touro University Berlin",
 		"description": "Graduate Dean for General Psychology and MBA. Writing grants, teaching, thesis supervision, research, development of curricula, Establishing an experimental psychology lab and a counselling center. ",
 		"start": 2022,
@@ -27,6 +30,7 @@
 		"lang": "en"
 	},
 	{
+		"shortTitle": "TOU",
 		"title": "Graduate Dean an der Touro University Berlin",
 		"description": "Graduate Dean für Allgemeine Psychologie und MBA. Antragstellung für Fördermittel, Lehre, Betreuung von Abschlussarbeiten, Forschung, Curriculumentwicklung, Aufbau eines experimentellen Psychologielabors und eines Beratungszentrums.",
 		"start": 2022,
@@ -36,6 +40,7 @@
 		"lang": "de"
 	},
 	{
+		"shortTitle": "HR",
 		"title": "Hardware, Software, and ECG development for the HeartRater project",
 		"description": "Software and Hardware development for the HeartRater ",
 		"start": 2022,
@@ -45,6 +50,7 @@
 		"lang": "en"
 	},
 	{
+		"shortTitle": "HR",
 		"title": "Hardware-, Software- und EKG-Entwicklung für das HeartRater-Projekt",
 		"description": "Software- und Hardwareentwicklung für das HeartRater-Projekt.",
 		"start": 2022,
@@ -54,6 +60,7 @@
 		"lang": "de"
 	},
 	{
+		"shortTitle": "BW",
 		"title": "Psychotherapist in training at the hospital of the german military armed forces",
 		"description": "Diagnostics, as well as individual and group psychotherapy with soldiers.",
 		"start": 2023,
@@ -64,6 +71,7 @@
 		"lang": "en"
 	},
 	{
+		"shortTitle": "BW",
 		"title": "Psychotherapeut in Ausbildung am Bundeswehrkrankenhaus",
 		"description": "Diagnostik sowie Einzel- und Gruppentherapie mit Soldaten.",
 		"start": 2023,
@@ -74,6 +82,7 @@
 		"lang": "de"
 	},
 	{
+		"shortTitle": "RTG",
 		"title": "Associate member of the Research Training Group 2386 Extrospection ",
 		"description": "\"Extrospection\" is an independent research project attached to the Berlin School of Mind and Brain.",
 		"start": 2022,
@@ -84,6 +93,7 @@
 		"lang": "en"
 	},
 	{
+	"shortTitle": "RTG",
 		"title": "Assoziiertes Mitglied des Graduiertenkollegs 2386 Extrospection",
 		"description": "„Extrospection“ ist ein unabhängiges Forschungsprojekt an der Berlin School of Mind and Brain.",
 		"start": 2022,
@@ -94,6 +104,7 @@
 		"lang": "de"
 	},
 	{
+		"shortTitle": "iVB",
 		"title": "Psychotherapist in training at iVB Berlin",
 		"description": "Psychotherapy training at the Institute for behavioral therapy Berlin for adults, children, and group psychotherapy.",
 		"start": 2021,
@@ -103,6 +114,7 @@
 		"lang": "en"
 	},
 	{
+		"shortTitle": "iVB",
 		"title": "Psychotherapeut in Ausbildung am iVB Berlin",
 		"description": "Psychotherapieausbildung am Institut für Verhaltenstherapie Berlin für Erwachsene, Kinder und Gruppenpsychotherapie.",
 		"start": 2021,
@@ -112,6 +124,7 @@
 		"lang": "de"
 	},
 	{
+		"shortTitle": "HU",
 		"title": "Member of the ethics committee of the Humboldt-University of Berlin ",
 		"description": "Review of ethics applications for scientific studies at the Institute for Psychology of the Humboldt University Berlin",
 		"start": 2021,
@@ -121,6 +134,7 @@
 		"lang": "en"
 	},
 	{
+		"shortTitle": "HU",
 		"title": "Mitglied der Ethikkommission der Humboldt-Universität zu Berlin",
 		"description": "Begutachtung von Ethikanträgen für wissenschaftliche Studien am Institut für Psychologie der Humboldt-Universität zu Berlin.",
 		"start": 2021,
@@ -130,6 +144,7 @@
 		"lang": "de"
 	},
 	{
+		"shortTitle": "IPU",
 		"title": "Lecturer at the International Psychoanalytic University Berlin",
 		"description": "Review of ethics applications for scientific studies at the Institute for Psychology of the Humboldt University Berlin",
 		"start": 2020,
@@ -140,6 +155,7 @@
 		"lang": "en"
 	},
 	{
+		"shortTitle": "IPU",
 		"title": "Dozent an der International Psychoanalytic University Berlin",
 		"description": "Lehre und Betreuung an der International Psychoanalytic University Berlin.",
 		"start": 2020,
@@ -149,7 +165,8 @@
 		"slug": "de/international-psychoanalytic",
 		"lang": "de"
 	},
-	{
+	{	
+		"shortTitle": "CH",
 		"title": "Visiting scholar at the Charité University medicine Berlin ",
 		"description": "Experiments with patients with schizophrenia investigating disorders of the self and anomalous self experience",
 		"start": 2019,
@@ -160,6 +177,7 @@
 		"lang": "en"
 	},
 	{
+		"shortTitle": "CH",
 		"title": "Gastwissenschaftler an der Charité – Universitätsmedizin Berlin",
 		"description": "Experimente mit Patient:innen mit Schizophrenie zur Untersuchung von Störungen des Selbst und abweichenden Selbsterfahrungen.",
 		"start": 2019,
@@ -170,6 +188,7 @@
 		"lang": "de"
 	},
 	{
+		"shortTitle": "SPP",
 		"title": "Scientist at the DFG special priority program (SPP) \"The Active Self\"",
 		"description": " The Priority Program brings together cognitive and behavioral scientists from various disciplines, including psychology and robotics, to study the sensorimotor grounding of the human minimal self.",
 		"start": 2019,
@@ -180,6 +199,7 @@
 		"lang": "en"
 	},
 	{
+		"shortTitle": "SPP",
 		"title": "Wissenschaftler im DFG-Schwerpunktprogramm (SPP) „The Active Self“",
 		"description": "Das Schwerpunktprogramm vereint kognitive und Verhaltenswissenschaftler:innen aus verschiedenen Disziplinen, darunter Psychologie und Robotik, um die sensomotorische Verankerung des minimalen Selbst zu erforschen.",
 		"start": 2019,
@@ -197,7 +217,8 @@
 		"image": "@assets/elbe-weser-welten.webp",
 		"imageAlt": "Elbe Weser Welten Logo",
 		"slug": "en/elbe-weser-welten",
-		"lang": "en"
+		"lang": "en",
+		"shortTitle": "EW"
 	},
 	{
 		"title": "Dozent bei der Elbe-Weser Welten gGmbH",
@@ -207,6 +228,7 @@
 		"image": "@assets/elbe-weser-welten.webp",
 		"imageAlt": "Elbe Weser Welten Logo",
 		"slug": "de/elbe-weser-welten",
-		"lang": "de"
+		"lang": "de",
+		"shortTitle": "EW"
 	}
 ]
