@@ -31,18 +31,14 @@ const t = useTranslations(lang);
 	<main class="w-full text-white page " id="publications">
 
 	<header class="page-head">
-		<p class="eyebrow section-title">Forschung &amp; Entwicklung</p>
+		<p class="eyebrow section-title">{t('publications.eyebrow')}</p>
 		<h1>{t('misc.projects_publications')}</h1>
-		<p class="lede">
-			Eine Übersicht unserer aktuellen Projekte, veröffentlichten Arbeiten und
-			offenen Beiträge. Jeder Eintrag verlinkt auf den vollständigen Beitrag
-			bzw. das zugehörige Repository.
-		</p>
+		<p class="lede">{t('publications.lede')}</p>
 	</header>
 
-  <nav class="filters" aria-label="Nach Kategorie filtern">
-    <button class="filter-chip" data-filter="alle" aria-pressed="true">Alle</button>
-    <button class="filter-chip" data-filter="publication" aria-pressed="false">Publication</button>
+  <nav class="filters" aria-label={t('publications.filter_label')}>
+    <button class="filter-chip" data-filter="alle" aria-pressed="true">{t('publications.filter_all')}</button>
+    <button class="filter-chip" data-filter="publication" aria-pressed="false">{t('publications.filter_publication')}</button>
     <!-- <button class="filter-chip" data-filter="projekt" aria-pressed="false">Projekt</button>
     <button class="filter-chip" data-filter="publikation" aria-pressed="false">Publikation</button>
     <button class="filter-chip" data-filter="open-source" aria-pressed="false">Open Source</button>

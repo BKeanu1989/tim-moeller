@@ -2,9 +2,13 @@
 import ContactForm from '@components/ContactForm.astro'
 import NavSideBarLayout from 'src/layouts/NavSideBarLayout.astro'
 import Copy from 'src/assets/copy.svg'
+import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
-<NavSideBarLayout title="Contact">
+<NavSideBarLayout title={t('nav.contact')}>
 	<main class="mx-auto min-h-dvh max-w-6xl px-4 py-12">
 		<div class="flex h-full flex-col items-center justify-center">
 			<!-- Contact Content -->
@@ -13,12 +17,8 @@ import Copy from 'src/assets/copy.svg'
 					<!-- Left Side: Text Content -->
 					<div class="space-y-6">
 						<div class="space-y-4">
-							<h1 class="text-4xl font-light text-white">Let's Work Together</h1>
-							<p class="leading-relaxed text-gray-300">
-								If you are interested in a collaboration in a scientific project, in my service as a
-								lecturer, or any other inquiries, please contact me via email or through the contact
-								form.
-							</p>
+							<h1 class="text-4xl font-light text-white">{t('contact.title')}</h1>
+							<p class="leading-relaxed text-gray-300">{t('contact.intro')}</p>
 						</div>
 
 						<!-- Contact Information -->
@@ -48,7 +48,7 @@ import Copy from 'src/assets/copy.svg'
 									<Copy class="h-5 w-5 cursor-pointer stroke-white" />
 									<span
 										class="copy-feedback text-sm text-cyan-400 opacity-0 transition-opacity duration-200"
-										>Copied!</span
+										>{t('contact.copied')}</span
 									>
 								</div>
 							</div>

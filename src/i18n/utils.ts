@@ -27,3 +27,23 @@ export function getLangAndRawIdFromCollectionId(id: string) {
         "id": splitted[1]
     }
 }
+
+export function slugify(text: string) {
+
+    // "Open Source" -> "open-source"
+    return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');            // Trim - from end of text
+}
+
+export function endSlugify(text: string) {
+    // "open-source" -> "Open Source"
+    return text.toString().toLowerCase()
+        .replace(/-/g, ' ')           // Replace - with space
+        .replace(/\b\w/g, (match) => match.toUpperCase()); // Capitalize first letter of each word
+    
+    
+}

@@ -20,7 +20,8 @@
   --border:   #2a2a30;
   /* --accent:   #3b82f6;
   --accent-dk:#2563eb; */
-  --accent:#d9a86c;
+  /* --accent:#d9a86c; */
+  --accent: #D6B16E;
   --accent-lighter:#dcba90;
   --accent-darker: #bd8e54;
   --accent-soft:rgba(217,168,108,.14);

@@ -15,234 +15,62 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<NavSideBarLayout title="About me">
+<NavSideBarLayout title={t('nav.about')}>
     <main id="about-me" class="w-full">
 
     <section class="hero atf h-dvh">
         <div class="hero-bg absolute -z-10">
         <div class="bg bg-black/70 absolute w-full h-full"></div>
         <div class="hero-image-container h-dvh ">
-            <Picture priority  src={HeroImage} widths={[360, 720, 1400, 1920]} sizes={`(max-width: 400px) 360px, (max-width: 800px) 720px, (max-width: 1400px) 1400px, 1920px`} class={"-z-20 max-h-dvh hidden lg:block"} alt="Berglandschaft"></Picture>
+            <Picture priority  src={HeroImage} widths={[360, 720, 1400, 1920]} sizes={`(max-width: 400px) 360px, (max-width: 800px) 720px, (max-width: 1400px) 1400px, 1920px`} class={"-z-20 max-h-dvh hidden lg:block"} alt={t('aboutme.hero.image_alt')}></Picture>
 
         </div>
   </div>
       <div class="wrap flex flex-col mx-auto justify-center h-full">
-        <span class="eyebrow section-title">Über mich</span>
-        <h1>Therapie, die <em class="text-c-accent">Forschung</em> ernst nimmt – und Sie noch viel mehr.</h1>
-        <p class="lead text-c-muted-grey">
-          Psychotherapeut in Ausbildung unter Supervision? Nein – kognitive Verhaltenstherapie,
-          online, auf Deutsch und Englisch: wissenschaftlich fundiert, transparent und gemeinsam vereinbart.
-        </p>
+        <span class="eyebrow section-title">{t('aboutme.hero.eyebrow')}</span>
+        <h1 set:html={t('aboutme.hero.title')}></h1>
+        <p class="lead text-c-muted-grey">{t('aboutme.hero.lead')}</p>
         <div class="hero-meta">
-          <span class="chip gold"><span class="dot"></span>Kognitive Verhaltenstherapie</span>
-          <span class="chip gold"><span class="dot"></span>Online-Praxis</span>
-          <span class="chip"><span class="dot"></span>Deutsch &amp; Englisch</span>
-          <span class="chip"><span class="dot"></span>Forschung &amp; Lehre</span>
+          <span class="chip gold"><span class="dot"></span>{t('aboutme.hero.chip1')}</span>
+          <span class="chip gold"><span class="dot"></span>{t('aboutme.hero.chip2')}</span>
+          <span class="chip"><span class="dot"></span>{t('aboutme.hero.chip3')}</span>
+          <span class="chip"><span class="dot"></span>{t('aboutme.hero.chip4')}</span>
         </div>
       </div>
     </section>
-    
+
     <!-- ================= HALTUNG ================= -->
     <section id="haltung">
       <div class="wrap">
         <div class="section-head">
-          <span class="eyebrow section-title">Meine Haltung</span>
-          <h2>Gemeinsam statt vorgefertigt</h2>
+          <span class="eyebrow section-title">{t('aboutme.stance.eyebrow')}</span>
+          <h2>{t('aboutme.stance.title')}</h2>
         </div>
-    
+
         <div class="belief-grid flex items-start">
           <div class="belief-text">
-            <p>
-              Ich bin Psychotherapeut und arbeite im Verfahren der kognitiven Verhaltenstherapie.
-              In meiner Privatpraxis behandle ich Erwachsene ausschließlich online – auf Deutsch und Englisch.
-            </p>
-            <p>
-              Meine Haltung ist es, Ihre persönlichen Erfahrungen ernst zu nehmen und mit einem
-              wissenschaftlich fundierten therapeutischen Vorgehen zu verbinden.
-              <strong>Sie sind die Expertin oder der Experte für Ihr Leben;</strong>
-              ich bringe methodisches Wissen und Erfahrung im therapeutischen Prozess ein.
-              Zusammen entwickeln wir Verständnis für Ihre Situation und konkrete Wege,
-              die zu Ihrem Alltag passen.
-            </p>
-            <p>
-              Mir ist wichtig, dass Sie jederzeit nachvollziehen können, wohin wir gehen:
-              Wir vereinbaren Ziele gemeinsam, überprüfen regelmäßig unsere Fortschritte und
-              passen die Behandlung an, wenn etwas nicht hilfreich ist.
-              <strong>Ihre Rückmeldungen sind ausdrücklich Teil des Prozesses – auch wenn sie kritisch sind.</strong>
-            </p>
-            <p>
-              Neben meiner therapeutischen Tätigkeit bin ich in Forschung und Lehre tätig.
-              Dieser Hintergrund prägt meine Arbeit: Ich orientiere mich an gut untersuchten
-              Methoden und daran, was für Ihre Situation tatsächlich hilfreich ist.
-            </p>
+            <p>{t('aboutme.stance.p1')}</p>
+            <p set:html={t('aboutme.stance.p2')}></p>
+            <p set:html={t('aboutme.stance.p3')}></p>
+            <p>{t('aboutme.stance.p4')}</p>
           </div>
-    
+
           <aside class="quote-card sticky">
-            <blockquote>
-              Sie sind die Expertin oder der Experte für Ihr Leben.
-            </blockquote>
-            <cite>— Grundsatz meiner Arbeit</cite>
+            <blockquote>{t('aboutme.stance.quote')}</blockquote>
+            <cite>{t('aboutme.stance.cite')}</cite>
           </aside>
         </div>
       </div>
     </section>
-    
+
     <!-- ================= AFFILIATIONS ================= -->
     <section id="affiliations">
       <div class="wrap">
         <div class="section-head">
-          <span class="eyebrow section-title">Affiliations &amp; Contributions</span>
-          <h2>Forschung, Lehre &amp; Praxis</h2>
-          <p>Ein Überblick über die Institutionen und Projekte, mit denen ich verbunden bin – von der Grundlagenforschung bis zur Psychotherapieausbildung.</p>
+          <span class="eyebrow section-title">{t('aboutme.affiliations.eyebrow')}</span>
+          <h2>{t('aboutme.affiliations.title')}</h2>
+          <p>{t('aboutme.affiliations.text')}</p>
         </div>
-    
-        <!-- <div class="timeline">
-    
-    
-          <article class="t-item">
-            <div class="t-marker">LMU</div>
-            <div class="t-card">
-              <div class="t-logo"><span class="initials">LMU</span></div>
-              <div class="t-body">
-                <span class="t-org">LMU München</span>
-                <h3>Postdoctoral Researcher</h3>
-                <span class="t-time">Seit 2024</span>
-                <p>Postdoctoral research with patients suffering from schizophrenia using EEG, Eye-Tracking, Computational modeling, Virtual reality, and ECG.</p>
-              </div>
-            </div>
-          </article>
-    
-          <article class="t-item">
-            <div class="t-marker">TU</div>
-            <div class="t-card">
-              <div class="t-logo"><span class="initials">TU</span></div>
-              <div class="t-body">
-                <span class="t-org">Touro University Berlin</span>
-                <h3>Graduate Dean</h3>
-                <span class="t-time">Seit 2022</span>
-                <p>Graduate Dean for General Psychology and MBA. Writing grants, teaching, thesis supervision, research, development of curricula, establishing an experimental psychology lab and a counselling center.</p>
-              </div>
-            </div>
-          </article>
-    
-          <article class="t-item">
-            <div class="t-marker">HR</div>
-            <div class="t-card">
-              <div class="t-logo"><span class="initials">♥</span></div>
-              <div class="t-body">
-                <span class="t-org">HeartRater Project</span>
-                <h3>Hardware-, Software- &amp; ECG-Entwicklung</h3>
-                <span class="t-time">Seit 2022</span>
-                <p>Software- und Hardware-Entwicklung für das HeartRater-Projekt.</p>
-              </div>
-            </div>
-          </article>
-    
-          <article class="t-item">
-            <div class="t-marker">BW</div>
-            <div class="t-card">
-              <div class="t-logo"><span class="initials">BW</span></div>
-              <div class="t-body">
-                <span class="t-org">Bundeswehr</span>
-                <h3>Psychotherapist in Training</h3>
-                <span class="t-time">2023 – 2024</span>
-                <p>Diagnostics, as well as individual and group psychotherapy with soldiers at the hospital of the German Armed Forces.</p>
-              </div>
-            </div>
-          </article>
-    
-          <article class="t-item">
-            <div class="t-marker">RTG</div>
-            <div class="t-card">
-              <div class="t-logo"><span class="initials">RTG</span></div>
-              <div class="t-body">
-                <span class="t-org">Research Training Group 2386 „Extrospection“</span>
-                <h3>Associate Member</h3>
-                <span class="t-time">2022 – 2024</span>
-                <p>„Extrospection“ is an independent research project attached to the Berlin School of Mind and Brain.</p>
-              </div>
-            </div>
-          </article>
-    
-          <article class="t-item">
-            <div class="t-marker">iVB</div>
-            <div class="t-card">
-              <div class="t-logo"><span class="initials">iVB</span></div>
-              <div class="t-body">
-                <span class="t-org">iVB Institut für Verhaltenstherapie Berlin</span>
-                <h3>Psychotherapist in Training</h3>
-                <span class="t-time">Seit 2021</span>
-                <p>Psychotherapy training at the Institute for Behavioral Therapy Berlin for adults, children, and group psychotherapy.</p>
-              </div>
-            </div>
-          </article>
-    
-          <article class="t-item">
-            <div class="t-marker">HU</div>
-            <div class="t-card">
-              <div class="t-logo"><span class="initials">HU</span></div>
-              <div class="t-body">
-                <span class="t-org">Humboldt-Universität zu Berlin</span>
-                <h3>Member of the Ethics Committee</h3>
-                <span class="t-time">Seit 2021</span>
-                <p>Review of ethics applications for scientific studies at the Institute for Psychology of the Humboldt University Berlin.</p>
-              </div>
-            </div>
-          </article>
-    
-          <article class="t-item">
-            <div class="t-marker">IPU</div>
-            <div class="t-card">
-              <div class="t-logo"><span class="initials">IPU</span></div>
-              <div class="t-body">
-                <span class="t-org">International Psychoanalytic University Berlin</span>
-                <h3>Lecturer</h3>
-                <span class="t-time">2020 – 2024</span>
-                <p>Lehre in der wissenschaftlichen Psychologie – von methodischen Grundlagen bis zu anwendungsorientierten Themen.</p>
-              </div>
-            </div>
-          </article>
-    
-          <article class="t-item">
-            <div class="t-marker">Ch</div>
-            <div class="t-card">
-              <div class="t-logo"><span class="initials">Ch</span></div>
-              <div class="t-body">
-                <span class="t-org">Charité – Universitätsmedizin Berlin</span>
-                <h3>Visiting Scholar</h3>
-                <span class="t-time">2019 – 2024</span>
-                <p>Experiments with patients with schizophrenia investigating disorders of the self and anomalous self experience.</p>
-              </div>
-            </div>
-          </article>
-    
-          <article class="t-item">
-            <div class="t-marker">SPS</div>
-            <div class="t-card">
-              <div class="t-logo"><span class="initials">SPS</span></div>
-              <div class="t-body">
-                <span class="t-org">DFG Schwerpunktprogramm „The Active Self“</span>
-                <h3>Scientist</h3>
-                <span class="t-time">2019 – 2025</span>
-                <p>The Priority Program brings together cognitive and behavioral scientists from various disciplines, including psychology and robotics, to study the sensorimotor grounding of the human minimal self.</p>
-              </div>
-            </div>
-          </article>
-    
-          <article class="t-item">
-            <div class="t-marker">EW</div>
-            <div class="t-card">
-              <div class="t-logo"><span class="initials">EW</span></div>
-              <div class="t-body">
-                <span class="t-org">Elbe-Weser Welten gGmbH</span>
-                <h3>Lecturer</h3>
-                <span class="t-time">2018 – 2021</span>
-                <p>Teaching developmental psychology and developmental disorders to auxiliary school assistants.</p>
-              </div>
-            </div>
-          </article>
-    
-        </div> -->
         <TimeLine lang={lang} />
       </div>
     </section>
@@ -251,19 +79,10 @@ const t = useTranslations(lang);
     <section id="opensource">
       <div class="wrap">
         <div class="oss cta-banner reveal">
-          <span class="section-title">Open Source &amp; Code</span>
-          <h2>Forschung, die man nachbauen kann</h2>
-          <p>
-            Ein Teil meiner Arbeit ist <strong>Open Source</strong>: Ich teile Software und Tools,
-            die in Forschungsprojekten entstehen – damit Methoden nicht nur in meinem Labor,
-            sondern überall reproduzierbar bleiben.
-          </p>
-          <p>
-            Einige Forschungsarbeiten umfassen dabei die Entwicklung von
-            <strong>low-budget Echtzeit-ECG-Analyse</strong>: erschwingliche Hard- und Software,
-            mit der Herzfrequenzdaten bereits während des Experiments erfasst und ausgewertet werden –
-            etwa im Kontext des <strong>HeartRater</strong>-Projekts und verwandter Studien.
-          </p>
+          <span class="section-title">{t('aboutme.oss.eyebrow')}</span>
+          <h2>{t('aboutme.oss.title')}</h2>
+          <p set:html={t('aboutme.oss.p1')}></p>
+          <p set:html={t('aboutme.oss.p2')}></p>
           <div class="tags">
             <span class="tag">Open Source</span>
             <span class="tag">Real-Time ECG</span>
@@ -296,55 +115,6 @@ const t = useTranslations(lang);
         @apply text-blue-500;
     }
 
-
-
-/* ---------- Timeline / Affiliations ---------- */
-/* .timeline{ position:relative; margin-top:8px; }
-.timeline::before{
-  content:""; position:absolute; left:23px; top:8px; bottom:8px;
-  width:1px; background:linear-gradient(var(--accent), var(--line) 30%, var(--line) 85%, transparent);
-}
-
-.t-item{
-  position:relative; display:grid; grid-template-columns:48px 1fr; gap:22px;
-  padding:18px 0;
-}
-.t-marker{
-  position:relative; z-index:1; width:48px; height:48px; border-radius:14px;
-  background:var(--bg-2); border:1px solid var(--line);
-  display:flex; align-items:center; justify-content:center;
-  font-family:var(--font-head); font-size:15px; color:var(--accent);
-}
-.t-item:hover .t-marker{ border-color:var(--accent-darker); background:var(--accent-soft); }
-
-.t-card{
-  background:var(--card); border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:22px 26px;
-  display:grid; grid-template-columns:56px 1fr; gap:20px; align-items:start;
-  transition:border-color .25s ease, transform .25s ease, background .25s ease;
-}
-.t-card:hover{ border-color:rgba(217,168,108,.35); transform:translateY(-2px); background:var(--card-2); } */
-
-/* Logo-Platzhalter: <img src="logo.png"> gegen echtes Logo tauschen */
-/* .t-logo{
-  width:56px; height:56px; border-radius:12px;
-  background:var(--bg-2); border:1px solid var(--line);
-  display:flex; align-items:center; justify-content:center;
-  overflow:hidden;
-}
-.t-logo img{ width:100%; height:100%; object-fit:contain; }
-.t-logo .initials{ font-family:var(--font-head); font-size:15px; color:var(--muted); }
-
-.t-body h3{ font-size:19px; margin-bottom:2px; }
-.t-org{ font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:8px; }
-.t-time{
-  display:inline-block; font-size:12px; font-weight:600;
-  color:var(--teal); background:rgba(138,184,172,.1);
-  border:1px solid rgba(138,184,172,.25);
-  padding:3px 11px; border-radius:999px; margin-bottom:10px;
-}
-.t-body p{ color:var(--muted); font-size:15px; line-height:1.65; } */
 
 
 /* ---------- Responsive ---------- */
