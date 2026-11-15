@@ -24,13 +24,14 @@ englishPublications.sort((a, b) => {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+
 ---
 
 <NavSideBarLayout title={t('misc.projects_publications')}>
-	<main class="w-full text-white" id="publications">
+	<main class="w-full text-white page " id="publications">
 
 	<header class="page-head">
-		<p class="eyebrow">Forschung &amp; Entwicklung</p>
+		<p class="eyebrow section-title">Forschung &amp; Entwicklung</p>
 		<h1>{t('misc.projects_publications')}</h1>
 		<p class="lede">
 			Eine Übersicht unserer aktuellen Projekte, veröffentlichten Arbeiten und
@@ -41,7 +42,7 @@ const t = useTranslations(lang);
 
   <nav class="filters" aria-label="Nach Kategorie filtern">
     <button class="filter-chip" data-filter="alle" aria-pressed="true">Alle</button>
-    <button class="filter-chip" data-filter="publication" aria-pressed="true">Publication</button>
+    <button class="filter-chip" data-filter="publication" aria-pressed="false">Publication</button>
     <!-- <button class="filter-chip" data-filter="projekt" aria-pressed="false">Projekt</button>
     <button class="filter-chip" data-filter="publikation" aria-pressed="false">Publikation</button>
     <button class="filter-chip" data-filter="open-source" aria-pressed="false">Open Source</button>
@@ -60,3 +61,25 @@ const t = useTranslations(lang);
 		</div>
 	</main>
 </NavSideBarLayout>
+<script>
+	document.addEventListener("astro:page-load", () => {
+  const chips = document.querySelectorAll('.filter-chip');
+  const cards = document.querySelectorAll('.card');
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.setAttribute('aria-pressed', 'false'));
+      chip.setAttribute('aria-pressed', 'true');
+
+	  // @ts-ignore
+      const f = chip.dataset.filter;
+      cards.forEach(card => {
+	  // @ts-ignore
+
+        const show = f === 'alle' || card.dataset.tags.split(' ').includes(f);
+        card.classList.toggle('hidden', !show);
+      });
+    });
+  });
+	});
+</script>

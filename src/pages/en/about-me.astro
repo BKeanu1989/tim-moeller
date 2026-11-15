@@ -26,7 +26,7 @@ const t = useTranslations(lang);
 
         </div>
   </div>
-      <div class="wrap flex flex-col justify-center h-full">
+      <div class="wrap flex flex-col mx-auto justify-center h-full">
         <span class="eyebrow section-title">Über mich</span>
         <h1>Therapie, die <em class="text-c-accent">Forschung</em> ernst nimmt – und Sie noch viel mehr.</h1>
         <p class="lead text-c-muted-grey">
@@ -46,7 +46,7 @@ const t = useTranslations(lang);
     <section id="haltung">
       <div class="wrap">
         <div class="section-head">
-          <span class="eyebrow">Meine Haltung</span>
+          <span class="eyebrow section-title">Meine Haltung</span>
           <h2>Gemeinsam statt vorgefertigt</h2>
         </div>
     
@@ -91,7 +91,7 @@ const t = useTranslations(lang);
     <section id="affiliations">
       <div class="wrap">
         <div class="section-head">
-          <span class="eyebrow">Affiliations &amp; Contributions</span>
+          <span class="eyebrow section-title">Affiliations &amp; Contributions</span>
           <h2>Forschung, Lehre &amp; Praxis</h2>
           <p>Ein Überblick über die Institutionen und Projekte, mit denen ich verbunden bin – von der Grundlagenforschung bis zur Psychotherapieausbildung.</p>
         </div>
@@ -243,15 +243,15 @@ const t = useTranslations(lang);
           </article>
     
         </div> -->
-        <TimeLine />
+        <TimeLine lang={lang} />
       </div>
     </section>
     
     <!-- ================= OPEN SOURCE ================= -->
     <section id="opensource">
       <div class="wrap">
-        <div class="oss">
-          <span class="eyebrow">Open Source &amp; Code</span>
+        <div class="oss cta-banner reveal">
+          <span class="section-title">Open Source &amp; Code</span>
           <h2>Forschung, die man nachbauen kann</h2>
           <p>
             Ein Teil meiner Arbeit ist <strong>Open Source</strong>: Ich teile Software und Tools,
@@ -349,8 +349,11 @@ const t = useTranslations(lang);
 
 /* ---------- Responsive ---------- */
 @media (max-width: 860px){
-  .belief-grid{ grid-template-columns:1fr; }
-  .quote-card{ position:static; }
+  .belief-grid{ flex-direction: column; }
+  .quote-card{
+     position:static; order: 1; margin-bottom: 24px; 
+    }
+  .belief-text{ order: 2; }
   .oss{ padding:36px 26px; }
 }
 @media (max-width: 560px){

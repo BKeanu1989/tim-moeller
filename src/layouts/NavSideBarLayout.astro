@@ -49,6 +49,42 @@ const t = useTranslations(lang);
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G0B00QVBJ8"></script>
 <script>
 	
+	document.addEventListener("astro:page-load", () => {
+		(function(){
+			var main=document.querySelector('main');
+			// @ts-ignore
+	  function onScroll(){main.classList.toggle('scrolled',window.scrollY>40);}
+	  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+	
+	  document.querySelectorAll('details').forEach(function(d){
+		d.addEventListener('toggle',function(){
+			if (d.open) {
+				document.querySelectorAll('details[open]').forEach(function(o) {
+					if (o!==d) {
+					// @ts-ignore
+					o.open=false
+				};
+
+			});}
+	
+		});
+	  });
+	
+	  // Sanftes Einblenden beim Scrollen
+	  var io = new IntersectionObserver(function(entries) {
+		entries.forEach(function(e) { 
+			if(e.isIntersecting){ 
+				e.target.classList.add('visible');
+				io.unobserve(e.target);
+			}
+		});
+	  },{threshold:.12});
+
+	  document.querySelectorAll('.reveal').forEach(function(el) {
+		io.observe(el);
+	});
+	})();
+	});
 	//@ts-ignore
   window.dataLayer = window.dataLayer || [];
   //@ts-ignore
@@ -72,7 +108,7 @@ const t = useTranslations(lang);
 	wait_for_update: 500
 });
 </script>
-	<body class="min-h-dvh bg-c-black">
+	<body class="min-h-dvh bg-c-black min-w-full overflox-x-hidden">
 		<!-- <body class="min-h-dvh bg-gradient-to-b from-c-neutral-900 to-c-neutral-800"> -->
 		<NavSideBar />
 		<div class="ml-0 flex lg:ml-72 relative">
@@ -86,27 +122,29 @@ const t = useTranslations(lang);
 			window.gsap = gsap
 		</script>
 	</body>
-</html>
-<style is:global>
-	:root {
-		--neutral-cool-grey-1: 210 25 7;
-		--neutral-cool-grey-2: 210 12 15;
-		--navbar-height: 50px;
-		--navbar-offset: calc(-1 * var(--navbar-height));
-	}
-	@font-face {
-		font-family: 'Open Sans';
-		font-style: normal;
-		font-weight: 400;
-		font-display: swap;
-		src: url(/fonts/OpenSans-VariableFont_wdth,wght.ttf) format('truetype');
-	}
 
-	body {
-		/* max-width: 100dvw;
-    min-height: 100dvh; */
-		height: 100%;
-		overflow-x: hidden;
-		/* overflow: hidden; */
-	}
-</style>
+	<style is:global>
+		:root {
+			--neutral-cool-grey-1: 210 25 7;
+			--neutral-cool-grey-2: 210 12 15;
+			--navbar-height: 50px;
+			--navbar-offset: calc(-1 * var(--navbar-height));
+		}
+		@font-face {
+			font-family: 'Open Sans';
+			font-style: normal;
+			font-weight: 400;
+			font-display: swap;
+			src: url(/fonts/OpenSans-VariableFont_wdth,wght.ttf) format('truetype');
+		}
+	
+		body {
+			/* max-width: 100dvw;
+		min-height: 100dvh; */
+			height: 100%;
+			overflow-x: hidden;
+			/* overflow: hidden; */
+		}
+	</style>
+</html>
+
