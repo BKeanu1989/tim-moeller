@@ -2,11 +2,6 @@
 import ContactForm from '@components/ContactForm.astro'
 import NavSideBarLayout from 'src/layouts/NavSideBarLayout.astro'
 import Copy from 'src/assets/copy.svg'
-import { getLangFromUrl, useTranslations } from "src/i18n/utils";
-
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 ---
 
 <NavSideBarLayout title="Contact">
@@ -18,9 +13,11 @@ const t = useTranslations(lang);
 					<!-- Left Side: Text Content -->
 					<div class="space-y-6">
 						<div class="space-y-4">
-							<h1 class="text-4xl font-light text-white">Lassen Sie uns zusammenarbeiten</h1>
+							<h1 class="text-4xl font-light text-white">Let's Work Together</h1>
 							<p class="leading-relaxed text-gray-300">
-                                Wenn Sie an einer Zusammenarbeit in einem wissenschaftlichen Projekt, an meiner Tätigkeit als Dozent oder an anderen Anfragen interessiert sind, kontaktieren Sie mich bitte per E-Mail oder über das Kontaktformular.
+								If you are interested in a collaboration in a scientific project, in my service as a
+								lecturer, or any other inquiries, please contact me via email or through the contact
+								form.
 							</p>
 						</div>
 
@@ -51,7 +48,7 @@ const t = useTranslations(lang);
 									<Copy class="h-5 w-5 cursor-pointer stroke-white" />
 									<span
 										class="copy-feedback text-sm text-cyan-400 opacity-0 transition-opacity duration-200"
-										>{t("contact.copied")}</span
+										>Copied!</span
 									>
 								</div>
 							</div>
@@ -60,8 +57,8 @@ const t = useTranslations(lang);
 
 					<!-- Right Side: Contact Form -->
 					<div class="relative">
-						<div class="absolute inset-0 rounded-full c-gradient blur-xl"></div>
-						<div class="relative rounded-lg c-gradient p-6 shadow-lg backdrop-blur-sm">
+						<div class="c-gradient absolute inset-0 rounded-full blur-xl"></div>
+						<div class="c-gradient relative rounded-lg p-6 shadow-lg backdrop-blur-sm">
 							<ContactForm />
 						</div>
 					</div>
@@ -97,16 +94,15 @@ const t = useTranslations(lang);
 </script>
 
 <style>
-/* @reference "tailwindcss"; */
   @reference "../../main.css";
 
 
-.c-gradient {
-    @apply bg-gradient-to-br from-black from-20% via-[#222] via-50% to-black to-80%;
-}
-	/* main {
-		background: radial-gradient(circle at top right, rgba(6, 182, 212, 0.05) 0%, transparent 60%);
-	} */
+	.c-gradient {
+		@apply bg-gradient-to-br from-black from-20% via-[#222] via-50% to-black to-80%;
+	}
+	main {
+		/* background: radial-gradient(circle at top right, rgba(6, 182, 212, 0.05) 0%, transparent 60%); */
+	}
 
 	.email-copy.copied {
 		opacity: 0.5;
