@@ -52,17 +52,21 @@ const t = useTranslations(lang);
 </div>
 
 <script is:inline define:vars={{ gtmId, turnstileSiteKey }}>
-//   (function () {
+  (function () {
     "use strict";
 
+    /* With <ClientRouter />, this inline script is NOT re-executed after a
+       client-side navigation, while the DOM is swapped. So global setup runs
+       once, and everything that touches DOM elements is (re)bound on every
+       "astro:page-load" (which also fires on the initial load). */
+    if (window.__cookieConsentInit) return;
+    window.__cookieConsentInit = true;
+
     var STORAGE_KEY = "cookie-consent-v1";
-    var banner = document.getElementById("cookie-banner");
-    var chkStatistics = document.getElementById("cc-statistics");
-    var chkFunctional = document.getElementById("cc-functional");
 
     /* Consent Mode v2: Standardmäßig "denied", bevor irgendetwas lädt */
     window.dataLayer = window.dataLayer || [];
-    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
     window.gtag("consent", "default", {
       ad_storage: "denied",
       ad_user_data: "denied",
@@ -74,21 +78,23 @@ const t = useTranslations(lang);
       wait_for_update: 500
     });
 
+    /* Always query the current DOM – elements are replaced on navigation */
+    function el(id) { return document.getElementById(id); }
+
     function getConsent() {
       try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); }
       catch (_) { return null; }
     }
 
     function setConsent(statistics, functional) {
-        console.log("setConsent", statistics, functional)
       var consent = {
         statistics: !!statistics,
         functional: !!functional,
         timestamp: new Date().toISOString()
       };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(consent)); } catch (_) {}
       applyConsent(consent);
-      banner.hidden = true;
+      closeBanner();
     }
 
     function loadScript(src) {
@@ -111,12 +117,12 @@ const t = useTranslations(lang);
     var turnstileRequested = false;
     function loadTurnstile() {
       if (!turnstileSiteKey) return;
-      if (window.turnstile) { renderTurnstileWidgets(); return; }
+      if (window.turnstile) { window.renderTurnstileWidgets(); return; }
       if (turnstileRequested) return;
       turnstileRequested = true;
       window.onTurnstileLoad = function () {
         delete window.onTurnstileLoad;
-        renderTurnstileWidgets();
+        window.renderTurnstileWidgets();
       };
       loadScript(
         "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit"
@@ -126,11 +132,11 @@ const t = useTranslations(lang);
     window.renderTurnstileWidgets = function () {
       if (!window.turnstile || !turnstileSiteKey) return;
       var pending = document.querySelectorAll(".cf-turnstile[data-cc-pending]");
-      pending.forEach(function (el) {
-        el.removeAttribute("data-cc-pending");
-        window.turnstile.render(el, {
-          sitekey: el.getAttribute("data-sitekey") || turnstileSiteKey,
-          theme: el.getAttribute("data-theme") || "auto"
+      pending.forEach(function (node) {
+        node.removeAttribute("data-cc-pending");
+        window.turnstile.render(node, {
+          sitekey: node.getAttribute("data-sitekey") || turnstileSiteKey,
+          theme: node.getAttribute("data-theme") || "auto"
         });
       });
     };
@@ -147,43 +153,70 @@ const t = useTranslations(lang);
       if (consent.functional) loadTurnstile();
     }
 
+    /* Prevents the click that opened the banner (e.g. the sidebar button)
+       from being treated as an outside click and closing it right away. */
+    var ignoreOutsideClick = false;
+
     function showBanner() {
-        // console.log("showBanner")
+      var banner = el("cookie-banner");
+      if (!banner) return;
       var c = getConsent();
-      chkStatistics.checked = !!(c && c.statistics);
-      chkFunctional.checked = !!(c && c.functional);
-    //   banner.hidden = false;
-      let b2 = document.getElementById("cookie-banner");
-      if (b2) b2.hidden = false;
-    //   document.getElementById("banner").hidden = false;
+      var chkStatistics = el("cc-statistics");
+      var chkFunctional = el("cc-functional");
+      if (chkStatistics) chkStatistics.checked = !!(c && c.statistics);
+      if (chkFunctional) chkFunctional.checked = !!(c && c.functional);
+      banner.hidden = false;
+      ignoreOutsideClick = true;
+      setTimeout(function () { ignoreOutsideClick = false; }, 0);
     }
 
+    function closeBanner() {
+      var banner = el("cookie-banner");
+      if (banner) banner.hidden = true;
+    }
+
+    /* Bind the banner buttons of the current page. The elements are new after
+       every navigation, so listeners never get attached twice. */
+    function bindBanner() {
+      var banner = el("cookie-banner");
+      if (!banner || banner.dataset.ccBound) return;
+      banner.dataset.ccBound = "true";
+
+      el("cc-accept-all").addEventListener("click", function () {
+        setConsent(true, true);
+      });
+      el("cc-save").addEventListener("click", function () {
+        setConsent(el("cc-statistics").checked, el("cc-functional").checked);
+      });
+      el("cc-reject").addEventListener("click", function () {
+        setConsent(false, false);
+      });
+
+      if (!getConsent()) showBanner();
+    }
+
+    /* Outside click closes the banner (registered once on document) */
+    document.addEventListener("click", function (e) {
+      if (ignoreOutsideClick) return;
+      var banner = el("cookie-banner");
+      if (!banner || banner.hidden) return;
+      if (e.composedPath().indexOf(banner) === -1) closeBanner();
+    });
+
+    /* Consent only needs to be applied once (GTM/Turnstile stay loaded) */
     var saved = getConsent();
-    if (saved) applyConsent(saved); else showBanner();
+    if (saved) applyConsent(saved);
 
-    document.getElementById("cc-accept-all").addEventListener("click", function () {
-      setConsent(true, true);
-      closeBanner();
-
-    });
-    document.getElementById("cc-save").addEventListener("click", function () {
-      setConsent(chkStatistics.checked, chkFunctional.checked);
-      closeBanner();
-
-    });
-    document.getElementById("cc-reject").addEventListener("click", function () {
-      setConsent(false, false);
-      closeBanner();
-    });
+    document.addEventListener("astro:page-load", bindBanner);
+    /* Fallback for pages without <ClientRouter /> */
+    if (document.readyState !== "loading") bindBanner();
+    else document.addEventListener("DOMContentLoaded", bindBanner);
 
     /* Für einen "Cookie-Einstellungen"-Link im Footer aufrufbar */
-    window.closeBanner = function () { 
-      let b2 = document.getElementById("cookie-banner");
-      if (b2) b2.hidden = true;
-    };
+    window.closeBanner = closeBanner;
     window.openCookieSettings = showBanner;
     window.getConsent = getConsent;
-//   })();
+  })();
 </script>
 
 <style>

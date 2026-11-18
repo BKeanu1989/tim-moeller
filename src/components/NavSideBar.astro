@@ -422,49 +422,6 @@ const currentYear = new Date().getFullYear()
 		}
 	}
 
-		try {
-
-			const cookieBannerButton = document.getElementById('showCookieBanner')
-			if (cookieBannerButton) {
-				cookieBannerButton.addEventListener('click', (e) => {
-					console.log("showCookieBanner clicked V3")
-					e.preventDefault()
-					// const event = new CustomEvent('open-banner')
-					// window.dispatchEvent(event)
-					// @ts-ignore
-					window.openCookieSettings()
-				})
-			} else {
-				console.error('Cookie banner button not found')
-			}
-		} catch (error) {
-			console.error(error)
-		}
-
-
-	window.addEventListener('astro:page-loaded', () => {
-		console.log("addEventListenerToCookieBannerButton")
-		// Cleanup if necessary
-		try {
-
-			const cookieBannerButton = document.getElementById('showCookieBanner')
-			if (cookieBannerButton) {
-				cookieBannerButton.addEventListener('click', (e) => {
-					console.log("showCookieBanner clicked")
-					e.preventDefault()
-					// const event = new CustomEvent('open-banner')
-					// window.dispatchEvent(event)
-					// @ts-ignore
-					window.openCookieSettings()
-				})
-			} else {
-				console.error('Cookie banner button not found')
-			}
-		} catch (error) {
-			console.error(error)
-		}
-	})
-
 </script>
 
 <style>
