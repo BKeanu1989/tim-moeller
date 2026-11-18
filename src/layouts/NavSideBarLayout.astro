@@ -9,7 +9,8 @@ import '../styles/index.css'
 import 'katex/dist/katex.min.css';
 
 import NavSideBar from '@components/NavSideBar.astro'
-import CookieBanner from '@components/CookieBanner.astro'
+import CookieBanner from '@components/CookieBannerv2.astro'
+// import CookieBanner from '@components/CookieBanner.astro'
 
 const { title } = Astro.props
 const lang = getLangFromUrl(Astro.url)
@@ -34,19 +35,19 @@ const t = useTranslations(lang);
 		<link rel="preconnect" href="https://challenges.cloudflare.com" />
 		<meta name="generator" content={Astro.generator} />
 		<script defer src={"https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" + '?' + bar}></script>
-		<script
+		<!-- <script
 	src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
 	async
 	defer
 	is:inline
-></script>
-		<script src="../scripts/cookiebanner.ts"></script>
+></script> -->
+		<!-- <script src="../scripts/cookiebanner.ts"></script> -->
 		<!-- <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script> -->
 		<title>{title}</title>
 		<ClientRouter />
 	</head>
 	<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-G0B00QVBJ8"></script>
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-G0B00QVBJ8"></script> -->
 <script>
 	
 	document.addEventListener("astro:page-load", () => {
@@ -85,28 +86,28 @@ const t = useTranslations(lang);
 	});
 	})();
 	});
-	//@ts-ignore
-  window.dataLayer = window.dataLayer || [];
-  //@ts-ignore
-  window.gtag = gtag
-  //@ts-ignore
+// 	//@ts-ignore
+//   window.dataLayer = window.dataLayer || [];
+//   //@ts-ignore
+//   window.gtag = gtag
+//   //@ts-ignore
 
-  function gtag(){dataLayer.push(arguments);}
-	//@ts-ignore
+//   function gtag(){dataLayer.push(arguments);}
+// 	//@ts-ignore
 
-  gtag('js', new Date());
-	//@ts-ignore
+//   gtag('js', new Date());
+// 	//@ts-ignore
 
-  gtag('config', 'G-G0B00QVBJ8');
+//   gtag('config', 'G-G0B00QVBJ8');
 
-  //@ts-ignore
-  gtag('consent', 'default', {
-	ad_storage: 'denied',
-	ad_user_data: 'denied',
-	ad_personalization: 'denied',
-	analytics_storage: 'denied',
-	wait_for_update: 500
-});
+//   //@ts-ignore
+//   gtag('consent', 'default', {
+// 	ad_storage: 'denied',
+// 	ad_user_data: 'denied',
+// 	ad_personalization: 'denied',
+// 	analytics_storage: 'denied',
+// 	wait_for_update: 500
+// });
 </script>
 	<body class="min-h-dvh bg-c-black min-w-full overflox-x-hidden">
 		<!-- <body class="min-h-dvh bg-gradient-to-b from-c-neutral-900 to-c-neutral-800"> -->

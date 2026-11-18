@@ -54,7 +54,12 @@ const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : ''
       placeholder={t("contact.message.placeholder")}
     ></textarea>
   </div>
-  <div class="mt-4" id="turnstile-widget" data-sitekey={siteKey}></div>
+  <!-- Turnstile Widget -->
+  <!-- <div class="mt-4" id="turnstile-widget" data-sitekey={siteKey}></div> -->
+
+  <!-- Turnstile Widget v2 -->
+  <div class="cf-turnstile" data-cc-pending data-theme="dark"></div>
+
 
     <!-- <TertiaryButton>
     </TertiaryButton> -->
@@ -79,7 +84,9 @@ import { CookieBannerObserver } from "src/scripts/cookiebanner"
     
     $form.addEventListener('submit', (e) => {
       e.preventDefault();
-      if (!window.Complianz.getStatistics()) {
+      console.log("form submit", window.getConsent())
+      if (!window.getConsent()?.functional) {
+      // if (!window.Complianz.getStatistics().) {
         window.Complianz.openCookieBanner()
         return;
       }
@@ -158,11 +165,14 @@ import { CookieBannerObserver } from "src/scripts/cookiebanner"
     $cmplSt?.classList.add("hidden")
     $submitButton?.removeAttribute("disabled")
 
+// can you check if the user has given consent for statistics cookies? If not, show a message and disable the submit button.
 
-    let statisticsPermission = window.Complianz.getStatistics()
-    if (statisticsPermission) {
+    // @ts-ignore
+    let functionalPermission = window.getConsent()?.functional
+    if (functionalPermission) {
       // console.info("statistics perm")
     } else {
+      console.log("no statistics perm")
       if ($cmplSt) {
         $cmplSt.classList.remove("hidden")
         // @ts-ignore
@@ -188,6 +198,7 @@ import { CookieBannerObserver } from "src/scripts/cookiebanner"
   let intervalInc: any = null;
   let timeout: any;
   document.addEventListener("astro:page-load", () => {
+
     renderTurnstile()
     bar = new CookieBannerObserver();
     window.Complianz.attach(bar)
@@ -198,9 +209,11 @@ import { CookieBannerObserver } from "src/scripts/cookiebanner"
     }, 2500);
 
     setTimeout(() => {
-      let statisticPerm = window.Complianz.getStatistics();
+      let statisticPerm = window.getConsent()?.statistics;
       if (!statisticPerm) {
-        window.Complianz.openCookieBanner();
+        // window.Complianz.openCookieBanner();
+        // window.Complianz.openCookieSettings();
+        window.openCookieSettings();
       }
       
     }, 1500);

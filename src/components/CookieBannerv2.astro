@@ -1,0 +1,243 @@
+---
+import { getLangFromUrl, useTranslations } from "src/i18n/utils";
+import MyButton from "./buttons/MyButton.astro";
+
+// src/components/CookieConsent.astro
+const gtmId = import.meta.env.PUBLIC_GTM_ID ?? "";
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div id="cookie-banner" class="cookie-banner" hidden>
+  <div class="cookie-banner__inner">
+    <p class="cookie-banner__text">
+      <!-- Wir verwenden Cookies bzw. vergleichbare Technologien. Einige sind für den
+      Betrieb der Seite erforderlich, andere erst nach Ihrer Einwilligung
+      (Statistik/Marketing via Google Tag Manager &amp; Spam-Schutz via
+      Cloudflare Turnstile). Details finden Sie in unserer -->
+      {t("cookie.text")}
+      <a href={"/data_protection" }>{t("nav.data_protection")}</a>.
+    </p>
+
+    <details class="cookie-banner__details">
+      <summary>{t('cookie.title')}</summary>
+      <label>
+        <input type="checkbox" id="cc-necessary" checked disabled />
+        {t('cookie.necessary')}
+      </label>
+      <label>
+        <input type="checkbox" id="cc-statistics" />
+        <!-- Statistik &amp; Marketing (Google Tag Manager / Google Analytics) -->
+        {t('cookie.statistics')}
+      </label>
+      <label>
+        <input type="checkbox" id="cc-functional" />
+        <!-- Spam-Schutz (Cloudflare Turnstile) -->
+        {t('cookie.functional')}
+      </label>
+    </details>
+
+    <div class="cookie-banner__actions">
+      <MyButton htmlType="button" id="cc-accept-all"> {t('cookie.accept_all')}</MyButton>
+      <MyButton htmlType="button" type="tertiary" id="cc-save">
+        {t('cookie.save')}
+      </MyButton>
+      <MyButton htmlType="button" type="tertiary" id="cc-reject">
+        {t('cookie.only_necessary')}
+      </MyButton>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ gtmId, turnstileSiteKey }}>
+//   (function () {
+    "use strict";
+
+    var STORAGE_KEY = "cookie-consent-v1";
+    var banner = document.getElementById("cookie-banner");
+    var chkStatistics = document.getElementById("cc-statistics");
+    var chkFunctional = document.getElementById("cc-functional");
+
+    /* Consent Mode v2: Standardmäßig "denied", bevor irgendetwas lädt */
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("consent", "default", {
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      analytics_storage: "denied",
+      functionality_storage: "denied",
+      personalization_storage: "denied",
+      security_storage: "granted",
+      wait_for_update: 500
+    });
+
+    function getConsent() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); }
+      catch (_) { return null; }
+    }
+
+    function setConsent(statistics, functional) {
+        console.log("setConsent", statistics, functional)
+      var consent = {
+        statistics: !!statistics,
+        functional: !!functional,
+        timestamp: new Date().toISOString()
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
+      applyConsent(consent);
+      banner.hidden = true;
+    }
+
+    function loadScript(src) {
+      var s = document.createElement("script");
+      s.src = src;
+      s.async = true;
+      document.head.appendChild(s);
+    }
+
+    /* --- Google Tag Manager: erst nach Einwilligung laden --- */
+    var gtmLoaded = false;
+    function loadGTM() {
+      if (gtmLoaded || !gtmId) return;
+      gtmLoaded = true;
+      window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+      loadScript("https://www.googletagmanager.com/gtm.js?id=" + gtmId);
+    }
+
+    /* --- Cloudflare Turnstile: erst nach Einwilligung laden --- */
+    var turnstileRequested = false;
+    function loadTurnstile() {
+      if (!turnstileSiteKey) return;
+      if (window.turnstile) { renderTurnstileWidgets(); return; }
+      if (turnstileRequested) return;
+      turnstileRequested = true;
+      window.onTurnstileLoad = function () {
+        delete window.onTurnstileLoad;
+        renderTurnstileWidgets();
+      };
+      loadScript(
+        "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit"
+      );
+    }
+
+    window.renderTurnstileWidgets = function () {
+      if (!window.turnstile || !turnstileSiteKey) return;
+      var pending = document.querySelectorAll(".cf-turnstile[data-cc-pending]");
+      pending.forEach(function (el) {
+        el.removeAttribute("data-cc-pending");
+        window.turnstile.render(el, {
+          sitekey: el.getAttribute("data-sitekey") || turnstileSiteKey,
+          theme: el.getAttribute("data-theme") || "auto"
+        });
+      });
+    };
+
+    function applyConsent(consent) {
+      window.gtag("consent", "update", {
+        ad_storage: consent.statistics ? "granted" : "denied",
+        ad_user_data: consent.statistics ? "granted" : "denied",
+        ad_personalization: consent.statistics ? "granted" : "denied",
+        analytics_storage: consent.statistics ? "granted" : "denied",
+        functionality_storage: consent.functional ? "granted" : "denied"
+      });
+      if (consent.statistics) loadGTM();
+      if (consent.functional) loadTurnstile();
+    }
+
+    function showBanner() {
+        // console.log("showBanner")
+      var c = getConsent();
+      chkStatistics.checked = !!(c && c.statistics);
+      chkFunctional.checked = !!(c && c.functional);
+    //   banner.hidden = false;
+      let b2 = document.getElementById("cookie-banner");
+      if (b2) b2.hidden = false;
+    //   document.getElementById("banner").hidden = false;
+    }
+
+    var saved = getConsent();
+    if (saved) applyConsent(saved); else showBanner();
+
+    document.getElementById("cc-accept-all").addEventListener("click", function () {
+      setConsent(true, true);
+      closeBanner();
+
+    });
+    document.getElementById("cc-save").addEventListener("click", function () {
+      setConsent(chkStatistics.checked, chkFunctional.checked);
+      closeBanner();
+
+    });
+    document.getElementById("cc-reject").addEventListener("click", function () {
+      setConsent(false, false);
+      closeBanner();
+    });
+
+    /* Für einen "Cookie-Einstellungen"-Link im Footer aufrufbar */
+    window.closeBanner = function () { 
+      let b2 = document.getElementById("cookie-banner");
+      if (b2) b2.hidden = true;
+    };
+    window.openCookieSettings = showBanner;
+    window.getConsent = getConsent;
+//   })();
+</script>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    background: #1f2937;
+    background: linear-gradient(to top, #1f2937, #111827);
+    /* background: #181D24; */
+    color: #f9fafb;
+    padding: 1rem;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
+    font-size: 0.95rem;
+  }
+  .cookie-banner[hidden] { display: none; }
+
+  .cookie-banner__inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .cookie-banner__text { margin: 0; flex: 1 1 20rem; }
+  .cookie-banner__text a { color: #93c5fd; }
+
+  .cookie-banner__details { flex: 1 1 100%; }
+  .cookie-banner__details label {
+    display: block;
+    margin: 0.4rem 0;
+    cursor: pointer;
+  }
+  .cookie-banner__actions {
+    flex: 1 0 auto;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #6b7280;
+    border-radius: 0.375rem;
+    background: transparent;
+    color: #f9fafb;
+    cursor: pointer;
+  }
+  .btn--primary {
+    background: #2563eb;
+    border-color: #2563eb;
+  }
+</style>

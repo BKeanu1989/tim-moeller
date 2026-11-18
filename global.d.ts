@@ -6,6 +6,10 @@ import type { MyComplz } from "./scripts/cookiebanner.ts";
 
 declare global {
     interface Window {
-        Complianz: MyComplz
+        Complianz: MyComplz,
+        openCookieSettings: () => void,
+        getConsent: () => { statistics: boolean, storage: boolean, answered: boolean, functional: boolean }
     }
+
+
 }

@@ -205,6 +205,8 @@ export class MyComplz implements Subject{
         const event = new CustomEvent('open-banner')
         window.dispatchEvent(event)
     }
+
+    
 }
 
 if (!window.Complianz) {

@@ -19,6 +19,7 @@ import MollerConsoltungLogo from '@assets/Logo_Psychotherapie.png'
 import Download from '../assets/download-white.svg'
 import LanguagePicker from './LanguagePicker.astro'
 import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
+import MyButton from "./buttons/MyButton.astro"
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
@@ -190,7 +191,12 @@ const currentYear = new Date().getFullYear()
 			</nav>
 	
 			<!-- Footer -->
-			<footer class="space-y-6 border-t border-gray-700/50 py-8">
+			<footer class="space-y-6 border-t flex flex-col items-center border-gray-700/50 py-8">
+				
+				<MyButton type="tertiary" id="showCookieBanner">
+					{t('misc.cookies_button')}
+				</MyButton>
+
 				<!-- Language Picker -->
 				<div class="px-4">
 					<LanguagePicker />
@@ -235,7 +241,7 @@ const currentYear = new Date().getFullYear()
 	</aside>
 </div>
 
-<script>
+<script  >
 	function setupMobileMenu() {
 		let isTransitioning = false
 		const button = document.getElementById('mobile-menu-button')
@@ -331,6 +337,43 @@ const currentYear = new Date().getFullYear()
 	// Setup on view transitions
 	document.addEventListener('astro:page-load', setupMobileMenu)
 	document.addEventListener('astro:page-load', highlightActiveNavigation)
+	// document.addEventListener('astro:page-load', addEventListenerToCookieBannerButton)
+	document.addEventListener('astro:before-swap', () => {
+		// Cleanup if necessary
+	})
+
+	document.addEventListener('astro:page-load', () => {
+		// Cleanup if necessary
+		console.log('Page loaded, setup complete')
+
+		// try {
+
+			const cookieBannerButton = document.getElementById('showCookieBanner')
+			console.log("cookieBannerButton", cookieBannerButton)
+			if (cookieBannerButton) {
+				cookieBannerButton.addEventListener('click', (e) => {
+					console.log("showCookieBanner clicked working")
+					e.preventDefault()
+					// const event = new CustomEvent('open-banner')
+					// window.dispatchEvent(event)
+					// window.openCookieSettings()
+						// @ts-ignore
+
+					if (window.openCookieSettings) {
+						console.log("Calling openCookieSettings function")
+						// @ts-ignore
+						window.openCookieSettings()
+					} else {
+						console.error('openCookieSettings function not found')
+					}
+				})
+			} else {
+				console.error('Cookie banner button not found')
+			}
+		// } catch (error) {
+		// 	console.error(error)
+		// }
+	})
 
 	function highlightActiveNavigation() {
 		const activeNavLocation = document.location.href
@@ -355,6 +398,73 @@ const currentYear = new Date().getFullYear()
 			}
 		}
 	}
+
+	function addEventListenerToCookieBannerButton() {
+		try {
+			console.log("addEventListenerToCookieBannerButton")
+
+			const cookieBannerButton = document.getElementById('showCookieBanner')
+			if (cookieBannerButton) {
+				
+				cookieBannerButton.addEventListener('click', (e) => {
+					console.log("showCookieBanner clicked")
+					e.preventDefault()
+					// const event = new CustomEvent('open-banner')
+					// window.dispatchEvent(event)
+					// @ts-ignore
+					window.openCookieSettings()
+				})
+			} else {
+				console.error('Cookie banner button not found')
+			}
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
+		try {
+
+			const cookieBannerButton = document.getElementById('showCookieBanner')
+			if (cookieBannerButton) {
+				cookieBannerButton.addEventListener('click', (e) => {
+					console.log("showCookieBanner clicked V3")
+					e.preventDefault()
+					// const event = new CustomEvent('open-banner')
+					// window.dispatchEvent(event)
+					// @ts-ignore
+					window.openCookieSettings()
+				})
+			} else {
+				console.error('Cookie banner button not found')
+			}
+		} catch (error) {
+			console.error(error)
+		}
+
+
+	window.addEventListener('astro:page-loaded', () => {
+		console.log("addEventListenerToCookieBannerButton")
+		// Cleanup if necessary
+		try {
+
+			const cookieBannerButton = document.getElementById('showCookieBanner')
+			if (cookieBannerButton) {
+				cookieBannerButton.addEventListener('click', (e) => {
+					console.log("showCookieBanner clicked")
+					e.preventDefault()
+					// const event = new CustomEvent('open-banner')
+					// window.dispatchEvent(event)
+					// @ts-ignore
+					window.openCookieSettings()
+				})
+			} else {
+				console.error('Cookie banner button not found')
+			}
+		} catch (error) {
+			console.error(error)
+		}
+	})
+
 </script>
 
 <style>

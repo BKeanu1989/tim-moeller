@@ -179,6 +179,27 @@
     }
   }
 
+  /* Hero: same structure as home / about-me */
+  .hero {
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      margin: 1.1rem 0 1.4rem;
+
+      em {
+        display: block;
+      }
+    }
+
+    p.lead {
+      @apply text-c-muted-grey-light;
+    }
+
+    .hero-form label {
+      @apply text-c-muted-grey-light;
+    }
+  }
+
   p {
     @apply text-c-gray;
   }
@@ -351,7 +372,23 @@ h1, h2, h3 {
   outline: 3px solid var(--color-blue);
   outline-offset: 4px;
 }
+  .section-title, .eyebrow {
+    @apply text-sm text-c-accent uppercase font-inter mb-4;
+  }
 
+  .section-title {
+    display: inline-flex;
+    align-items: center;
+    gap: .8rem;
+    letter-spacing: .22em;
+  }
+
+  .section-title::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
   
   main#home, main#about-me, main#publications{
 
@@ -463,23 +500,9 @@ h1, h2, h3 {
   
   header.scrolled{background:rgba(11,15,20,.82);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
   
-  .section-title, .eyebrow {
-    @apply text-sm text-c-accent uppercase font-inter mb-4;
-  }
 
-  .section-title {
-    display: inline-flex;
-    align-items: center;
-    gap: .8rem;
-    letter-spacing: .22em;
-  }
 
-  .section-title::before {
-    content: "";
-    width: 24px;
-    height: 1px;
-    background: var(--accent);
-  }
+
   
   section:not(.hero) {
     @apply flex justify-center py-24;

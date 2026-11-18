@@ -12,35 +12,34 @@ import MyTimeLine from '@components/MyTimeLine.astro'
 import MyTimeLineItem from '@components/MyTimeLineItem.astro'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
-
-const backgroundUrl = `url(${dunkleWandPflanze.src})`
 ---
 
 
 <NavSideBarLayout title={t('nav.therapy')}>
 	<main class="flex flex-col w-full text-gray-200 therapy">
-        <div class="atf flex flex-row h-[90vh] pb-5 min-h-fit lg:w-1/2 m-5 relative rounded-xl border lg:mx-auto">
-            <div class="atf-image--wrapper absolute w-full h-full" >
-                <div class="bg-overlay left-0 top-0 w-full h-full rounded-xl z-10 absolute bg-black/60 "></div>
-                
+        <section class="hero atf relative isolate min-h-dvh overflow-hidden" id="hero">
+            <div class="hero-bg absolute inset-0 -z-10">
+                <div class="bg bg-black/70 absolute w-full h-full z-10"></div>
+                <div class="hero-image-container h-full">
+                    <Picture priority src={dunkleWandPflanze} widths={[360, 720, 1200]} sizes={`(max-width: 400px) 360px, (max-width: 800px) 720px, 1200px`} class={"w-full h-full object-cover hidden lg:block"} alt="" />
+                </div>
             </div>
-            <section class="w-full relative left pt-5 px-10 mt-20 z-20">
-                <h1 class="lg:text-7xl text-5xl left--text text-blue-500 font-bold italic hyphens-auto font-cormorant leading-snug lg:tracking-tight">{t('therapy.hero.title')}</h1>
-                <p class="lg:text-5xl text-3xl left--text font-inter lg:leading-snug" >{t('therapy.hero.subtitle')}</p>
-                <p class="text-xl left--text text-c-bg-grey font-inter lg:leading-7 mt-8" >
-                    <span class="left--text">{t('therapy.hero.lead.1')}</span> <span class="left--text">{t('therapy.hero.lead.2')}</span> <span class="left--text">{t('therapy.hero.lead.3')}</span>
-                    <span class="left--text">{t('therapy.hero.lead.4')}</span> <span class="left--text">{t('therapy.hero.lead.5')}</span>
-                </p>
-                <div class="lg:w-[70%] mt-10">
+            <div class="wrap hero-inner flex flex-col lg:flex-row lg:gap-20 lg:min-w-[700px] mx-auto justify-center min-h-dvh py-24">
+                <div class="hero-inner-1 lg:w-[45%]">
+                    <span class="eyebrow section-title">{t('nav.therapy')}</span>
+                    <h1>{t('therapy.hero.title')} <em class="text-c-accent">{t('therapy.hero.subtitle')}</em></h1>
+                    <p class="lead">
+                        {t('therapy.hero.lead.1')} {t('therapy.hero.lead.2')} {t('therapy.hero.lead.3')}
+                        {t('therapy.hero.lead.4')} {t('therapy.hero.lead.5')}
+                    </p>
+                </div>
+                <div class="hero-form hero-inner-2 lg:w-[65%] mt-6">
                     <ContactForm />
                 </div>
-            </section>
-        </div>
-        <div class="px-10 lg:w-1/2 lg:mx-auto">
-            <hr>
-        </div>
-        <section class="about-me px-10 lg:w-1/2 lg:mx-auto">
-            <div class="section-label text-blue-500 mb-4">{t('nav.about')}</div>
+            </div>
+        </section>
+        <section class="about-me pt-24 px-10 lg:w-1/2 lg:mx-auto">
+            <div class="section-title text-blue-500 mb-4">{t('nav.about')}</div>
             <div class="about-me--text flex flex-col gap-5 text-c-gray">
                 <p>
                     {t('therapy.about.p1')}
@@ -66,7 +65,7 @@ const backgroundUrl = `url(${dunkleWandPflanze.src})`
             <hr>
         </div>
         <section class="how-i-work px-10 lg:w-1/2 lg:mx-auto">
-            <div class="section-label uppercase text-lg text-blue-500 mb-2">{t('therapy.howiwork.eyebrow')}</div>
+            <div class="section-title uppercase text-lg text-blue-500 mb-2">{t('therapy.howiwork.eyebrow')}</div>
             <h2 class="font-cormorant text-4xl font-bold mb-4 leading-5">{t('therapy.howiwork.h2')}</h2>
 
             <div class="flex flex-col gap-5">
@@ -88,7 +87,7 @@ const backgroundUrl = `url(${dunkleWandPflanze.src})`
             <hr>
         </div>
         <section class="qualification px-10 lg:mx-auto lg:w-1/2">
-            <div class="section-label uppercase text-lg text-blue-500 mb-2">{t('misc.qualifications')}</div>
+            <div class="section-title uppercase text-lg text-blue-500 mb-2">{t('misc.qualifications')}</div>
             <h2 class="">{t('therapy.qualification.h2')}</h2>
 
             <MyTimeLine class:list={"pl-5"}>
@@ -103,7 +102,7 @@ const backgroundUrl = `url(${dunkleWandPflanze.src})`
             <hr>
         </div>
         <section class="lg:w-1/2 px-10 lg:mx-auto">
-            <div class="section-label text-blue-500 uppercase text-lg font-bold mb-2">{t('practice.info_header')}</div>
+            <div class="section-title text-blue-500 uppercase text-lg font-bold mb-2">{t('practice.info_header')}</div>
             <h2 class="mb-4 font-cormorant font-bold">{t('practice.info_sub_header')}</h2>
                 <div class="info-grid">
                 <dl class="info-row">
@@ -138,7 +137,7 @@ const backgroundUrl = `url(${dunkleWandPflanze.src})`
         </div>
 
         <section id="contact" class=" px-10 lg:w-1/2 lg:mx-auto">
-            <div class="section-label">{t('nav.contact')}</div>
+            <div class="section-title">{t('nav.contact')}</div>
             <h2>{t('misc.write_me')}</h2>
 
             <p>
@@ -184,14 +183,4 @@ const backgroundUrl = `url(${dunkleWandPflanze.src})`
 
 	</main>
 	<section></section>
-    <style define:vars={{backgroundUrl}}>
-main#therapy {
-    --foo: var(--backgroundUrl);
-}
-        
-.atf {
-    background-image: var(--backgroundUrl);
-    background-size: cover;
-}
-    </style>
 </NavSideBarLayout>

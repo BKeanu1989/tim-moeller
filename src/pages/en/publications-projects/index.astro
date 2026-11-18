@@ -3,7 +3,7 @@ import NavSideBarLayout from '../../../layouts/NavSideBarLayout.astro'
 
 import { getCollection } from 'astro:content'
 import Publication from '@components/Publication.astro'
-import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
+import { getLangFromUrl, useTranslations, slugify, endSlugify } from 'src/i18n/utils'
 
 const allPublications = await getCollection('publications')
 console.log('🚀 ~ allPublications:', allPublications)
@@ -24,6 +24,15 @@ englishPublications.sort((a, b) => {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+const allTags = ()=> {
+	  const tagsSet = new Set<string>();
+  englishPublications.forEach((pub) => {
+	// pub.data.
+	if (!pub.data.tags) return;
+	pub.data.tags.forEach((tag) => tagsSet.add(tag));
+  });
+  return Array.from(tagsSet);
+}
 
 ---
 
@@ -36,19 +45,20 @@ const t = useTranslations(lang);
 		<p class="lede">{t('publications.lede')}</p>
 	</header>
 
-  <nav class="filters" aria-label={t('publications.filter_label')}>
-    <button class="filter-chip" data-filter="alle" aria-pressed="true">{t('publications.filter_all')}</button>
+	<nav class="filters" aria-label={t('publications.filter_label')}>
+	  <button class="filter-chip" data-filter="alle" aria-pressed="true">{t('publications.filter_all')}</button>
+	{
+		allTags ? allTags().map((tag) => (
+			<button class="filter-chip" data-filter={slugify(tag)} aria-pressed="false">{endSlugify(tag)}</button>
+		)) : null
+	}
     <button class="filter-chip" data-filter="publication" aria-pressed="false">{t('publications.filter_publication')}</button>
-    <!-- <button class="filter-chip" data-filter="projekt" aria-pressed="false">Projekt</button>
-    <button class="filter-chip" data-filter="publikation" aria-pressed="false">Publikation</button>
-    <button class="filter-chip" data-filter="open-source" aria-pressed="false">Open Source</button>
-    <button class="filter-chip" data-filter="preprint" aria-pressed="false">Preprint</button> -->
   </nav>
-		<div class="flex flex-col flex-wrap place-content-evenly gap-5 md:flex-row">
+		<div class="flex flex-col flex-wrap gap-5 md:flex-row">
 			{
 				englishPublications.map((x) => {
 					return (
-						<div class="single-publication mx-auto w-[90lvw] rounded-sm md:w-2/5">
+						<div class="single-publication w-[90lvw] rounded-sm md:w-2/5">
 							<Publication class:list={'h-full'} input={x} />
 						</div>
 					)
@@ -73,7 +83,7 @@ const t = useTranslations(lang);
 	  // @ts-ignore
 
         const show = f === 'alle' || card.dataset.tags.split(' ').includes(f);
-        card.classList.toggle('hidden', !show);
+        card.parentElement?.classList.toggle('hidden', !show);
       });
     });
   });

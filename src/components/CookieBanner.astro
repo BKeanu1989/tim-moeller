@@ -17,8 +17,16 @@ const t = useTranslations(lang);
                 <input type="checkbox" name="statistics" id="statistics">
             </div>
             <div class="cookie-banner--buttons mt-auto">
-                <MyButton type="alarm" class="decline">{t('misc.decline')}</MyButton>
-                <MyButton type="ok" class="accept">{t('misc.accept')}</MyButton>
+                <!-- <MyButton type="alarm" class="decline">{t('misc.decline')}</MyButton>
+                 
+                <MyButton type="ok" class="accept">{t('misc.accept')}</MyButton> -->
+                <MyButton htmlType="button" id="cc-accept-all"> {t('cookie.accept_all')}</MyButton>
+                    <MyButton htmlType="button" type="tertiary" id="cc-save">
+                        {t('cookie.save')}
+                    </MyButton>
+                    <MyButton htmlType="button" type="tertiary" id="cc-reject">
+                        {t('cookie.only_necessary')}
+                    </MyButton>
             </div>
         </form>
     </div>
