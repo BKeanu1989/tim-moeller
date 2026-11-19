@@ -72,7 +72,7 @@ const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : ''
   <span class="hidden" id="hidden-info" data-url-prefix={baseURLPrefix}></span>
 </form>
 <script>
-import { CookieBannerObserver } from "src/scripts/cookiebanner"
+import { CookieBannerObserver } from "src/scripts/cookeBannerv3"
 
   const urlPrefix = document.getElementById("hidden-info")?.dataset.urlPrefix ?? ''
   let $cmplSt: HTMLElement | null
@@ -84,10 +84,9 @@ import { CookieBannerObserver } from "src/scripts/cookiebanner"
     
     $form.addEventListener('submit', (e) => {
       e.preventDefault();
-      console.log("form submit", window.getConsent())
-      if (!window.getConsent()?.functional) {
+      if (!window.CookieBannerMoeller.getConsent().statistics) {
       // if (!window.Complianz.getStatistics().) {
-        window.Complianz.openCookieBanner()
+        window.CookieBannerMoeller.showBanner()
         return;
       }
 
@@ -172,7 +171,6 @@ import { CookieBannerObserver } from "src/scripts/cookiebanner"
     if (functionalPermission) {
       // console.info("statistics perm")
     } else {
-      console.log("no statistics perm")
       if ($cmplSt) {
         $cmplSt.classList.remove("hidden")
         // @ts-ignore

@@ -34,6 +34,7 @@ export class MyComplz implements Subject{
     // handles checks for granted permissions for cookies and co.
     // get & setter for localstorage
     static #instance: MyComplz;
+    static STORAGE_KEY = "complianz-consent";
 
     private observers: Observer[] = [];
 
@@ -48,7 +49,11 @@ export class MyComplz implements Subject{
         // read values or default
         this.initFromLocalstorage()
         this.installWindowListeners()
+
+        console.log(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY, import.meta.env.PUBLIC_GTM_ID)
+        console.log(MyComplz.STORAGE_KEY)
     }
+
 
     attach(observer: Observer) {
         const isExist = this.observers.includes(observer);
@@ -206,11 +211,14 @@ export class MyComplz implements Subject{
         window.dispatchEvent(event)
     }
 
-    
+
 }
 
+
 if (!window.Complianz) {
+
     window.Complianz = MyComplz.instance;
+    console.log("window.Complianz created", window.Complianz)
 }
 
 // const plz = new MyComplz();

@@ -35,7 +35,9 @@
   --card-2:#181f28;
   --line:rgba(255,255,255,.08);
   --teal:#8ab8ac;
-  --font-head: 'Fraunces', Georgia, 'Times New Roman', serif;
+  /* --font-heading: "DM Serif Display", Georgia, serif; */
+  --font-heading: 'Fraunces', Georgia, 'Times New Roman', serif;
+  /* --font-head: 'Fraunces', Georgia, 'Times New Roman', serif; */
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --radius: 18px;
 
@@ -321,7 +323,7 @@ article.publication-single p {
   --color-light-text: #171A20;
 
   /* Typography */
-  --font-heading: "DM Serif Display", Georgia, serif;
+  /* --font-heading: "DM Serif Display", Georgia, serif; */
   --font-body: "Inter", sans-serif;
 
   /* Layout */

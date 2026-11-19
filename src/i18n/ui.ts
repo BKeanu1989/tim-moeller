@@ -53,6 +53,7 @@ export const ui = {
         'cookie.accept_all': 'Accept all',
         'cookie.only_necessary': 'Only necessary',
         'cookie.save': 'Save selection',
+        'cookie.close': 'Close cookie settings',
         'button.back_to_publications': 'Back to publications',
         'about.professor': 'Adjunct Professor',
         'about.therapist': 'Therapist',
@@ -79,7 +80,7 @@ export const ui = {
         'practice.value.4': 'Private Health Insurance · Self-Pay · Reimbursement',
         'practice.key.5': 'Format',
         'practice.value.5': 'In-Person & Online',
-        'practice.key.6': 'Langauges',
+        'practice.key.6': 'Languages',
         'practice.value.6': 'German · English',
 
         // ---------- Home ----------
@@ -327,6 +328,7 @@ export const ui = {
         'cookie.accept_all': 'Alle akzeptieren',
         'cookie.only_necessary': 'Nur notwendige',
         'cookie.save': 'Auswahl speichern',
+        'cookie.close': 'Cookie Einstellungen schließen',
 
         // 'cookie.turnstile_text': 'Wir verwenden Turnstile, um Spam zu verhindern. Turnstile ist ein datenschutzfreundlicher Captcha-Dienst von Cloudflare, der keine personenbezogenen Daten sammelt. Weitere Informationen finden Sie in unserer Datenschutzerklärung.',
         // 'cookie.gtm_text': 'Wir verwenden Google Tag Manager, um unsere Website zu analysieren und zu verbessern. Google Tag Manager ist ein datenschutzfreundlicher Dienst von Google, der keine personenbezogenen Daten sammelt. Weitere Informationen finden Sie in unserer Datenschutzerklärung.',
@@ -486,7 +488,7 @@ export const ui = {
         'aboutme.hero.image_alt': "Berglandschaft",
         'aboutme.hero.eyebrow': "Über mich",
         'aboutme.hero.title': "Therapie, die <em class=\"text-c-accent\">Forschung</em> ernst nimmt – und Sie noch viel mehr.",
-        'aboutme.hero.lead': "Psychotherapeut in Ausbildung unter Supervision? Nein – kognitive Verhaltenstherapie, online, auf Deutsch und Englisch: wissenschaftlich fundiert, transparent und gemeinsam vereinbart.",
+        'aboutme.hero.lead': "Ich bin approbierter Psychologischer Psychotherapeut (VT) mit Zusatzqualifikationen in Entspannungsverfahren und Gruppenpsychotherapie. Ich begleite Erwachsene mit kognitiver Verhaltenstherapie persönlich und online, auf Deutsch und Englisch.",
         'aboutme.hero.chip1': "Kognitive Verhaltenstherapie",
         'aboutme.hero.chip2': "Online-Praxis",
         'aboutme.hero.chip3': "Deutsch & Englisch",

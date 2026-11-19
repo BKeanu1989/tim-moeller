@@ -218,7 +218,7 @@ const currentYear = new Date().getFullYear()
 				<!-- Legal Links -->
 				<div class="flex flex-col gap-y-2 text-center">
 					<a
-						href={`/${lang}/impressum`}
+					href={`/${lang}/impressum`}
 						class="text-sm text-gray-400 transition-colors hover:text-white"
 					>
 						Impressum
@@ -342,38 +342,8 @@ const currentYear = new Date().getFullYear()
 		// Cleanup if necessary
 	})
 
-	document.addEventListener('astro:page-load', () => {
-		// Cleanup if necessary
-		console.log('Page loaded, setup complete')
-
-		// try {
-
-			const cookieBannerButton = document.getElementById('showCookieBanner')
-			console.log("cookieBannerButton", cookieBannerButton)
-			if (cookieBannerButton) {
-				cookieBannerButton.addEventListener('click', (e) => {
-					console.log("showCookieBanner clicked working")
-					e.preventDefault()
-					// const event = new CustomEvent('open-banner')
-					// window.dispatchEvent(event)
-					// window.openCookieSettings()
-						// @ts-ignore
-
-					if (window.openCookieSettings) {
-						console.log("Calling openCookieSettings function")
-						// @ts-ignore
-						window.openCookieSettings()
-					} else {
-						console.error('openCookieSettings function not found')
-					}
-				})
-			} else {
-				console.error('Cookie banner button not found')
-			}
-		// } catch (error) {
-		// 	console.error(error)
-		// }
-	})
+	// The #showCookieBanner button is handled by a delegated click listener
+	// in CookieBannerv2.astro (works before astro:page-load has fired).
 
 	function highlightActiveNavigation() {
 		const activeNavLocation = document.location.href
@@ -401,18 +371,14 @@ const currentYear = new Date().getFullYear()
 
 	function addEventListenerToCookieBannerButton() {
 		try {
-			console.log("addEventListenerToCookieBannerButton")
-
 			const cookieBannerButton = document.getElementById('showCookieBanner')
 			if (cookieBannerButton) {
 				
 				cookieBannerButton.addEventListener('click', (e) => {
-					console.log("showCookieBanner clicked")
-					e.preventDefault()
-					// const event = new CustomEvent('open-banner')
-					// window.dispatchEvent(event)
+					const event = new CustomEvent('open-banner')
+					window.dispatchEvent(event)
 					// @ts-ignore
-					window.openCookieSettings()
+					// window.openCookieSettings()
 				})
 			} else {
 				console.error('Cookie banner button not found')
@@ -421,6 +387,10 @@ const currentYear = new Date().getFullYear()
 			console.error(error)
 		}
 	}
+
+
+	addEventListenerToCookieBannerButton()
+	document.addEventListener("astro:page-load", addEventListenerToCookieBannerButton)
 
 </script>
 

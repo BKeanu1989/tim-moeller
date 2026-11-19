@@ -5,22 +5,50 @@ import MyButton from "./buttons/MyButton.astro";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
-<div class="cookie-banner hidden md:block h-min fixed bottom-0 right-5 bg-slate-500 z-20" data-status="closed">
-    <button class="rounded-t-[0.25rem] text-white py-2 px-5 open-cookie-banner" data-target="cookie-button">{t('misc.cookies_button')}</button>
-    <div class="banner h-min hidden py-5 justify-between border" data-target="cookie-banner">
+<div class="cookie-banner hidden md:block h-min fixed bottom-0 right-5 bg-slate-500 z-20" id="cookie-banner" data-status="closed">
+    <!-- <button class="rounded-t-[0.25rem] text-white py-2 px-5 open-cookie-banner" data-target="cookie-button">{t('misc.cookies_button')}</button> -->
+    <div class="banner relative h-min hidden py-5 justify-between border" data-target="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-banner-title">
+        <button
+            type="button"
+            id="cc-close"
+            aria-label={t('cookie.close')}
+            title={t('cookie.close')}
+            class="absolute top-3 right-3 inline-flex items-center justify-center w-11 h-11 rounded-full text-white/80 hover:text-white hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-800 transition-colors cursor-pointer"
+        >
+            <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+        </button>
         <form action="" class="flex flex-col h-full p-5 gap-5">
             <div class="cookie-banner--text">
-                <h1 class="mx-auto text-3xl text-center">{t('cookie.title')}</h1>
+                <h1 id="cookie-banner-title" class="mx-auto text-3xl mb-4 text-center font- px-10">{t('cookie.title')}</h1>
                 {t('cookie.text')}</div>
             <div class="checkbox-categories">
-                <label for="statistics">{t('cookie.statistics')}</label>
-                <input type="checkbox" name="statistics" id="statistics">
+                <!-- <label for="statistics">{t('cookie.statistics')}</label>
+                <input type="checkbox" name="statistics" id="statistics"> -->
+                <details class="cookie-banner__details">
+                <summary>{t('cookie.title')}</summary>
+                <label>
+                    <input type="checkbox" id="cc-necessary" checked disabled />
+                    {t('cookie.necessary')}
+                </label>
+                <label>
+                    <input type="checkbox" id="cc-statistics" />
+                    <!-- Statistik &amp; Marketing (Google Tag Manager / Google Analytics) -->
+                    {t('cookie.statistics')}
+                </label>
+                <label>
+                    <input type="checkbox" id="cc-functional" />
+                    <!-- Spam-Schutz (Cloudflare Turnstile) -->
+                    {t('cookie.functional')}
+                </label>
+                </details>
             </div>
             <div class="cookie-banner--buttons mt-auto">
                 <!-- <MyButton type="alarm" class="decline">{t('misc.decline')}</MyButton>
                  
                 <MyButton type="ok" class="accept">{t('misc.accept')}</MyButton> -->
-                <MyButton htmlType="button" id="cc-accept-all"> {t('cookie.accept_all')}</MyButton>
+                <MyButton htmlType="button" type="primary" id="cc-accept-all"> {t('cookie.accept_all')}</MyButton>
                     <MyButton htmlType="button" type="tertiary" id="cc-save">
                         {t('cookie.save')}
                     </MyButton>
@@ -34,67 +62,67 @@ const t = useTranslations(lang);
 <script>
     // import 
     import {CookieBannerObserver} from "../scripts/cookiebanner"
+    // import CookieBannerMoeller from "../scripts/cookieBannerv3"
     let cookieWrapper: HTMLElement | null  
     let cookieBanner: HTMLElement  | null
     let cookieButton: HTMLElement | null
-    let statisticsInput = document.getElementById('statistics') as HTMLInputElement
+
+    let cookieWrapperFn = () => document.querySelector("div.cookie-banner") as HTMLElement
+    let cookieBannerFn = () => document.querySelector(".cookie-banner div[data-target='cookie-banner']") as HTMLElement
+    let cookieButtonFn = () => document.querySelector(".cookie-banner [data-target='cookie-button']") as HTMLElement
+
+        
+    
+    let statisticsInput = document.getElementById('cc-statistics') as HTMLInputElement
+    let functionalInput = document.getElementById('cc-functional') as HTMLInputElement
     let foo: any;
 
+
+    
+    let isOpening = false;
+    let lastFocused: HTMLElement | null = null;
+    
+    // console.log("included cookiebannermodule", CookieBannerMoeller)
+    // if (!CookieBannerMoeller) {
+    //     if (!window.CookieBannerMoeller) {
+            
+    //         window.CookieBannerMoeller = CookieBannerMoeller.instance;
+    //     }
+    // }
     
     function initCookieBanner() {
 
-        console.info("init cookie banner", window.Complianz.getStatistics())
         // window.Complianz.
-        cookieWrapper = document.querySelector("div.cookie-banner") as HTMLElement
-        cookieBanner = document.querySelector(".cookie-banner div[data-target='cookie-banner']") as HTMLElement
-        cookieButton = document.querySelector(".cookie-banner [data-target='cookie-button']") as HTMLElement
+        // let cookieWrapperFn = () => document.querySelector("div.cookie-banner") as HTMLElement
+        // let cookieBannerFn = () => document.querySelector(".cookie-banner div[data-target='cookie-banner']") as HTMLElement
+        // let cookieButtonFn = () => document.querySelector(".cookie-banner [data-target='cookie-button']") as HTMLElement
+        cookieWrapper = cookieWrapperFn()
+        cookieBanner = cookieBannerFn()
+        cookieButton = cookieButtonFn()
 
-        cookieButton?.addEventListener('click', (e) => {
+
+        cookieButtonFn()?.addEventListener('click', (e) => {
             const event = new CustomEvent('open-banner')
             window.dispatchEvent(event)
         })
-    
-        document.querySelector(".cookie-banner .accept")?.addEventListener('click', (e) => {
-            e.preventDefault()
-            try {
-                // @ts-ignore
-                window.gtag('consent', 'update', {
-                    analytics_storage: 'granted'
-                });
-                statisticsInput.checked = true
-                emitCloseBanner()
 
-                window.Complianz.setStatistics(true)
-                window.Complianz.saveToLocalstorage()
-                
-            } catch (error) {
-                console.error(error)
-            }
+        document.getElementById('cc-close')?.addEventListener('click', () => {
+            emitCloseBanner()
         })
-    
-        document.querySelector(".cookie-banner .decline")?.addEventListener('click', (e) => {
-            e.preventDefault()
-            try {
-                // @ts-ignore
-                window.gtag('consent', 'update', {
-                    analytics_storage: 'denied'
-                });
-                statisticsInput.checked = false
-                window.Complianz.setStatistics(false)
-                window.Complianz.saveToLocalstorage()
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && cookieWrapperFn()?.dataset.status === 'open') {
                 emitCloseBanner()
-                
-            } catch (error) {
-                console.error(error)
             }
         })
     
         document.addEventListener('click', (event) => {
+            cookieWrapper = cookieWrapperFn()
+
             if (cookieWrapper && cookieWrapper.dataset.status === 'open') {
-                console.log("outside trigger")
                 const withinBoundaries = event.composedPath().includes(cookieWrapper)
         
-                if (!withinBoundaries) {
+                if (!withinBoundaries && !isOpening) {
                     emitCloseBanner()
                 } 
             }
@@ -102,14 +130,20 @@ const t = useTranslations(lang);
     
         window.addEventListener('close-banner', (e) => {
             try {
-                console.log("close banner event")
-    
+                cookieBanner = cookieBannerFn()
+                cookieButton = cookieButtonFn()
+                cookieWrapper = cookieWrapperFn()
+
                 cookieBanner?.classList.add('hidden')
                 cookieButton?.classList.remove('hidden')
                 if (cookieWrapper) {
                     cookieWrapper.dataset.status = "closed"
                 }
-                
+
+                // return focus to the element that opened the banner (a11y)
+                lastFocused?.focus?.()
+                lastFocused = null
+
             } catch (error) {
                 console.error(error)
             }
@@ -117,19 +151,38 @@ const t = useTranslations(lang);
     
         window.addEventListener('open-banner', (e) => {
             try {
-                console.log("open-banner")
-                
+                isOpening = true;
+                cookieBanner = cookieBannerFn()
+                cookieButton = cookieButtonFn()
+                cookieWrapper = cookieWrapperFn()
+
                 cookieBanner?.classList.remove('hidden')  
                 cookieButton?.classList.add('hidden')
                 if (cookieWrapper) {
                     cookieWrapper.dataset.status = "open"
+                    cookieWrapper.classList.remove('hidden')
                 }
 
+                // move keyboard focus into the dialog (a11y)
+                lastFocused = document.activeElement as HTMLElement | null
+                requestAnimationFrame(() => document.getElementById('cc-close')?.focus())
 
-                if (window.Complianz.getStatistics()) {
-                    statisticsInput.checked = true;
-                }
 
+                let perms = window.CookieBannerMoeller.getConsent()
+                // console.log(perms)
+
+                if (perms) {
+                    if (perms.statistics) {
+                        statisticsInput.checked = true;
+                    }
+                    if (perms.functional) {
+                        functionalInput.checked = true
+                    }
+                }  
+
+                setTimeout(() => {
+                    isOpening = false;
+                }, 150)
             } catch (error) {
                 console.error(error)
             }
@@ -137,20 +190,21 @@ const t = useTranslations(lang);
 
 
 
-        foo = new CookieBannerObserver();
-        window.Complianz.attach(foo)
+        // foo = new CookieBannerObserver();
+        // window.Complianz.attach(foo)
 
-        // if (window.Complianz.getAnswered() == false) {
-        //     const event = new CustomEvent('open-banner')
-        //     window.dispatchEvent(event)
+        // // if (window.Complianz.getAnswered() == false) {
+        // //     const event = new CustomEvent('open-banner')
+        // //     window.dispatchEvent(event)
+        // // }
+
+        // if (window.Complianz.getStatistics() == true) {
+        //     statisticsInput.checked = true
         // }
-
-        if (window.Complianz.getStatistics() == true) {
-            statisticsInput.checked = true
-        }
 
     }
 
+    initCookieBanner()
     document.addEventListener('astro:page-load', initCookieBanner);
 
     document.addEventListener("astro:before-swap", () => {
@@ -202,7 +256,7 @@ const t = useTranslations(lang);
         --border: rgba(255, 255, 255, 0.12);
         --text: rgba(255, 255, 255, 0.85);
         --muted: rgba(255, 255, 255, 0.5);
-        --accent: #3b82f6;
+        /* --accent: #3b82f6; */
 
         --radius: 14px;
 
@@ -245,4 +299,11 @@ const t = useTranslations(lang);
 
         filter: blur(200px);
     }
+
+      .cookie-banner__details { flex: 1 1 100%; }
+  .cookie-banner__details label {
+    display: block;
+    margin: 0.4rem 0;
+    cursor: pointer;
+  }
 </style>
