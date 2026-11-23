@@ -5,7 +5,7 @@ import ECG from "@assets/ecg.svg"
 import Raspberry from "@assets/raspberry-pi.svg"
 import Therapy from '@assets/therapy.svg'
 
-import { getLangFromUrl, useTranslations } from "src/i18n/utils";
+import { getLangFromUrl, getLangStaticPaths, useTranslations } from "src/i18n/utils";
 import CareerIndex from '@components/CareerIndex.astro'
 import  { Picture } from 'astro:assets'
 import HeroImage from '@assets/bessi-new-year-background-736885_1920.jpg'
@@ -13,6 +13,9 @@ import TimeLine from '@components/TimeLine.astro'
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+export const getStaticPaths = getLangStaticPaths
+
 ---
 
 <NavSideBarLayout title={t('nav.about')}>

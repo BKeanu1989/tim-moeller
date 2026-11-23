@@ -2,7 +2,7 @@
 import { Picture } from 'astro:assets'
 import NavSideBarLayout from '../../layouts/NavSideBarLayout.astro'
 
-import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
+import { getLangFromUrl, getLangStaticPaths, useTranslations } from 'src/i18n/utils'
 // import dunkleWandPflanze from "@assets/background-therapy-2-chairs-plant.jpeg"
 import dunkleWandPflanze from "@assets/background-therapy-2-chairs-plant-left-upscaled-cropped-1200w-1530h.jpeg"
 import ContactForm from '@components/ContactForm.astro'
@@ -12,6 +12,9 @@ import MyTimeLine from '@components/MyTimeLine.astro'
 import MyTimeLineItem from '@components/MyTimeLineItem.astro'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
+
+export const getStaticPaths = getLangStaticPaths
+
 ---
 
 

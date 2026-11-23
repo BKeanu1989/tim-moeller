@@ -11,10 +11,14 @@ export default defineConfig({
 	base: '/',
 	// base: "tim-moeller",
 	i18n: {
-		prefixDefaultLocale: true,
+    locales: ['de', 'en'],
+    defaultLocale: 'de',
+    routing: {
 
-		defaultLocale: 'de',
-		locales: ['de', 'en']
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: true
+    },
+
 	},
 	  vite: {
     server: {

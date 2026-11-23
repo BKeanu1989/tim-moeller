@@ -5,6 +5,12 @@ export const languages = {
 
 export const defaultLang = 'de';
 
+export const data = {
+    'email': 'praxis@timjmoeller.com',
+    'telephone': '+4915223053269',
+    'telephone.visual': '+49 152 2305 3269',
+}
+
 export const ui = {
     en: {
         'nav.home': 'Home',
@@ -307,6 +313,11 @@ export const ui = {
 'contact.contact.email.answer.text': 'Usually replies within 24 hours',
 'contact.contact.privacy.1': 'Confidentiality starts with your very first message.',
 'contact.contact.privacy.2': ' Your information will only be used to process your enquiry.',
+
+
+    'contact.contact.telephone.title': 'Telefone',
+    'contact.contact.telephone.text': 'Antwort meist innerhalb von 24 h',
+
     },
     de: {
         'nav.home': 'Home',
@@ -610,12 +621,11 @@ export const ui = {
     'contact.contact.title': 'So erreichen Sie mich',
     'contact.contact.text': 'Wählen Sie den Weg, der Ihnen am liebsten ist. Es gibt keinen falschen.',
     'contact.contact.email.answer.text': 'Antwort meist innerhalb von 24 h',
+    'contact.contact.telephone.title': 'Telefone',
     'contact.contact.telephone.text': 'Antwort meist innerhalb von 24 h',
     'contact.contact.privacy.1': 'Vertraulichkeit gilt ab der ersten Nachricht.',
     'contact.contact.privacy.2': ' Ihre Angaben werden ausschließlich zur Bearbeitung Ihrer Anfrage genutzt.',
 
-    'data.contact.email': 'praxis@timjmoeller.com',
-    'data.contact.telephone': '+4915223053269',
-    'data.contact.telephone.visual': '+49 152 2305 3269',
+
     }, 
 } as const;

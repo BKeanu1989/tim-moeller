@@ -4,12 +4,13 @@ import NavSideBarLayout from 'src/layouts/NavSideBarLayout.astro'
 import Copy from 'src/assets/copy.svg'
 import { Picture } from 'astro:assets'
 import contactHero from '@assets/contact-hero-bigger.png'
-import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
+import { getLangFromUrl, getLangStaticPaths, useTranslations } from 'src/i18n/utils'
 import MyButton from '@components/buttons/MyButton.astro'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 const contactLink = `/${lang}/contact`;
+export const getStaticPaths = getLangStaticPaths
 
 ---
 
@@ -43,7 +44,7 @@ const contactLink = `/${lang}/contact`;
 </header>
 
 <section class="section reveal flex wrap lg:mx-auto" id="ueber-mich">
-  <div class="note flex lg:flex-row flex-col">
+  <div class="note flex gap-10 lg:flex-row flex-col">
     <div class="flex-1">
       <div class="section-head" style="margin-bottom:1.6rem">
         <p class="eyebrow section-title">{t('contact.aboutme.section.title')}</p>
@@ -60,13 +61,6 @@ const contactLink = `/${lang}/contact`;
             <blockquote>{t('contact.quote')}</blockquote>
             <cite>{t('contact.quote.cite')}</cite>
 
-      <!-- <div class="who">
-        <div class="avatar">MA</div>
-        <div>
-          <strong>Dr. Max Ammer</strong>
-          <small>Psychologischer Psychotherapeut (VT)</small>
-        </div>
-      </div> -->
     </div>
   </div>
 </section>
@@ -87,15 +81,6 @@ const contactLink = `/${lang}/contact`;
         <div>
           <h3>E-Mail</h3>
           <p><a href="mailto:praxis@timjmoeller.com">praxis@timjmoeller.com</a><br><span style="color:var(--dim);font-size:.88rem">{t('contact.contact.email.answer.text')}</span></p>
-        </div>
-      </div>
-		<div class="info-card">
-        <div class="info-icon">
-          <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5.5C3 4.1 4.1 3 5.5 3h2L9 7l-1.8 1.8a13 13 0 006 6L15 13l4 1.5v2c0 1.4-1.1 2.5-2.5 2.5C10 19 5 14 5 7.5 5 6.6 5 6 3 5.5z"/></svg>
-        </div>
-        <div>
-          <h3>Telefon</h3>
-          <p><a href="tel:+491701234567">0170 / 123 45 67</a><br><span style="color:var(--dim);font-size:.88rem">Mo–Fr, 9–18 Uhr – auch Anrufbeantworter</span></p>
         </div>
       </div>
       <div class="privacy-note">

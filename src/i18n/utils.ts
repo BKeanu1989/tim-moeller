@@ -16,6 +16,9 @@ export function useTranslations(lang: keyof typeof ui) {
     }
 }
 
+export const getLangStaticPaths = () =>
+  Object.keys(languages).map((lang) => ({ params: { lang } }))
+
 export function getLangAndRawIdFromCollectionId(id: string) {
     const splitted = id.split("/")
     if (splitted.length === 0) {

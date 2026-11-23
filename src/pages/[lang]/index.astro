@@ -4,11 +4,15 @@ import { Picture, Image } from 'astro:assets'
 import NavSideBarLayout from 'src/layouts/NavSideBarLayout.astro'
 import HeroImage from "@assets/mountains.jpg";
 import MyButton from '@components/buttons/MyButton.astro';
+// import tim from '@assets/tim-j-moeller-bigger.png'
 import tim from '@assets/dr-tim-julian-moeller-portrait.png'
-import { getLangFromUrl, useTranslations } from 'src/i18n/utils';
+
+import { getLangFromUrl, getLangStaticPaths, useTranslations } from 'src/i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+export const getStaticPaths = getLangStaticPaths
 
 const contactLink = `/${lang}/contact`;
 const mailtoLink = `mailto:praxis@timjmoeller.com?subject=${encodeURIComponent(t('home.contact.mail_subject'))}`;
