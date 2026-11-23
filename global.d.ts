@@ -17,6 +17,7 @@ declare global {
         // el: (id: string) => HTMLElement | null
         turnstile: any,
         CookieBannerMoeller: CookieBannerMoeller,
+        renderTurnstile: () => void
     }
 
 

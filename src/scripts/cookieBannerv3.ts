@@ -25,6 +25,7 @@ export class CookieBannerMoeller {
         // private constructor to prevent instantiation
 
         window.getConsent = this.getConsent.bind(this);
+        window.renderTurnstile = this.renderTurnstileWidgets.bind(this)
     }
 
     public static get instance() :CookieBannerMoeller {
@@ -37,7 +38,13 @@ export class CookieBannerMoeller {
     public installListeners() {
         // this.bindBanner();
         this.setupGTM();
-        
+        console.log("install listeners")
+        if (this.getConsent().functional) {
+        console.log("load turnstile")
+
+            this.loadTurnstile()
+        }
+
         // install window listeners for cookie consent
         // window.addEventListener("complianz-open-banner", () => {
         //     this.showBanner();
@@ -177,31 +184,36 @@ export class CookieBannerMoeller {
     }
 
 public loadTurnstile() {
+    console.log("LOAD TURNSTILE")
       if (!this.turnstileSiteKey) return;
       if (window.turnstile) { this.renderTurnstileWidgets(); return; }
       if (this.turnstileRequested) return;
       this.turnstileRequested = true;
-      let that = this;
+      let thatRenderTurnstileWidgets = this.renderTurnstileWidgets.bind(this)
                     // @ts-ignore
 
       window.onTurnstileLoad = function () {
                     // @ts-ignore
 
         delete window.onTurnstileLoad;
-        that.renderTurnstileWidgets();
+        thatRenderTurnstileWidgets();
       };
       this.loadScript(
         "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit"
       );
+    console.log("LOAD TURNSTILE --- END")
+
     }
 
     public renderTurnstileWidgets() {
-      if (!window.turnstile || !this.turnstileSiteKey) return;
+      if (!window.turnstile || !this.turnstileSiteKey) {
+        console.warn("sth went wrong with turnstile")
+      };
       var pending = document.querySelectorAll(".cf-turnstile[data-cc-pending]");
       let that = this;
       pending.forEach(function (node) {
         node.removeAttribute("data-cc-pending");
-        window.turnstile.render(node, {
+        window.turnstile?.render(node, {
           sitekey: node.getAttribute("data-sitekey") || that.turnstileSiteKey,
           theme: node.getAttribute("data-theme") || "auto"
         });
@@ -273,4 +285,6 @@ public loadTurnstile() {
 
 if (!window.CookieBannerMoeller) {
     window.CookieBannerMoeller = CookieBannerMoeller.instance;
+
+    
 }

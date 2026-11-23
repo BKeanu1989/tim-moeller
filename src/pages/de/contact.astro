@@ -2,69 +2,113 @@
 import ContactForm from '@components/ContactForm.astro'
 import NavSideBarLayout from 'src/layouts/NavSideBarLayout.astro'
 import Copy from 'src/assets/copy.svg'
+import { Picture } from 'astro:assets'
+import contactHero from '@assets/contact-hero-bigger.png'
 import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
+import MyButton from '@components/buttons/MyButton.astro'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
+const contactLink = `/${lang}/contact`;
+
 ---
 
 <NavSideBarLayout title={t('nav.contact')}>
-	<main class="mx-auto min-h-dvh max-w-6xl px-4 py-12">
-		<div class="flex h-full flex-col items-center justify-center">
-			<!-- Contact Content -->
-			<div class="w-full max-w-4xl">
-				<div class="grid items-center gap-12 md:grid-cols-2">
-					<!-- Left Side: Text Content -->
-					<div class="space-y-6">
-						<div class="space-y-4">
-							<h1 class="text-4xl font-light text-white">{t('contact.title')}</h1>
-							<p class="leading-relaxed text-gray-300">{t('contact.intro')}</p>
-						</div>
+	<main class="min-h-dvh w-full" id="main-contact">
+		<header class="hero w-full">
+  <Picture
+			src={contactHero}
+			alt="Ein ruhiger, warm beleuchteter Therapieraum mit Sesseln und Leselampe"
+			class="hero-bg"
+			formats={['avif', 'webp']}
+			fallbackFormat="png"
+			widths={[360, 720, 1400, 1920]} 
+			sizes={`(max-width: 400px) 360px, (max-width: 800px) 720px, (max-width: 1400px) 1400px, 1920px`}
+			loading="eager"
+			fetchpriority="high"
+		/>
+  <div class="hero-inner wrap container lg:mb-20">
+    <p class="eyebrow section-title fade fade-1">{t('contact.header.section.title')}</p>
+    <h1 class="fade fade-2">{t('contact.header.title.1')} <em class="text-c-accent">{t('contact.header.title.2')}</em></h1>
+    <p class="fade fade-3 text-c-muted-grey-light">{t('contact.header.text')}</p>
+    <div class="btn-row fade fade-4 mb-4">
+      <!-- <a href="#kontakt" class="btn btn-primary">Nachricht schreiben</a> -->
+		<MyButton type='primary' href="#contact-form">
+			{t('home.contact.form_button')}
+				<svg class="inline" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+		</MyButton>
+      <!-- <a href="tel:+xxx" class="btn btn-ghost">Rufen Sie mich an</a> -->
+    </div>
+  </div>
+</header>
 
-						<!-- Contact Information -->
-						<div class="space-y-4 border-t border-gray-700/50 pt-6">
-							<div class="flex items-center space-x-3 text-gray-300">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									class="h-5 w-5"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-								>
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-									></path>
-								</svg>
-								<a
-									href="mailto:praxis@timjmoeller.com"
-									class="email-address cursor-pointer transition-colors hover:text-white"
-								>
-									praxis@timjmoeller.com
-								</a>
-								<div class="email-copy flex items-center gap-2">
-									<Copy class="h-5 w-5 cursor-pointer stroke-white" />
-									<span
-										class="copy-feedback text-sm text-cyan-400 opacity-0 transition-opacity duration-200"
-										>{t('contact.copied')}</span
-									>
-								</div>
-							</div>
-						</div>
-					</div>
+<section class="section reveal flex wrap lg:mx-auto" id="ueber-mich">
+  <div class="note flex lg:flex-row flex-col">
+    <div class="flex-1">
+      <div class="section-head" style="margin-bottom:1.6rem">
+        <p class="eyebrow section-title">{t('contact.aboutme.section.title')}</p>
+        <h2 >{t('contact.aboutme.title')}</h2>
+      </div>
+      <ul class="note-bullets check-list">
+        <li><span><strong>{t('contact.aboutme.list.1.1')}</strong>{t('contact.aboutme.list.1.2')}</span></li>
+        <li><span><strong>{t('contact.aboutme.list.2.1')}</strong>{t('contact.aboutme.list.2.2')}</span></li>
+        <li><span><strong>{t('contact.aboutme.list.3.1')}</strong>{t('contact.aboutme.list.3.2')}</span></li>
+      </ul>
+    </div>
+    <div class="note-card quote-card flex-1">
+      <!-- <p></p> -->
+            <blockquote>{t('contact.quote')}</blockquote>
+            <cite>{t('contact.quote.cite')}</cite>
 
-					<!-- Right Side: Contact Form -->
-					<div class="relative">
-						<div class="c-gradient absolute inset-0 rounded-full blur-xl"></div>
-						<div class="c-gradient relative rounded-lg p-6 shadow-lg backdrop-blur-sm">
-							<ContactForm />
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+      <!-- <div class="who">
+        <div class="avatar">MA</div>
+        <div>
+          <strong>Dr. Max Ammer</strong>
+          <small>Psychologischer Psychotherapeut (VT)</small>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>
+
+<section class="section wrap lg:mx-auto reveal" id="kontakt">
+  <div class="section-head">
+    <p class="eyebrow section-title">Kontakt</p>
+    <h2 class="my-4">{t('contact.contact.title')}</h2>
+    <p class="text-c-muted-grey">{t('contact.contact.text')}</p>
+  </div>
+
+  <div class="contact-wrap lg:mx-auto reveal flex flex-col gap-10 lg:flex-row">
+    <div class="info-stack flex flex-col">
+      <div class="info-card">
+        <div class="info-icon">
+          <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16v12H4z"/><path stroke-linecap="round" stroke-linejoin="round" d="M4 7l8 6 8-6"/></svg>
+        </div>
+        <div>
+          <h3>E-Mail</h3>
+          <p><a href="mailto:praxis@timjmoeller.com">praxis@timjmoeller.com</a><br><span style="color:var(--dim);font-size:.88rem">{t('contact.contact.email.answer.text')}</span></p>
+        </div>
+      </div>
+		<div class="info-card">
+        <div class="info-icon">
+          <svg fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5.5C3 4.1 4.1 3 5.5 3h2L9 7l-1.8 1.8a13 13 0 006 6L15 13l4 1.5v2c0 1.4-1.1 2.5-2.5 2.5C10 19 5 14 5 7.5 5 6.6 5 6 3 5.5z"/></svg>
+        </div>
+        <div>
+          <h3>Telefon</h3>
+          <p><a href="tel:+491701234567">0170 / 123 45 67</a><br><span style="color:var(--dim);font-size:.88rem">Mo–Fr, 9–18 Uhr – auch Anrufbeantworter</span></p>
+        </div>
+      </div>
+      <div class="privacy-note">
+        <svg style="flex:none;width:20px;height:20px;margin-top:.1rem" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 3v6c0 4.5-3.2 7.7-8 9-4.8-1.3-8-4.5-8-9V6l8-3z"/></svg>
+        <span><strong style="color:var(--teal)">{t('contact.contact.privacy.1')}</strong>{t('contact.contact.privacy.2')}</span>
+      </div>
+    </div>
+
+    <div class="form-card lg:mx-auto" id="contact-form">
+		<ContactForm></ContactForm>
+    </div>
+  </div>
+</section>
 	</main>
 </NavSideBarLayout>
 
@@ -95,6 +139,131 @@ const t = useTranslations(lang)
 
 <style>
   @reference "../../main.css";
+
+.hero {
+
+	h1 {
+	   font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+	   max-width: 14ch;
+	   margin-bottom: 1.4rem;
+	   color: var(--text);
+   }
+
+   p {
+	   max-width: 52ch;
+	   /* color: var(--muted-light); */
+	   /* font-size: 1.08rem; */
+	   margin-bottom: 2.2rem;
+   }
+}
+
+.section-head {
+	max-width: 60ch;
+	margin-bottom: 3rem;
+}
+
+.form-card {
+	background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: clamp(1.6rem, 4vw, 2.6rem);
+}
+
+.info-card {
+	background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.4rem 1.6rem;
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+    transition: border-color .25s ease, background .25s ease;
+
+	svg{width:20px;height:20px}
+
+	h3 {
+		font-family:var(--font-body);
+		font-size:.82rem;
+		font-weight:600;
+		letter-spacing:.12em;
+		text-transform:uppercase;
+		color:var(--muted);
+		margin-bottom:.3rem;
+	}
+
+	p,a{
+		color:var(--muted-light);
+		font-size:1rem;
+		text-decoration:none;
+	}
+}
+
+.info-icon {
+	flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: grid;
+    place-items: center;
+}
+
+
+.info-stack{
+	display:grid;
+	gap:1.1rem;
+	align-content:start
+}
+/* .info-card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:1.4rem 1.6rem;display:flex;gap:1.1rem;align-items:flex-start;
+  transition:border-color .25s ease,background .25s ease;
+} */
+.info-card:hover{
+	border-color:rgba(217,168,108,.35);
+	background:var(--card-2);
+}
+.info-card 
+.info-card a:hover{color:var(--accent)}
+.privacy-note{
+  display:flex;gap:.9rem;align-items:flex-start;
+  background:rgba(138,184,172,.08);border:1px solid rgba(138,184,172,.25);
+  border-radius:16px;padding:1.2rem 1.4rem;color:var(--teal);font-size:.92rem;
+}
+
+	/* Hero mit <Picture> statt background-image */
+	.hero {
+		position: relative;
+		min-height: 100dvh;
+		display: flex;
+		align-items: flex-end;
+		isolation: isolate;
+		overflow: hidden;
+	}
+	.hero :global(.hero-bg) {
+		position: absolute;
+		inset: 0;
+		z-index: -2;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center 40%;
+		transform: scale(1.03);
+	}
+	.hero::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: linear-gradient(
+			180deg,
+			rgba(11, 15, 20, 0.55) 0%,
+			rgba(11, 15, 20, 0.35) 35%,
+			rgba(11, 15, 20, 0.88) 72%,
+			var(--bg) 100%
+		);
+	}
 
 
 	.c-gradient {

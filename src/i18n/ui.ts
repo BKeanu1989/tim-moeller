@@ -3,7 +3,7 @@ export const languages = {
     de: 'Deutsch',
 };
 
-export const defaultLang = 'en';
+export const defaultLang = 'de';
 
 export const ui = {
     en: {
@@ -23,11 +23,17 @@ export const ui = {
         'contact.send_message': "Send Message",
         'contact.send': 'Send',
         'contact.message': 'Message',
-        'contact.message.placeholder': 'your message',
+        'contact.message.placeholder': 'Write as much or as litte as you like',
         'contact.button': 'Get in contact',
         'contact.copied': 'Copied!',
         'contact.email_sent': 'Email sent',
         'contact.email_error': 'Couldn\'t send email',
+        'contact.data_protection_text.1': 'I have read the',
+        'contact.data_protection_text.2': ' and agree to the processing of my data for the purpose of handling my inquiry.',
+        'contact.quote': 'Through many years of experience, I know that picking up the phone or sending a message can often take courage. That is exactly why you won\'t receive a cold, generic response from me, but a personal reply – with time and attention dedicated to your individual situation. Whether you\'re dealing with emotional strain, worries, or simply a feeling that something needs to change: It\'s okay to reach out before things become “bad enough”.',
+        'contact.quote.cite': 'Dr. Tim Julian Möller',
+        // 'contact.data_protection_text': 'I ',
+
         'meta.description': 'Site of Dr. Tim Julian Möller - Cognitive Behavioural Therapist',
         'misc.accept': 'accept',
         'misc.complianz_error_message': 'We do not have cookie consent',
@@ -44,9 +50,13 @@ export const ui = {
         'misc.qualifications': 'Qualifications',
         'misc.today': 'today',
         'misc.write_me': 'Get in Touch',
+        'misc.loading': 'loading...',
+        'misc.email': 'praxis@timjmoeller.com',
+
         'cookie.necessary': 'Necessary (always active)',
 
         'cookie.functional': 'Spam-Protection (Cloudflare Turnstile)',
+        'cookie.turnstile': 'Spam-Protection',
         'cookie.statistics': 'Statistics',
         'cookie.title': 'Cookie Settings',
         'cookie.text': 'We use cookies and similar technologies to operate our website, generate statistics, and improve our content. With your consent, we may use Google Analytics to analyze usage. In the process, data may also be transferred to the United States. You can change or withdraw your consent at any time.',
@@ -91,7 +101,7 @@ export const ui = {
         'home.hero.badge1': "100 % online via video consultation",
         'home.hero.badge2': "German & English",
         'home.hero.badge3': "Free introductory call · 25 min.",
-        'home.cta.request_consultation': "Request an initial consultation",
+        'home.cta.request_consultation': "Request an initial consultation via Email",
 
         'home.statement.quote': "“In my private practice, I support you in better understanding your difficulties and in making concrete changes. Together, we combine your personal experiences with a scientifically grounded therapeutic approach.”",
         'home.statement.source': "All appointments take place online via video consultation.",
@@ -276,6 +286,27 @@ export const ui = {
         'therapy.cv.5.place': "Technische Universität Braunschweig",
         'therapy.contact.text': "I usually respond within 24 hours. For urgent matters, you can reach me by phone during consultation hours.",
 
+        
+        'contact.header.alt': 'A calm, warmly lit therapy room with armchairs and a reading lamp',
+'contact.header.section.title': 'Psychotherapy Practice',
+'contact.header.title.1': 'Taking the first step',
+'contact.header.title.2': 'is sometimes the hardest part.',
+'contact.header.text': 'Simply get in touch – no pressure and no complicated terminology. I will personally get back to you, usually within 24 hours.',
+'contact.aboutme.section.title': 'A Personal Note',
+'contact.aboutme.title': 'A few words from me before you fill out the form',
+'contact.aboutme.list.1.1': 'No obligation &amp; completely free.',
+'contact.aboutme.list.1.2': ' Getting in touch does not commit you to anything – it is simply an opportunity to start a conversation.',
+'contact.aboutme.list.2.1': 'Treated confidentially.',
+'contact.aboutme.list.2.2': ' Your message stays between us. I promise.',
+'contact.aboutme.list.3.1': 'At your own pace.',
+'contact.aboutme.list.3.2': ' Whether it is a short email or a phone call – we will proceed in whatever way feels right for you.',
+
+'contact.contact.section.title': 'Contact',
+'contact.contact.title': 'How to reach me',
+'contact.contact.text': 'Choose whichever way of getting in touch you prefer. There is no wrong choice.',
+'contact.contact.email.answer.text': 'Usually replies within 24 hours',
+'contact.contact.privacy.1': 'Confidentiality starts with your very first message.',
+'contact.contact.privacy.2': ' Your information will only be used to process your enquiry.',
     },
     de: {
         'nav.home': 'Home',
@@ -295,19 +326,24 @@ export const ui = {
         'contact.send': 'Senden',
         'contact.message': "Nachricht",
         'contact.send_message': "Nachricht senden",
-        'contact.message.placeholder': 'Deine Nachricht',
+        'contact.message.placeholder': 'Schreibe Sie so viel oder so wenig wie Sie möchten.',
         'contact.button': 'Kontaktieren',
         'contact.copied': 'Kopiert!',
         'contact.email_sent': 'Email gesendet',
         'contact.email_error': 'Email konnte nicht verschickt werden',
+        'contact.data_protection_text.1': 'Ich habe die ',
+        'contact.data_protection_text.2':' gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage einverstanden.',
         'meta.description': 'Seite von Dr. Tim Julian Möller - Psychologischer Psychotherapeut mit Schwerpunkt Kognitive Verhaltenstherapie',
+        'contact.quote': 'Ich weiß aus langjähriger Erfahrung: Anzurufen oder zu schreiben kostet oft Überwindung. Genau deshalb bekommen Sie von mir keine kühle Standardantwort, sondern eine persönliche Rückmeldung – mit Zeit und Aufmerksamkeit für Ihre Situation. Ob Belastung, Sorgen oder einfach das Gefühl, etwas verändern zu wollen: Es ist okay, anzufangen, bevor alles „schlimm genug“ ist.',
+        'contact.quote.cite': 'Dr. Tim Julian Möller',
+
 
         'misc.complianz_error_message': 'Wir haben keine Cookie Zustimmung von Ihnen',
         'misc.years_of_experience': 'Jahre an Erfahrung',
         'misc.open_source': 'Open Source',
         'misc.publications': 'Publikationen',
         'misc.projects_publications': 'Projekte & Publikationen',
-
+        'misc.email': 'praxis@timjmoeller.com',
         'misc.read_more': 'mehr lesen',
         'misc.show_more': 'Mehr anzeigen',
         'misc.accept': 'Akzeptieren',
@@ -370,7 +406,7 @@ export const ui = {
         'home.hero.badge1': "100 % online per Videosprechstunde",
         'home.hero.badge2': "Deutsch & Englisch",
         'home.hero.badge3': "Kostenloses Kennenlerngespräch · 25 Min.",
-        'home.cta.request_consultation': "Erstgespräch anfragen",
+        'home.cta.request_consultation': "Erstgespräch anfragen via Email",
 
         'home.statement.quote': "„In meiner Privatpraxis begleite ich Sie dabei, Ihre Schwierigkeiten besser zu verstehen und konkrete Veränderungen anzugehen. Dabei verbinden wir Ihre persönlichen Erfahrungen mit einem wissenschaftlich fundierten therapeutischen Vorgehen.“",
         'home.statement.source': "Alle Termine finden online per Videosprechstunde statt.",
@@ -554,5 +590,32 @@ export const ui = {
         'therapy.cv.5.place': "Technische Universität Carolo-Wilhelmina zu Braunschweig",
         'therapy.contact.text': "Ich antworte in der Regel innerhalb von 24 Stunden. In dringenden Fällen erreichen Sie mich während der Sprechzeiten telefonisch.",
 
-    },
+        // contact new
+        'contact.header.alt': 'Ein ruhiger, warm beleuchteter Therapieraum mit Sesseln und Leselampe',
+    'contact.header.section.title': 'Praxis für Verhaltenstherapie',
+    'contact.header.title.1': 'Der erste Schritt ist',
+    'contact.header.title.2': 'manchmal der schwerste.',
+    'contact.header.text': 'Schreiben Sie mir einfach – ganz ohne Druck und ganz ohne Fachchinesisch. Ich melde mich persönlich bei Ihnen, meist innerhalb von 24 Stunden.',
+    'contact.aboutme.section.title': 'Persönlich',
+    'contact.aboutme.title': 'Ein Wort von mir, bevor Sie das Formular ausfüllen',
+    'contact.aboutme.list.1.1': 'Unverbindlich &amp; kostenlos.',
+    'contact.aboutme.list.1.2': ' Eine Anfrage verpflichtet zu nichts – sie ist nur ein Gesprächsangebot.',
+    'contact.aboutme.list.2.1': 'Vertraulich behandelt.',
+    'contact.aboutme.list.2.2': ' Ihre Nachricht bleibt zwischen uns. Versprochen.',
+    'contact.aboutme.list.3.1': 'In Ihrem Tempo.',
+    'contact.aboutme.list.3.2': ' Ob kurze Mail oder Telefonat – wir gehen so vor, wie es sich für Sie richtig anfühlt.',
+
+
+    'contact.contact.section.title': 'Kontakt',
+    'contact.contact.title': 'So erreichen Sie mich',
+    'contact.contact.text': 'Wählen Sie den Weg, der Ihnen am liebsten ist. Es gibt keinen falschen.',
+    'contact.contact.email.answer.text': 'Antwort meist innerhalb von 24 h',
+    'contact.contact.telephone.text': 'Antwort meist innerhalb von 24 h',
+    'contact.contact.privacy.1': 'Vertraulichkeit gilt ab der ersten Nachricht.',
+    'contact.contact.privacy.2': ' Ihre Angaben werden ausschließlich zur Bearbeitung Ihrer Anfrage genutzt.',
+
+    'data.contact.email': 'praxis@timjmoeller.com',
+    'data.contact.telephone': '+4915223053269',
+    'data.contact.telephone.visual': '+49 152 2305 3269',
+    }, 
 } as const;

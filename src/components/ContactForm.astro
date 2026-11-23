@@ -54,6 +54,10 @@ const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : ''
       placeholder={t("contact.message.placeholder")}
     ></textarea>
   </div>
+  <div class="form-group mt-4  gap-1">
+    <input type="checkbox" name="data_protection" id="data_protection">
+    <label for="data_protection">{t('contact.data_protection_text.1')} <a class="text-c-accent underline" href={"/" + lang + "/data_protection"  }>{t('nav.data_protection')}</a> {t('contact.data_protection_text.2')}</label>
+  </div>
   <!-- Turnstile Widget -->
   <!-- <div class="mt-4" id="turnstile-widget" data-sitekey={siteKey}></div> -->
 
@@ -72,7 +76,7 @@ const baseURLPrefix = (import.meta.env.DEV) ? "http://localhost:8000" : ''
   <span class="hidden" id="hidden-info" data-url-prefix={baseURLPrefix}></span>
 </form>
 <script>
-import { CookieBannerObserver } from "src/scripts/cookeBannerv3"
+// import { CookieBannerObserver } from "src/scripts/cookeBannerv3"
 
   const urlPrefix = document.getElementById("hidden-info")?.dataset.urlPrefix ?? ''
   let $cmplSt: HTMLElement | null
@@ -108,11 +112,11 @@ import { CookieBannerObserver } from "src/scripts/cookeBannerv3"
         .then( async (response) => {
           // return response.text()
     const text = await response.text();
-    console.log(text)
+    // console.log(text)
 
-    console.log('HTTP status:', response.status);
-    console.log('Content-Type:', response.headers.get('content-type'));
-    console.log('PHP response:', text);
+    // console.log('HTTP status:', response.status);
+    // console.log('Content-Type:', response.headers.get('content-type'));
+    // console.log('PHP response:', text);
 
     if (!response.ok) {
       throw new Error(`HTTP error: ${response.status}`);
@@ -161,6 +165,8 @@ import { CookieBannerObserver } from "src/scripts/cookeBannerv3"
   
   function checkStatistics() {
     // reset
+    
+    $cmplSt = document.getElementById("cmplz-status")
     $cmplSt?.classList.add("hidden")
     $submitButton?.removeAttribute("disabled")
 
@@ -181,25 +187,25 @@ import { CookieBannerObserver } from "src/scripts/cookeBannerv3"
 
   }
 
-  function renderTurnstile() {
-    const $widget = document.getElementById("turnstile-widget")
-    if (!$widget || $widget.dataset.rendered) return
-    const turnstile = (window as any).turnstile
-    if (!turnstile) {
-      setTimeout(renderTurnstile, 200)
-      return
-    }
-    turnstile.render($widget, { sitekey: $widget.dataset.sitekey, theme: "dark" })
-    $widget.dataset.rendered = "true"
-  }
+  // function renderTurnstile() {
+  //   const $widget = document.getElementById("turnstile-widget")
+  //   if (!$widget || $widget.dataset.rendered) return
+  //   const turnstile = (window as any).turnstile
+  //   if (!turnstile) {
+  //     setTimeout(renderTurnstile, 200)
+  //     return
+  //   }
+  //   turnstile.render($widget, { sitekey: $widget.dataset.sitekey, theme: "dark" })
+  //   $widget.dataset.rendered = "true"
+  // }
 
   let intervalInc: any = null;
   let timeout: any;
   document.addEventListener("astro:page-load", () => {
 
-    renderTurnstile()
-    bar = new CookieBannerObserver();
-    window.Complianz.attach(bar)
+    window.renderTurnstile()
+    // bar = new CookieBannerObserver();
+    // window.Complianz.attach(bar)
     $cmplSt = document.getElementById("cmplz-status")
     $submitButton = document.querySelector("button[type='submit'")
     intervalInc = setInterval(() => {
@@ -211,7 +217,7 @@ import { CookieBannerObserver } from "src/scripts/cookeBannerv3"
       if (!statisticPerm) {
         // window.Complianz.openCookieBanner();
         // window.Complianz.openCookieSettings();
-        window.openCookieSettings();
+        window.CookieBannerMoeller.showBanner();
       }
       
     }, 1500);
