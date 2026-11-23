@@ -1,8 +1,5 @@
 ---
 import { languages } from '../i18n/ui'
-// import FlagDe from './icons/flag-de.astro'
-// import FlagGb from './icons/flag-gb.astro'
-// import FlagGb2 from './icons/flag-gb2.astro'
 
 import { getLangFromUrl, useTranslations } from 'src/i18n/utils'
 
@@ -14,7 +11,7 @@ const t = useTranslations(lang)
 	{
 		Object.entries(languages).map(([lang, label]) => (
 			<li class="flex border-solid border hover:scale-110 ease-out transition rounded-md border-white">
-				<a href={`/${lang}/`} class="rounded-md p-2 hover:bg-blue-600/10" aria-label={lang === 'en' ? 'Link to english version' : 'Link zur deutschen Version'}>
+				<a href={`/${lang}/`} class="rounded-md p-2 hover:bg-blue-600/10 single-language-picker" data-language={lang} aria-label={lang === 'en' ? 'Link to english version' : 'Link zur deutschen Version'}>
 					{lang}
 					{/* {lang === 'en' ? <FlagGb /> : <FlagDe />} */}
 				</a>
@@ -22,3 +19,34 @@ const t = useTranslations(lang)
 		))
 	}
 </ul>
+
+<script>
+	document.addEventListener("astro:page-load", () => {
+		const languagePickers = document.querySelectorAll('.single-language-picker')
+		if (!languagePickers) return;
+		languagePickers.forEach((single) => {
+			single.addEventListener('click', (e) => {
+				// @ts-ignore
+				const targetLang: string = e.target?.dataset?.language 
+				if (!targetLang ) {
+					console.warn("target not foundn")
+					return;
+				}
+				e.preventDefault()
+				window.location.href = redirectToSamePageAnotherLanguage(targetLang)
+			} )
+		})
+	})
+
+
+function redirectToSamePageAnotherLanguage(lang: string) {
+    const langs = ["de", "en"]
+    let url = window.location.href
+    langs.forEach((x) => {
+        url = url.replace(`/${x}`, `/` +lang)
+    })
+    
+    return url
+    
+}
+</script>

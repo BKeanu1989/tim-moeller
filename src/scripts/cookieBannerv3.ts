@@ -125,7 +125,7 @@ export class CookieBannerMoeller {
     }
 
     public closeBanner() {
-        console.log("close banner")
+        // console.log("close banner")
         let closeEvent = new CustomEvent("close-banner")
         window.dispatchEvent(closeEvent);
         // const banner = this.el("cookie-banner");
