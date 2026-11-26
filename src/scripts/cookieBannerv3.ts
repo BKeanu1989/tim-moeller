@@ -31,6 +31,10 @@ export class CookieBannerMoeller {
     public static get instance() :CookieBannerMoeller {
         if (!CookieBannerMoeller.#instance) {
             CookieBannerMoeller.#instance = new CookieBannerMoeller();
+
+            // init gtm once
+            console.info("apply last consent")
+            CookieBannerMoeller.#instance.applyConsent(CookieBannerMoeller.#instance.getConsent())
         }
         return CookieBannerMoeller.#instance;
     }
@@ -38,10 +42,7 @@ export class CookieBannerMoeller {
     public installListeners() {
         // this.bindBanner();
         this.setupGTM();
-        console.log("install listeners")
         if (this.getConsent().functional) {
-        console.log("load turnstile")
-
             this.loadTurnstile()
         }
 
@@ -54,14 +55,17 @@ export class CookieBannerMoeller {
         //     this.closeBanner();
         // });
 
-        let that = this;
+
+        let thatCloseBanner = this.closeBanner.bind(this)
+        let thatEl = this.el.bind(this)
+        let that = this
         document.addEventListener("click", function (e) {
             if (that.ignoreOutsideClick) return;
             if (e.target instanceof Element && e.target.closest(CookieBannerMoeller.#TRIGGER)) return;
-            var banner = that.el("cookie-banner");
-            console.log("document click event received, banner:", banner);
+            var banner = thatEl("cookie-banner");
             if (!banner || banner.hidden) return;
-            if (e.composedPath().indexOf(banner) === -1) that.closeBanner();
+            // if (e.composedPath().indexOf(banner) === -1) that.closeBanner();
+            if (e.composedPath().indexOf(banner) === -1) thatCloseBanner();
         });
 
         // window.addEventListener("complianz-get-consent", (event: CustomEvent) => {
@@ -176,7 +180,7 @@ export class CookieBannerMoeller {
       document.head.appendChild(s);
     }
 
-    public loadGTM() {
+    public   loadGTM() {
       if (this.gtmLoaded || !this.gtmId) return;
       this.gtmLoaded = true;
       window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });

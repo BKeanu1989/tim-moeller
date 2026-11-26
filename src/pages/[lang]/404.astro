@@ -1,0 +1,117 @@
+---
+import ContactForm from '@components/ContactForm.astro'
+import NavSideBarLayout from 'src/layouts/NavSideBarLayout.astro'
+import Copy from 'src/assets/copy.svg'
+import { Picture } from 'astro:assets'
+import contactHero from '@assets/contact-hero-bigger.png'
+import { getLangFromUrl, getLangStaticPaths, useTranslations } from 'src/i18n/utils'
+import MyButton from '@components/buttons/MyButton.astro'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const contactLink = `/${lang}/contact`;
+export const getStaticPaths = getLangStaticPaths
+
+
+
+---
+
+<NavSideBarLayout title={t('nav.contact')}>
+	<main class="min-h-dvh w-full flex items-center justify-center" id="main-contact">
+	
+<!-- ================= HERO / 404 ================= -->
+<header class="hero">
+  <div class="hero-bg" role="img" aria-label="Ein ruhiger, warm beleuchteter Therapieraum mit Sesseln und Leselampe"></div>
+  <div class="hero-inner">
+    <p class="error-code fade fade-1 text-center">404</p>
+    <p class="section-title fade fade-2 text-center block">Seite nicht gefunden</p>
+    <h1 class="fade fade-2">Diese Seite ist gerade <em>nicht da.</em><br>Aber ich bin es – und helfe Ihnen gern weiter.</h1>
+    <p class="fade fade-3">Manchmal verläuft man sich. Das ist völlig in Ordnung. Der Weg zurück ist nur ein Klick entfernt – oder Sie schauen sich in Ruhe um, was die Praxis sonst noch zu bieten hat.</p>
+    <div class="btn-row fade fade-4">
+      <a href="/" class="btn btn-primary">Zurück zur Startseite</a>
+      <a href={"/"+ lang + "/kontakt"} class="btn btn-ghost">Kontakt aufnehmen</a>
+    </div>
+  </div>
+</header>
+	</main>
+</NavSideBarLayout>
+
+<script>
+	// Get the text field and copy button
+
+</script>
+
+<style>
+
+.hero-inner{max-width:800px;padding:0 clamp(1.25rem,5vw,4rem)}
+
+.error-code{
+  font-family:var(--font-head);
+  font-size:clamp(6rem,20vw,11rem);
+  line-height:1;color:transparent;
+  -webkit-text-stroke:1.5px rgba(217,168,108,.55);
+  margin-bottom:.5rem;
+  user-select:none;
+}
+.section-title{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1.2rem;
+  display: block;
+}
+.section-title::before,.section-title::after{content:"";width:34px;height:1px;background:var(--accent)}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:1.2rem}
+.hero h1 em{font-style:italic;color:var(--accent-lighter)}
+.hero p{color:var(--muted-light);font-size:1.05rem;max-width:52ch;margin:0 auto 2.2rem}
+
+
+
+/* Fade-in */
+.fade{opacity:0;transform:translateY(18px);animation:fadeUp .8s ease forwards}
+.fade-1{animation-delay:.1s}.fade-2{animation-delay:.25s}.fade-3{animation-delay:.4s}.fade-4{animation-delay:.55s}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .fade{animation:none;opacity:1;transform:none}
+}
+
+/* ---------- Alternativen ---------- */
+.section{max-width:1120px;margin:0 auto;padding:clamp(3.5rem,8vh,6rem) clamp(1.25rem,5vw,4rem)}
+.section-head{text-align:center;max-width:56ch;margin:0 auto 2.8rem}
+.section-head h2{font-size:clamp(1.7rem,3.2vw,2.3rem);margin-bottom:.8rem}
+.section-head p{color:var(--muted)}
+
+.cards{display:grid;gap:1.2rem}
+@media(min-width:820px){.cards{grid-template-columns:repeat(3,1fr)}}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:1.8rem;text-decoration:none;
+  transition:border-color .25s ease,background .25s ease,transform .25s ease;
+}
+.card:hover{border-color:rgba(217,168,108,.35);background:var(--card-2);transform:translateY(-3px)}
+.card-icon{
+  width:44px;height:44px;border-radius:12px;margin-bottom:1.1rem;
+  background:var(--accent-soft);color:var(--accent);
+  display:grid;place-items:center;
+}
+.card-icon svg{width:20px;height:20px}
+.card h3{font-family:var(--font-body);font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:.4rem}
+.card p{color:var(--muted);font-size:.93rem}
+.card .arrow{
+  display:inline-block;margin-top:1rem;color:var(--accent);
+  font-size:.9rem;font-weight:500;
+  transition:transform .25s ease;
+}
+.card:hover .arrow{transform:translateX(4px)}
+
+/* ---------- Footer ---------- */
+footer{border-top:1px solid var(--line);background:var(--bg-2)}
+.footer-inner{
+  max-width:1120px;margin:0 auto;
+  padding:2rem clamp(1.25rem,5vw,4rem);
+  display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;
+  color:var(--muted);font-size:.88rem;
+}
+.footer-inner a{color:var(--muted);text-decoration:none;margin-left:1.4rem}
+.footer-inner a:hover{color:var(--accent)}
+ 
+</style>

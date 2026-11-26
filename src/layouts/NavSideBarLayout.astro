@@ -19,6 +19,7 @@ const now = new Date()
 const bar = now.getTime()
 const t = useTranslations(lang);
 
+
 ---
 
 <!doctype html>
@@ -109,7 +110,7 @@ const t = useTranslations(lang);
 // 	wait_for_update: 500
 // });
 </script>
-	<body class="min-h-dvh bg-c-black min-w-full overflox-x-hidden">
+	<body class="min-h-dvh bg-c-black min-w-full overflox-x-hidden" data-lastBuild={now}>
 		<!-- <body class="min-h-dvh bg-gradient-to-b from-c-neutral-900 to-c-neutral-800"> -->
 		<NavSideBar />
 		<div class="ml-0 flex lg:ml-72 relative">
